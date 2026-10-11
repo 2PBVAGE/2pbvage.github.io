@@ -21,7 +21,7 @@
             align-items: center;
         }
 
-        /* 1. ÜST BAR (SİYAH) */
+        /* 1. ÜST BAR */
         .header-bar {
             width: 100%;
             max-width: 600px;
@@ -79,7 +79,7 @@
         .channel-banner {
             width: 100%;
             height: 110px;
-            background-color: #333;
+            background-color: #ff4757;
             background-size: cover;
             background-position: center;
         }
@@ -99,7 +99,7 @@
             background-size: cover;
             background-position: center;
             flex-shrink: 0;
-            background-color: #000;
+            background-color: #222;
         }
         .channel-meta-info {
             display: flex;
@@ -237,7 +237,7 @@
             margin-bottom: 5px;
         }
 
-        /* OYUNCU / KANAL PROFİL KARTI (VİDEO ALTINDAKİ) */
+        /* OYUNCU / KANAL PROFİL KARTI */
         .channel-profile-card {
             background-color: #1a1a1a;
             border: 1px solid #2a2a2a;
@@ -264,6 +264,7 @@
             background-size: cover;
             background-position: center;
             border: 2px solid #ff4757;
+            background-color: #333;
         }
         .channel-name {
             font-size: 14px;
@@ -285,7 +286,7 @@
             font-weight: bold;
         }
 
-        /* AÇIKLAMA / ÖZET BÖLÜMÜ */
+        /* AÇIKLAMA BÖLÜMÜ */
         .video-description-box {
             background-color: #1a1a1a;
             border: 1px solid #2a2a2a;
@@ -372,11 +373,33 @@
     <!-- İÇERİK ALANI -->
     <div class="content-container">
 
-        <!-- 1. ANA SAYFA / AKIŞ GÖRÜNÜMÜ -->
+        <!-- 1. ANA SAYFA / AKIŞ GÖRÜNÜMÜ (HTML İÇİNDE HAZIR ELEMANLAR) -->
         <div id="feed-view">
-            <div id="posts-container" style="display: flex; flex-direction: column; gap: 20px;">
-                <!-- JS ile dolacak -->
+
+            <!-- VİDEO 2 -->
+            <div class="video-post">
+                <div class="video-thumbnail" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');" onclick="openWatchPage('v2')">
+                    <div class="play-button"></div>
+                </div>
+                <div class="post-title">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
+                <div class="post-meta">
+                    <span>📅 12 Eki, 2026 &bull; Komotaze</span>
+                    <button class="action-badge" onclick="openWatchPage('v2')">🚀 Hemen İzle</button>
+                </div>
             </div>
+
+            <!-- VİDEO 1 -->
+            <div class="video-post">
+                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" onclick="openWatchPage('v1')">
+                    <div class="play-button"></div>
+                </div>
+                <div class="post-title">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
+                <div class="post-meta">
+                    <span>📅 12 Eki, 2026 &bull; Sophie Rain</span>
+                    <button class="action-badge" onclick="openWatchPage('v1')">🚀 Hemen İzle</button>
+                </div>
+            </div>
+
         </div>
 
         <!-- 2. KANAL / PROFİL SAYFASI GÖRÜNÜMÜ -->
@@ -395,9 +418,7 @@
             </div>
 
             <div class="related-section-title">📹 Kanalın Tüm Videoları</div>
-            <div id="profile-posts-container" style="display: flex; flex-direction: column; gap: 20px;">
-                <!-- Kanal videoları buraya dolacak -->
-            </div>
+            <div id="profile-posts-container" style="display: flex; flex-direction: column; gap: 20px;"></div>
         </div>
 
         <!-- 3. VİDEO İZLEME EKRANI -->
@@ -438,7 +459,7 @@
 
     </div>
 
-    <!-- VİDEO VERİLERİ VE MANTIĞI -->
+    <!-- MANTIKSAL SCRIPT -->
     <script>
         var videos = {
             'v1': {
@@ -447,8 +468,8 @@
                 thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp",
                 date: "12 Eki, 2026",
                 author: "Sophie Rain",
-                authorAvatar: "https://i.ibb.co/DPFjgyL/image.png",
-                authorBanner: "https://i.ibb.co/DPFjgyL/image.png",
+                authorAvatar: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp",
+                authorBanner: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp",
                 desc: "Sophie Rain, bu özel çekimde kameralar karşısına tamamen cesur bir şekilde geçiyor. Üstsüz bir şekilde göğüslerini öne çıkaran hareketleriyle sınırları zorlayan Sophie Rain'in en çok konuşulan ve merak edilen özel anları kesintisiz yüksek kalitede sizlerle."
             },
             'v2': {
@@ -457,33 +478,11 @@
                 thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif",
                 date: "12 Eki, 2026",
                 author: "Komotaze",
-                authorAvatar: "https://i.ibb.co/pB3ntgg/image.png",
-                authorBanner: "https://i.ibb.co/pB3ntgg/image.png",
+                authorAvatar: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif",
+                authorBanner: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif",
                 desc: "Arkadaşının kısa süreliğine markete gitmesini fırsat bilen ikilinin evde baş başa kaldığı tutkulu ve heyecan dolu gizli anlar. Sınırların aşıldığı yasak kaçamağı kesintisiz yüksek kalitede izleyebilirsiniz."
             }
         };
-
-        function renderFeed() {
-            var container = document.getElementById('posts-container');
-            if(!container) return;
-            container.innerHTML = '';
-
-            Object.keys(videos).forEach(function(key) {
-                var v = videos[key];
-                var post = document.createElement('div');
-                post.className = 'video-post';
-                post.innerHTML = 
-                    '<div class="video-thumbnail" style="background-image: url(\'' + v.thumb + '\');" onclick="openWatchPage(\'' + key + '\')">' +
-                        '<div class="play-button"></div>' +
-                    '</div>' +
-                    '<div class="post-title">' + v.title + '</div>' +
-                    '<div class="post-meta">' +
-                        '<span>📅 ' + v.date + ' &bull; ' + v.author + '</span>' +
-                        '<button class="action-badge" onclick="openWatchPage(\'' + key + '\')">🚀 Hemen İzle</button>' +
-                    '</div>';
-                container.appendChild(post);
-            });
-        }
 
         function openWatchPage(id) {
             var v = videos[id];
@@ -558,13 +557,4 @@
                             '<span>📅 ' + v.date + '</span>' +
                             '<button class="action-badge" onclick="openWatchPage(\'' + key + '\')">🚀 Hemen İzle</button>' +
                         '</div>';
-                    profilePostsContainer.appendChild(post);
-                }
-            });
-
-            window.scrollTo(0, 0);
-        }
-
-        function showFeed() {
-            document.getElementById('watch-view').style.display = 'none';
-            document.getElementById('profile-view').style.dis
+                 

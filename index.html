@@ -62,7 +62,7 @@
             gap: 15px;
         }
 
-        /* ================= KISIM 1: ANA SAYFA GÖRÜNÜMÜ ================= */
+        /* ================= ANA SAYFA GÖRÜNÜMÜ ================= */
         #feed-view {
             width: 100%;
             display: flex;
@@ -138,9 +138,9 @@
             box-shadow: 0 2px 8px rgba(255, 71, 87, 0.4);
         }
 
-        /* ================= KISIM 2: VİDEO İZLEME GÖRÜNÜMÜ (ATTIĞINIZ EKRAN) ================= */
+        /* ================= VİDEO İZLEME EKRANI ================= */
         #watch-view {
-            display: none; /* İlk açılışta gizlidir, tıklanınca açılır */
+            display: none;
             width: 100%;
             flex-direction: column;
             gap: 15px;
@@ -155,7 +155,7 @@
         .video-player-box {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 Siyah Ekran Oranı */
+            padding-bottom: 56.25%;
             background-color: #000000;
             border-radius: 6px;
             overflow: hidden;
@@ -181,6 +181,29 @@
             font-weight: bold;
             margin-bottom: 5px;
         }
+
+        /* AÇIKLAMA / ÖZET BÖLÜMÜ STİLİ */
+        .video-description-box {
+            background-color: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 5px;
+        }
+        .desc-heading {
+            font-size: 14px;
+            font-weight: bold;
+            color: #ff4757;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .desc-text {
+            font-size: 13px;
+            color: #cccccc;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
@@ -195,7 +218,7 @@
     <!-- İÇERİK ALANI -->
     <div class="content-container">
 
-        <!-- 1. ANA SAYFA GÖRÜNÜMÜ (HEMEN İZLE BUTONLU) -->
+        <!-- 1. ANA SAYFA GÖRÜNÜMÜ -->
         <div id="feed-view">
             <div class="video-post">
                 <div class="video-thumbnail" onclick="openWatchPage()">
@@ -204,13 +227,12 @@
                 <div class="post-title">Sophie Rain - Black Panties Strip Video</div>
                 <div class="post-meta">
                     <span>📅 12 Eki, 2026</span>
-                    <!-- SAĞ ALTTAKI HEMEN İZLE BUTONU -->
                     <button class="action-badge" onclick="openWatchPage()">🚀 Hemen İzle</button>
                 </div>
             </div>
         </div>
 
-        <!-- 2. VİDEO İZLEME EKRANI (TAM SİZİN İSTEDİĞİNİZ RESİMDEKİ GİBİ) -->
+        <!-- 2. VİDEO İZLEME EKRANI + AÇIKLAMA ÖZETİ -->
         <div id="watch-view">
             <button class="back-home-btn" onclick="showFeed()">⬅ Ana Sayfaya Dön</button>
             
@@ -221,6 +243,14 @@
             <div class="video-player-box">
                 <iframe id="main-player" src="" allowfullscreen></iframe>
             </div>
+
+            <!-- VİDEO İLE ALAKALI ÖZET / AÇIKLAMA BÖLÜMÜ -->
+            <div class="video-description-box">
+                <div class="desc-heading">📌 Video Özeti & Detaylar</div>
+                <div class="desc-text">
+                    Sophie Rain, bu özel çekimde kameralar karşısına tamamen cesur bir şekilde geçiyor. Üstsüz bir şekilde göğüslerini öne çıkaran hareketleriyle sınırları zorlayan Sophie Rain'in en çok konuşulan ve merak edilen özel anları kesintisiz yüksek kalitede sizlerle.
+                </div>
+            </div>
         </div>
 
     </div>
@@ -230,7 +260,6 @@
         function openWatchPage() {
             document.getElementById('feed-view').style.display = 'none';
             document.getElementById('watch-view').style.display = 'flex';
-            // Video kaynağını siyah ekrana yükler
             document.getElementById('main-player').src = 'https://playmogo.com/e/1fvov3xdwsbq';
             window.scrollTo(0, 0);
         }
@@ -238,7 +267,6 @@
         function showFeed() {
             document.getElementById('watch-view').style.display = 'none';
             document.getElementById('feed-view').style.display = 'flex';
-            // Videoyu durdurur
             document.getElementById('main-player').src = '';
             window.scrollTo(0, 0);
         }

@@ -19,37 +19,47 @@
             flex-direction: column;
             align-items: center;
         }
-        h1 {
-            color: #ff3333;
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .main-player-card {
+        /* ÜST LOGO / BAŞLIK */
+        .site-header {
             width: 100%;
-            max-width: 600px;
+            max-width: 500px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             background-color: #1e1e1e;
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
-        .main-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
+        .site-logo {
             color: #ff3333;
+            font-size: 22px;
+            font-weight: bold;
         }
-        .video-container {
+        
+        /* VİDEO AKIŞ LİSTESİ */
+        .feed-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 100%;
+            max-width: 500px;
+        }
+        .video-post {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            overflow: hidden;
+            padding-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+        }
+        .video-wrapper {
             position: relative;
             padding-bottom: 56.25%; /* 16:9 Oranı */
             height: 0;
-            overflow: hidden;
-            border-radius: 8px;
             background-color: #000;
         }
-        .video-container iframe {
+        .video-wrapper iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -57,118 +67,67 @@
             height: 100%;
             border: 0;
         }
-        
-        /* VİDEO SEÇME LİSTESİ BAŞLIĞI */
-        .section-title {
-            width: 100%;
-            max-width: 600px;
+        .post-title {
+            padding: 12px 15px 8px 15px;
             font-size: 16px;
             font-weight: bold;
-            margin-bottom: 12px;
-            color: #ccc;
-            border-bottom: 1px solid #333;
-            padding-bottom: 5px;
+            color: #ffffff;
+            line-height: 1.4;
         }
-
-        /* VİDEO SEÇME YERİ (GRID) */
-        .video-select-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 12px;
-            width: 100%;
-            max-width: 600px;
-        }
-        .select-card {
-            background-color: #1e1e1e;
-            border-radius: 8px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.2s, border-color 0.2s;
-            border: 2px solid transparent;
-        }
-        .select-card:hover, .select-card:active {
-            transform: scale(0.96);
-            border-color: #ff3333;
-        }
-        .thumb-box {
-            position: relative;
-            width: 100%;
-            padding-bottom: 60%;
-            background-color: #2a2a2a;
+        .post-meta {
+            padding: 0 15px;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-        }
-        .play-btn {
-            position: absolute;
-            width: 35px;
-            height: 35px;
-            background: rgba(255, 51, 51, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .play-btn::after {
-            content: "";
-            border-style: solid;
-            border-width: 6px 0 6px 10px;
-            border-color: transparent transparent transparent #fff;
-            margin-left: 2px;
-        }
-        .card-title {
-            padding: 8px;
             font-size: 12px;
-            text-align: center;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            color: #aaaaaa;
+        }
+        .action-badge {
+            background-color: #2a2a2a;
+            padding: 6px 12px;
+            border-radius: 20px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid #444;
         }
     </style>
 </head>
 <body>
 
-    <!-- SİTE BAŞLIĞI -->
-    <h1>2PBVAGE</h1>
-
-    <!-- ÜSTTEKİ ANA VİDEO OYNATICI -->
-    <div class="main-player-card">
-        <div id="videoTitle" class="main-title">Video 2933</div>
-        <div class="video-container">
-            <iframe id="mainPlayer" src="https://playmogo.com/e/1fvov3xdwsbq" allowfullscreen></iframe>
-        </div>
+    <!-- ÜST MENÜ ALANI -->
+    <div class="site-header">
+        <div class="site-logo">😎 2PBVAGE</div>
     </div>
 
-    <div class="section-title">Diğer Videolar</div>
+    <!-- VİDEO LİSTESİ (ALT ALTA AKIŞ) -->
+    <div class="feed-container">
 
-    <!-- VİDEO SEÇME LİSTESİ -->
-    <div class="video-select-grid">
-
-        <!-- 1. VİDEO SEÇENEĞİ -->
-        <div class="select-card" onclick="changeVideo('https://playmogo.com/e/1fvov3xdwsbq', 'Video 2933')">
-            <div class="thumb-box">
-                <div class="play-btn"></div>
+        <!-- 1. VİDEO GÖNDERİSİ -->
+        <div class="video-post">
+            <div class="video-wrapper">
+                <iframe src="https://playmogo.com/e/1fvov3xdwsbq" allowfullscreen></iframe>
             </div>
-            <div class="card-title">Video 2933</div>
+            <div class="post-title">Video 2933 - Özel İçerik ve Detaylı Görüntüler</div>
+            <div class="post-meta">
+                <span>📅 11 Eki, 2026</span>
+                <a href="https://playmogo.com/e/1fvov3xdwsbq" target="_blank" class="action-badge">🚀 Hemen İzle</a>
+            </div>
         </div>
 
-        <!-- 2. VİDEO SEÇENEĞİ (Örnek) -->
-        <div class="select-card" onclick="changeVideo('https://playmogo.com/e/YENI_VIDEO_LINKI', 'İkinci Video Başlığı')">
-            <div class="thumb-box">
-                <div class="play-btn"></div>
+        <!-- 2. VİDEO GÖNDERİSİ (Yeni video eklemek istediğinizde bu bloğu kopyalayıp çoğaltabilirsiniz) -->
+        <div class="video-post">
+            <div class="video-wrapper">
+                <iframe src="https://playmogo.com/e/YENI_VIDEO_LINKINIZ" allowfullscreen></iframe>
             </div>
-            <div class="card-title">İkinci Video</div>
+            <div class="post-title">İkinci Videonun Başlığı Buraya Yazılacak</div>
+            <div class="post-meta">
+                <span>📅 11 Eki, 2026</span>
+                <a href="https://playmogo.com/e/YENI_VIDEO_LINKINIZ" target="_blank" class="action-badge">🚀 Hemen İzle</a>
+            </div>
         </div>
 
     </div>
-
-    <script>
-        function changeVideo(videoUrl, title) {
-            document.getElementById('mainPlayer').src = videoUrl;
-            document.getElementById('videoTitle').innerText = title;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    </script>
 
 </body>
 </html>

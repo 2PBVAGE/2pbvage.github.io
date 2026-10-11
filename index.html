@@ -2,11 +2,11 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>2PBVAGE 🤍</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         body { background-color: #121212; color: #ffffff; font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; }
         
         .header-bar { width: 100%; max-width: 600px; background-color: #000; display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; }
@@ -15,16 +15,16 @@
         .content-container { width: 100%; max-width: 600px; padding: 15px; display: flex; flex-direction: column; gap: 15px; }
 
         .page-sec { display: none; width: 100%; flex-direction: column; gap: 15px; }
-        .active-sec { display: flex; }
+        .active-sec { display: flex !important; }
 
-        .video-post { background-color: #1e1e1e; border-radius: 12px; overflow: hidden; border: 1px solid #222; margin-bottom: 15px; }
+        .video-post { background-color: #1e1e1e; border-radius: 12px; overflow: hidden; border: 1px solid #222; margin-bottom: 15px; position: relative; }
         .video-thumbnail { position: relative; width: 100%; padding-bottom: 56.25%; background-size: cover; background-position: center; display: block; cursor: pointer; }
-        .play-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 55px; height: 55px; background: rgba(255, 71, 87, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .play-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 55px; height: 55px; background: rgba(255, 71, 87, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; pointer-events: none; }
         .play-button::after { content: ""; border-style: solid; border-width: 10px 0 10px 18px; border-color: transparent transparent transparent #fff; margin-left: 4px; }
         
         .post-title { padding: 14px 15px 8px 15px; font-size: 15px; font-weight: bold; color: #fff; cursor: pointer; }
         .post-meta { padding: 0 15px 15px 15px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #aaa; }
-        .action-badge { background-color: #ff4757; color: #fff; padding: 8px 16px; border-radius: 20px; font-weight: bold; border: none; cursor: pointer; }
+        .action-badge { background-color: #ff4757; color: #fff; padding: 10px 18px; border-radius: 20px; font-weight: bold; border: none; cursor: pointer; z-index: 10; display: inline-block; user-select: none; }
 
         .back-btn { align-self: flex-start; background-color: #222; color: #ff4757; padding: 8px 14px; border-radius: 6px; border: 1px solid #333; cursor: pointer; font-weight: bold; font-size: 12px; }
         
@@ -50,8 +50,8 @@
 <body>
 
     <div class="header-bar">
-        <div style="font-size: 20px; cursor: pointer;" onclick="goHome()">☰</div>
-        <div class="header-logo" onclick="goHome()">2PBVAGE 🤍</div>
+        <div style="font-size: 20px; cursor: pointer;" id="nav-menu">☰</div>
+        <div class="header-logo" id="nav-logo">2PBVAGE 🤍</div>
         <div style="font-size: 20px; cursor: pointer;">🔍</div>
     </div>
 
@@ -59,91 +59,20 @@
 
         <!-- 1. ANA SAYFA -->
         <div id="sec-feed" class="page-sec active-sec">
-            <div class="video-post">
-                <div class="video-thumbnail" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');" onclick="loadVideo('v2')">
-                    <div class="play-button"></div>
-                </div>
-                <div class="post-title" onclick="loadVideo('v2')">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
-                <div class="post-meta">
-                    <span>📅 12 Eki, 2026 &bull; <strong style="color:#ff4757; cursor:pointer;" onclick="loadProfile('Komotaze')">Komotaze</strong></span>
-                    <button class="action-badge" onclick="loadVideo('v2')">Hemen İzle</button>
-                </div>
-            </div>
-
-            <div class="video-post">
-                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" onclick="loadVideo('v1')">
-                    <div class="play-button"></div>
-                </div>
-                <div class="post-title" onclick="loadVideo('v1')">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
-                <div class="post-meta">
-                    <span>📅 12 Eki, 2026 &bull; <strong style="color:#ff4757; cursor:pointer;" onclick="loadProfile('Sophie Rain')">Sophie Rain</strong></span>
-                    <button class="action-badge" onclick="loadVideo('v1')">Hemen İzle</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- 2. VİDEO İZLEME SAYFASI -->
-        <div id="sec-watch" class="page-sec">
-            <button class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</button>
-            <h1 id="v-title" style="font-size: 18px; color: #fff;"></h1>
             
-            <div class="video-player-box">
-                <iframe id="v-iframe" src="" allowfullscreen></iframe>
-            </div>
-
-            <div class="channel-profile-card" id="v-card">
-                <div class="channel-info-left">
-                    <div class="channel-avatar" id="v-avatar"></div>
-                    <div>
-                        <div class="channel-name" id="v-author"></div>
-                        <div style="font-size: 11px; color: #aaa;">Kanalı & Tüm Videoları Gör</div>
-                    </div>
+            <div class="video-post">
+                <div class="video-thumbnail" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');" data-vid="v2">
+                    <div class="play-button"></div>
                 </div>
-                <button class="action-badge">Kanala Git</button>
-            </div>
-
-            <div class="video-description-box">
-                <div class="desc-heading">📌 Video Özeti & Detaylar</div>
-                <div class="desc-text" id="v-desc"></div>
-            </div>
-        </div>
-
-        <!-- 3. KANAL PROFİL SAYFASI -->
-        <div id="sec-profile" class="page-sec">
-            <button class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</button>
-            <div class="channel-header">
-                <div class="channel-banner" id="p-banner"></div>
-                <div class="channel-details">
-                    <div class="channel-main-avatar" id="p-avatar"></div>
-                    <div class="channel-main-title" id="p-title"></div>
+                <div class="post-title" data-vid="v2">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
+                <div class="post-meta">
+                    <span>📅 12 Eki, 2026 &bull; <strong style="color:#ff4757; cursor:pointer;" data-author="Komotaze">Komotaze</strong></span>
+                    <button class="action-badge" data-vid="v2">Hemen İzle</button>
                 </div>
             </div>
-            <div style="font-size: 15px; font-weight: bold; color: #ff4757; margin-top: 10px;">📹 Kanalın Videoları</div>
-            <div id="p-videos"></div>
-        </div>
 
-    </div>
-
-    <script>
-        var videos = {
-            'v1': {
-                title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor",
-                url: "https://playmogo.com/e/1fvov3xdwsbq",
-                thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp",
-                author: "Sophie Rain",
-                avatar: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp",
-                desc: "Sophie Rain, bu özel çekimde kameralar karşısına tamamen cesur bir şekilde geçiyor. Üstsüz bir şekilde göğüslerini öne çıkaran hareketleriyle sınırları zorlayan Sophie Rain'in en çok konuşulan özel anları."
-            },
-            'v2': {
-                title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...",
-                url: "https://playmogo.com/e/ehhg2pcksir6",
-                thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif",
-                author: "Komotaze",
-                avatar: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif",
-                desc: "Arkadaşının kısa süreliğine markete gitmesini fırsat bilen ikilinin evde baş başa kaldığı tutkulu ve heyecan dolu gizli anlar."
-            }
-        };
-
-        function showSection(id) {
-            document.getElementById('sec-feed').classList.remove('active-sec');
-            document.getElementById('sec-watch').classList.remove('active-sec
+            <div class="video-post">
+                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" data-vid="v1">
+                    <div class="play-button"></div>
+                </div>
+                <div class="post-title"

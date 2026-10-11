@@ -370,32 +370,32 @@
         <div class="header-icon">🔍</div>
     </div>
 
-    <!-- İÇERİK ALANI -->
+    <!-- İÇERİK KAPSAYICI -->
     <div class="content-container">
 
-        <!-- 1. ANA SAYFA / AKIŞ GÖRÜNÜMÜ (HTML İÇİNDE HAZIR ELEMANLAR) -->
+        <!-- 1. ANA SAYFA / AKIŞ GÖRÜNÜMÜ -->
         <div id="feed-view">
 
-            <!-- VİDEO 2 -->
+            <!-- VİDEO 2 (Komotaze) -->
             <div class="video-post">
                 <div class="video-thumbnail" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');" onclick="openWatchPage('v2')">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
+                <div class="post-title" onclick="openWatchPage('v2')" style="cursor: pointer;">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
                 <div class="post-meta">
-                    <span>📅 12 Eki, 2026 &bull; Komotaze</span>
+                    <span>📅 12 Eki, 2026 &bull; <a href="#" onclick="openChannelProfile('Komotaze'); return false;" style="color: #ff4757; text-decoration: none; font-weight: bold;">Komotaze</a></span>
                     <button class="action-badge" onclick="openWatchPage('v2')">🚀 Hemen İzle</button>
                 </div>
             </div>
 
-            <!-- VİDEO 1 -->
+            <!-- VİDEO 1 (Sophie Rain) -->
             <div class="video-post">
                 <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" onclick="openWatchPage('v1')">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
+                <div class="post-title" onclick="openWatchPage('v1')" style="cursor: pointer;">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
                 <div class="post-meta">
-                    <span>📅 12 Eki, 2026 &bull; Sophie Rain</span>
+                    <span>📅 12 Eki, 2026 &bull; <a href="#" onclick="openChannelProfile('Sophie Rain'); return false;" style="color: #ff4757; text-decoration: none; font-weight: bold;">Sophie Rain</a></span>
                     <button class="action-badge" onclick="openWatchPage('v1')">🚀 Hemen İzle</button>
                 </div>
             </div>
@@ -445,7 +445,7 @@
                 <button class="channel-visit-btn">Kanala Git ➔</button>
             </div>
 
-            <!-- AÇIKLAMA / ÖZET BÖLÜMÜ -->
+            <!-- AÇIKLAMA BÖLÜMÜ -->
             <div class="video-description-box">
                 <div class="desc-heading">📌 Video Özeti & Detaylar</div>
                 <div id="watch-desc-text" class="desc-text"></div>
@@ -475,86 +475,3 @@
             'v2': {
                 title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...",
                 embedUrl: "https://playmogo.com/e/ehhg2pcksir6",
-                thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif",
-                date: "12 Eki, 2026",
-                author: "Komotaze",
-                authorAvatar: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif",
-                authorBanner: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif",
-                desc: "Arkadaşının kısa süreliğine markete gitmesini fırsat bilen ikilinin evde baş başa kaldığı tutkulu ve heyecan dolu gizli anlar. Sınırların aşıldığı yasak kaçamağı kesintisiz yüksek kalitede izleyebilirsiniz."
-            }
-        };
-
-        function openWatchPage(id) {
-            var v = videos[id];
-            if (!v) return;
-
-            document.getElementById('feed-view').style.display = 'none';
-            document.getElementById('profile-view').style.display = 'none';
-            document.getElementById('watch-view').style.display = 'flex';
-            
-            document.getElementById('watch-title-text').innerText = v.title;
-            document.getElementById('watch-desc-text').innerText = v.desc;
-            document.getElementById('main-player').src = v.embedUrl;
-
-            document.getElementById('channel-name-text').innerText = v.author;
-            document.getElementById('channel-avatar-img').style.backgroundImage = "url('" + v.authorAvatar + "')";
-            
-            document.getElementById('channel-card-box').onclick = function() { openChannelProfile(v.author); };
-
-            var relatedContainer = document.getElementById('related-container');
-            relatedContainer.innerHTML = '';
-
-            Object.keys(videos).forEach(function(key) {
-                if (key !== id) {
-                    var item = videos[key];
-                    var card = document.createElement('div');
-                    card.className = 'related-card';
-                    card.onclick = function() { openWatchPage(key); };
-                    card.innerHTML = 
-                        '<div class="related-thumb" style="background-image: url(\'' + item.thumb + '\');"></div>' +
-                        '<div class="related-info">' +
-                            '<div class="related-title">' + item.title + '</div>' +
-                            '<div class="related-date">📅 ' + item.date + '</div>' +
-                        '</div>';
-                    relatedContainer.appendChild(card);
-                }
-            });
-
-            window.scrollTo(0, 0);
-        }
-
-        function openChannelProfile(authorName) {
-            document.getElementById('feed-view').style.display = 'none';
-            document.getElementById('watch-view').style.display = 'none';
-            document.getElementById('main-player').src = '';
-            document.getElementById('profile-view').style.display = 'flex';
-
-            var authorData = null;
-            Object.keys(videos).forEach(function(k){
-                if(videos[k].author === authorName) authorData = videos[k];
-            });
-
-            if(authorData) {
-                document.getElementById('prof-title').innerText = authorData.author;
-                document.getElementById('prof-avatar').style.backgroundImage = "url('" + authorData.authorAvatar + "')";
-                document.getElementById('prof-banner').style.backgroundImage = "url('" + authorData.authorBanner + "')";
-            }
-
-            var profilePostsContainer = document.getElementById('profile-posts-container');
-            profilePostsContainer.innerHTML = '';
-
-            Object.keys(videos).forEach(function(key) {
-                var v = videos[key];
-                if (v.author === authorName) {
-                    var post = document.createElement('div');
-                    post.className = 'video-post';
-                    post.innerHTML = 
-                        '<div class="video-thumbnail" style="background-image: url(\'' + v.thumb + '\');" onclick="openWatchPage(\'' + key + '\')">' +
-                            '<div class="play-button"></div>' +
-                        '</div>' +
-                        '<div class="post-title">' + v.title + '</div>' +
-                        '<div class="post-meta">' +
-                            '<span>📅 ' + v.date + '</span>' +
-                            '<button class="action-badge" onclick="openWatchPage(\'' + key + '\')">🚀 Hemen İzle</button>' +
-                        '</div>';
-                 

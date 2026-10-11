@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2PBVAGE</title>
-    <!-- Modern ve Şık Google Font (Montserrat) -->
+    <!-- Modern Montserrat Fontu -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <style>
         * {
@@ -21,7 +21,7 @@
             flex-direction: column;
             align-items: center;
         }
-        /* ÜST LOGO / BAŞLIK (ÖZEL FONT VE RENK) */
+        /* LOGO ALANI */
         .site-header {
             width: 100%;
             max-width: 500px;
@@ -46,11 +46,8 @@
             gap: 8px;
             text-shadow: 0 2px 10px rgba(255, 71, 87, 0.3);
         }
-        .site-logo span {
-            font-size: 20px;
-        }
         
-        /* VİDEO LİSTESİ */
+        /* VİDEO AKIŞI */
         .feed-container {
             display: flex;
             flex-direction: column;
@@ -73,14 +70,15 @@
             position: relative;
             width: 100%;
             padding-bottom: 56.25%; /* 16:9 Oranı */
-            background-color: #000;
+            background-color: #1a1a1a;
+            background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop'); /* Şık arka plan kapak görseli */
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        /* OYNAT BUTONU SİMGESİ */
+        /* OYNAT BUTONU */
         .play-button {
             position: absolute;
             width: 55px;
@@ -91,10 +89,7 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 0 15px rgba(0,0,0,0.7);
-            transition: transform 0.2s;
-        }
-        .video-post:hover .play-button {
-            transform: scale(1.1);
+            z-index: 2;
         }
         .play-button::after {
             content: "";
@@ -102,6 +97,16 @@
             border-width: 10px 0 10px 18px;
             border-color: transparent transparent transparent #ffffff;
             margin-left: 4px;
+        }
+        .video-thumbnail::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
         }
         .post-title {
             padding: 14px 15px 8px 15px;
@@ -130,22 +135,22 @@
 </head>
 <body>
 
-    <!-- ÜST MENÜ ALANI (BEYAZ KALP VE ÖZEL FONT) -->
+    <!-- LOGO -->
     <div class="site-header">
-        <div class="site-logo">2PBVAGE <span>🤍</span></div>
+        <div class="site-logo">2PBVAGE 🤍</div>
     </div>
 
     <!-- VİDEO LİSTESİ -->
     <div class="feed-container">
 
-        <!-- 1. VİDEO -->
+        <!-- 1. VİDEO KARTI -->
         <a href="https://playmogo.com/e/1fvov3xdwsbq" target="_blank" class="video-post">
             <div class="video-thumbnail">
                 <div class="play-button"></div>
             </div>
-            <div class="post-title">Video 2933 - Özel İçerik ve Detaylı Görüntüler</div>
+            <div class="post-title">Sophie Rain - Black Panties Strip Video</div>
             <div class="post-meta">
-                <span>📅 11 Eki, 2026</span>
+                <span>📅 12 Eki, 2026</span>
                 <span class="action-badge">🚀 Hemen İzle</span>
             </div>
         </a>

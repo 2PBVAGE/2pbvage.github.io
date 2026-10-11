@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sophie Rain - Black Panties Strip Video - 2PBVAGE</title>
+    <title>2PBVAGE 🤍</title>
     <!-- Modern Montserrat Fontu -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <style>
@@ -21,7 +21,7 @@
             align-items: center;
         }
 
-        /* ÜST BAR (SİYAH) */
+        /* 1. ÜST BAR (SİYAH) */
         .header-bar {
             width: 100%;
             max-width: 600px;
@@ -62,104 +62,185 @@
             gap: 15px;
         }
 
-        /* 1. ÜSTTE VİDEO BAŞLIĞI */
-        .video-title {
+        /* ================= KISIM 1: ANA SAYFA GÖRÜNÜMÜ ================= */
+        #feed-view {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .video-post {
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+            border: 1px solid #222;
+        }
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background-color: #000;
+            background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 55px;
+            height: 55px;
+            background: rgba(255, 71, 87, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(0,0,0,0.7);
+            z-index: 2;
+        }
+        .play-button::after {
+            content: "";
+            border-style: solid;
+            border-width: 10px 0 10px 18px;
+            border-color: transparent transparent transparent #ffffff;
+            margin-left: 4px;
+        }
+        .post-title {
+            padding: 14px 15px 8px 15px;
+            font-size: 15px;
+            font-weight: bold;
+            color: #ffffff;
+            line-height: 1.4;
+        }
+        .post-meta {
+            padding: 0 15px 15px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #aaaaaa;
+        }
+        .action-badge {
+            background-color: #ff4757;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 12px;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 8px rgba(255, 71, 87, 0.4);
+        }
+
+        /* ================= KISIM 2: VİDEO İZLEME GÖRÜNÜMÜ (ATTIĞINIZ EKRAN) ================= */
+        #watch-view {
+            display: none; /* İlk açılışta gizlidir, tıklanınca açılır */
+            width: 100%;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .watch-title {
             font-size: 20px;
             font-weight: bold;
             color: #ffffff;
             line-height: 1.35;
             margin-top: 5px;
         }
-
-        /* 2. SİTE İÇİ VİDEO OYNATICI (SİYAH ÇERÇEVE) */
-        .video-wrapper {
+        .video-player-box {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 Oranı */
+            padding-bottom: 56.25%; /* 16:9 Siyah Ekran Oranı */
             background-color: #000000;
             border-radius: 6px;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.9);
         }
-
-        /* İLK BAŞTA GÖRÜNEN KAPAK VE OYNAT BUTONU */
-        .video-cover {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-        }
-
-        .play-button {
-            width: 65px;
-            height: 65px;
-            background: rgba(255, 71, 87, 0.95);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 20px rgba(255, 71, 87, 0.6);
-        }
-
-        .play-button::after {
-            content: "";
-            border-style: solid;
-            border-width: 12px 0 12px 22px;
-            border-color: transparent transparent transparent #ffffff;
-            margin-left: 5px;
-        }
-
-        /* SİTEYE GÖMÜLÜ OYNATICI (IFRAME) */
-        .video-wrapper iframe {
+        .video-player-box iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             border: 0;
-            z-index: 5;
+        }
+        .back-home-btn {
+            align-self: flex-start;
+            background-color: #222;
+            color: #ff4757;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid #333;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 5px;
         }
     </style>
 </head>
 <body>
 
-    <!-- ÜST MENÜ BARİ -->
+    <!-- ÜST BAR -->
     <div class="header-bar">
-        <div class="header-icon">☰</div>
-        <a href="#" class="header-logo">2PBVAGE 🤍</a>
+        <div class="header-icon" onclick="showFeed()">☰</div>
+        <a href="#" class="header-logo" onclick="showFeed()">2PBVAGE 🤍</a>
         <div class="header-icon">🔍</div>
     </div>
 
     <!-- İÇERİK ALANI -->
     <div class="content-container">
 
-        <!-- VİDEO BAŞLIĞI (EN ÜSTTE) -->
-        <h1 class="video-title">Sophie Rain - Black Panties Strip Video</h1>
-
-        <!-- SİYAH VİDEO OYNATICI (SİTE DIŞINA GİTMEDEN BULDİĞİNİZ YERDE OYNATIR) -->
-        <div class="video-wrapper">
-            <div id="cover-layer" class="video-cover" onclick="startVideo()">
-                <div class="play-button"></div>
+        <!-- 1. ANA SAYFA GÖRÜNÜMÜ (HEMEN İZLE BUTONLU) -->
+        <div id="feed-view">
+            <div class="video-post">
+                <div class="video-thumbnail" onclick="openWatchPage()">
+                    <div class="play-button"></div>
+                </div>
+                <div class="post-title">Sophie Rain - Black Panties Strip Video</div>
+                <div class="post-meta">
+                    <span>📅 12 Eki, 2026</span>
+                    <!-- SAĞ ALTTAKI HEMEN İZLE BUTONU -->
+                    <button class="action-badge" onclick="openWatchPage()">🚀 Hemen İzle</button>
+                </div>
             </div>
-            <iframe id="video-iframe" src="" allowfullscreen></iframe>
+        </div>
+
+        <!-- 2. VİDEO İZLEME EKRANI (TAM SİZİN İSTEDİĞİNİZ RESİMDEKİ GİBİ) -->
+        <div id="watch-view">
+            <button class="back-home-btn" onclick="showFeed()">⬅ Ana Sayfaya Dön</button>
+            
+            <!-- ÜSTTE BEYAZ VİDEO BAŞLIĞI -->
+            <h1 class="watch-title">Sophie Rain - Black Panties Strip Video</h1>
+
+            <!-- ORTADA SİYAH ALANA GÖMÜLÜ VİDEO OYNATICI -->
+            <div class="video-player-box">
+                <iframe id="main-player" src="" allowfullscreen></iframe>
+            </div>
         </div>
 
     </div>
 
+    <!-- TIKLAMA MANTIĞI -->
     <script>
-        function startVideo() {
-            // Kapak fotoğrafını kaldırır ve videoyu kendi sitenizin içinde doğrudan başlatır
-            document.getElementById('cover-layer').style.display = 'none';
-            document.getElementById('video-iframe').src = 'https://playmogo.com/e/1fvov3xdwsbq';
+        function openWatchPage() {
+            document.getElementById('feed-view').style.display = 'none';
+            document.getElementById('watch-view').style.display = 'flex';
+            // Video kaynağını siyah ekrana yükler
+            document.getElementById('main-player').src = 'https://playmogo.com/e/1fvov3xdwsbq';
+            window.scrollTo(0, 0);
+        }
+
+        function showFeed() {
+            document.getElementById('watch-view').style.display = 'none';
+            document.getElementById('feed-view').style.display = 'flex';
+            // Videoyu durdurur
+            document.getElementById('main-player').src = '';
+            window.scrollTo(0, 0);
         }
     </script>
 

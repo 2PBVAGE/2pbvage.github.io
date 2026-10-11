@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2PBVAGE</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         body {
             background-color: #121212;
             color: #ffffff;
             font-family: Arial, sans-serif;
-            margin: 0;
             padding: 15px;
             display: flex;
             flex-direction: column;
@@ -17,32 +21,29 @@
         }
         h1 {
             color: #ff3333;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             text-align: center;
             font-size: 28px;
             font-weight: bold;
         }
-        .video-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
+        .main-player-card {
             width: 100%;
-            max-width: 500px;
-        }
-        .video-card {
+            max-width: 600px;
             background-color: #1e1e1e;
             border-radius: 12px;
             padding: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
         }
-        .video-card h3 {
-            margin: 0 0 10px 0;
-            font-size: 16px;
-            color: #ffffff;
+        .main-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ff3333;
         }
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Ekran Oranı */
+            padding-bottom: 56.25%; /* 16:9 Oranı */
             height: 0;
             overflow: hidden;
             border-radius: 8px;
@@ -56,6 +57,73 @@
             height: 100%;
             border: 0;
         }
+        
+        /* VİDEO SEÇME LİSTESİ BAŞLIĞI */
+        .section-title {
+            width: 100%;
+            max-width: 600px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #ccc;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+
+        /* VİDEO SEÇME YERİ (GRID) */
+        .video-select-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 12px;
+            width: 100%;
+            max-width: 600px;
+        }
+        .select-card {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+            border: 2px solid transparent;
+        }
+        .select-card:hover, .select-card:active {
+            transform: scale(0.96);
+            border-color: #ff3333;
+        }
+        .thumb-box {
+            position: relative;
+            width: 100%;
+            padding-bottom: 60%;
+            background-color: #2a2a2a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .play-btn {
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 51, 51, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .play-btn::after {
+            content: "";
+            border-style: solid;
+            border-width: 6px 0 6px 10px;
+            border-color: transparent transparent transparent #fff;
+            margin-left: 2px;
+        }
+        .card-title {
+            padding: 8px;
+            font-size: 12px;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     </style>
 </head>
 <body>
@@ -63,25 +131,44 @@
     <!-- SİTE BAŞLIĞI -->
     <h1>2PBVAGE</h1>
 
-    <div class="video-grid">
+    <!-- ÜSTTEKİ ANA VİDEO OYNATICI -->
+    <div class="main-player-card">
+        <div id="videoTitle" class="main-title">Video 2933</div>
+        <div class="video-container">
+            <iframe id="mainPlayer" src="https://playmogo.com/e/1fvov3xdwsbq" allowfullscreen></iframe>
+        </div>
+    </div>
 
-        <!-- 1. VİDEO -->
-        <div class="video-card">
-            <h3>Birinci Video Başlığı</h3>
-            <div class="video-container">
-                <iframe src="https://playmogo.com/e/1fvov3xdwsbq" allowfullscreen></iframe>
+    <div class="section-title">Diğer Videolar</div>
+
+    <!-- VİDEO SEÇME LİSTESİ -->
+    <div class="video-select-grid">
+
+        <!-- 1. VİDEO SEÇENEĞİ -->
+        <div class="select-card" onclick="changeVideo('https://playmogo.com/e/1fvov3xdwsbq', 'Video 2933')">
+            <div class="thumb-box">
+                <div class="play-btn"></div>
             </div>
+            <div class="card-title">Video 2933</div>
         </div>
 
-        <!-- 2. VİDEO (İleride yeni video eklemek için bu bloğu kullanabilirsiniz) -->
-        <div class="video-card">
-            <h3>İkinci Video Başlığı</h3>
-            <div class="video-container">
-                <iframe src="https://playmogo.com/e/SİZİN_YENİ_VİDEO_LİNKİNİZ" allowfullscreen></iframe>
+        <!-- 2. VİDEO SEÇENEĞİ (Örnek) -->
+        <div class="select-card" onclick="changeVideo('https://playmogo.com/e/YENI_VIDEO_LINKI', 'İkinci Video Başlığı')">
+            <div class="thumb-box">
+                <div class="play-btn"></div>
             </div>
+            <div class="card-title">İkinci Video</div>
         </div>
 
     </div>
+
+    <script>
+        function changeVideo(videoUrl, title) {
+            document.getElementById('mainPlayer').src = videoUrl;
+            document.getElementById('videoTitle').innerText = title;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 
 </body>
 </html>

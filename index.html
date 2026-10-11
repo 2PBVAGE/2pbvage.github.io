@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2PBVAGE</title>
+    <!-- Modern ve Şık Google Font (Montserrat) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -19,26 +21,36 @@
             flex-direction: column;
             align-items: center;
         }
-        /* ÜST LOGO / BAŞLIK */
+        /* ÜST LOGO / BAŞLIK (ÖZEL FONT VE RENK) */
         .site-header {
             width: 100%;
             max-width: 500px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            background-color: #1e1e1e;
-            padding: 12px 15px;
-            border-radius: 8px;
+            background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+            padding: 15px;
+            border-radius: 12px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            border: 1px solid #333;
         }
         .site-logo {
-            color: #ff3333;
-            font-size: 22px;
-            font-weight: bold;
+            font-family: 'Montserrat', sans-serif;
+            color: #ff4757;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-shadow: 0 2px 10px rgba(255, 71, 87, 0.3);
+        }
+        .site-logo span {
+            font-size: 20px;
         }
         
-        /* VİDEO AKIŞ LİSTESİ */
+        /* VİDEO LİSTESİ */
         .feed-container {
             display: flex;
             flex-direction: column;
@@ -48,28 +60,52 @@
         }
         .video-post {
             background-color: #1e1e1e;
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
             padding-bottom: 15px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            border: 1px solid #222;
         }
-        .video-wrapper {
+        .video-thumbnail {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Oranı */
-            height: 0;
-            background-color: #000;
-        }
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
-            border: 0;
+            padding-bottom: 56.25%; /* 16:9 Oranı */
+            background-color: #000;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* OYNAT BUTONU SİMGESİ */
+        .play-button {
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            background: rgba(255, 71, 87, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(0,0,0,0.7);
+            transition: transform 0.2s;
+        }
+        .video-post:hover .play-button {
+            transform: scale(1.1);
+        }
+        .play-button::after {
+            content: "";
+            border-style: solid;
+            border-width: 10px 0 10px 18px;
+            border-color: transparent transparent transparent #ffffff;
+            margin-left: 4px;
         }
         .post-title {
-            padding: 12px 15px 8px 15px;
-            font-size: 16px;
+            padding: 14px 15px 8px 15px;
+            font-size: 15px;
             font-weight: bold;
             color: #ffffff;
             line-height: 1.4;
@@ -83,49 +119,36 @@
             color: #aaaaaa;
         }
         .action-badge {
-            background-color: #2a2a2a;
-            padding: 6px 12px;
+            background-color: #ff4757;
+            padding: 6px 14px;
             border-radius: 20px;
             color: #ffffff;
-            text-decoration: none;
             font-weight: bold;
-            border: 1px solid #444;
+            box-shadow: 0 2px 8px rgba(255, 71, 87, 0.4);
         }
     </style>
 </head>
 <body>
 
-    <!-- ÜST MENÜ ALANI -->
+    <!-- ÜST MENÜ ALANI (BEYAZ KALP VE ÖZEL FONT) -->
     <div class="site-header">
-        <div class="site-logo">😎 2PBVAGE</div>
+        <div class="site-logo">2PBVAGE <span>🤍</span></div>
     </div>
 
-    <!-- VİDEO LİSTESİ (ALT ALTA AKIŞ) -->
+    <!-- VİDEO LİSTESİ -->
     <div class="feed-container">
 
-        <!-- 1. VİDEO GÖNDERİSİ -->
-        <div class="video-post">
-            <div class="video-wrapper">
-                <iframe src="https://playmogo.com/e/1fvov3xdwsbq" allowfullscreen></iframe>
+        <!-- 1. VİDEO -->
+        <a href="https://playmogo.com/e/1fvov3xdwsbq" target="_blank" class="video-post">
+            <div class="video-thumbnail">
+                <div class="play-button"></div>
             </div>
             <div class="post-title">Video 2933 - Özel İçerik ve Detaylı Görüntüler</div>
             <div class="post-meta">
                 <span>📅 11 Eki, 2026</span>
-                <a href="https://playmogo.com/e/1fvov3xdwsbq" target="_blank" class="action-badge">🚀 Hemen İzle</a>
+                <span class="action-badge">🚀 Hemen İzle</span>
             </div>
-        </div>
-
-        <!-- 2. VİDEO GÖNDERİSİ (Yeni video eklemek istediğinizde bu bloğu kopyalayıp çoğaltabilirsiniz) -->
-        <div class="video-post">
-            <div class="video-wrapper">
-                <iframe src="https://playmogo.com/e/YENI_VIDEO_LINKINIZ" allowfullscreen></iframe>
-            </div>
-            <div class="post-title">İkinci Videonun Başlığı Buraya Yazılacak</div>
-            <div class="post-meta">
-                <span>📅 11 Eki, 2026</span>
-                <a href="https://playmogo.com/e/YENI_VIDEO_LINKINIZ" target="_blank" class="action-badge">🚀 Hemen İzle</a>
-            </div>
-        </div>
+        </a>
 
     </div>
 

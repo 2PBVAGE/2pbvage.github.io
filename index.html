@@ -440,15 +440,15 @@
 
     <!-- VİDEO VERİLERİ VE MANTIĞI -->
     <script>
-        const videos = {
+        var videos = {
             'v1': {
                 title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor",
                 embedUrl: "https://playmogo.com/e/1fvov3xdwsbq",
                 thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp",
                 date: "12 Eki, 2026",
                 author: "Sophie Rain",
-                authorAvatar: "https://i.ibb.co/DPFjgyLy/image.png",
-                authorBanner: "https://i.ibb.co/DPFjgyLy/image.png",
+                authorAvatar: "https://i.ibb.co/DPFjgyL/image.png",
+                authorBanner: "https://i.ibb.co/DPFjgyL/image.png",
                 desc: "Sophie Rain, bu özel çekimde kameralar karşısına tamamen cesur bir şekilde geçiyor. Üstsüz bir şekilde göğüslerini öne çıkaran hareketleriyle sınırları zorlayan Sophie Rain'in en çok konuşulan ve merak edilen özel anları kesintisiz yüksek kalitede sizlerle."
             },
             'v2': {
@@ -457,38 +457,36 @@
                 thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif",
                 date: "12 Eki, 2026",
                 author: "Komotaze",
-                authorAvatar: "https://i.ibb.co/pB3ntggN/image.png",
-                authorBanner: "https://i.ibb.co/pB3ntggN/image.png",
+                authorAvatar: "https://i.ibb.co/pB3ntgg/image.png",
+                authorBanner: "https://i.ibb.co/pB3ntgg/image.png",
                 desc: "Arkadaşının kısa süreliğine markete gitmesini fırsat bilen ikilinin evde baş başa kaldığı tutkulu ve heyecan dolu gizli anlar. Sınırların aşıldığı yasak kaçamağı kesintisiz yüksek kalitede izleyebilirsiniz."
             }
         };
 
-        // Ana sayfadaki gönderileri yükle
         function renderFeed() {
-            const container = document.getElementById('posts-container');
+            var container = document.getElementById('posts-container');
+            if(!container) return;
             container.innerHTML = '';
 
-            Object.keys(videos).forEach(key => {
-                const v = videos[key];
-                const post = document.createElement('div');
+            Object.keys(videos).forEach(function(key) {
+                var v = videos[key];
+                var post = document.createElement('div');
                 post.className = 'video-post';
-                post.innerHTML = `
-                    <div class="video-thumbnail" style="background-image: url('${v.thumb}');" onclick="openWatchPage('${key}')">
-                        <div class="play-button"></div>
-                    </div>
-                    <div class="post-title">${v.title}</div>
-                    <div class="post-meta">
-                        <span>📅 ${v.date} &bull; ${v.author}</span>
-                        <button class="action-badge" onclick="openWatchPage('${key}')">🚀 Hemen İzle</button>
-                    </div>
-                `;
+                post.innerHTML = 
+                    '<div class="video-thumbnail" style="background-image: url(\'' + v.thumb + '\');" onclick="openWatchPage(\'' + key + '\')">' +
+                        '<div class="play-button"></div>' +
+                    '</div>' +
+                    '<div class="post-title">' + v.title + '</div>' +
+                    '<div class="post-meta">' +
+                        '<span>📅 ' + v.date + ' &bull; ' + v.author + '</span>' +
+                        '<button class="action-badge" onclick="openWatchPage(\'' + key + '\')">🚀 Hemen İzle</button>' +
+                    '</div>';
                 container.appendChild(post);
             });
         }
 
-        // İzleme Sayfasını Aç
         function openWatchPage(id) {
-            const v = videos[id];
+            var v = videos[id];
             if (!v) return;
 
             document.getElementById('feed-view').style.display = 'none';
@@ -499,30 +497,26 @@
             document.getElementById('watch-desc-text').innerText = v.desc;
             document.getElementById('main-player').src = v.embedUrl;
 
-            // Kanal / Profil Kartını Doldur
             document.getElementById('channel-name-text').innerText = v.author;
-            document.getElementById('channel-avatar-img').style.backgroundImage = `url('${v.authorAvatar}')`;
+            document.getElementById('channel-avatar-img').style.backgroundImage = "url('" + v.authorAvatar + "')";
             
-            // Kanala Git butonuna tıklandığında Profil Sayfası açılır
-            document.getElementById('channel-card-box').onclick = () => openChannelProfile(v.author);
+            document.getElementById('channel-card-box').onclick = function() { openChannelProfile(v.author); };
 
-            // Benzer Videolar
-            const relatedContainer = document.getElementById('related-container');
+            var relatedContainer = document.getElementById('related-container');
             relatedContainer.innerHTML = '';
 
-            Object.keys(videos).forEach(key => {
+            Object.keys(videos).forEach(function(key) {
                 if (key !== id) {
-                    const item = videos[key];
-                    const card = document.createElement('div');
+                    var item = videos[key];
+                    var card = document.createElement('div');
                     card.className = 'related-card';
-                    card.onclick = () => openWatchPage(key);
-                    card.innerHTML = `
-                        <div class="related-thumb" style="background-image: url('${item.thumb}');"></div>
-                        <div class="related-info">
-                            <div class="related-title">${item.title}</div>
-                            <div class="related-date">📅 ${item.date}</div>
-                        </div>
-                    `;
+                    card.onclick = function() { openWatchPage(key); };
+                    card.innerHTML = 
+                        '<div class="related-thumb" style="background-image: url(\'' + item.thumb + '\');"></div>' +
+                        '<div class="related-info">' +
+                            '<div class="related-title">' + item.title + '</div>' +
+                            '<div class="related-date">📅 ' + item.date + '</div>' +
+                        '</div>';
                     relatedContainer.appendChild(card);
                 }
             });
@@ -530,40 +524,40 @@
             window.scrollTo(0, 0);
         }
 
-        // YouTube Tarzı Kanal Profil Sayfasını Aç
         function openChannelProfile(authorName) {
             document.getElementById('feed-view').style.display = 'none';
             document.getElementById('watch-view').style.display = 'none';
             document.getElementById('main-player').src = '';
             document.getElementById('profile-view').style.display = 'flex';
 
-            // Yazara ait veriyi bul
-            let authorData = Object.values(videos).find(v => v.author === authorName);
+            var authorData = null;
+            Object.keys(videos).forEach(function(k){
+                if(videos[k].author === authorName) authorData = videos[k];
+            });
+
             if(authorData) {
                 document.getElementById('prof-title').innerText = authorData.author;
-                document.getElementById('prof-avatar').style.backgroundImage = `url('${authorData.authorAvatar}')`;
-                document.getElementById('prof-banner').style.backgroundImage = `url('${authorData.authorBanner}')`;
+                document.getElementById('prof-avatar').style.backgroundImage = "url('" + authorData.authorAvatar + "')";
+                document.getElementById('prof-banner').style.backgroundImage = "url('" + authorData.authorBanner + "')";
             }
 
-            // Yalnızca o yazarın videolarını listele
-            const profilePostsContainer = document.getElementById('profile-posts-container');
+            var profilePostsContainer = document.getElementById('profile-posts-container');
             profilePostsContainer.innerHTML = '';
 
-            Object.keys(videos).forEach(key => {
-                const v = videos[key];
+            Object.keys(videos).forEach(function(key) {
+                var v = videos[key];
                 if (v.author === authorName) {
-                    const post = document.createElement('div');
+                    var post = document.createElement('div');
                     post.className = 'video-post';
-                    post.innerHTML = `
-                        <div class="video-thumbnail" style="background-image: url('${v.thumb}');" onclick="openWatchPage('${key}')">
-                            <div class="play-button"></div>
-                        </div>
-                        <div class="post-title">${v.title}</div>
-                        <div class="post-meta">
-                            <span>📅 ${v.date}</span>
-                            <button class="action-badge" onclick="openWatchPage('${key}')">🚀 Hemen İzle</button>
-                        </div>
-                    `;
+                    post.innerHTML = 
+                        '<div class="video-thumbnail" style="background-image: url(\'' + v.thumb + '\');" onclick="openWatchPage(\'' + key + '\')">' +
+                            '<div class="play-button"></div>' +
+                        '</div>' +
+                        '<div class="post-title">' + v.title + '</div>' +
+                        '<div class="post-meta">' +
+                            '<span>📅 ' + v.date + '</span>' +
+                            '<button class="action-badge" onclick="openWatchPage(\'' + key + '\')">🚀 Hemen İzle</button>' +
+                        '</div>';
                     profilePostsContainer.appendChild(post);
                 }
             });
@@ -571,6 +565,6 @@
             window.scrollTo(0, 0);
         }
 
-        // Ana Sayfaya Dön
         function showFeed() {
- 
+            document.getElementById('watch-view').style.display = 'none';
+            document.getElementById('profile-view').style.dis

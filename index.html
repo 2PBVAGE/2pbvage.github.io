@@ -9,36 +9,72 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background-color: #121212; color: #ffffff; font-family: Arial, sans-serif; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+        
+        /* ÜST LOGO */
         .site-header { width: 100%; max-width: 500px; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #1e1e1e, #2a2a2a); padding: 15px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.6); border: 1px solid #333; }
         .site-logo { font-family: 'Montserrat', sans-serif; color: #ff4757; font-size: 24px; font-weight: 800; letter-spacing: 1.5px; display: flex; align-items: center; gap: 8px; }
-        .feed-container { display: flex; flex-direction: column; gap: 25px; width: 100%; max-width: 500px; }
-        .video-post { background-color: #1e1e1e; border-radius: 12px; overflow: hidden; padding-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.6); text-decoration: none; color: inherit; display: block; border: 1px solid #222; }
-        .video-thumbnail { position: relative; width: 100%; padding-bottom: 56.25%; background-color: #000; background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; }
-        .play-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 55px; height: 55px; background: rgba(255, 71, 87, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(0,0,0,0.7); z-index: 2; }
+
+        /* VİDEO İZLEME KARTI */
+        .watch-card { width: 100%; max-width: 500px; background-color: #1e1e1e; border-radius: 12px; overflow: hidden; border: 1px solid #222; box-shadow: 0 4px 15px rgba(0,0,0,0.8); margin-bottom: 25px; }
+        
+        /* 1. ÜSTTE BAŞLIK */
+        .card-title { padding: 15px 15px 10px 15px; font-size: 16px; font-weight: bold; color: #ffffff; line-height: 1.4; }
+
+        /* 2. ORTADA VİDEO OYNATICI KUTUSU */
+        .card-player { position: relative; width: 100%; padding-bottom: 56.25%; background-color: #000; background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; }
+        .card-player a { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 3; }
+        .play-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: rgba(255, 71, 87, 0.95); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(255, 71, 87, 0.6); z-index: 2; pointer-events: none; }
         .play-button::after { content: ""; border-style: solid; border-width: 10px 0 10px 18px; border-color: transparent transparent transparent #ffffff; margin-left: 4px; }
-        .video-thumbnail::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.7) 100%); z-index: 1; }
-        .post-title { padding: 14px 15px 8px 15px; font-size: 15px; font-weight: bold; color: #ffffff; line-height: 1.4; }
-        .post-meta { padding: 0 15px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #aaaaaa; }
-        .action-badge { background-color: #ff4757; padding: 6px 14px; border-radius: 20px; color: #ffffff; font-weight: bold; }
+
+        .card-meta { padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #aaaaaa; border-top: 1px solid #2a2a2a; }
+        .action-badge { background-color: #ff4757; color: #ffffff; padding: 6px 14px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 12px; }
+
+        /* 3. AŞAĞIDA BENZER VİDEOLAR LİSTESİ */
+        .section-title { width: 100%; max-width: 500px; font-size: 15px; font-weight: bold; color: #ff4757; margin-bottom: 15px; border-left: 4px solid #ff4757; padding-left: 8px; }
+        .related-feed { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 15px; }
+        .related-card { background-color: #1e1e1e; border-radius: 10px; overflow: hidden; display: flex; text-decoration: none; color: inherit; border: 1px solid #222; }
+        .related-thumb { width: 130px; min-height: 80px; background-color: #000; background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp'); background-size: cover; background-position: center; position: relative; flex-shrink: 0; }
+        .related-info { padding: 10px 12px; display: flex; flex-direction: column; justify-content: center; }
+        .related-title { font-size: 13px; font-weight: bold; color: #fff; margin-bottom: 5px; line-height: 1.3; }
+        .related-date { font-size: 11px; color: #777; }
     </style>
 </head>
 <body>
+
+    <!-- ÜST LOGO -->
     <div class="site-header">
         <div class="site-logo">2PBVAGE 🤍</div>
     </div>
 
-    <div class="feed-container">
-        <!-- Bu karta tıklayınca video detay sayfasına (izle.html) gider -->
-        <a href="izle.html" class="video-post">
-            <div class="video-thumbnail">
-                <div class="play-button"></div>
-            </div>
-            <div class="post-title">Sophie Rain - Black Panties Strip Video</div>
-            <div class="post-meta">
-                <span>📅 12 Eki, 2026</span>
-                <span class="action-badge">🚀 Hemen İzle</span>
+    <!-- ANA VİDEO KARTI -->
+    <div class="watch-card">
+        <!-- ÜSTTE BAŞLIK -->
+        <div class="card-title">Sophie Rain - Black Panties Strip Video</div>
+
+        <!-- ORTADA VİDEO KAPAK VE OYNAT BUTONU -->
+        <div class="card-player">
+            <div class="play-button"></div>
+            <a href="https://playmogo.com/e/1fvov3xdwsbq" target="_blank"></a>
+        </div>
+
+        <div class="card-meta">
+            <span>📅 12 Eki, 2026</span>
+            <a href="https://playmogo.com/e/1fvov3xdwsbq" target="_blank" class="action-badge">🚀 Hemen İzle</a>
+        </div>
+    </div>
+
+    <!-- AŞAĞIDA BENZER VİDEOLAR -->
+    <div class="section-title">Benzer Videolar</div>
+    
+    <div class="related-feed">
+        <a href="https://playmogo.com/e/1fvov3xdwsbq" target="_blank" class="related-card">
+            <div class="related-thumb"></div>
+            <div class="related-info">
+                <div class="related-title">Sophie Rain - Özel Koleksiyon ve Detaylar</div>
+                <div class="related-date">📅 12 Eki, 2026</div>
             </div>
         </a>
     </div>
+
 </body>
 </html>

@@ -62,30 +62,59 @@
             gap: 15px;
         }
 
-        /* FİLTRE BİLGİ ÇUBUĞU (Kanal Görünümündeyken Üstte Çıkar) */
-        .filter-banner {
+        /* YOUTUBE TARZI KANAL PROFİL HEADER'I */
+        #profile-view {
             display: none;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+        }
+        .channel-header {
             background-color: #1a1a1a;
-            border: 1px solid #333;
-            padding: 10px 15px;
-            border-radius: 8px;
-            justify-content: space-between;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #2a2a2a;
+            position: relative;
+        }
+        .channel-banner {
+            width: 100%;
+            height: 110px;
+            background-color: #333;
+            background-size: cover;
+            background-position: center;
+        }
+        .channel-details {
+            padding: 15px;
+            display: flex;
             align-items: center;
-            font-size: 13px;
-            margin-bottom: 5px;
+            gap: 15px;
+            position: relative;
+            margin-top: -30px;
         }
-        .filter-banner span {
-            color: #ff4757;
+        .channel-main-avatar {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            border: 3px solid #ff4757;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+            background-color: #000;
+        }
+        .channel-meta-info {
+            display: flex;
+            flex-direction: column;
+            margin-top: 25px;
+        }
+        .channel-main-title {
+            font-size: 18px;
             font-weight: bold;
+            color: #ffffff;
         }
-        .clear-filter-btn {
-            background: #ff4757;
-            color: #fff;
-            border: none;
-            padding: 4px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 11px;
+        .channel-sub-info {
+            font-size: 12px;
+            color: #ff4757;
+            margin-top: 3px;
             font-weight: bold;
         }
 
@@ -208,7 +237,7 @@
             margin-bottom: 5px;
         }
 
-        /* OYUNCU / KANAL PROFİL KARTI */
+        /* OYUNCU / KANAL PROFİL KARTI (VİDEO ALTINDAKİ) */
         .channel-profile-card {
             background-color: #1a1a1a;
             border: 1px solid #2a2a2a;
@@ -343,20 +372,35 @@
     <!-- İÇERİK ALANI -->
     <div class="content-container">
 
-        <!-- AKTİF FİLTRE BİLGİSİ -->
-        <div id="filter-banner" class="filter-banner">
-            <div>Gösterilen Profil: <span id="filter-author-name"></span></div>
-            <button class="clear-filter-btn" onclick="showFeed()">Tümünü Göster</button>
-        </div>
-
         <!-- 1. ANA SAYFA / AKIŞ GÖRÜNÜMÜ -->
         <div id="feed-view">
             <div id="posts-container" style="display: flex; flex-direction: column; gap: 20px;">
-                <!-- JavaScript ile dinamik dolacak -->
+                <!-- JS ile dolacak -->
             </div>
         </div>
 
-        <!-- 2. VİDEO İZLEME EKRANI -->
+        <!-- 2. KANAL / PROFİL SAYFASI GÖRÜNÜMÜ -->
+        <div id="profile-view">
+            <button class="back-home-btn" onclick="showFeed()">⬅ Ana Sayfaya Dön</button>
+            
+            <div class="channel-header">
+                <div id="prof-banner" class="channel-banner"></div>
+                <div class="channel-details">
+                    <div id="prof-avatar" class="channel-main-avatar"></div>
+                    <div class="channel-meta-info">
+                        <div id="prof-title" class="channel-main-title"></div>
+                        <div class="channel-sub-info">✔ Doğrulanmış Kanal &bull; Özel İçerikler</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="related-section-title">📹 Kanalın Tüm Videoları</div>
+            <div id="profile-posts-container" style="display: flex; flex-direction: column; gap: 20px;">
+                <!-- Kanal videoları buraya dolacak -->
+            </div>
+        </div>
+
+        <!-- 3. VİDEO İZLEME EKRANI -->
         <div id="watch-view">
             <button class="back-home-btn" onclick="showFeed()">⬅ Ana Sayfaya Dön</button>
             
@@ -369,15 +413,15 @@
             </div>
 
             <!-- OYUNCU / KANAL PROFİL KARTI -->
-            <div id="channel-card-box" class="channel-profile-card" onclick="">
+            <div id="channel-card-box" class="channel-profile-card">
                 <div class="channel-info-left">
                     <div id="channel-avatar-img" class="channel-avatar"></div>
                     <div>
                         <div id="channel-name-text" class="channel-name"></div>
-                        <div class="channel-videos-count">Tüm Videoları Görüntüle</div>
+                        <div class="channel-videos-count">Kanalı & Tüm Videoları Gör</div>
                     </div>
                 </div>
-                <button class="channel-visit-btn">Profili Gör</button>
+                <button class="channel-visit-btn">Kanala Git ➔</button>
             </div>
 
             <!-- AÇIKLAMA / ÖZET BÖLÜMÜ -->
@@ -403,7 +447,8 @@
                 thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp",
                 date: "12 Eki, 2026",
                 author: "Sophie Rain",
-                authorAvatar: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp",
+                authorAvatar: "https://i.ibb.co/DPFjgyLy/image.png",
+                authorBanner: "https://i.ibb.co/DPFjgyLy/image.png",
                 desc: "Sophie Rain, bu özel çekimde kameralar karşısına tamamen cesur bir şekilde geçiyor. Üstsüz bir şekilde göğüslerini öne çıkaran hareketleriyle sınırları zorlayan Sophie Rain'in en çok konuşulan ve merak edilen özel anları kesintisiz yüksek kalitede sizlerle."
             },
             'v2': {
@@ -411,54 +456,44 @@
                 embedUrl: "https://playmogo.com/e/ehhg2pcksir6",
                 thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif",
                 date: "12 Eki, 2026",
-                author: "Özel Koleksiyon / Komotaze",
-                authorAvatar: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif",
+                author: "Komotaze",
+                authorAvatar: "https://i.ibb.co/pB3ntggN/image.png",
+                authorBanner: "https://i.ibb.co/pB3ntggN/image.png",
                 desc: "Arkadaşının kısa süreliğine markete gitmesini fırsat bilen ikilinin evde baş başa kaldığı tutkulu ve heyecan dolu gizli anlar. Sınırların aşıldığı yasak kaçamağı kesintisiz yüksek kalitede izleyebilirsiniz."
             }
         };
 
-        let currentFilterAuthor = null;
-
-        // Ana sayfadaki gönderileri listele (Filtreye göre hepsi veya belirli yazar)
-        function renderFeed(filterAuthor = null) {
+        // Ana sayfadaki gönderileri yükle
+        function renderFeed() {
             const container = document.getElementById('posts-container');
             container.innerHTML = '';
 
-            const banner = document.getElementById('filter-banner');
-            if (filterAuthor) {
-                banner.style.display = 'flex';
-                document.getElementById('filter-author-name').innerText = filterAuthor;
-            } else {
-                banner.style.display = 'none';
-            }
-
             Object.keys(videos).forEach(key => {
                 const v = videos[key];
-                if (!filterAuthor || v.author === filterAuthor) {
-                    const post = document.createElement('div');
-                    post.className = 'video-post';
-                    post.innerHTML = `
-                        <div class="video-thumbnail" style="background-image: url('${v.thumb}');" onclick="openWatchPage('${key}')">
-                            <div class="play-button"></div>
-                        </div>
-                        <div class="post-title">${v.title}</div>
-                        <div class="post-meta">
-                            <span>📅 ${v.date} &bull; ${v.author}</span>
-                            <button class="action-badge" onclick="openWatchPage('${key}')">🚀 Hemen İzle</button>
-                        </div>
-                    `;
-                    container.appendChild(post);
-                }
+                const post = document.createElement('div');
+                post.className = 'video-post';
+                post.innerHTML = `
+                    <div class="video-thumbnail" style="background-image: url('${v.thumb}');" onclick="openWatchPage('${key}')">
+                        <div class="play-button"></div>
+                    </div>
+                    <div class="post-title">${v.title}</div>
+                    <div class="post-meta">
+                        <span>📅 ${v.date} &bull; ${v.author}</span>
+                        <button class="action-badge" onclick="openWatchPage('${key}')">🚀 Hemen İzle</button>
+                    </div>
+                `;
+                container.appendChild(post);
             });
         }
 
+        // İzleme Sayfasını Aç
         function openWatchPage(id) {
             const v = videos[id];
             if (!v) return;
 
             document.getElementById('feed-view').style.display = 'none';
+            document.getElementById('profile-view').style.display = 'none';
             document.getElementById('watch-view').style.display = 'flex';
-            document.getElementById('filter-banner').style.display = 'none';
             
             document.getElementById('watch-title-text').innerText = v.title;
             document.getElementById('watch-desc-text').innerText = v.desc;
@@ -468,11 +503,10 @@
             document.getElementById('channel-name-text').innerText = v.author;
             document.getElementById('channel-avatar-img').style.backgroundImage = `url('${v.authorAvatar}')`;
             
-            // Profil kartına tıklayınca o yazarın videolarına filtrele
-            const channelCard = document.getElementById('channel-card-box');
-            channelCard.onclick = () => filterByAuthor(v.author);
+            // Kanala Git butonuna tıklandığında Profil Sayfası açılır
+            document.getElementById('channel-card-box').onclick = () => openChannelProfile(v.author);
 
-            // Benzer Videoları Oluştur
+            // Benzer Videolar
             const relatedContainer = document.getElementById('related-container');
             relatedContainer.innerHTML = '';
 
@@ -496,26 +530,47 @@
             window.scrollTo(0, 0);
         }
 
-        function filterByAuthor(authorName) {
-            currentFilterAuthor = authorName;
+        // YouTube Tarzı Kanal Profil Sayfasını Aç
+        function openChannelProfile(authorName) {
+            document.getElementById('feed-view').style.display = 'none';
             document.getElementById('watch-view').style.display = 'none';
-            document.getElementById('feed-view').style.display = 'flex';
-            renderFeed(authorName);
-            window.scrollTo(0, 0);
-        }
-
-        function showFeed() {
-            currentFilterAuthor = null;
-            document.getElementById('watch-view').style.display = 'none';
-            document.getElementById('feed-view').style.display = 'flex';
             document.getElementById('main-player').src = '';
-            renderFeed(null);
+            document.getElementById('profile-view').style.display = 'flex';
+
+            // Yazara ait veriyi bul
+            let authorData = Object.values(videos).find(v => v.author === authorName);
+            if(authorData) {
+                document.getElementById('prof-title').innerText = authorData.author;
+                document.getElementById('prof-avatar').style.backgroundImage = `url('${authorData.authorAvatar}')`;
+                document.getElementById('prof-banner').style.backgroundImage = `url('${authorData.authorBanner}')`;
+            }
+
+            // Yalnızca o yazarın videolarını listele
+            const profilePostsContainer = document.getElementById('profile-posts-container');
+            profilePostsContainer.innerHTML = '';
+
+            Object.keys(videos).forEach(key => {
+                const v = videos[key];
+                if (v.author === authorName) {
+                    const post = document.createElement('div');
+                    post.className = 'video-post';
+                    post.innerHTML = `
+                        <div class="video-thumbnail" style="background-image: url('${v.thumb}');" onclick="openWatchPage('${key}')">
+                            <div class="play-button"></div>
+                        </div>
+                        <div class="post-title">${v.title}</div>
+                        <div class="post-meta">
+                            <span>📅 ${v.date}</span>
+                            <button class="action-badge" onclick="openWatchPage('${key}')">🚀 Hemen İzle</button>
+                        </div>
+                    `;
+                    profilePostsContainer.appendChild(post);
+                }
+            });
+
             window.scrollTo(0, 0);
         }
 
-        // Sayfa açıldığında ana akışı yükle
-        renderFeed(null);
-    </script>
-
-</body>
-</html>
+        // Ana Sayfaya Dön
+        function showFeed() {
+ 

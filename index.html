@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2PBVAGE</title>
+    <title>Sophie Rain - Black Panties Strip Video - 2PBVAGE</title>
     <!-- Modern Montserrat Fontu -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <style>
@@ -16,7 +16,7 @@
             background-color: #121212;
             color: #ffffff;
             font-family: Arial, sans-serif;
-            padding: 15px;
+            padding: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -24,49 +24,41 @@
         /* LOGO ALANI */
         .site-header {
             width: 100%;
-            max-width: 500px;
+            max-width: 600px;
             display: flex;
             justify-content: center;
             align-items: center;
             background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 20px;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.6);
             border: 1px solid #333;
         }
         .site-logo {
             font-family: 'Montserrat', sans-serif;
             color: #ff4757;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 800;
             letter-spacing: 1.5px;
             display: flex;
             align-items: center;
             gap: 8px;
-            text-shadow: 0 2px 10px rgba(255, 71, 87, 0.3);
         }
-        
-        /* VİDEO AKIŞI */
-        .feed-container {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
+
+        /* ANA VİDEO DETAY ALANI */
+        .main-video-container {
             width: 100%;
-            max-width: 500px;
-        }
-        .video-post {
+            max-width: 600px;
             background-color: #1e1e1e;
             border-radius: 12px;
             overflow: hidden;
-            padding-bottom: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-            text-decoration: none;
-            color: inherit;
-            display: block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
             border: 1px solid #222;
+            margin-bottom: 25px;
         }
-        .video-thumbnail {
+        /* TAM EKRAN GENİŞLİĞİNDE VİDEO / KAPAK ALANI */
+        .video-player-box {
             position: relative;
             width: 100%;
             padding-bottom: 56.25%; /* 16:9 Oranı */
@@ -78,83 +70,183 @@
             align-items: center;
             justify-content: center;
         }
-        /* OYNAT BUTONU (TAM ORTADA) */
-        .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 55px;
-            height: 55px;
-            background: rgba(255, 71, 87, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 15px rgba(0,0,0,0.7);
-            z-index: 2;
-        }
-        .play-button::after {
-            content: "";
-            border-style: solid;
-            border-width: 10px 0 10px 18px;
-            border-color: transparent transparent transparent #ffffff;
-            margin-left: 4px;
-        }
-        .video-thumbnail::after {
-            content: '';
+        .video-player-box a {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.7) 100%);
-            z-index: 1;
+            z-index: 3;
         }
-        .post-title {
-            padding: 14px 15px 8px 15px;
-            font-size: 15px;
+        /* TAM ORTADAKİ BAŞLAT/OYNAT BUTONU */
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 65px;
+            height: 65px;
+            background: rgba(255, 71, 87, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(255, 71, 87, 0.6);
+            z-index: 2;
+            pointer-events: none;
+        }
+        .play-button::after {
+            content: "";
+            border-style: solid;
+            border-width: 12px 0 12px 22px;
+            border-color: transparent transparent transparent #ffffff;
+            margin-left: 5px;
+        }
+        
+        /* VİDEO BAŞLIĞI VE BİLGİLERİ (VİDEONUN HEMEN ALTINDA) */
+        .video-details {
+            padding: 15px;
+        }
+        .video-title {
+            font-size: 17px;
             font-weight: bold;
             color: #ffffff;
             line-height: 1.4;
+            margin-bottom: 12px;
         }
-        .post-meta {
-            padding: 0 15px;
+        .video-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 12px;
+            font-size: 13px;
             color: #aaaaaa;
+            border-top: 1px solid #2a2a2a;
+            padding-top: 12px;
         }
-        .action-badge {
+        .action-btn {
             background-color: #ff4757;
-            padding: 6px 14px;
-            border-radius: 20px;
             color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
             font-weight: bold;
+            font-size: 13px;
             box-shadow: 0 2px 8px rgba(255, 71, 87, 0.4);
+        }
+
+        /* BENZER VİDEOLAR BAŞLIĞI VE LİSTESİ (AŞAĞI KAYDIRINCA ÇIKAN KISIM) */
+        .section-title {
+            width: 100%;
+            max-width: 600px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #ff4757;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid #2a2a2a;
+            padding-bottom: 8px;
+        }
+        .related-feed {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .related-card {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            overflow: hidden;
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid #222;
+        }
+        .related-thumb {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background-color: #000;
+            background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');
+            background-size: cover;
+            background-position: center;
+        }
+        .small-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 71, 87, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .small-play::after {
+            content: "";
+            border-style: solid;
+            border-width: 8px 0 8px 14px;
+            border-color: transparent transparent transparent #ffffff;
+            margin-left: 3px;
+        }
+        .related-info {
+            padding: 12px;
+        }
+        .related-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+        .related-date {
+            font-size: 11px;
+            color: #888888;
         }
     </style>
 </head>
 <body>
 
-    <!-- LOGO -->
+    <!-- ÜST LOGO -->
     <div class="site-header">
         <div class="site-logo">2PBVAGE 🤍</div>
     </div>
 
-    <!-- VİDEO LİSTESİ -->
-    <div class="feed-container">
+    <!-- ANA VİDEO SAYFASI (DETAY) -->
+    <div class="main-video-container">
+        <!-- VİDEO OYNATICI (Oynat Butonlu Kapak) -->
+        <div class="video-player-box">
+            <div class="play-button"></div>
+            <!-- Tıklayınca Playmogo Oynatıcıya Gider -->
+            <a href="https://playmogo.com/e/1fvov3xdwsbq" target="_blank"></a>
+        </div>
 
-        <!-- 1. VİDEO KARTI -->
-        <a href="https://playmogo.com/e/1fvov3xdwsbq" target="_blank" class="video-post">
-            <div class="video-thumbnail">
-                <div class="play-button"></div>
-            </div>
-            <div class="post-title">Sophie Rain - Black Panties Strip Video</div>
-            <div class="post-meta">
+        <!-- VİDEO BAŞLIĞI VE DETAYLARI (Videoların Altında) -->
+        <div class="video-details">
+            <h1 class="video-title">Sophie Rain - Black Panties Strip Video</h1>
+            <div class="video-meta">
                 <span>📅 12 Eki, 2026</span>
-                <span class="action-badge">🚀 Hemen İzle</span>
+                <a href="https://playmogo.com/e/1fvov3xdwsbq" target="_blank" class="action-btn">🚀 Hemen İzle</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- AŞAĞI KAYDIRINCA ÇIKAN BENZER VİDEOLAR BÖLÜMÜ -->
+    <div class="section-title">🔥 Benzer Videolar</div>
+
+    <div class="related-feed">
+
+        <!-- BENZER VİDEO 1 -->
+        <a href="https://playmogo.com/e/1fvov3xdwsbq" target="_blank" class="related-card">
+            <div class="related-thumb">
+                <div class="small-play"></div>
+            </div>
+            <div class="related-info">
+                <div class="related-title">Sophie Rain - Özel Koleksiyon İçerik #2</div>
+                <div class="related-date">📅 12 Eki, 2026</div>
             </div>
         </a>
 

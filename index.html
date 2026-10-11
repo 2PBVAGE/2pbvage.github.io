@@ -3,25 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Platformum</title>
+    <title>2PBVAGE</title>
     <style>
-        body { background-color: #121212; color: white; font-family: Arial, sans-serif; margin: 0; padding: 20px; }
-        h1 { text-align: center; color: #ff4757; }
-        .video-card { background: #1e1e1e; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #ff3333;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .video-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 100%;
+            max-width: 500px;
+        }
+        .video-card {
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        .video-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            color: #ffffff;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Ekran Oranı */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: #000;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Kendi Video Sitem</h1>
+    <!-- SİTE BAŞLIĞI -->
+    <h1>2PBVAGE</h1>
 
-    <div class="video-card">
-        <h3>Örnek Video</h3>
-        <div class="video-container">
-            <!-- Buraya harici video sitelerinden aldığınız embed kodunu yapıştırabilirsiniz -->
-            <iframe src="https://playmogo.com/d/1fvov3xdwsbq" allowfullscreen></iframe>
+    <div class="video-grid">
+
+        <!-- 1. VİDEO -->
+        <div class="video-card">
+            <h3>Birinci Video Başlığı</h3>
+            <div class="video-container">
+                <iframe src="https://doodstream.com/e/SİZİN_VİDEO_LINKINIZ_1" allowfullscreen></iframe>
+            </div>
         </div>
+
+        <!-- 2. VİDEO (Gerektiğinde çoğaltabilirsiniz) -->
+        <div class="video-card">
+            <h3>İkinci Video Başlığı</h3>
+            <div class="video-container">
+                <iframe src="https://doodstream.com/e/SİZİN_VİDEO_LINKINIZ_2" allowfullscreen></iframe>
+            </div>
+        </div>
+
     </div>
 
 </body>

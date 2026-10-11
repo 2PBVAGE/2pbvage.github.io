@@ -204,6 +204,59 @@
             color: #cccccc;
             line-height: 1.5;
         }
+
+        /* AÇIKLAMANIN ALTINA EKLENEN BENZER VİDEOLAR BÖLÜMÜ */
+        .related-section-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #ff4757;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            border-left: 3px solid #ff4757;
+            padding-left: 8px;
+        }
+        .related-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .related-card {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid #262626;
+            cursor: pointer;
+        }
+        .related-thumb {
+            width: 120px;
+            height: 75px;
+            background-color: #000;
+            background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .related-info {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .related-title {
+            font-size: 13px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+        .related-date {
+            font-size: 11px;
+            color: #777777;
+        }
     </style>
 </head>
 <body>
@@ -232,7 +285,7 @@
             </div>
         </div>
 
-        <!-- 2. VİDEO İZLEME EKRANI + AÇIKLAMA ÖZETİ -->
+        <!-- 2. VİDEO İZLEME EKRANI + AÇIKLAMA ÖZETİ + BENZER VİDEOLAR -->
         <div id="watch-view">
             <button class="back-home-btn" onclick="showFeed()">⬅ Ana Sayfaya Dön</button>
             
@@ -251,6 +304,20 @@
                     Sophie Rain, bu özel çekimde kameralar karşısına tamamen cesur bir şekilde geçiyor. Üstsüz bir şekilde göğüslerini öne çıkaran hareketleriyle sınırları zorlayan Sophie Rain'in en çok konuşulan ve merak edilen özel anları kesintisiz yüksek kalitede sizlerle.
                 </div>
             </div>
+
+            <!-- AÇIKLAMA YERİNİN ALTINA EKLENEN BENZER VİDEOLAR -->
+            <div class="related-section-title">🔥 Benzer Videolar</div>
+            
+            <div class="related-feed">
+                <div class="related-card" onclick="openWatchPage()">
+                    <div class="related-thumb"></div>
+                    <div class="related-info">
+                        <div class="related-title">Sophie Rain - Özel Koleksiyon Video #2</div>
+                        <div class="related-date">📅 12 Eki, 2026</div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </div>

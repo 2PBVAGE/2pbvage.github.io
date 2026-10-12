@@ -106,8 +106,10 @@
         </div>
         <ul style="list-style: none; padding: 15px 0;">
             <li style="padding: 14px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;" onclick="filterCat('all')">🔥 Tüm Videolar</li>
+            <li style="padding: 14px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;" onclick="filterCat('fullhd')">🎬 Full HD</li>
             <li style="padding: 14px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;" onclick="filterCat('amateur')">🏠 Amatör / Ev Yapımı</li>
             <li style="padding: 14px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;" onclick="filterCat('show')">⭐ Özel Şov / Trend</li>
+            <li style="padding: 14px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;" onclick="filterCat('group')">👥 Grup / Özel Şov</li>
         </ul>
     </div>
 
@@ -122,6 +124,21 @@
         <!-- ANA SAYFA -->
         <div id="sec-feed" class="page-sec active-sec">
             <div id="cat-title" style="font-size: 15px; font-weight: bold; color: #ff4757; margin-bottom: 5px;">🔥 Tüm Videolar</div>
+
+            <!-- VİDEO 3: Sophie Rain Piper and Aishah -->
+            <div class="video-post" data-cat="group">
+                <div class="video-thumbnail" style="background-image: url('https://i.ibb.co/LXRB8b0n/image.jpg');" onclick="askVideo('v3')">
+                    <div class="play-button"></div>
+                </div>
+                <div class="post-title" onclick="askVideo('v3')">Sophie Rain Piper and Aishah Kamera Karşısında İzleyenleri Şenlendiriyor</div>
+                <div class="post-meta">
+                    <div class="author-box" onclick="openProfile('Sophie Rain')">
+                        <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/DPFjgyLy/image.jpg');"></div>
+                        <strong style="color:#ff4757;">Sophie Rain<span class="verified-badge">✓</span></strong>
+                    </div>
+                    <button class="action-btn" onclick="askVideo('v3')">🚀 Hemen İzle</button>
+                </div>
+            </div>
 
             <!-- VİDEO 2 (comatozze) -->
             <div class="video-post" data-cat="amateur">
@@ -213,7 +230,8 @@
     <script>
         var db = {
             v1: { title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", url: "https://playmogo.com/e/1fvov3xdwsbq", thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", desc: "Sophie Rain özel şov gösterisi." },
-            v2: { title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...", url: "https://playmogo.com/e/ehhg2pcksir6", thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", author: "comatozze", avatar: "https://i.ibb.co/pB3ntggN/image.jpg", desc: "Evde baş başa kalan ikilinin gizli anları." }
+            v2: { title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...", url: "https://playmogo.com/e/ehhg2pcksir6", thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", author: "comatozze", avatar: "https://i.ibb.co/pB3ntggN/image.jpg", desc: "Evde baş başa kalan ikilinin gizli anları." },
+            v3: { title: "Sophie Rain Piper and Aishah Kamera Karşısında İzleyenleri Şenlendiriyor", url: "https://playmogo.com/e/xmiqbgo3vrz4", thumb: "https://i.ibb.co/LXRB8b0n/image.jpg", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", desc: "Sophie Rain, Piper ve Aishah ile birlikte kamera karşısına geçiyor! OnlyFans dünyasının popüler isimlerinin bir araya geldiği bu özel şovda unutulmaz anlar ve nefes kesen özel dakikalar izleyicileri bekliyor. [Kategoriler: Grup, Genç Özel Şov, OnlyFans]" }
         };
         var selectedVid = "";
         var activeAuthor = "";
@@ -232,9 +250,13 @@
             goHome();
             var posts = document.querySelectorAll('.video-post');
             var title = document.getElementById('cat-title');
-            if(cat === 'all') { title.innerHTML = "🔥 Tüm Videolar"; posts.forEach(p => p.style.display = 'block'); }
+            if(cat === 'all' || cat === 'fullhd') { 
+                title.innerHTML = (cat === 'fullhd') ? "🎬 Full HD Videolar" : "🔥 Tüm Videolar"; 
+                posts.forEach(p => p.style.display = 'block'); 
+            }
             else if(cat === 'amateur') { title.innerHTML = "🏠 Amatör / Ev Yapımı"; posts.forEach(p => p.style.display = (p.dataset.cat === 'amateur') ? 'block' : 'none'); }
             else if(cat === 'show') { title.innerHTML = "⭐ Özel Şov / Trend"; posts.forEach(p => p.style.display = (p.dataset.cat === 'show') ? 'block' : 'none'); }
+            else if(cat === 'group') { title.innerHTML = "👥 Grup / Özel Şov"; posts.forEach(p => p.style.display = (p.dataset.cat === 'group') ? 'block' : 'none'); }
         }
 
         function askVideo(id) {
@@ -272,25 +294,9 @@
         }
 
         function openProfile(author) {
-            var key = (author === 'Sophie Rain') ? 'v1' : 'v2';
+            var key = (author === 'Sophie Rain') ? 'v3' : 'v2';
             var item = db[key];
             
             document.getElementById('v-iframe').src = "";
             document.getElementById('p-title').innerText = item.author;
-            document.getElementById('p-avatar').style.backgroundImage = "url('" + item.avatar + "')";
-            document.getElementById('p-banner').style.backgroundImage = "url('" + item.avatar + "')";
-            
-            document.getElementById('p-videos').innerHTML = '<div class="video-post"><div class="video-thumbnail" style="background-image:url(\''+item.thumb+'\');" onclick="askVideo(\''+key+'\')"><div class="play-button"></div></div><div class="post-title" onclick="askVideo(\''+key+'\')">'+item.title+'</div><div class="post-meta"><div class="author-box" onclick="openProfile(\''+item.author+'\')"><div class="author-avatar-small" style="background-image:url(\''+item.avatar+'\');"></div><strong style="color:#ff4757;">'+item.author+'<span class="verified-badge">✓</span></strong></div><button class="action-btn" onclick="askVideo(\''+key+'\')">🚀 Hemen İzle</button></div></div>';
-            
-            document.getElementById('sec-feed').className = 'page-sec';
-            document.getElementById('sec-watch').className = 'page-sec';
-            document.getElementById('sec-profile').className = 'page-sec active-sec';
-            window.scrollTo(0,0);
-        }
-
-        function goCurrentAuthorProfile() {
-            if(activeAuthor) { openProfile(activeAuthor); }
-        }
-    </script>
-</body>
-</html>
+            document.getElementById('p-avatar').style.backgroundImage = 

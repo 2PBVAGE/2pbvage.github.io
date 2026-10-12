@@ -265,15 +265,44 @@
         }
 
         function openProfile(author) {
-            var key = (author === 'Sophie Rain') ? 'v3' : 'v2';
-            var item = db[key];
-            
             document.getElementById('v-iframe').src = "";
-            document.getElementById('p-title').innerText = item.author;
-            document.getElementById('p-avatar').style.backgroundImage = "url('" + item.avatar + "')";
-            document.getElementById('p-banner').style.backgroundImage = "url('" + item.avatar + "')";
-            
-            document.getElementById('p-videos').innerHTML = '<div class="video-post"><div class="video-thumbnail" style="background-image:url(\''+item.thumb+'\');" onclick="requestVideo(\''+key+'\')"><div class="play-button"></div></div><div class="post-title" onclick="requestVideo(\''+key+'\')">'+item.title+'</div><div class="post-meta"><div class="author-box" onclick="openProfile(\''+item.author+'\')"><div class="author-avatar-small" style="background-image:url(\''+item.avatar+'\');"></div><strong style="color:#ff4757;">'+item.author+' ✓</strong></div><button class="action-btn" onclick="requestVideo(\''+key+'\')">🚀 Hemen İzle</button></div></div>';
+            document.getElementById('p-title').innerText = author;
+
+            var avatarUrl = "";
+            var htmlVideos = "";
+            var targetName = author.toLowerCase();
+
+            // Veritabanındaki tüm videoları tara: Başlığında veya Yazar adında 'author' geçenleri ekle
+            for (var key in db) {
+                if (db.hasOwnProperty(key)) {
+                    var v = db[key];
+                    var vTitle = v.title.toLowerCase();
+                    var vAuthor = v.author.toLowerCase();
+
+                    if (vTitle.indexOf(targetName) !== -1 || vAuthor.indexOf(targetName) !== -1) {
+                        if (!avatarUrl) { avatarUrl = v.avatar; }
+                        
+                        htmlVideos += '<div class="video-post">' +
+                            '<div class="video-thumbnail" style="background-image:url(\'' + v.thumb + '\');" onclick="requestVideo(\'' + key + '\')">' +
+                            '<div class="play-button"></div></div>' +
+                            '<div class="post-title" onclick="requestVideo(\'' + key + '\')">' + v.title + '</div>' +
+                            '<div class="post-meta">' +
+                            '<div class="author-box" onclick="openProfile(\'' + v.author + '\')">' +
+                            '<div class="author-avatar-small" style="background-image:url(\'' + v.avatar + '\');"></div>' +
+                            '<strong style="color:#ff4757;">' + v.author + ' ✓</strong>' +
+                            '</div>' +
+                            '<button class="action-btn" onclick="requestVideo(\'' + key + '\')">🚀 Hemen İzle</button>' +
+                            '</div></div>';
+                    }
+                }
+            }
+
+            if (avatarUrl) {
+                document.getElementById('p-avatar').style.backgroundImage = "url('" + avatarUrl + "')";
+                document.getElementById('p-banner').style.backgroundImage = "url('" + avatarUrl + "')";
+            }
+
+            document.getElementById('p-videos').innerHTML = htmlVideos || '<p style="color:#aaa; font-size:13px; padding:10px;">Bu kanala ait henüz video bulunmuyor.</p>';
             
             document.getElementById('sec-feed').className = 'page-sec';
             document.getElementById('sec-watch').className = 'page-sec';

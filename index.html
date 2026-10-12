@@ -28,6 +28,18 @@
         .header-logo { color: #fff; font-size: 20px; font-weight: 800; cursor: pointer; }
         .menu-icon-btn { font-size: 26px; cursor: pointer; padding: 5px; color: #fff; }
         
+        /* ARAMA ÇUBUĞU KUTUSU */
+        #search-box-container {
+            display: none; width: 100%; max-width: 600px; background-color: #1a1a1a;
+            padding: 10px 15px; border-bottom: 1px solid #222; position: sticky; top: 57px; z-index: 999;
+        }
+        .search-input-wrapper { display: flex; align-items: center; background-color: #262626; border-radius: 20px; padding: 6px 15px; border: 1px solid #333; }
+        .search-input-wrapper input {
+            width: 100%; background: transparent; border: none; outline: none;
+            color: #fff; font-size: 14px; padding: 4px;
+        }
+        .search-close-btn { color: #aaa; font-size: 18px; cursor: pointer; margin-left: 8px; }
+
         #menu-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); z-index: 50000; display: none; }
         #menu-drawer { position: fixed; top: 0; left: -280px; width: 260px; height: 100vh; background-color: #1a1a1a; z-index: 50001; transition: left 0.3s ease; display: flex; flex-direction: column; }
         #menu-drawer.open { left: 0; }
@@ -92,7 +104,16 @@
     <div class="header-bar">
         <div class="menu-icon-btn" onclick="toggleMenu(true)">☰</div>
         <div class="header-logo" onclick="goHome()">2PBVAGE 🤍</div>
-        <div style="font-size: 18px; cursor: pointer; padding: 5px;">🔍</div>
+        <div style="font-size: 18px; cursor: pointer; padding: 5px;" onclick="toggleSearch()">🔍</div>
+    </div>
+
+    <!-- ARAMA ÇUBUĞU -->
+    <div id="search-box-container">
+        <div class="search-input-wrapper">
+            <span style="color:#aaa; margin-right:5px;">🔍</span>
+            <input type="text" id="search-input" placeholder="Video veya kanal ara... (ör. Sophie, Türk)" onkeyup="performSearch()">
+            <span class="search-close-btn" onclick="toggleSearch(false)">✕</span>
+        </div>
     </div>
 
     <div class="content-container">
@@ -101,7 +122,7 @@
             <div id="cat-title" style="font-size: 15px; font-weight: bold; color: #ff4757; margin-bottom: 5px;">🔥 Tüm Videolar</div>
 
             <!-- VİDEO 3 -->
-            <div class="video-post" data-cat="group">
+            <div class="video-post" data-cat="group" id="card-v3">
                 <div class="video-thumbnail" style="background-image: url('https://i.postimg.cc/f3xPmkCr/XAz-Dr-ONXl-P3D8v3o-NMKp7LGK-640w.webp');" onclick="requestVideo('v3')">
                     <div class="play-button"></div>
                 </div>
@@ -116,7 +137,7 @@
             </div>
 
             <!-- VİDEO 2 -->
-            <div class="video-post" data-cat="amateur">
+            <div class="video-post" data-cat="amateur" id="card-v2">
                 <div class="video-thumbnail" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');" onclick="requestVideo('v2')">
                     <div class="play-button"></div>
                 </div>
@@ -131,7 +152,7 @@
             </div>
 
             <!-- VİDEO 1 -->
-            <div class="video-post" data-cat="show">
+            <div class="video-post" data-cat="show" id="card-v1">
                 <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" onclick="requestVideo('v1')">
                     <div class="play-button"></div>
                 </div>
@@ -143,6 +164,10 @@
                     </div>
                     <button class="action-btn" onclick="requestVideo('v1')">🚀 Hemen İzle</button>
                 </div>
+            </div>
+            
+            <div id="no-search-results" style="display:none; color:#aaa; font-size:14px; text-align:center; padding:30px 10px;">
+                🔍 Aradığınız kelimeye uygun video bulunamadı.
             </div>
         </div>
 
@@ -206,6 +231,69 @@
             }
         }
 
+        function toggleSearch(forceState) {
+            var box = document.getElementById('search-box-container');
+            var input = document.getElementById('search-input');
+            if (forceState === false) {
+                box.style.display = 'none';
+                input.value = '';
+                performSearch();
+            } else {
+                if (box.style.display === 'block') {
+                    box.style.display = 'none';
+                    input.value = '';
+                    performSearch();
+                } else {
+                    box.style.display = 'block';
+                    input.focus();
+                }
+            }
+        }
+
+        function performSearch() {
+            goHome();
+            var query = document.getElementById('search-input').value.toLowerCase().trim();
+            var titleHeader = document.getElementById('cat-title');
+            var noResults = document.getElementById('no-search-results');
+            var foundCount = 0;
+
+            if (query === "") {
+                titleHeader.innerHTML = "🔥 Tüm Videolar";
+                for (var id in db) {
+                    var card = document.getElementById('card-' + id);
+                    if (card) card.style.display = 'block';
+                }
+                noResults.style.display = 'none';
+                return;
+            }
+
+            titleHeader.innerHTML = '🔍 "' + query + '" için arama sonuçları:';
+
+            for (var key in db) {
+                if (db.hasOwnProperty(key)) {
+                    var item = db[key];
+                    var cardEl = document.getElementById('card-' + key);
+                    
+                    var matchTitle = item.title.toLowerCase().indexOf(query) !== -1;
+                    var matchAuthor = item.author.toLowerCase().indexOf(query) !== -1;
+                    var matchDesc = item.desc ? item.desc.toLowerCase().indexOf(query) !== -1 : false;
+
+                    if (matchTitle || matchAuthor || matchDesc) {
+                        if (cardEl) cardEl.style.display = 'block';
+                        foundCount++;
+                    } else {
+                        if (cardEl) cardEl.style.display = 'none';
+                    }
+                }
+            }
+
+            if (foundCount === 0) {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+            }
+        }
+
         function goHome() {
             document.getElementById('v-iframe').src = "";
             document.getElementById('sec-feed').className = 'page-sec active-sec';
@@ -251,64 +339,4 @@
         }
 
         function filterCat(cat) {
-            toggleMenu(false);
-            goHome();
-            var posts = document.querySelectorAll('.video-post');
-            var title = document.getElementById('cat-title');
-            if(cat === 'all' || cat === 'fullhd') { 
-                title.innerHTML = (cat === 'fullhd') ? "🎬 Full HD Videolar" : "🔥 Tüm Videolar"; 
-                posts.forEach(function(p) { p.style.display = 'block'; }); 
-            }
-            else if(cat === 'amateur') { title.innerHTML = "🏠 Amatör / Ev Yapımı"; posts.forEach(function(p) { p.style.display = (p.dataset.cat === 'amateur') ? 'block' : 'none'; }); }
-            else if(cat === 'show') { title.innerHTML = "⭐ Özel Şov / Trend"; posts.forEach(function(p) { p.style.display = (p.dataset.cat === 'show') ? 'block' : 'none'; }); }
-            else if(cat === 'group') { title.innerHTML = "👥 Grup / Özel Şov"; posts.forEach(function(p) { p.style.display = (p.dataset.cat === 'group') ? 'block' : 'none'; }); }
-        }
-
-        function openProfile(author) {
-            document.getElementById('v-iframe').src = "";
-            document.getElementById('p-title').innerText = author;
-
-            var avatarUrl = "";
-            var htmlVideos = "";
-            var targetName = author.toLowerCase();
-
-            // Veritabanındaki tüm videoları tara: Başlığında veya Yazar adında 'author' geçenleri ekle
-            for (var key in db) {
-                if (db.hasOwnProperty(key)) {
-                    var v = db[key];
-                    var vTitle = v.title.toLowerCase();
-                    var vAuthor = v.author.toLowerCase();
-
-                    if (vTitle.indexOf(targetName) !== -1 || vAuthor.indexOf(targetName) !== -1) {
-                        if (!avatarUrl) { avatarUrl = v.avatar; }
-                        
-                        htmlVideos += '<div class="video-post">' +
-                            '<div class="video-thumbnail" style="background-image:url(\'' + v.thumb + '\');" onclick="requestVideo(\'' + key + '\')">' +
-                            '<div class="play-button"></div></div>' +
-                            '<div class="post-title" onclick="requestVideo(\'' + key + '\')">' + v.title + '</div>' +
-                            '<div class="post-meta">' +
-                            '<div class="author-box" onclick="openProfile(\'' + v.author + '\')">' +
-                            '<div class="author-avatar-small" style="background-image:url(\'' + v.avatar + '\');"></div>' +
-                            '<strong style="color:#ff4757;">' + v.author + ' ✓</strong>' +
-                            '</div>' +
-                            '<button class="action-btn" onclick="requestVideo(\'' + key + '\')">🚀 Hemen İzle</button>' +
-                            '</div></div>';
-                    }
-                }
-            }
-
-            if (avatarUrl) {
-                document.getElementById('p-avatar').style.backgroundImage = "url('" + avatarUrl + "')";
-                document.getElementById('p-banner').style.backgroundImage = "url('" + avatarUrl + "')";
-            }
-
-            document.getElementById('p-videos').innerHTML = htmlVideos || '<p style="color:#aaa; font-size:13px; padding:10px;">Bu kanala ait henüz video bulunmuyor.</p>';
-            
-            document.getElementById('sec-feed').className = 'page-sec';
-            document.getElementById('sec-watch').className = 'page-sec';
-            document.getElementById('sec-profile').className = 'page-sec active-sec';
-            window.scrollTo(0,0);
-        }
-    </script>
-</body>
-</html>
+         

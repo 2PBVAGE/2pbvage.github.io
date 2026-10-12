@@ -25,21 +25,26 @@
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         body { background-color: #121212; color: #ffffff; font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; }
         
-        /* 18+ MODAL */
+        /* 18+ MODAL (EN ÜST KATMAN) */
         #site-age-modal {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.98); z-index: 999999;
+            background: rgba(0, 0, 0, 0.98); z-index: 2147483647 !important;
             display: flex; align-items: center; justify-content: center; padding: 20px;
+            pointer-events: auto;
         }
         .modal-box {
             background-color: #1a1a1a; border: 1px solid #333; border-radius: 14px;
             padding: 30px 20px; width: 100%; max-width: 400px; text-align: center;
+            position: relative; z-index: 2147483647 !important;
         }
         .modal-title { font-size: 22px; font-weight: bold; color: #ff4757; margin-bottom: 12px; font-family: 'Montserrat', sans-serif; }
         .modal-text { font-size: 14px; color: #ccc; line-height: 1.5; margin-bottom: 25px; }
+        
         .modal-btn {
-            background-color: #ff4757; color: #fff; border: none; padding: 16px;
+            background-color: #ff4757; color: #fff; border: none; padding: 18px;
             border-radius: 25px; font-size: 16px; font-weight: bold; width: 100%; cursor: pointer;
+            display: block; -webkit-appearance: none; appearance: none;
+            touch-action: manipulation;
         }
 
         .header-bar { width: 100%; max-width: 600px; background-color: #000; display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 1000; }
@@ -93,7 +98,7 @@
         <div class="modal-box">
             <div class="modal-title">⚠️ Yaş Sınırı (18+)</div>
             <div class="modal-text">Bu internet sitesi yetişkinlere özel içerikler barındırmaktadır. Devam etmek için 18 yaşından büyük olmalısınız.</div>
-            <button type="button" class="modal-btn" onclick="closeAgeModal()">18+ Yaşından Büyüğüm</button>
+            <button type="button" class="modal-btn" onclick="this.parentElement.parentElement.remove();">18+ Yaşından Büyüğüm</button>
         </div>
     </div>
 
@@ -226,11 +231,6 @@
         };
         var activeAuthor = "";
 
-        function closeAgeModal() {
-            var el = document.getElementById('site-age-modal');
-            if(el) el.style.display = 'none';
-        }
-
         function toggleMenu(open) {
             var overlay = document.getElementById('menu-overlay');
             var drawer = document.getElementById('menu-drawer');
@@ -293,4 +293,4 @@
             document.getElementById('p-avatar').style.backgroundImage = "url('" + item.avatar + "')";
             document.getElementById('p-banner').style.backgroundImage = "url('" + item.avatar + "')";
             
-            document.getElementById('p-videos').innerHTML = '<div class="video-post"><div class="video-thumbnail" style="background-image:url(\''+item.thumb+'\');" onclick="playVideoDirect(\''+key+'\')"><div class="play-button"></div></div><div class="post-title" onclick="playVideoDirect(\''+key+'\')">'+item.title+'</div><div class="post-meta"><div class="author-box" onclick="openProfile(\''+item.author+'\')"><div class="author-avatar-small" style="background-image:url(\''+item.avatar+'\');">
+            document.getElementById('p-videos').innerHTML = '<div class="video-post"><div class="video-thumbnail" style="background-image:url(\''+item.thumb+'\');" onclick="playVideoDirect(\''+key+'\')"><div class="play-button"></div></div><div class="post-title" onclick="playVideoDirect(\''+key+'\')">'+item.title+'</div><div class="post-meta"><div class="author-box" onclic

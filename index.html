@@ -93,7 +93,7 @@
         <div class="modal-box">
             <div class="modal-title">⚠️ Yaş Sınırı (18+)</div>
             <div class="modal-text">Bu internet sitesi yetişkinlere özel içerikler barındırmaktadır. Devam etmek için 18 yaşından büyük olmalısınız.</div>
-            <button class="modal-btn" onclick="hideSiteModal()">18+ Yaşından Büyüğüm</button>
+            <button type="button" class="modal-btn" onclick="hideSiteModal()">18+ Yaşından Büyüğüm</button>
         </div>
     </div>
 
@@ -223,7 +223,7 @@
         <div style="background:#1a1a1a; border:1px solid #333; border-radius:14px; padding:30px 20px; width:100%; max-width:400px; text-align:center;">
             <div style="font-size:22px; font-weight:bold; color:#ff4757; margin-bottom:12px;">⚠️ Yetişkin İçerik</div>
             <div style="font-size:14px; color:#ccc; margin-bottom:25px;">Bu video yaş sınırı içerir. İzlemek için onay verin.</div>
-            <button class="modal-btn" onclick="confirmVideo()">18+ Büyüğüm, İzle</button>
+            <button type="button" class="modal-btn" onclick="confirmVideo()">18+ Büyüğüm, İzle</button>
         </div>
     </div>
 
@@ -237,7 +237,10 @@
         var activeAuthor = "";
 
         function hideSiteModal() {
-            document.getElementById('site-age-modal').style.display = 'none';
+            var modal = document.getElementById('site-age-modal');
+            if (modal) {
+                modal.style.setProperty('display', 'none', 'important');
+            }
         }
 
         function toggleMenu(open) {
@@ -298,5 +301,4 @@
             var item = db[key];
             
             document.getElementById('v-iframe').src = "";
-            document.getElementById('p-title').innerText = item.author;
-            document.getElementById('p-avatar').style.backgroundImage = 
+            doc

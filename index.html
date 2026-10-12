@@ -11,6 +11,7 @@
             margin: 0; 
             padding: 0; 
             -webkit-tap-highlight-color: transparent; 
+            touch-action: manipulation;
         }
         body { 
             background-color: #121212; 
@@ -122,7 +123,7 @@
         .action-btn { 
             background-color: #ff4757; 
             color: #fff !important; 
-            padding: 8px 16px; 
+            padding: 10px 18px; 
             border-radius: 20px; 
             font-weight: bold; 
             border: none; 
@@ -131,7 +132,6 @@
             text-decoration: none;
             font-size: 12px;
             user-select: none;
-            -webkit-user-select: none;
         }
 
         .back-btn { 
@@ -277,4 +277,142 @@
 
             <!-- VİDEO 1 (Sophie Rain) -->
             <div class="video-post">
-                <div class="
+                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" onclick="loadVideo('v1')">
+                    <div class="play-button"></div>
+                </div>
+                <div class="post-title" onclick="loadVideo('v1')">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
+                <div class="post-meta">
+                    <span>📅 12 Eki &bull; <strong style="color:#ff4757; cursor:pointer;" onclick="loadProfile('Sophie Rain')">Sophie Rain</strong></span>
+                    <a href="javascript:void(0)" class="action-btn" onclick="loadVideo('v1')">🚀 Hemen İzle</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 2. VİDEO İZLEME SAYFASI -->
+        <div id="sec-watch" class="page-sec">
+            <a href="javascript:void(0)" class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</a>
+            <h1 id="v-title" style="font-size: 18px; color: #fff;"></h1>
+            
+            <div class="video-player-box">
+                <iframe id="v-iframe" src="" allowfullscreen></iframe>
+            </div>
+
+            <div class="channel-profile-card" id="v-card" onclick="goCurrentProfile()">
+                <div class="channel-info-left">
+                    <div class="channel-avatar" id="v-avatar"></div>
+                    <div>
+                        <div class="channel-name" id="v-author"></div>
+                        <div style="font-size: 11px; color: #aaa;">Kanalı & Tüm Videoları Gör</div>
+                    </div>
+                </div>
+                <span class="action-btn">Kanala Git</span>
+            </div>
+
+            <div class="video-description-box">
+                <div class="desc-heading">📌 Video Özeti & Detaylar</div>
+                <div class="desc-text" id="v-desc"></div>
+            </div>
+        </div>
+
+        <!-- 3. KANAL PROFİL SAYFASI -->
+        <div id="sec-profile" class="page-sec">
+            <a href="javascript:void(0)" class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</a>
+            <div class="channel-header">
+                <div class="channel-banner" id="p-banner"></div>
+                <div class="channel-details">
+                    <div class="channel-main-avatar" id="p-avatar"></div>
+                    <div class="channel-main-title" id="p-title"></div>
+                </div>
+            </div>
+            <div style="font-size: 15px; font-weight: bold; color: #ff4757; margin-top: 10px;">📹 Kanalın Videoları</div>
+            <div id="p-videos"></div>
+        </div>
+
+    </div>
+
+    <script>
+        var videos = {
+            v1: {
+                title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor",
+                url: "https://playmogo.com/e/1fvov3xdwsbq",
+                thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp",
+                author: "Sophie Rain",
+                avatar: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp",
+                desc: "Sophie Rain, bu özel çekimde kameralar karşısına tamamen cesur bir şekilde geçiyor. Üstsüz bir şekilde göğüslerini öne çıkaran hareketleriyle sınırları zorlayan Sophie Rain'in en çok konuşulan özel anları."
+            },
+            v2: {
+                title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...",
+                url: "https://playmogo.com/e/ehhg2pcksir6",
+                thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif",
+                author: "comatozze",
+                avatar: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif",
+                desc: "Arkadaşının kısa süreliğine markete gitmesini fırsat bilen ikilinin evde baş başa kaldığı tutkulu ve heyecan dolu gizli anlar."
+            }
+        };
+
+        var currentAuthor = "";
+
+        function showSection(id) {
+            document.getElementById('sec-feed').className = 'page-sec';
+            document.getElementById('sec-watch').className = 'page-sec';
+            document.getElementById('sec-profile').className = 'page-sec';
+            
+            document.getElementById(id).className = 'page-sec active-sec';
+            window.scrollTo(0, 0);
+        }
+
+        function loadVideo(id) {
+            var item = videos[id];
+            if (!item) return;
+
+            currentAuthor = item.author;
+            document.getElementById('v-title').innerText = item.title;
+            document.getElementById('v-author').innerText = item.author;
+            document.getElementById('v-avatar').style.backgroundImage = "url(" + item.avatar + ")";
+            document.getElementById('v-desc').innerText = item.desc;
+            
+            showSection('sec-watch');
+
+            setTimeout(function() {
+                document.getElementById('v-iframe').src = item.url;
+            }, 50);
+        }
+
+        function loadProfile(authorName) {
+            var item = (authorName === 'Sophie Rain') ? videos.v1 : videos.v2;
+            var videoKey = (authorName === 'Sophie Rain') ? 'v1' : 'v2';
+
+            document.getElementById('v-iframe').src = '';
+            document.getElementById('p-title').innerText = item.author;
+            document.getElementById('p-avatar').style.backgroundImage = "url(" + item.avatar + ")";
+            document.getElementById('p-banner').style.backgroundImage = "url(" + item.avatar + ")";
+
+            document.getElementById('p-videos').innerHTML = 
+                '<div class="video-post">' +
+                    '<div class="video-thumbnail" style="background-image: url(' + item.thumb + ');" onclick="loadVideo(\'' + videoKey + '\')">' +
+                        '<div class="play-button"></div>' +
+                    '</div>' +
+                    '<div class="post-title" onclick="loadVideo(\'' + videoKey + '\')">' + item.title + '</div>' +
+                    '<div class="post-meta">' +
+                        '<span>📅 12 Eki</span>' +
+                        '<a href="javascript:void(0)" class="action-btn" onclick="loadVideo(\'' + videoKey + '\')">🚀 Hemen İzle</a>' +
+                    '</div>' +
+                '</div>';
+
+            showSection('sec-profile');
+        }
+
+        function goCurrentProfile() {
+            if (currentAuthor) {
+                loadProfile(currentAuthor);
+            }
+        }
+
+        function goHome() {
+            document.getElementById('v-iframe').src = '';
+            showSection('sec-feed');
+        }
+    </script>
+</body>
+</html>

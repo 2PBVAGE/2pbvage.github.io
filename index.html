@@ -30,6 +30,11 @@
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: rgba(0, 0, 0, 0.96); z-index: 2147483647;
             display: none; align-items: center; justify-content: center; padding: 20px;
+            pointer-events: none;
+        }
+        #site-age-modal.open-modal {
+            display: flex !important;
+            pointer-events: auto;
         }
         .modal-box {
             background-color: #1a1a1a; border: 1px solid #333; border-radius: 14px;
@@ -275,7 +280,7 @@
             if (isAgeVerified) {
                 playVideoDirect(id);
             } else {
-                document.getElementById('site-age-modal').style.display = 'flex';
+                document.getElementById('site-age-modal').classList.add('open-modal');
             }
         }
 
@@ -302,4 +307,4 @@
             document.getElementById('p-avatar').style.backgroundImage = "url('" + item.avatar + "')";
             document.getElementById('p-banner').style.backgroundImage = "url('" + item.avatar + "')";
             
-            document.getElementById('p-videos').innerHTML = '<div class="video-post"><div class="video-thumbnail play-trigger" data-vid="'+key+'" style="background-image:url(\''+item.thumb+'\');"><div class="play-b
+            document.getElementById('p-videos').innerHTM

@@ -50,6 +50,34 @@
         .video-player-box { position: relative; width: 100%; padding-bottom: 56.25%; background-color: #000; border-radius: 6px; overflow: hidden; }
         .video-player-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
         .back-btn { align-self: flex-start; background-color: #222; color: #ff4757; padding: 8px 14px; border-radius: 6px; border: 1px solid #333; cursor: pointer; font-weight: bold; font-size: 12px; }
+
+        /* KANAL PROFİL KARTI */
+        .channel-card {
+            background-color: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 10px;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .channel-info { display: flex; align-items: center; gap: 12px; }
+        .channel-avatar {
+            width: 48px; height: 48px; border-radius: 50%;
+            background-size: cover; background-position: center;
+            border: 2px solid #ff4757; background-color: #222;
+        }
+        .channel-header-box {
+            background-color: #1a1a1a; border-radius: 12px; overflow: hidden;
+            border: 1px solid #2a2a2a; text-align: center; padding-bottom: 20px;
+        }
+        .channel-banner { width: 100%; height: 100px; background-size: cover; background-position: center; background-color: #ff4757; }
+        .channel-main-avatar {
+            width: 80px; height: 80px; border-radius: 50%;
+            border: 3px solid #ff4757; margin: -40px auto 10px auto;
+            background-size: cover; background-position: center; background-color: #000;
+        }
     </style>
 </head>
 <body>
@@ -61,11 +89,6 @@
             <div class="modal-text">Bu internet sitesi yetişkinlere özel içerikler barındırmaktadır. Devam etmek için 18 yaşından büyük olmalısınız.</div>
             <button class="modal-btn" onclick="hideSiteModal()">18+ Yaşından Büyüğüm</button>
         </div>
-    </div>
-
-    <!-- VİDEO 18+ MODALI -->
-    <div id="video-age-modal" style="display:none;" class="modal-box" style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:999999; background:#1a1a1a; padding:30px; border-radius:14px; border:1px solid #333; text-align:center;">
-        <!-- Dinamik dolacak -->
     </div>
 
     <!-- KATEGORİ MENÜSÜ -->
@@ -101,7 +124,7 @@
                 </div>
                 <div class="post-title" onclick="askVideo('v2')">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
                 <div class="post-meta">
-                    <span>📅 12 Eki &bull; <strong style="color:#ff4757; cursor:pointer;" onclick="openProfile('comatozze')">comatozze</strong></span>
+                    <span>👁️ 184.2K İzlenme &bull; <strong style="color:#ff4757; cursor:pointer;" onclick="openProfile('comatozze')">comatozze</strong></span>
                     <button class="action-btn" onclick="askVideo('v2')">🚀 Hemen İzle</button>
                 </div>
             </div>
@@ -113,7 +136,7 @@
                 </div>
                 <div class="post-title" onclick="askVideo('v1')">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
                 <div class="post-meta">
-                    <span>📅 12 Eki &bull; <strong style="color:#ff4757; cursor:pointer;" onclick="openProfile('Sophie Rain')">Sophie Rain</strong></span>
+                    <span>👁️ 342.9K İzlenme &bull; <strong style="color:#ff4757; cursor:pointer;" onclick="openProfile('Sophie Rain')">Sophie Rain</strong></span>
                     <button class="action-btn" onclick="askVideo('v1')">🚀 Hemen İzle</button>
                 </div>
             </div>
@@ -123,9 +146,25 @@
         <div id="sec-watch" class="page-sec">
             <button class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</button>
             <h1 id="v-title" style="font-size: 18px; color: #fff;"></h1>
+            
             <div class="video-player-box">
                 <iframe id="v-iframe" src="" allowfullscreen></iframe>
             </div>
+
+            <div style="font-size: 13px; color: #aaa; margin-top: -5px;" id="v-views"></div>
+
+            <!-- KANAL KARTI -->
+            <div class="channel-card" onclick="goCurrentAuthorProfile()">
+                <div class="channel-info">
+                    <div class="channel-avatar" id="v-avatar"></div>
+                    <div>
+                        <div style="font-size: 15px; font-weight: bold; color: #fff;" id="v-author"></div>
+                        <div style="font-size: 11px; color: #aaa;">Kanalı & Tüm Videoları Gör</div>
+                    </div>
+                </div>
+                <button class="action-btn">Kanala Git</button>
+            </div>
+
             <div class="video-description-box" style="background:#1a1a1a; padding:15px; border-radius:8px; border:1px solid #2a2a2a;">
                 <div style="font-size:14px; font-weight:bold; color:#ff4757; margin-bottom:8px;">📌 Açıklama</div>
                 <div id="v-desc" style="font-size:13px; color:#ccc; line-height:1.5;"></div>
@@ -135,10 +174,16 @@
         <!-- PROFİL SAYFASI -->
         <div id="sec-profile" class="page-sec">
             <button class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</button>
-            <div style="background:#1a1a1a; padding:15px; border-radius:8px; border:1px solid #2a2a2a; text-align:center;">
-                <div id="p-title" style="font-size:18px; font-weight:bold; color:#fff; margin-top:10px;"></div>
+            
+            <div class="channel-header-box">
+                <div class="channel-banner" id="p-banner"></div>
+                <div class="channel-main-avatar" id="p-avatar"></div>
+                <div id="p-title" style="font-size: 20px; font-weight: bold; color: #fff;"></div>
+                <div style="font-size: 12px; color: #aaa; margin-top: 5px;">Doğrulanmış İçerik Üreticisi</div>
             </div>
-            <div id="p-videos" style="margin-top:10px;"></div>
+
+            <div style="font-size: 15px; font-weight: bold; color: #ff4757; margin-top: 10px;">📹 Kanalın Videoları</div>
+            <div id="p-videos"></div>
         </div>
     </div>
 
@@ -153,10 +198,11 @@
 
     <script>
         var db = {
-            v1: { title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", url: "https://playmogo.com/e/1fvov3xdwsbq", thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", author: "Sophie Rain", desc: "Sophie Rain özel şov gösterisi." },
-            v2: { title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...", url: "https://playmogo.com/e/ehhg2pcksir6", thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", author: "comatozze", desc: "Evde baş başa kalan ikilinin gizli anları." }
+            v1: { title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", url: "https://playmogo.com/e/1fvov3xdwsbq", thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", author: "Sophie Rain", avatar: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", views: "342.9K", desc: "Sophie Rain özel şov gösterisi." },
+            v2: { title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...", url: "https://playmogo.com/e/ehhg2pcksir6", thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", author: "comatozze", avatar: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", views: "184.2K", desc: "Evde baş başa kalan ikilinin gizli anları." }
         };
         var selectedVid = "";
+        var activeAuthor = "";
 
         function hideSiteModal() {
             document.getElementById('site-age-modal').style.display = 'none';
@@ -186,12 +232,19 @@
             document.getElementById('vid-modal-bg').style.display = 'none';
             if(selectedVid) {
                 var item = db[selectedVid];
+                activeAuthor = item.author;
+
                 document.getElementById('v-title').innerText = item.title;
+                document.getElementById('v-author').innerText = item.author;
+                document.getElementById('v-views').innerText = "👁️ " + item.views + " İzlenme";
+                document.getElementById('v-avatar').style.backgroundImage = "url('" + item.avatar + "')";
                 document.getElementById('v-desc').innerText = item.desc;
+
                 document.getElementById('sec-feed').className = 'page-sec';
                 document.getElementById('sec-watch').className = 'page-sec active-sec';
                 document.getElementById('sec-profile').className = 'page-sec';
                 window.scrollTo(0,0);
+                
                 setTimeout(function() { document.getElementById('v-iframe').src = item.url; }, 50);
                 selectedVid = "";
             }
@@ -208,12 +261,22 @@
         function openProfile(author) {
             var key = (author === 'Sophie Rain') ? 'v1' : 'v2';
             var item = db[key];
-            document.getElementById('p-title').innerText = item.author + " Kanalı";
-            document.getElementById('p-videos').innerHTML = '<div class="video-post"><div class="video-thumbnail" style="background-image:url(\''+item.thumb+'\');" onclick="askVideo(\''+key+'\')"><div class="play-button"></div></div><div class="post-title" onclick="askVideo(\''+key+'\')">'+item.title+'</div><div class="post-meta"><span>📅 12 Eki</span><button class="action-btn" onclick="askVideo(\''+key+'\')">🚀 Hemen İzle</button></div></div>';
+            
+            document.getElementById('v-iframe').src = "";
+            document.getElementById('p-title').innerText = item.author;
+            document.getElementById('p-avatar').style.backgroundImage = "url('" + item.avatar + "')";
+            document.getElementById('p-banner').style.backgroundImage = "url('" + item.avatar + "')";
+            
+            document.getElementById('p-videos').innerHTML = '<div class="video-post"><div class="video-thumbnail" style="background-image:url(\''+item.thumb+'\');" onclick="askVideo(\''+key+'\')"><div class="play-button"></div></div><div class="post-title" onclick="askVideo(\''+key+'\')">'+item.title+'</div><div class="post-meta"><span>👁️ '+item.views+' İzlenme</span><button class="action-btn" onclick="askVideo(\''+key+'\')">🚀 Hemen İzle</button></div></div>';
+            
             document.getElementById('sec-feed').className = 'page-sec';
             document.getElementById('sec-watch').className = 'page-sec';
             document.getElementById('sec-profile').className = 'page-sec active-sec';
             window.scrollTo(0,0);
+        }
+
+        function goCurrentAuthorProfile() {
+            if(activeAuthor) { openProfile(activeAuthor); }
         }
     </script>
 </body>

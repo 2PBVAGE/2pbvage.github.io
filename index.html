@@ -28,14 +28,12 @@
         /* VİDEO İZLEME 18+ MODALI (BAŞLANGIÇTA GİZLİ) */
         #site-age-modal {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.99); z-index: 2147483647;
+            background: rgba(0, 0, 0, 0.95); z-index: 2147483647;
             display: none; align-items: center; justify-content: center; padding: 20px;
-            pointer-events: auto;
         }
         .modal-box {
             background-color: #1a1a1a; border: 1px solid #333; border-radius: 14px;
             padding: 30px 20px; width: 100%; max-width: 400px; text-align: center;
-            pointer-events: auto;
         }
         .modal-title { font-size: 22px; font-weight: bold; color: #ff4757; margin-bottom: 12px; font-family: 'Montserrat', sans-serif; }
         .modal-text { font-size: 14px; color: #ccc; line-height: 1.5; margin-bottom: 25px; }
@@ -43,7 +41,6 @@
             background-color: #ff4757; color: #fff; border: none; padding: 18px;
             border-radius: 25px; font-size: 16px; font-weight: bold; width: 100%; cursor: pointer;
             touch-action: manipulation; -webkit-appearance: none; appearance: none;
-            pointer-events: auto; position: relative; z-index: 99999;
         }
 
         .header-bar { width: 100%; max-width: 600px; background-color: #000; display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 1000; }
@@ -98,29 +95,29 @@
         <div class="modal-box">
             <div class="modal-title">⚠️ Yaş Sınırı (18+)</div>
             <div class="modal-text">Bu videoyu izlemek için 18 yaşından büyük olmalısınız.</div>
-            <button type="button" class="modal-btn" onclick="confirmAge()" ontouchend="confirmAge()">18+ Yaşından Büyüğüm</button>
+            <button type="button" id="confirm-age-btn" class="modal-btn">18+ Yaşından Büyüğüm</button>
         </div>
     </div>
 
     <!-- KATEGORİ MENÜSÜ -->
-    <div id="menu-overlay" onclick="toggleMenu(false)"></div>
+    <div id="menu-overlay"></div>
     <div id="menu-drawer">
         <div style="padding: 18px; background: #000; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222;">
             <span style="color:#ff4757; font-weight:bold;">📁 Kategoriler</span>
-            <span style="color:#aaa; font-size:22px; cursor:pointer; padding:5px;" onclick="toggleMenu(false)">✕</span>
+            <span id="close-menu-btn" style="color:#aaa; font-size:22px; cursor:pointer; padding:5px;">✕</span>
         </div>
         <ul style="list-style: none; padding: 15px 0;">
-            <li style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;" onclick="filterCat('all')">🔥 Tüm Videolar</li>
-            <li style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;" onclick="filterCat('fullhd')">🎬 Full HD</li>
-            <li style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;" onclick="filterCat('amateur')">🏠 Amatör / Ev Yapımı</li>
-            <li style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;" onclick="filterCat('show')">⭐ Özel Şov / Trend</li>
-            <li style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;" onclick="filterCat('group')">👥 Grup / Özel Şov</li>
+            <li class="cat-item" data-cat="all" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🔥 Tüm Videolar</li>
+            <li class="cat-item" data-cat="fullhd" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🎬 Full HD</li>
+            <li class="cat-item" data-cat="amateur" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🏠 Amatör / Ev Yapımı</li>
+            <li class="cat-item" data-cat="show" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">⭐ Özel Şov / Trend</li>
+            <li class="cat-item" data-cat="group" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">👥 Grup / Özel Şov</li>
         </ul>
     </div>
 
     <!-- HEADER -->
     <div class="header-bar">
-        <div class="menu-icon-btn" onclick="toggleMenu(true)">☰</div>
+        <div id="open-menu-btn" class="menu-icon-btn">☰</div>
         <div class="header-logo" onclick="goHome()">2PBVAGE 🤍</div>
         <div style="font-size: 18px; cursor: pointer; padding: 5px;">🔍</div>
     </div>
@@ -132,7 +129,7 @@
 
             <!-- VİDEO 3: Sophie Rain Ve Piper Aishah -->
             <div class="video-post" data-cat="group">
-                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" onclick="requestVideo('v3')">
+                <div class="video-thumbnail" style="background-image: url('https://i.ibb.co/LXRB8b0n/image.jpg');" onclick="requestVideo('v3')">
                     <div class="play-button"></div>
                 </div>
                 <div class="post-title" onclick="requestVideo('v3')">Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor</div>
@@ -227,33 +224,44 @@
         var db = {
             v1: { title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", url: "https://playmogo.com/e/1fvov3xdwsbq", thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", desc: "Sophie Rain özel şov gösterisi." },
             v2: { title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...", url: "https://playmogo.com/e/ehhg2pcksir6", thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", author: "comatozze", avatar: "https://i.ibb.co/pB3ntggN/image.jpg", desc: "Evde baş başa kalan ikilinin gizli anları." },
-            v3: { title: "Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor", url: "https://playmogo.com/e/xmiqbgo3vrz4", thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", desc: "Sophie Rain, Piper ve Aishah ile birlikte kamera karşısına geçiyor! OnlyFans dünyasının popüler isimlerinin bir araya geldiği bu özel şovda unutulmaz anlar ve nefes kesen özel dakikalar izleyicileri bekliyor. [Kategoriler: Grup, Genç Özel Şov, OnlyFans]" }
+            v3: { title: "Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor", url: "https://playmogo.com/e/xmiqbgo3vrz4", thumb: "https://i.ibb.co/LXRB8b0n/image.jpg", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", desc: "Sophie Rain, Piper ve Aishah ile birlikte kamera karşısına geçiyor! OnlyFans dünyasının popüler isimlerinin bir araya geldiği bu özel şovda unutulmaz anlar ve nefes kesen özel dakikalar izleyicileri bekliyor. [Kategoriler: Grup, Genç Özel Şov, OnlyFans]" }
         };
         var activeAuthor = "";
         var pendingVideoId = null;
         var isAgeVerified = false;
 
-        // Kullanıcı video açmak istediğinde çalışır
+        document.addEventListener("DOMContentLoaded", function() {
+            // Menü Butonları
+            document.getElementById('open-menu-btn').addEventListener('click', function() { toggleMenu(true); });
+            document.getElementById('close-menu-btn').addEventListener('click', function() { toggleMenu(false); });
+            document.getElementById('menu-overlay').addEventListener('click', function() { toggleMenu(false); });
+
+            // Kategoriler
+            var catItems = document.querySelectorAll('.cat-item');
+            catItems.forEach(function(item) {
+                item.addEventListener('click', function() {
+                    var cat = this.getAttribute('data-cat');
+                    filterCat(cat);
+                });
+            });
+
+            // Yaş Doğrulama Onayı
+            document.getElementById('confirm-age-btn').addEventListener('click', function() {
+                isAgeVerified = true;
+                document.getElementById('site-age-modal').style.display = 'none';
+                if (pendingVideoId) {
+                    playVideoDirect(pendingVideoId);
+                    pendingVideoId = null;
+                }
+            });
+        });
+
         function requestVideo(id) {
             pendingVideoId = id;
             if (isAgeVerified) {
                 playVideoDirect(id);
             } else {
-                // Yaş doğrulanmadıysa modalı göster
                 document.getElementById('site-age-modal').style.display = 'flex';
-            }
-        }
-
-        // Yaş doğrulama butonuna basıldığında
-        function confirmAge() {
-            isAgeVerified = true;
-            var modal = document.getElementById('site-age-modal');
-            if (modal) {
-                modal.style.display = 'none';
-            }
-            if (pendingVideoId) {
-                playVideoDirect(pendingVideoId);
-                pendingVideoId = null;
             }
         }
 
@@ -295,15 +303,4 @@
 
                 document.getElementById('sec-feed').className = 'page-sec';
                 document.getElementById('sec-watch').className = 'page-sec active-sec';
-                document.getElementById('sec-profile').className = 'page-sec';
-                window.scrollTo(0,0);
-                
-                document.getElementById('v-iframe').src = item.url;
-            }
-        }
-
-        function goHome() {
-            document.getElementById('v-iframe').src = "";
-            document.getElementById('sec-feed').className = 'page-sec active-sec';
-            document.getElementById('sec-watch').className = 'page-sec';
-            document.getElementById('sec-pr
+                document.getElementById('sec-profile').className = 'page-sec'

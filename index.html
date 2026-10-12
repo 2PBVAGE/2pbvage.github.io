@@ -93,7 +93,7 @@
         <div class="modal-box">
             <div class="modal-title">⚠️ Yaş Sınırı (18+)</div>
             <div class="modal-text">Bu internet sitesi yetişkinlere özel içerikler barındırmaktadır. Devam etmek için 18 yaşından büyük olmalısınız.</div>
-            <button type="button" class="modal-btn" onclick="hideSiteModal()">18+ Yaşından Büyüğüm</button>
+            <button type="button" class="modal-btn" onclick="this.closest('#site-age-modal').remove()">18+ Yaşından Büyüğüm</button>
         </div>
     </div>
 
@@ -236,13 +236,6 @@
         var selectedVid = "";
         var activeAuthor = "";
 
-        function hideSiteModal() {
-            var modal = document.getElementById('site-age-modal');
-            if (modal) {
-                modal.style.setProperty('display', 'none', 'important');
-            }
-        }
-
         function toggleMenu(open) {
             document.getElementById('menu-overlay').style.display = open ? 'block' : 'none';
             document.getElementById('menu-drawer').className = open ? 'open' : '';
@@ -301,4 +294,6 @@
             var item = db[key];
             
             document.getElementById('v-iframe').src = "";
-            doc
+            document.getElementById('p-title').innerText = item.author;
+            document.getElementById('p-avatar').style.backgroundImage = "url('" + item.avatar + "')";
+            document.getElementById('p-ba

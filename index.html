@@ -25,7 +25,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         body { background-color: #121212; color: #ffffff; font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; }
         
-        /* 18+ MODAL */
+        /* 18+ MODAL - KESİN ENGEL KALDIRMA */
         #site-age-modal {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: rgba(0, 0, 0, 0.96); z-index: 2147483647;
@@ -34,7 +34,7 @@
         }
         #site-age-modal.open-modal {
             display: flex !important;
-            pointer-events: auto;
+            pointer-events: auto !important;
         }
         .modal-box {
             background-color: #1a1a1a; border: 1px solid #333; border-radius: 14px;
@@ -214,7 +214,7 @@
             <div class="channel-header-box">
                 <div class="channel-banner" id="p-banner"></div>
                 <div class="channel-main-avatar" id="p-avatar"></div>
-                <div style="font-size: 20px; font-weight: bold; color: #fff; display: flex; align-items: center; justify-content: center; gap: 4px;">
+                <div style="font-size: 20px; font-weight: bold; color: #fff; display: flex; align- items: center; justify-content: center; gap: 4px;">
                     <span id="p-title"></span><span class="verified-badge" style="width:18px; height:18px; font-size:11px;">✓</span>
                 </div>
                 <div style="font-size: 12px; color: #aaa; margin-top: 5px;">Doğrulanmış İçerik Üreticisi</div>
@@ -307,4 +307,4 @@
             document.getElementById('p-avatar').style.backgroundImage = "url('" + item.avatar + "')";
             document.getElementById('p-banner').style.backgroundImage = "url('" + item.avatar + "')";
             
-            document.getElementById('p-videos').innerHTM
+            document.

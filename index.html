@@ -25,10 +25,10 @@
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         body { background-color: #121212; color: #ffffff; font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; }
         
-        /* 18+ MODAL */
+        /* 18+ MODAL EN ÜST KATMAN */
         #site-age-modal {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.98); z-index: 9999999;
+            background: rgba(0, 0, 0, 0.98); z-index: 99999999 !important;
             display: flex; align-items: center; justify-content: center; padding: 20px;
         }
         .modal-box {
@@ -40,7 +40,7 @@
         .modal-btn {
             background-color: #ff4757; color: #fff; border: none; padding: 18px;
             border-radius: 25px; font-size: 16px; font-weight: bold; width: 100%; cursor: pointer;
-            touch-action: manipulation;
+            touch-action: manipulation; user-select: none;
         }
 
         .header-bar { width: 100%; max-width: 600px; background-color: #000; display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 1000; }
@@ -95,7 +95,7 @@
         <div class="modal-box">
             <div class="modal-title">⚠️ Yaş Sınırı (18+)</div>
             <div class="modal-text">Bu internet sitesi yetişkinlere özel içerikler barındırmaktadır. Devam etmek için 18 yaşından büyük olmalısınız.</div>
-            <button type="button" class="modal-btn" onclick="closeModal()">18+ Yaşından Büyüğüm</button>
+            <button type="button" id="btn-enter-site" class="modal-btn">18+ Yaşından Büyüğüm</button>
         </div>
     </div>
 
@@ -221,20 +221,29 @@
     </div>
 
     <script>
+        // YAŞ DOĞRULAMA BUTONUNA DOĞRUDAN DİNLEYİCİ BAĞLAMA
+        document.addEventListener('DOMContentLoaded', function() {
+            var btn = document.getElementById('btn-enter-site');
+            if (btn) {
+                var closeEvent = function(e) {
+                    if (e) e.preventDefault();
+                    var modal = document.getElementById('site-age-modal');
+                    if (modal) {
+                        modal.style.display = 'none';
+                        modal.remove();
+                    }
+                };
+                btn.addEventListener('click', closeEvent);
+                btn.addEventListener('touchstart', closeEvent);
+            }
+        });
+
         var db = {
             v1: { title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", url: "https://playmogo.com/e/1fvov3xdwsbq", thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", desc: "Sophie Rain özel şov gösterisi." },
             v2: { title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...", url: "https://playmogo.com/e/ehhg2pcksir6", thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", author: "comatozze", avatar: "https://i.ibb.co/pB3ntggN/image.jpg", desc: "Evde baş başa kalan ikilinin gizli anları." },
             v3: { title: "Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor", url: "https://playmogo.com/e/xmiqbgo3vrz4", thumb: "https://i.ibb.co/LXRB8b0n/image.jpg", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", desc: "Sophie Rain, Piper ve Aishah ile birlikte kamera karşısına geçiyor! OnlyFans dünyasının popüler isimlerinin bir araya geldiği bu özel şovda unutulmaz anlar ve nefes kesen özel dakikalar izleyicileri bekliyor. [Kategoriler: Grup, Genç Özel Şov, OnlyFans]" }
         };
         var activeAuthor = "";
-
-        function closeModal() {
-            var m = document.getElementById('site-age-modal');
-            if (m) {
-                m.style.display = 'none';
-                m.remove();
-            }
-        }
 
         function toggleMenu(open) {
             var overlay = document.getElementById('menu-overlay');
@@ -294,8 +303,4 @@
             var item = db[key];
             
             document.getElementById('v-iframe').src = "";
-            document.getElementById('p-title').innerText = item.author;
-            document.getElementById('p-avatar').style.backgroundImage = "url('" + item.avatar + "')";
-            document.getElementById('p-banner').style.backgroundImage = "url('" + item.avatar + "')";
-            
-            document.getElementById('p-videos').innerHTML = '<div class="video-post"><div class="video-thumbnail" style="background-image:url(\''+item.thumb+'\');" onclick="playVideoDirect(\''+key+'\')"><div class="play-button"></div></div><div class="post-title" onclick="playVideoDirect(\''+key+'\')">'+it
+            document.getElementById('p-title').innerText = ite

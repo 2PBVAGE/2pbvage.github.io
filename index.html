@@ -25,11 +25,11 @@
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         body { background-color: #121212; color: #ffffff; font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; }
         
-        /* 18+ MODAL - DOKUNMA VE TIKLAMA GARANTİLİ */
+        /* VİDEO İZLEME 18+ MODALI (BAŞLANGIÇTA GİZLİ) */
         #site-age-modal {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: rgba(0, 0, 0, 0.99); z-index: 2147483647;
-            display: flex; align-items: center; justify-content: center; padding: 20px;
+            display: none; align-items: center; justify-content: center; padding: 20px;
             pointer-events: auto;
         }
         .modal-box {
@@ -93,12 +93,12 @@
 </head>
 <body>
 
-    <!-- GİRİŞ 18+ MODALI -->
+    <!-- VİDEO İZLEME 18+ MODALI -->
     <div id="site-age-modal">
         <div class="modal-box">
             <div class="modal-title">⚠️ Yaş Sınırı (18+)</div>
-            <div class="modal-text">Bu internet sitesi yetişkinlere özel içerikler barındırmaktadır. Devam etmek için 18 yaşından büyük olmalısınız.</div>
-            <button type="button" id="age-confirm-btn" class="modal-btn" onclick="removeAgeModal()" ontouchend="removeAgeModal()">18+ Yaşından Büyüğüm</button>
+            <div class="modal-text">Bu videoyu izlemek için 18 yaşından büyük olmalısınız.</div>
+            <button type="button" class="modal-btn" onclick="confirmAge()" ontouchend="confirmAge()">18+ Yaşından Büyüğüm</button>
         </div>
     </div>
 
@@ -132,46 +132,46 @@
 
             <!-- VİDEO 3: Sophie Rain Ve Piper Aishah -->
             <div class="video-post" data-cat="group">
-                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" onclick="playVideoDirect('v3')">
+                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" onclick="requestVideo('v3')">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title" onclick="playVideoDirect('v3')">Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor</div>
+                <div class="post-title" onclick="requestVideo('v3')">Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor</div>
                 <div class="post-meta">
                     <div class="author-box" onclick="openProfile('Sophie Rain')">
                         <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/DPFjgyLy/image.jpg');"></div>
                         <strong style="color:#ff4757;">Sophie Rain<span class="verified-badge">✓</span></strong>
                     </div>
-                    <button type="button" class="action-btn" onclick="playVideoDirect('v3')">🚀 Hemen İzle</button>
+                    <button type="button" class="action-btn" onclick="requestVideo('v3')">🚀 Hemen İzle</button>
                 </div>
             </div>
 
             <!-- VİDEO 2 (comatozze) -->
             <div class="video-post" data-cat="amateur">
-                <div class="video-thumbnail" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');" onclick="playVideoDirect('v2')">
+                <div class="video-thumbnail" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');" onclick="requestVideo('v2')">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title" onclick="playVideoDirect('v2')">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
+                <div class="post-title" onclick="requestVideo('v2')">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
                 <div class="post-meta">
                     <div class="author-box" onclick="openProfile('comatozze')">
                         <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/pB3ntggN/image.jpg');"></div>
                         <strong style="color:#ff4757;">comatozze<span class="verified-badge">✓</span></strong>
                     </div>
-                    <button type="button" class="action-btn" onclick="playVideoDirect('v2')">🚀 Hemen İzle</button>
+                    <button type="button" class="action-btn" onclick="requestVideo('v2')">🚀 Hemen İzle</button>
                 </div>
             </div>
 
             <!-- VİDEO 1 (Sophie Rain) -->
             <div class="video-post" data-cat="show">
-                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" onclick="playVideoDirect('v1')">
+                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" onclick="requestVideo('v1')">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title" onclick="playVideoDirect('v1')">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
+                <div class="post-title" onclick="requestVideo('v1')">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
                 <div class="post-meta">
                     <div class="author-box" onclick="openProfile('Sophie Rain')">
                         <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/DPFjgyLy/image.jpg');"></div>
                         <strong style="color:#ff4757;">Sophie Rain<span class="verified-badge">✓</span></strong>
                     </div>
-                    <button type="button" class="action-btn" onclick="playVideoDirect('v1')">🚀 Hemen İzle</button>
+                    <button type="button" class="action-btn" onclick="requestVideo('v1')">🚀 Hemen İzle</button>
                 </div>
             </div>
         </div>
@@ -224,20 +224,38 @@
     </div>
 
     <script>
-        function removeAgeModal() {
-            var modal = document.getElementById('site-age-modal');
-            if (modal) {
-                modal.style.display = 'none';
-                modal.remove();
-            }
-        }
-
         var db = {
             v1: { title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", url: "https://playmogo.com/e/1fvov3xdwsbq", thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", desc: "Sophie Rain özel şov gösterisi." },
             v2: { title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...", url: "https://playmogo.com/e/ehhg2pcksir6", thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", author: "comatozze", avatar: "https://i.ibb.co/pB3ntggN/image.jpg", desc: "Evde baş başa kalan ikilinin gizli anları." },
             v3: { title: "Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor", url: "https://playmogo.com/e/xmiqbgo3vrz4", thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", desc: "Sophie Rain, Piper ve Aishah ile birlikte kamera karşısına geçiyor! OnlyFans dünyasının popüler isimlerinin bir araya geldiği bu özel şovda unutulmaz anlar ve nefes kesen özel dakikalar izleyicileri bekliyor. [Kategoriler: Grup, Genç Özel Şov, OnlyFans]" }
         };
         var activeAuthor = "";
+        var pendingVideoId = null;
+        var isAgeVerified = false;
+
+        // Kullanıcı video açmak istediğinde çalışır
+        function requestVideo(id) {
+            pendingVideoId = id;
+            if (isAgeVerified) {
+                playVideoDirect(id);
+            } else {
+                // Yaş doğrulanmadıysa modalı göster
+                document.getElementById('site-age-modal').style.display = 'flex';
+            }
+        }
+
+        // Yaş doğrulama butonuna basıldığında
+        function confirmAge() {
+            isAgeVerified = true;
+            var modal = document.getElementById('site-age-modal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+            if (pendingVideoId) {
+                playVideoDirect(pendingVideoId);
+                pendingVideoId = null;
+            }
+        }
 
         function toggleMenu(open) {
             var overlay = document.getElementById('menu-overlay');
@@ -288,15 +306,4 @@
             document.getElementById('v-iframe').src = "";
             document.getElementById('sec-feed').className = 'page-sec active-sec';
             document.getElementById('sec-watch').className = 'page-sec';
-            document.getElementById('sec-profile').className = 'page-sec';
-            window.scrollTo(0,0);
-        }
-
-        function openProfile(author) {
-            var key = (author === 'Sophie Rain') ? 'v3' : 'v2';
-            var item = db[key];
-            
-            document.getElementById('v-iframe').src = "";
-            document.getElementById('p-title').innerText = item.author;
-            document.getElementById('p-avatar').style.backgroundImage = "url('" + item.avatar + "')";
-            document.getElementById('p-banner').style.backgroun
+            document.getElementById('sec-pr

@@ -29,7 +29,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.95);
-            z-index: 9999;
+            z-index: 10000;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -62,12 +62,13 @@
             background-color: #ff4757;
             color: #fff;
             border: none;
-            padding: 12px 24px;
+            padding: 14px 24px;
             border-radius: 25px;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             width: 100%;
+            display: block;
         }
 
         .header-bar { 
@@ -92,7 +93,7 @@
             cursor: pointer; 
         }
         
-        /* KATEGORİ MENÜSÜ */
+        /* KATEGORİ MENÜSÜ (DRAWER) */
         .menu-overlay {
             position: fixed;
             top: 0;
@@ -100,7 +101,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.7);
-            z-index: 500;
+            z-index: 5000;
             display: none;
         }
         .menu-drawer {
@@ -110,7 +111,7 @@
             width: 260px;
             height: 100%;
             background-color: #1a1a1a;
-            z-index: 501;
+            z-index: 5001;
             transition: left 0.3s ease;
             display: flex;
             flex-direction: column;
@@ -381,7 +382,7 @@
         <div class="age-modal-box">
             <div class="age-modal-title">⚠️ Yaş Sınırı (18+)</div>
             <div class="age-modal-text">Bu internet sitesi yetişkinlere özel içerikler barındırmaktadır. Devam etmek için 18 yaşından büyük olmalısınız.</div>
-            <button class="age-verify-btn" onclick="verifySiteAge()">18+ Yaşından Büyüğüm</button>
+            <button type="button" class="age-verify-btn" id="btn-verify-site">18+ Yaşından Büyüğüm</button>
         </div>
     </div>
 
@@ -390,28 +391,28 @@
         <div class="age-modal-box">
             <div class="age-modal-title">⚠️ Yetişkin İçerik Uyarısı</div>
             <div class="age-modal-text">Seçtiğiniz video yaş sınırı içeren yetişkin materyalleri teşhir etmektedir. İzlemek için onay verin.</div>
-            <button class="age-verify-btn" onclick="verifyVideoAge()">18+ Büyüğüm, Videoyu Aç</button>
+            <button type="button" class="age-verify-btn" id="btn-verify-video">18+ Büyüğüm, Videoyu Aç</button>
         </div>
     </div>
 
     <!-- KATEGORİ MENÜSÜ -->
-    <div class="menu-overlay" id="menu-overlay" onclick="closeMenu()"></div>
+    <div class="menu-overlay" id="menu-overlay"></div>
     <div class="menu-drawer" id="menu-drawer">
         <div class="menu-header">
             <span class="menu-title">📁 Kategoriler</span>
-            <span class="menu-close" onclick="closeMenu()">✕</span>
+            <span class="menu-close" id="btn-close-menu">✕</span>
         </div>
         <ul class="category-list">
-            <li class="category-item active" onclick="filterCategory('all')">🔥 Tüm Videolar</li>
-            <li class="category-item" onclick="filterCategory('amateur')">🏠 Amatör / Ev Yapımı</li>
-            <li class="category-item" onclick="filterCategory('show')">⭐ Özel Şov / Trend</li>
+            <li class="category-item active" id="cat-all">🔥 Tüm Videolar</li>
+            <li class="category-item" id="cat-amateur">🏠 Amatör / Ev Yapımı</li>
+            <li class="category-item" id="cat-show">⭐ Özel Şov / Trend</li>
         </ul>
     </div>
 
     <!-- ÜST HEADER BAR -->
     <div class="header-bar">
-        <div style="font-size: 24px; cursor: pointer; padding: 5px;" onclick="openMenu()">☰</div>
-        <div class="header-logo" onclick="goHome()">2PBVAGE 🤍</div>
+        <div style="font-size: 24px; cursor: pointer; padding: 5px;" id="btn-open-menu">☰</div>
+        <div class="header-logo" id="btn-logo-home">2PBVAGE 🤍</div>
         <div style="font-size: 18px; cursor: pointer; padding: 5px;">🔍</div>
     </div>
 
@@ -424,25 +425,25 @@
 
             <!-- VİDEO 2 (comatozze) -->
             <div class="video-post" data-cat="amateur">
-                <div class="video-thumbnail" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');" onclick="requestVideo('v2')">
+                <div class="video-thumbnail" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');" id="play-v2-thumb">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title" onclick="requestVideo('v2')">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
+                <div class="post-title" id="play-v2-title">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
                 <div class="post-meta">
-                    <span>📅 12 Eki &bull; <strong style="color:#ff4757; cursor:pointer;" onclick="loadProfile('comatozze')">comatozze</strong></span>
-                    <a href="javascript:void(0)" class="action-btn" onclick="requestVideo('v2')">🚀 Hemen İzle</a>
+                    <span>📅 12 Eki &bull; <strong style="color:#ff4757; cursor:pointer;" id="prof-comatozze">comatozze</strong></span>
+                    <button type="button" class="action-btn" id="play-v2-btn">🚀 Hemen İzle</button>
                 </div>
             </div>
 
             <!-- VİDEO 1 (Sophie Rain) -->
             <div class="video-post" data-cat="show">
-                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" onclick="requestVideo('v1')">
+                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" id="play-v1-thumb">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title" onclick="requestVideo('v1')">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
+                <div class="post-title" id="play-v1-title">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
                 <div class="post-meta">
-                    <span>📅 12 Eki &bull; <strong style="color:#ff4757; cursor:pointer;" onclick="loadProfile('Sophie Rain')">Sophie Rain</strong></span>
-                    <a href="javascript:void(0)" class="action-btn" onclick="requestVideo('v1')">🚀 Hemen İzle</a>
+                    <span>📅 12 Eki &bull; <strong style="color:#ff4757; cursor:pointer;" id="prof-sophie">Sophie Rain</strong></span>
+                    <button type="button" class="action-btn" id="play-v1-btn">🚀 Hemen İzle</button>
                 </div>
             </div>
 
@@ -450,14 +451,14 @@
 
         <!-- 2. VİDEO İZLEME SAYFASI -->
         <div id="sec-watch" class="page-sec">
-            <a href="javascript:void(0)" class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</a>
+            <button type="button" class="back-btn" id="btn-back-watch">⬅ Ana Sayfaya Dön</button>
             <h1 id="v-title" style="font-size: 18px; color: #fff;"></h1>
             
             <div class="video-player-box">
                 <iframe id="v-iframe" src="" allowfullscreen></iframe>
             </div>
 
-            <div class="channel-profile-card" id="v-card" onclick="goCurrentProfile()">
+            <div class="channel-profile-card" id="v-card">
                 <div class="channel-info-left">
                     <div class="channel-avatar" id="v-avatar"></div>
                     <div>
@@ -476,7 +477,7 @@
 
         <!-- 3. KANAL PROFİL SAYFASI -->
         <div id="sec-profile" class="page-sec">
-            <a href="javascript:void(0)" class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</a>
+            <button type="button" class="back-btn" id="btn-back-prof">⬅ Ana Sayfaya Dön</button>
             <div class="channel-header">
                 <div class="channel-banner" id="p-banner"></div>
                 <div class="channel-details">
@@ -513,27 +514,18 @@
         var currentAuthor = "";
         var pendingVideoId = "";
 
-        // Siteye Giriş 18+ Onayı
-        function verifySiteAge() {
-            var modal = document.getElementById("site-age-modal");
-            if (modal) modal.style.display = "none";
+        function showSection(id) {
+            document.getElementById("sec-feed").className = "page-sec";
+            document.getElementById("sec-watch").className = "page-sec";
+            document.getElementById("sec-profile").className = "page-sec";
+            
+            document.getElementById(id).className = "page-sec active-sec";
+            window.scrollTo(0, 0);
         }
 
-        // Video Tıklama (18+ Kontrolü)
-        function requestVideo(id) {
-            pendingVideoId = id;
-            var vModal = document.getElementById("video-age-modal");
-            if (vModal) vModal.style.display = "flex";
-        }
-
-        // Video Onayı Verildiğinde
-        function verifyVideoAge() {
-            var vModal = document.getElementById("video-age-modal");
-            if (vModal) vModal.style.display = "none";
-            if (pendingVideoId) {
-                loadVideo(pendingVideoId);
-                pendingVideoId = "";
-            }
+        function goHome() {
+            document.getElementById("v-iframe").src = "";
+            showSection("sec-feed");
         }
 
         function openMenu() {
@@ -554,4 +546,33 @@
                 drawer.classList.remove("open");
                 setTimeout(function() {
                     overlay.style.display = "none";
-                }, 30
+                }, 300);
+            }
+        }
+
+        function filterCategory(catKey) {
+            closeMenu();
+            goHome();
+
+            var posts = document.querySelectorAll(".video-post");
+            var titleElem = document.getElementById("cat-title");
+
+            if (catKey === "all") {
+                if (titleElem) titleElem.innerHTML = "🔥 Tüm Videolar";
+                for(var i = 0; i < posts.length; i++) { posts[i].style.display = "block"; }
+            } else if (catKey === "amateur") {
+                if (titleElem) titleElem.innerHTML = "🏠 Amatör / Ev Yapımı Videolar";
+                for(var i = 0; i < posts.length; i++) {
+                    posts[i].style.display = (posts[i].getAttribute("data-cat") === "amateur") ? "block" : "none";
+                }
+            } else if (catKey === "show") {
+                if (titleElem) titleElem.innerHTML = "⭐ Özel Şov / Trend Videolar";
+                for(var i = 0; i < posts.length; i++) {
+                    posts[i].style.display = (posts[i].getAttribute("data-cat") === "show") ? "block" : "none";
+                }
+            }
+        }
+
+        function requestVideo(id) {
+            pendingVideoId = id;
+            var vModal

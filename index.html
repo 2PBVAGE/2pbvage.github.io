@@ -229,7 +229,7 @@
             padding-bottom: 56.25%; 
             background-color: #000; 
             border-radius: 6px; 
-overflow: hidden; 
+            overflow: hidden; 
         }
         .video-player-box iframe { 
             position: absolute; 
@@ -343,9 +343,9 @@ overflow: hidden;
 
     <!-- ÜST HEADER BAR -->
     <div class="header-bar">
-        <div style="font-size: 22px; cursor: pointer;" onclick="openMenu()">☰</div>
+        <div style="font-size: 22px; cursor: pointer; padding: 5px;" onclick="openMenu()">☰</div>
         <div class="header-logo" onclick="goHome()">2PBVAGE 🤍</div>
-        <div style="font-size: 18px; cursor: pointer;">🔍</div>
+        <div style="font-size: 18px; cursor: pointer; padding: 5px;">🔍</div>
     </div>
 
     <div class="content-container">
@@ -372,4 +372,68 @@ overflow: hidden;
                 <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" onclick="loadVideo('v1')">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title" onclick="load
+                <div class="post-title" onclick="loadVideo('v1')">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
+                <div class="post-meta">
+                    <span>📅 12 Eki &bull; <strong style="color:#ff4757; cursor:pointer;" onclick="loadProfile('Sophie Rain')">Sophie Rain</strong></span>
+                    <a href="javascript:void(0)" class="action-btn" onclick="loadVideo('v1')">🚀 Hemen İzle</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 2. VİDEO İZLEME SAYFASI -->
+        <div id="sec-watch" class="page-sec">
+            <a href="javascript:void(0)" class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</a>
+            <h1 id="v-title" style="font-size: 18px; color: #fff;"></h1>
+            
+            <div class="video-player-box">
+                <iframe id="v-iframe" src="" allowfullscreen></iframe>
+            </div>
+
+            <div class="channel-profile-card" id="v-card" onclick="goCurrentProfile()">
+                <div class="channel-info-left">
+                    <div class="channel-avatar" id="v-avatar"></div>
+                    <div>
+                        <div class="channel-name" id="v-author"></div>
+                        <div style="font-size: 11px; color: #aaa;">Kanalı & Tüm Videoları Gör</div>
+                    </div>
+                </div>
+                <span class="action-btn">Kanala Git</span>
+            </div>
+
+            <div class="video-description-box">
+                <div class="desc-heading">📌 Video Özeti & Detaylar</div>
+                <div class="desc-text" id="v-desc"></div>
+            </div>
+        </div>
+
+        <!-- 3. KANAL PROFİL SAYFASI -->
+        <div id="sec-profile" class="page-sec">
+            <a href="javascript:void(0)" class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</a>
+            <div class="channel-header">
+                <div class="channel-banner" id="p-banner"></div>
+                <div class="channel-details">
+                    <div class="channel-main-avatar" id="p-avatar"></div>
+                    <div class="channel-main-title" id="p-title"></div>
+                </div>
+            </div>
+            <div style="font-size: 15px; font-weight: bold; color: #ff4757; margin-top: 10px;">📹 Kanalın Videoları</div>
+            <div id="p-videos"></div>
+        </div>
+
+    </div>
+
+    <script>
+        var videos = {
+            v1: {
+                title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor",
+                url: "https://playmogo.com/e/1fvov3xdwsbq",
+                thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp",
+                author: "Sophie Rain",
+                avatar: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp",
+                desc: "Sophie Rain, bu özel çekimde kameralar karşısına tamamen cesur bir şekilde geçiyor. Üstsüz bir şekilde göğüslerini öne çıkaran hareketleriyle sınırları zorlayan Sophie Rain'in en çok konuşulan özel anları."
+            },
+            v2: {
+                title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...",
+                url: "https://playmogo.com/e/ehhg2pcksir6",
+                thumb

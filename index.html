@@ -25,15 +25,17 @@
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         body { background-color: #121212; color: #ffffff; font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; }
         
-        /* 18+ MODAL (EN ÜST KATMAN) */
+        /* 18+ MODAL - DOKUNMA VE TIKLAMA GARANTİLİ */
         #site-age-modal {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: rgba(0, 0, 0, 0.99); z-index: 2147483647;
             display: flex; align-items: center; justify-content: center; padding: 20px;
+            pointer-events: auto;
         }
         .modal-box {
             background-color: #1a1a1a; border: 1px solid #333; border-radius: 14px;
             padding: 30px 20px; width: 100%; max-width: 400px; text-align: center;
+            pointer-events: auto;
         }
         .modal-title { font-size: 22px; font-weight: bold; color: #ff4757; margin-bottom: 12px; font-family: 'Montserrat', sans-serif; }
         .modal-text { font-size: 14px; color: #ccc; line-height: 1.5; margin-bottom: 25px; }
@@ -41,6 +43,7 @@
             background-color: #ff4757; color: #fff; border: none; padding: 18px;
             border-radius: 25px; font-size: 16px; font-weight: bold; width: 100%; cursor: pointer;
             touch-action: manipulation; -webkit-appearance: none; appearance: none;
+            pointer-events: auto; position: relative; z-index: 99999;
         }
 
         .header-bar { width: 100%; max-width: 600px; background-color: #000; display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 1000; }
@@ -95,7 +98,7 @@
         <div class="modal-box">
             <div class="modal-title">⚠️ Yaş Sınırı (18+)</div>
             <div class="modal-text">Bu internet sitesi yetişkinlere özel içerikler barındırmaktadır. Devam etmek için 18 yaşından büyük olmalısınız.</div>
-            <button type="button" id="age-confirm-btn" class="modal-btn">18+ Yaşından Büyüğüm</button>
+            <button type="button" id="age-confirm-btn" class="modal-btn" onclick="removeAgeModal()" ontouchend="removeAgeModal()">18+ Yaşından Büyüğüm</button>
         </div>
     </div>
 
@@ -221,26 +224,13 @@
     </div>
 
     <script>
-        // Butona basıldığında modalı anında kaldır
-        function closeAgeModal() {
+        function removeAgeModal() {
             var modal = document.getElementById('site-age-modal');
             if (modal) {
                 modal.style.display = 'none';
                 modal.remove();
             }
         }
-
-        // Olay Dinleyicilerini Doğrudan Bağlama
-        window.addEventListener('DOMContentLoaded', function() {
-            var btn = document.getElementById('age-confirm-btn');
-            if (btn) {
-                btn.addEventListener('click', closeAgeModal);
-                btn.addEventListener('touchstart', function(e) {
-                    e.preventDefault();
-                    closeAgeModal();
-                }, {passive: false});
-            }
-        });
 
         var db = {
             v1: { title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", url: "https://playmogo.com/e/1fvov3xdwsbq", thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", desc: "Sophie Rain özel şov gösterisi." },
@@ -304,4 +294,9 @@
 
         function openProfile(author) {
             var key = (author === 'Sophie Rain') ? 'v3' : 'v2';
-            var item = db[k
+            var item = db[key];
+            
+            document.getElementById('v-iframe').src = "";
+            document.getElementById('p-title').innerText = item.author;
+            document.getElementById('p-avatar').style.backgroundImage = "url('" + item.avatar + "')";
+            document.getElementById('p-banner').style.backgroun

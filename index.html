@@ -6,572 +6,215 @@
     <title>2PBVAGE 🤍</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <style>
-        * { 
-            box-sizing: border-box; 
-            margin: 0; 
-            padding: 0; 
-            -webkit-tap-highlight-color: transparent; 
-            touch-action: manipulation;
-        }
-        body { 
-            background-color: #121212; 
-            color: #ffffff; 
-            font-family: Arial, sans-serif; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        body { background-color: #121212; color: #ffffff; font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; }
         
-        /* 18+ YAŞ DOĞRULAMA MODALLARI */
-        .age-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 999999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+        /* 18+ MODAL */
+        #site-age-modal {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.98); z-index: 999999;
+            display: flex; align-items: center; justify-content: center; padding: 20px;
         }
-        .age-modal-box {
-            background-color: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 14px;
-            padding: 30px 20px;
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.8);
-            position: relative;
-            z-index: 1000000;
+        .modal-box {
+            background-color: #1a1a1a; border: 1px solid #333; border-radius: 14px;
+            padding: 30px 20px; width: 100%; max-width: 400px; text-align: center;
         }
-        .age-modal-title {
-            font-size: 22px;
-            font-weight: bold;
-            color: #ff4757;
-            margin-bottom: 12px;
-            font-family: 'Montserrat', sans-serif;
-        }
-        .age-modal-text {
-            font-size: 14px;
-            color: #ccc;
-            line-height: 1.5;
-            margin-bottom: 25px;
-        }
-        .age-verify-btn {
-            background-color: #ff4757;
-            color: #fff;
-            border: none;
-            padding: 15px 24px;
-            border-radius: 25px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            display: block;
-            pointer-events: auto !important;
-            user-select: none;
-            -webkit-user-select: none;
+        .modal-title { font-size: 22px; font-weight: bold; color: #ff4757; margin-bottom: 12px; font-family: 'Montserrat', sans-serif; }
+        .modal-text { font-size: 14px; color: #ccc; line-height: 1.5; margin-bottom: 25px; }
+        .modal-btn {
+            background-color: #ff4757; color: #fff; border: none; padding: 16px;
+            border-radius: 25px; font-size: 16px; font-weight: bold; width: 100%; cursor: pointer;
         }
 
-        .header-bar { 
-            width: 100%; 
-            max-width: 600px; 
-            background-color: #000; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 12px 18px; 
-            border-bottom: 1px solid #222; 
-            position: sticky; 
-            top: 0; 
-            z-index: 100; 
-        }
-        .header-logo { 
-            font-family: 'Montserrat', sans-serif; 
-            color: #fff; 
-            font-size: 20px; 
-            font-weight: 800; 
-            text-decoration: none; 
-            cursor: pointer; 
-        }
+        .header-bar { width: 100%; max-width: 600px; background-color: #000; display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; }
+        .header-logo { font-family: 'Montserrat', sans-serif; color: #fff; font-size: 20px; font-weight: 800; cursor: pointer; }
         
-        /* KATEGORİ MENÜSÜ */
-        .menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 5000;
-            display: none;
-        }
-        .menu-drawer {
-            position: fixed;
-            top: 0;
-            left: -280px;
-            width: 260px;
-            height: 100%;
-            background-color: #1a1a1a;
-            z-index: 5001;
-            transition: left 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            border-right: 1px solid #2a2a2a;
-        }
-        .menu-drawer.open {
-            left: 0;
-        }
-        .menu-header {
-            padding: 18px;
-            background-color: #000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #222;
-        }
-        .menu-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: #ff4757;
-        }
-        .menu-close {
-            font-size: 20px;
-            cursor: pointer;
-            color: #aaa;
-            padding: 5px;
-        }
-        .category-list {
-            list-style: none;
-            padding: 15px 0;
-        }
-        .category-item {
-            padding: 14px 20px;
-            font-size: 14px;
-            color: #ddd;
-            cursor: pointer;
-            border-bottom: 1px solid #222;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .category-item:hover, .category-item.active {
-            background-color: #262626;
-            color: #ff4757;
-            font-weight: bold;
-        }
+        /* MENÜ */
+        #menu-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 5000; display: none; }
+        #menu-drawer { position: fixed; top: 0; left: -280px; width: 260px; height: 100vh; background-color: #1a1a1a; z-index: 5001; transition: left 0.3s ease; display: flex; flex-direction: column; border-right: 1px solid #2a2a2a; }
+        #menu-drawer.open { left: 0; }
 
-        .content-container { 
-            width: 100%; 
-            max-width: 600px; 
-            padding: 15px; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 15px; 
-        }
+        .content-container { width: 100%; max-width: 600px; padding: 15px; display: flex; flex-direction: column; gap: 15px; }
+        .page-sec { display: none; width: 100%; flex-direction: column; gap: 15px; }
+        .active-sec { display: flex !important; }
 
-        .page-sec { 
-            display: none; 
-            width: 100%; 
-            flex-direction: column; 
-            gap: 15px; 
-        }
-        .active-sec { 
-            display: flex !important; 
-        }
-
-        .category-heading {
-            font-size: 15px;
-            font-weight: bold;
-            color: #ff4757;
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .video-post { 
-            background-color: #1e1e1e; 
-            border-radius: 12px; 
-            overflow: hidden; 
-            border: 1px solid #222; 
-            margin-bottom: 15px; 
-            position: relative; 
-        }
-        .video-thumbnail { 
-            position: relative; 
-            width: 100%; 
-            padding-bottom: 56.25%; 
-            background-size: cover; 
-            background-position: center; 
-            display: block; 
-            cursor: pointer; 
-            background-color: #000;
-        }
-        .play-button { 
-            position: absolute; 
-            top: 50%; 
-            left: 50%; 
-            transform: translate(-50%, -50%); 
-            width: 55px; 
-            height: 55px; 
-            background: rgba(255, 71, 87, 0.9); 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            pointer-events: none; 
-        }
-        .play-button::after { 
-            content: ""; 
-            border-style: solid; 
-            border-width: 10px 0 10px 18px; 
-            border-color: transparent transparent transparent #fff; 
-            margin-left: 4px; 
-        }
+        .video-post { background-color: #1e1e1e; border-radius: 12px; overflow: hidden; border: 1px solid #222; margin-bottom: 15px; }
+        .video-thumbnail { position: relative; width: 100%; padding-bottom: 56.25%; background-size: cover; background-position: center; display: block; cursor: pointer; background-color: #000; }
+        .play-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 55px; height: 55px; background: rgba(255, 71, 87, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+        .play-button::after { content: ""; border-style: solid; border-width: 10px 0 10px 18px; border-color: transparent transparent transparent #fff; margin-left: 4px; }
         
-        .post-title { 
-            padding: 14px 15px 8px 15px; 
-            font-size: 15px; 
-            font-weight: bold; 
-            color: #fff; 
-            cursor: pointer; 
-            line-height: 1.4;
-        }
-        .post-meta { 
-            padding: 0 15px 15px 15px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            font-size: 12px; 
-            color: #aaa; 
-            gap: 10px;
-        }
-        .action-btn { 
-            background-color: #ff4757; 
-            color: #fff !important; 
-            padding: 10px 18px; 
-            border-radius: 20px; 
-            font-weight: bold; 
-            border: none; 
-            cursor: pointer; 
-            display: inline-block; 
-            text-decoration: none;
-            font-size: 12px;
-            user-select: none;
-        }
+        .post-title { padding: 14px 15px 8px 15px; font-size: 15px; font-weight: bold; color: #fff; cursor: pointer; line-height: 1.4; }
+        .post-meta { padding: 0 15px 15px 15px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #aaa; }
+        .action-btn { background-color: #ff4757; color: #fff !important; padding: 10px 18px; border-radius: 20px; font-weight: bold; border: none; cursor: pointer; text-decoration: none; font-size: 12px; }
 
-        .back-btn { 
-            align-self: flex-start; 
-            background-color: #222; 
-            color: #ff4757; 
-            padding: 8px 14px; 
-            border-radius: 6px; 
-            border: 1px solid #333; 
-            cursor: pointer; 
-            font-weight: bold; 
-            font-size: 12px; 
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .video-player-box { 
-            position: relative; 
-            width: 100%; 
-            padding-bottom: 56.25%; 
-            background-color: #000; 
-            border-radius: 6px; 
-            overflow: hidden; 
-        }
-        .video-player-box iframe { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            border: 0; 
-        }
-
-        .channel-profile-card { 
-            background-color: #1a1a1a; 
-            border: 1px solid #2a2a2a; 
-            border-radius: 8px; 
-            padding: 12px 15px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            cursor: pointer; 
-        }
-        .channel-info-left { 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-        }
-        .channel-avatar { 
-            width: 45px; 
-            height: 45px; 
-            border-radius: 50%; 
-            background-size: cover; 
-            background-position: center; 
-            border: 2px solid #ff4757; 
-            background-color: #222;
-        }
-        .channel-name { 
-            font-size: 14px; 
-            font-weight: bold; 
-            color: #fff; 
-        }
-        
-        .video-description-box { 
-            background-color: #1a1a1a; 
-            border: 1px solid #2a2a2a; 
-            border-radius: 8px; 
-            padding: 15px; 
-        }
-        .desc-heading { 
-            font-size: 14px; 
-            font-weight: bold; 
-            color: #ff4757; 
-            margin-bottom: 8px; 
-        }
-        .desc-text { 
-            font-size: 13px; 
-            color: #ccc; 
-            line-height: 1.5; 
-        }
-
-        .channel-header { 
-            background-color: #1a1a1a; 
-            border-radius: 12px; 
-            overflow: hidden; 
-            border: 1px solid #2a2a2a; 
-        }
-        .channel-banner { 
-            width: 100%; 
-            height: 110px; 
-            background-size: cover; 
-            background-position: center; 
-            background-color: #ff4757; 
-        }
-        .channel-details { 
-            padding: 15px; 
-            display: flex; 
-            align-items: center; 
-            gap: 15px; 
-            margin-top: -30px; 
-        }
-        .channel-main-avatar { 
-            width: 75px; 
-            height: 75px; 
-            border-radius: 50%; 
-            border: 3px solid #ff4757; 
-            background-size: cover; 
-            background-position: center; 
-            background-color: #000; 
-        }
-        .channel-main-title { 
-            font-size: 18px; 
-            font-weight: bold; 
-            color: #fff; 
-            margin-top: 25px; 
-        }
+        .video-player-box { position: relative; width: 100%; padding-bottom: 56.25%; background-color: #000; border-radius: 6px; overflow: hidden; }
+        .video-player-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .back-btn { align-self: flex-start; background-color: #222; color: #ff4757; padding: 8px 14px; border-radius: 6px; border: 1px solid #333; cursor: pointer; font-weight: bold; font-size: 12px; }
     </style>
 </head>
 <body>
 
-    <!-- GİRİŞ 18+ YAŞ DOĞRULAMA MODALI -->
-    <div class="age-modal-overlay" id="site-age-modal">
-        <div class="age-modal-box">
-            <div class="age-modal-title">⚠️ Yaş Sınırı (18+)</div>
-            <div class="age-modal-text">Bu internet sitesi yetişkinlere özel içerikler barındırmaktadır. Devam etmek için 18 yaşından büyük olmalısınız.</div>
-            <button type="button" class="age-verify-btn" onclick="closeSiteAgeModal()">18+ Yaşından Büyüğüm</button>
+    <!-- GİRİŞ 18+ MODALI -->
+    <div id="site-age-modal">
+        <div class="modal-box">
+            <div class="modal-title">⚠️ Yaş Sınırı (18+)</div>
+            <div class="modal-text">Bu internet sitesi yetişkinlere özel içerikler barındırmaktadır. Devam etmek için 18 yaşından büyük olmalısınız.</div>
+            <button class="modal-btn" onclick="hideSiteModal()">18+ Yaşından Büyüğüm</button>
         </div>
     </div>
 
-    <!-- VİDEO İÇİN 18+ YAŞ DOĞRULAMA MODALI -->
-    <div class="age-modal-overlay" id="video-age-modal" style="display: none;">
-        <div class="age-modal-box">
-            <div class="age-modal-title">⚠️ Yetişkin İçerik Uyarısı</div>
-            <div class="age-modal-text">Seçtiğiniz video yaş sınırı içeren yetişkin materyalleri teşhir etmektedir. İzlemek için onay verin.</div>
-            <button type="button" class="age-verify-btn" onclick="closeVideoAgeModal()">18+ Büyüğüm, Videoyu Aç</button>
-        </div>
+    <!-- VİDEO 18+ MODALI -->
+    <div id="video-age-modal" style="display:none;" class="modal-box" style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:999999; background:#1a1a1a; padding:30px; border-radius:14px; border:1px solid #333; text-align:center;">
+        <!-- Dinamik dolacak -->
     </div>
 
     <!-- KATEGORİ MENÜSÜ -->
-    <div class="menu-overlay" id="menu-overlay" onclick="closeMenu()"></div>
-    <div class="menu-drawer" id="menu-drawer">
-        <div class="menu-header">
-            <span class="menu-title">📁 Kategoriler</span>
-            <span class="menu-close" onclick="closeMenu()">✕</span>
+    <div id="menu-overlay" onclick="toggleMenu(false)"></div>
+    <div id="menu-drawer">
+        <div style="padding: 18px; background: #000; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222;">
+            <span style="color:#ff4757; font-weight:bold;">📁 Kategoriler</span>
+            <span style="color:#aaa; font-size:20px; cursor:pointer;" onclick="toggleMenu(false)">✕</span>
         </div>
-        <ul class="category-list">
-            <li class="category-item active" onclick="filterCategory('all')">🔥 Tüm Videolar</li>
-            <li class="category-item" onclick="filterCategory('amateur')">🏠 Amatör / Ev Yapımı</li>
-            <li class="category-item" onclick="filterCategory('show')">⭐ Özel Şov / Trend</li>
+        <ul style="list-style: none; padding: 15px 0;">
+            <li style="padding: 14px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;" onclick="filterCat('all')">🔥 Tüm Videolar</li>
+            <li style="padding: 14px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;" onclick="filterCat('amateur')">🏠 Amatör / Ev Yapımı</li>
+            <li style="padding: 14px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;" onclick="filterCat('show')">⭐ Özel Şov / Trend</li>
         </ul>
     </div>
 
-    <!-- ÜST HEADER BAR -->
+    <!-- HEADER -->
     <div class="header-bar">
-        <div style="font-size: 24px; cursor: pointer; padding: 5px;" onclick="openMenu()">☰</div>
+        <div style="font-size: 24px; cursor: pointer;" onclick="toggleMenu(true)">☰</div>
         <div class="header-logo" onclick="goHome()">2PBVAGE 🤍</div>
-        <div style="font-size: 18px; cursor: pointer; padding: 5px;">🔍</div>
+        <div style="font-size: 18px; cursor: pointer;">🔍</div>
     </div>
 
     <div class="content-container">
-
-        <!-- 1. ANA SAYFA -->
+        <!-- ANA SAYFA -->
         <div id="sec-feed" class="page-sec active-sec">
-            
-            <div id="cat-title" class="category-heading">🔥 Tüm Videolar</div>
+            <div id="cat-title" style="font-size: 15px; font-weight: bold; color: #ff4757; margin-bottom: 5px;">🔥 Tüm Videolar</div>
 
-            <!-- VİDEO 2 (comatozze) -->
+            <!-- VİDEO 2 -->
             <div class="video-post" data-cat="amateur">
-                <div class="video-thumbnail" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');" onclick="requestVideo('v2')">
+                <div class="video-thumbnail" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');" onclick="askVideo('v2')">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title" onclick="requestVideo('v2')">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
+                <div class="post-title" onclick="askVideo('v2')">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
                 <div class="post-meta">
-                    <span>📅 12 Eki &bull; <strong style="color:#ff4757; cursor:pointer;" onclick="loadProfile('comatozze')">comatozze</strong></span>
-                    <button type="button" class="action-btn" onclick="requestVideo('v2')">🚀 Hemen İzle</button>
+                    <span>📅 12 Eki &bull; <strong style="color:#ff4757; cursor:pointer;" onclick="openProfile('comatozze')">comatozze</strong></span>
+                    <button class="action-btn" onclick="askVideo('v2')">🚀 Hemen İzle</button>
                 </div>
             </div>
 
-            <!-- VİDEO 1 (Sophie Rain) -->
+            <!-- VİDEO 1 -->
             <div class="video-post" data-cat="show">
-                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" onclick="requestVideo('v1')">
+                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" onclick="askVideo('v1')">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title" onclick="requestVideo('v1')">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
+                <div class="post-title" onclick="askVideo('v1')">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
                 <div class="post-meta">
-                    <span>📅 12 Eki &bull; <strong style="color:#ff4757; cursor:pointer;" onclick="loadProfile('Sophie Rain')">Sophie Rain</strong></span>
-                    <button type="button" class="action-btn" onclick="requestVideo('v1')">🚀 Hemen İzle</button>
+                    <span>📅 12 Eki &bull; <strong style="color:#ff4757; cursor:pointer;" onclick="openProfile('Sophie Rain')">Sophie Rain</strong></span>
+                    <button class="action-btn" onclick="askVideo('v1')">🚀 Hemen İzle</button>
                 </div>
             </div>
-
         </div>
 
-        <!-- 2. VİDEO İZLEME SAYFASI -->
+        <!-- İZLEME SAYFASI -->
         <div id="sec-watch" class="page-sec">
-            <button type="button" class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</button>
+            <button class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</button>
             <h1 id="v-title" style="font-size: 18px; color: #fff;"></h1>
-            
             <div class="video-player-box">
                 <iframe id="v-iframe" src="" allowfullscreen></iframe>
             </div>
-
-            <div class="channel-profile-card" id="v-card" onclick="goCurrentProfile()">
-                <div class="channel-info-left">
-                    <div class="channel-avatar" id="v-avatar"></div>
-                    <div>
-                        <div class="channel-name" id="v-author"></div>
-                        <div style="font-size: 11px; color: #aaa;">Kanalı & Tüm Videoları Gör</div>
-                    </div>
-                </div>
-                <span class="action-btn">Kanala Git</span>
-            </div>
-
-            <div class="video-description-box">
-                <div class="desc-heading">📌 Video Özeti & Detaylar</div>
-                <div class="desc-text" id="v-desc"></div>
+            <div class="video-description-box" style="background:#1a1a1a; padding:15px; border-radius:8px; border:1px solid #2a2a2a;">
+                <div style="font-size:14px; font-weight:bold; color:#ff4757; margin-bottom:8px;">📌 Açıklama</div>
+                <div id="v-desc" style="font-size:13px; color:#ccc; line-height:1.5;"></div>
             </div>
         </div>
 
-        <!-- 3. KANAL PROFİL SAYFASI -->
+        <!-- PROFİL SAYFASI -->
         <div id="sec-profile" class="page-sec">
-            <button type="button" class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</button>
-            <div class="channel-header">
-                <div class="channel-banner" id="p-banner"></div>
-                <div class="channel-details">
-                    <div class="channel-main-avatar" id="p-avatar"></div>
-                    <div class="channel-main-title" id="p-title"></div>
-                </div>
+            <button class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</button>
+            <div style="background:#1a1a1a; padding:15px; border-radius:8px; border:1px solid #2a2a2a; text-align:center;">
+                <div id="p-title" style="font-size:18px; font-weight:bold; color:#fff; margin-top:10px;"></div>
             </div>
-            <div style="font-size: 15px; font-weight: bold; color: #ff4757; margin-top: 10px;">📹 Kanalın Videoları</div>
-            <div id="p-videos"></div>
+            <div id="p-videos" style="margin-top:10px;"></div>
         </div>
+    </div>
 
+    <!-- VİDEO 18+ MODAL OVERLAY -->
+    <div id="vid-modal-bg" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.95); z-index:999999; display:none; align-items:center; justify-content:center; padding:20px;">
+        <div style="background:#1a1a1a; border:1px solid #333; border-radius:14px; padding:30px 20px; width:100%; max-width:400px; text-align:center;">
+            <div style="font-size:22px; font-weight:bold; color:#ff4757; margin-bottom:12px;">⚠️ Yetişkin İçerik</div>
+            <div style="font-size:14px; color:#ccc; margin-bottom:25px;">Bu video yaş sınırı içerir. İzlemek için onay verin.</div>
+            <button class="modal-btn" onclick="confirmVideo()">18+ Büyüğüm, İzle</button>
+        </div>
     </div>
 
     <script>
-        var videos = {
-            v1: {
-                title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor",
-                url: "https://playmogo.com/e/1fvov3xdwsbq",
-                thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp",
-                author: "Sophie Rain",
-                avatar: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp",
-                desc: "Sophie Rain, bu özel çekimde kameralar karşısına tamamen cesur bir şekilde geçiyor. Üstsüz bir şekilde göğüslerini öne çıkaran hareketleriyle sınırları zorlayan Sophie Rain'in en çok konuşulan özel anları."
-            },
-            v2: {
-                title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...",
-                url: "https://playmogo.com/e/ehhg2pcksir6",
-                thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif",
-                author: "comatozze",
-                avatar: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif",
-                desc: "Arkadaşının kısa süreliğine markete gitmesini fırsat bilen ikilinin evde baş başa kaldığı tutkulu ve heyecan dolu gizli anlar."
-            }
+        var db = {
+            v1: { title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", url: "https://playmogo.com/e/1fvov3xdwsbq", thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", author: "Sophie Rain", desc: "Sophie Rain özel şov gösterisi." },
+            v2: { title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...", url: "https://playmogo.com/e/ehhg2pcksir6", thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", author: "comatozze", desc: "Evde baş başa kalan ikilinin gizli anları." }
         };
+        var selectedVid = "";
 
-        var currentAuthor = "";
-        var pendingVideoId = "";
-
-        function closeSiteAgeModal() {
-            var el = document.getElementById("site-age-modal");
-            if (el) el.style.display = "none";
+        function hideSiteModal() {
+            document.getElementById('site-age-modal').style.display = 'none';
         }
 
-        function requestVideo(id) {
-            pendingVideoId = id;
-            var vModal = document.getElementById("video-age-modal");
-            if (vModal) vModal.style.display = "flex";
+        function toggleMenu(open) {
+            document.getElementById('menu-overlay').style.display = open ? 'block' : 'none';
+            document.getElementById('menu-drawer').className = open ? 'open' : '';
         }
 
-        function closeVideoAgeModal() {
-            var vModal = document.getElementById("video-age-modal");
-            if (vModal) vModal.style.display = "none";
-            if (pendingVideoId) {
-                loadVideo(pendingVideoId);
-                pendingVideoId = "";
-            }
-        }
-
-        function openMenu() {
-            var overlay = document.getElementById("menu-overlay");
-            var drawer = document.getElementById("menu-drawer");
-            if (overlay && drawer) {
-                overlay.style.display = "block";
-                setTimeout(function() {
-                    drawer.classList.add("open");
-                }, 10);
-            }
-        }
-
-        function closeMenu() {
-            var overlay = document.getElementById("menu-overlay");
-            var drawer = document.getElementById("menu-drawer");
-            if (overlay && drawer) {
-                drawer.classList.remove("open");
-                setTimeout(function() {
-                    overlay.style.display = "none";
-                }, 300);
-            }
-        }
-
-        function filterCategory(catKey) {
-            closeMenu();
+        function filterCat(cat) {
+            toggleMenu(false);
             goHome();
+            var posts = document.querySelectorAll('.video-post');
+            var title = document.getElementById('cat-title');
+            if(cat === 'all') { title.innerHTML = "🔥 Tüm Videolar"; posts.forEach(p => p.style.display = 'block'); }
+            else if(cat === 'amateur') { title.innerHTML = "🏠 Amatör / Ev Yapımı"; posts.forEach(p => p.style.display = (p.dataset.cat === 'amateur') ? 'block' : 'none'); }
+            else if(cat === 'show') { title.innerHTML = "⭐ Özel Şov / Trend"; posts.forEach(p => p.style.display = (p.dataset.cat === 'show') ? 'block' : 'none'); }
+        }
 
-            var posts = document.querySelectorAll(".video-post");
-            var titleElem = document.getElementById("cat-title");
+        function askVideo(id) {
+            selectedVid = id;
+            document.getElementById('vid-modal-bg').style.display = 'flex';
+        }
 
-            if (catKey === "all") {
-                if (titleElem) titleElem.innerHTML = "🔥 Tüm Videolar";
-                for(var i = 0; i < posts.length; i++) { posts[i].style.display = "block"; }
-            } else if (catKey === "amateur") {
-                if (titleElem) titleElem.innerHTML = "🏠 Amatör / Ev Yapımı Videolar";
-                for(var i = 0; i < 
+        function confirmVideo() {
+            document.getElementById('vid-modal-bg').style.display = 'none';
+            if(selectedVid) {
+                var item = db[selectedVid];
+                document.getElementById('v-title').innerText = item.title;
+                document.getElementById('v-desc').innerText = item.desc;
+                document.getElementById('sec-feed').className = 'page-sec';
+                document.getElementById('sec-watch').className = 'page-sec active-sec';
+                document.getElementById('sec-profile').className = 'page-sec';
+                window.scrollTo(0,0);
+                setTimeout(function() { document.getElementById('v-iframe').src = item.url; }, 50);
+                selectedVid = "";
+            }
+        }
+
+        function goHome() {
+            document.getElementById('v-iframe').src = "";
+            document.getElementById('sec-feed').className = 'page-sec active-sec';
+            document.getElementById('sec-watch').className = 'page-sec';
+            document.getElementById('sec-profile').className = 'page-sec';
+            window.scrollTo(0,0);
+        }
+
+        function openProfile(author) {
+            var key = (author === 'Sophie Rain') ? 'v1' : 'v2';
+            var item = db[key];
+            document.getElementById('p-title').innerText = item.author + " Kanalı";
+            document.getElementById('p-videos').innerHTML = '<div class="video-post"><div class="video-thumbnail" style="background-image:url(\''+item.thumb+'\');" onclick="askVideo(\''+key+'\')"><div class="play-button"></div></div><div class="post-title" onclick="askVideo(\''+key+'\')">'+item.title+'</div><div class="post-meta"><span>📅 12 Eki</span><button class="action-btn" onclick="askVideo(\''+key+'\')">🚀 Hemen İzle</button></div></div>';
+            document.getElementById('sec-feed').className = 'page-sec';
+            document.getElementById('sec-watch').className = 'page-sec';
+            document.getElementById('sec-profile').className = 'page-sec active-sec';
+            window.scrollTo(0,0);
+        }
+    </script>
+</body>
+</html>

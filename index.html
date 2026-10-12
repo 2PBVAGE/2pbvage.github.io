@@ -28,7 +28,7 @@
         /* 18+ MODAL */
         #site-age-modal {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.98); z-index: 999999;
+            background: rgba(0, 0, 0, 0.98); z-index: 9999999;
             display: flex; align-items: center; justify-content: center; padding: 20px;
         }
         .modal-box {
@@ -38,7 +38,7 @@
         .modal-title { font-size: 22px; font-weight: bold; color: #ff4757; margin-bottom: 12px; font-family: 'Montserrat', sans-serif; }
         .modal-text { font-size: 14px; color: #ccc; line-height: 1.5; margin-bottom: 25px; }
         .modal-btn {
-            background-color: #ff4757; color: #fff; border: none; padding: 16px;
+            background-color: #ff4757; color: #fff; border: none; padding: 18px;
             border-radius: 25px; font-size: 16px; font-weight: bold; width: 100%; cursor: pointer;
             touch-action: manipulation;
         }
@@ -127,9 +127,9 @@
         <div id="sec-feed" class="page-sec active-sec">
             <div id="cat-title" style="font-size: 15px; font-weight: bold; color: #ff4757; margin-bottom: 5px;">🔥 Tüm Videolar</div>
 
-            <!-- VİDEO 3: Sophie Rain Piper Ve Aishah -->
+            <!-- VİDEO 3: Sophie Rain Ve Piper Aishah -->
             <div class="video-post" data-cat="group">
-                <div class="video-thumbnail" style="background-image: url('https://ibb.co/p6RkS0Yk.jpg');" onclick="playVideoDirect('v3')">
+                <div class="video-thumbnail" style="background-image: url('https://i.ibb.co/LXRB8b0n/image.jpg');" onclick="playVideoDirect('v3')">
                     <div class="play-button"></div>
                 </div>
                 <div class="post-title" onclick="playVideoDirect('v3')">Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor</div>
@@ -224,13 +224,16 @@
         var db = {
             v1: { title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", url: "https://playmogo.com/e/1fvov3xdwsbq", thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", desc: "Sophie Rain özel şov gösterisi." },
             v2: { title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...", url: "https://playmogo.com/e/ehhg2pcksir6", thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", author: "comatozze", avatar: "https://i.ibb.co/pB3ntggN/image.jpg", desc: "Evde baş başa kalan ikilinin gizli anları." },
-            v3: { title: "Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor", url: "https://playmogo.com/e/xmiqbgo3vrz4", thumb: "https://ibb.co/p6RkS0Yk.jpg", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", desc: "Sophie Rain, Piper ve Aishah ile birlikte kamera karşısına geçiyor! OnlyFans dünyasının popüler isimlerinin bir araya geldiği bu özel şovda unutulmaz anlar ve nefes kesen özel dakikalar izleyicileri bekliyor. [Kategoriler: Grup, Genç Özel Şov, OnlyFans]" }
+            v3: { title: "Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor", url: "https://playmogo.com/e/xmiqbgo3vrz4", thumb: "https://i.ibb.co/LXRB8b0n/image.jpg", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", desc: "Sophie Rain, Piper ve Aishah ile birlikte kamera karşısına geçiyor! OnlyFans dünyasının popüler isimlerinin bir araya geldiği bu özel şovda unutulmaz anlar ve nefes kesen özel dakikalar izleyicileri bekliyor. [Kategoriler: Grup, Genç Özel Şov, OnlyFans]" }
         };
         var activeAuthor = "";
 
         function closeModal() {
             var m = document.getElementById('site-age-modal');
-            if (m) m.style.display = 'none';
+            if (m) {
+                m.style.display = 'none';
+                m.remove();
+            }
         }
 
         function toggleMenu(open) {
@@ -295,4 +298,4 @@
             document.getElementById('p-avatar').style.backgroundImage = "url('" + item.avatar + "')";
             document.getElementById('p-banner').style.backgroundImage = "url('" + item.avatar + "')";
             
-            document.getElementById('p-videos').innerHTML = '<div class="video-post"><div class="video-thumbnail" style="background-image:url(\''+item.thumb+'\');" onclick="playVideoDirect(\''+key+'\')"><div class="play-button"></div></div><div class="post-title" onclick="playVideoDirect(\''+key+'\')">'+item.title+'</div><div class="post-meta"><div class="author-box" onclick="openP
+            document.getElementById('p-videos').innerHTML = '<div class="video-post"><div class="video-thumbnail" style="background-image:url(\''+item.thumb+'\');" onclick="playVideoDirect(\''+key+'\')"><div class="play-button"></div></div><div class="post-title" onclick="playVideoDirect(\''+key+'\')">'+it

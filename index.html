@@ -213,6 +213,11 @@
             document.getElementById('menu-drawer').className = open ? 'open' : '';
         }
 
+        function updateAllViewCounters() {
+            document.getElementById('feed-views-v1').innerText = db.v1.views;
+            document.getElementById('feed-views-v2').innerText = db.v2.views;
+        }
+
         function filterCat(cat) {
             toggleMenu(false);
             goHome();
@@ -234,14 +239,9 @@
                 var item = db[selectedVid];
                 activeAuthor = item.author;
 
-                // Görüntülenme sayısını 1 artır
+                // İzlenmeyi artır ve anında ana sayfadaki tüm sayaçları güncelle
                 item.views++;
-
-                // Ana sayfadaki izlenme rakamlarını güncelle
-                var feedViewsElem = document.getElementById('feed-views-' + selectedVid);
-                if (feedViewsElem) {
-                    feedViewsElem.innerText = item.views;
-                }
+                updateAllViewCounters();
 
                 document.getElementById('v-title').innerText = item.title;
                 document.getElementById('v-author').innerText = item.author;
@@ -261,6 +261,7 @@
 
         function goHome() {
             document.getElementById('v-iframe').src = "";
+            updateAllViewCounters(); // Ana sayfaya her dönüldüğünde rakamları kesin olarak güncelle
             document.getElementById('sec-feed').className = 'page-sec active-sec';
             document.getElementById('sec-watch').className = 'page-sec';
             document.getElementById('sec-profile').className = 'page-sec';

@@ -22,6 +22,56 @@
             align-items: center; 
         }
         
+        /* 18+ YAŞ DOĞRULAMA MODALI */
+        .age-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .age-modal-box {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 14px;
+            padding: 30px 20px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        .age-modal-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ff4757;
+            margin-bottom: 12px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .age-modal-text {
+            font-size: 14px;
+            color: #ccc;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+        .age-verify-btn {
+            background-color: #ff4757;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3);
+        }
+
         .header-bar { 
             width: 100%; 
             max-width: 600px; 
@@ -52,7 +102,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.7);
-            z-index: 999;
+            z-index: 200;
             display: none;
         }
         .menu-drawer {
@@ -62,7 +112,7 @@
             width: 260px;
             height: 100%;
             background-color: #1a1a1a;
-            z-index: 1000;
+            z-index: 201;
             transition: left 0.3s ease;
             display: flex;
             flex-direction: column;
@@ -88,7 +138,6 @@
             font-size: 20px;
             cursor: pointer;
             color: #aaa;
-            padding: 5px;
         }
         .category-list {
             list-style: none;
@@ -328,6 +377,24 @@
 </head>
 <body>
 
+    <!-- GİRİŞ 18+ YAŞ DOĞRULAMA MODALI -->
+    <div class="age-modal-overlay" id="site-age-modal">
+        <div class="age-modal-box">
+            <div class="age-modal-title">⚠️ Yaş Sınırı (18+)</div>
+            <div class="age-modal-text">Bu internet sitesi yetişkinlere özel içerikler barındırmaktadır. Devam etmek için 18 yaşından büyük olmalısınız.</div>
+            <button class="age-verify-btn" onclick="verifySiteAge()">18+ Yaşından Büyüğüm</button>
+        </div>
+    </div>
+
+    <!-- VİDEO İÇİN 18+ YAŞ DOĞRULAMA MODALI -->
+    <div class="age-modal-overlay" id="video-age-modal" style="display: none;">
+        <div class="age-modal-box">
+            <div class="age-modal-title">⚠️ Yetişkin İçerik Uyarısı</div>
+            <div class="age-modal-text">Seçtiğiniz video yaş sınırı içeren yetişkin materyalleri teşhir etmektedir. İzlemek için onay verin.</div>
+            <button class="age-verify-btn" onclick="verifyVideoAge()">18+ Büyüğüm, Videoyu Aç</button>
+        </div>
+    </div>
+
     <!-- KATEGORİ MENÜSÜ -->
     <div class="menu-overlay" id="menu-overlay" onclick="closeMenu()"></div>
     <div class="menu-drawer" id="menu-drawer">
@@ -344,9 +411,9 @@
 
     <!-- ÜST HEADER BAR -->
     <div class="header-bar">
-        <div style="font-size: 22px; cursor: pointer; padding: 5px;" onclick="openMenu()">☰</div>
+        <div style="font-size: 22px; cursor: pointer;" onclick="openMenu()">☰</div>
         <div class="header-logo" onclick="goHome()">2PBVAGE 🤍</div>
-        <div style="font-size: 18px; cursor: pointer; padding: 5px;">🔍</div>
+        <div style="font-size: 18px; cursor: pointer;">🔍</div>
     </div>
 
     <div class="content-container">
@@ -358,25 +425,25 @@
 
             <!-- VİDEO 2 (comatozze) -->
             <div class="video-post" data-cat="amateur">
-                <div class="video-thumbnail" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');" onclick="loadVideo('v2')">
+                <div class="video-thumbnail" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');" onclick="requestVideo('v2')">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title" onclick="loadVideo('v2')">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
+                <div class="post-title" onclick="requestVideo('v2')">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
                 <div class="post-meta">
                     <span>📅 12 Eki &bull; <strong style="color:#ff4757; cursor:pointer;" onclick="loadProfile('comatozze')">comatozze</strong></span>
-                    <a href="javascript:void(0)" class="action-btn" onclick="loadVideo('v2')">🚀 Hemen İzle</a>
+                    <a href="javascript:void(0)" class="action-btn" onclick="requestVideo('v2')">🚀 Hemen İzle</a>
                 </div>
             </div>
 
             <!-- VİDEO 1 (Sophie Rain) -->
             <div class="video-post" data-cat="show">
-                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" onclick="loadVideo('v1')">
+                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" onclick="requestVideo('v1')">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title" onclick="loadVideo('v1')">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
+                <div class="post-title" onclick="requestVideo('v1')">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
                 <div class="post-meta">
                     <span>📅 12 Eki &bull; <strong style="color:#ff4757; cursor:pointer;" onclick="loadProfile('Sophie Rain')">Sophie Rain</strong></span>
-                    <a href="javascript:void(0)" class="action-btn" onclick="loadVideo('v1')">🚀 Hemen İzle</a>
+                    <a href="javascript:void(0)" class="action-btn" onclick="requestVideo('v1')">🚀 Hemen İzle</a>
                 </div>
             </div>
 
@@ -445,117 +512,64 @@
         };
 
         var currentAuthor = "";
+        var pendingVideoId = "";
 
-        function openMenu() {
-            var overlay = document.getElementById("menu-overlay");
-            var drawer = document.getElementById("menu-drawer");
-            if (overlay && drawer) {
-                overlay.style.display = "block";
-                setTimeout(function() {
-                    drawer.classList.add("open");
-                }, 10);
+        // 1. Siteye Giriş Yaş Onayı
+        function verifySiteAge() {
+            document.getElementById('site-age-modal').style.display = 'none';
+        }
+
+        // 2. Video Tıklama (18+ Kontrolü)
+        function requestVideo(id) {
+            pendingVideoId = id;
+            document.getElementById('video-age-modal').style.display = 'flex';
+        }
+
+        // Video Yaş Onayı Onaylandığında
+        function verifyVideoAge() {
+            document.getElementById('video-age-modal').style.display = 'none';
+            if (pendingVideoId) {
+                loadVideo(pendingVideoId);
+                pendingVideoId = "";
             }
         }
 
+        function openMenu() {
+            document.getElementById('menu-overlay').style.display = 'block';
+            setTimeout(function() {
+                document.getElementById('menu-drawer').classList.add('open');
+            }, 10);
+        }
+
         function closeMenu() {
-            var overlay = document.getElementById("menu-overlay");
-            var drawer = document.getElementById("menu-drawer");
-            if (overlay && drawer) {
-                drawer.classList.remove("open");
-                setTimeout(function() {
-                    overlay.style.display = "none";
-                }, 300);
-            }
+            document.getElementById('menu-drawer').classList.remove('open');
+            setTimeout(function() {
+                document.getElementById('menu-overlay').style.display = 'none';
+            }, 300);
         }
 
         function filterCategory(catKey) {
             closeMenu();
             goHome();
 
-            var posts = document.querySelectorAll(".video-post");
-            var titleElem = document.getElementById("cat-title");
+            var posts = document.querySelectorAll('.video-post');
+            var titleElem = document.getElementById('cat-title');
 
-            if (catKey === "all") {
-                if (titleElem) titleElem.innerHTML = "🔥 Tüm Videolar";
-                for(var i = 0; i < posts.length; i++) {
-                    posts[i].style.display = "block";
-                }
-            } else if (catKey === "amateur") {
-                if (titleElem) titleElem.innerHTML = "🏠 Amatör / Ev Yapımı Videolar";
-                for(var i = 0; i < posts.length; i++) {
-                    if (posts[i].getAttribute("data-cat") === "amateur") {
-                        posts[i].style.display = "block";
+            if (catKey === 'all') {
+                titleElem.innerHTML = "🔥 Tüm Videolar";
+                posts.forEach(function(post) { post.style.display = 'block'; });
+            } else if (catKey === 'amateur') {
+                titleElem.innerHTML = "🏠 Amatör / Ev Yapımı Videolar";
+                posts.forEach(function(post) {
+                    if (post.getAttribute('data-cat') === 'amateur') {
+                        post.style.display = 'block';
                     } else {
-                        posts[i].style.display = "none";
+                        post.style.display = 'none';
                     }
-                }
-            } else if (catKey === "show") {
-                if (titleElem) titleElem.innerHTML = "⭐ Özel Şov / Trend Videolar";
-                for(var i = 0; i < posts.length; i++) {
-                    if (posts[i].getAttribute("data-cat") === "show") {
-                        posts[i].style.display = "block";
-                    } else {
-                        posts[i].style.display = "none";
-                    }
-                }
-            }
-        }
-
-        function showSection(id) {
-            document.getElementById("sec-feed").className = "page-sec";
-            document.getElementById("sec-watch").className = "page-sec";
-            document.getElementById("sec-profile").className = "page-sec";
-            
-            document.getElementById(id).className = "page-sec active-sec";
-            window.scrollTo(0, 0);
-        }
-
-        function loadVideo(id) {
-            var item = videos[id];
-            if (!item) return;
-
-            currentAuthor = item.author;
-            document.getElementById("v-title").innerText = item.title;
-            document.getElementById("v-author").innerText = item.author;
-            document.getElementById("v-avatar").style.backgroundImage = "url(" + item.avatar + ")";
-            document.getElementById("v-desc").innerText = item.desc;
-            
-            showSection("sec-watch");
-
-            setTimeout(function() {
-                document.getElementById("v-iframe").src = item.url;
-            }, 50);
-        }
-
-        function loadProfile(authorName) {
-            var item = (authorName === "Sophie Rain") ? videos.v1 : videos.v2;
-            var videoKey = (authorName === "Sophie Rain") ? "v1" : "v2";
-
-            document.getElementById("v-iframe").src = "";
-            document.getElementById("p-title").innerText = item.author;
-            document.getElementById("p-avatar").style.backgroundImage = "url(" + item.avatar + ")";
-            document.getElementById("p-banner").style.backgroundImage = "url(" + item.avatar + ")";
-
-            var htmlContent = '<div class="video-post">' +
-                '<div class="video-thumbnail" style="background-image: url(' + item.thumb + ');" onclick="loadVideo(\'' + videoKey + '\')">' +
-                    '<div class="play-button"></div>' +
-                '</div>' +
-                '<div class="post-title" onclick="loadVideo(\'' + videoKey + '\')">' + item.title + '</div>' +
-                '<div class="post-meta">' +
-                    '<span>📅 12 Eki</span>' +
-                    '<a href="javascript:void(0)" class="action-btn" onclick="loadVideo(\'' + videoKey + '\')">🚀 Hemen İzle</a>' +
-                '</div>' +
-            '</div>';
-
-            document.getElementById("p-videos").innerHTML = htmlContent;
-            showSection("sec-profile");
-        }
-
-        function goCurrentProfile() {
-            if (currentAuthor) {
-                loadProfile(currentAuthor);
-            }
-        }
-
-        function goHome() {
-            document.getElementById("v-ifra
+                });
+            } else if (catKey === 'show') {
+                titleElem.innerHTML = "⭐ Özel Şov / Trend Videolar";
+                posts.forEach(function(post) {
+                    if (post.getAttribute('data-cat') === 'show') {
+                        post.style.display = 'block';
+             

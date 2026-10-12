@@ -208,7 +208,6 @@
             text-decoration: none;
             font-size: 12px;
             user-select: none;
-            z-index: 10;
         }
 
         .back-btn { 
@@ -330,23 +329,23 @@
 <body>
 
     <!-- KATEGORİ MENÜSÜ -->
-    <div class="menu-overlay" id="menu-overlay"></div>
+    <div class="menu-overlay" id="menu-overlay" onclick="closeMenu()"></div>
     <div class="menu-drawer" id="menu-drawer">
         <div class="menu-header">
             <span class="menu-title">📁 Kategoriler</span>
-            <span class="menu-close" id="btn-close-menu">✕</span>
+            <span class="menu-close" onclick="closeMenu()">✕</span>
         </div>
         <ul class="category-list">
-            <li class="category-item active" data-cat-filter="all">🔥 Tüm Videolar</li>
-            <li class="category-item" data-cat-filter="amateur">🏠 Amatör / Ev Yapımı</li>
-            <li class="category-item" data-cat-filter="show">⭐ Özel Şov / Trend</li>
+            <li class="category-item active" onclick="filterCategory('all')">🔥 Tüm Videolar</li>
+            <li class="category-item" onclick="filterCategory('amateur')">🏠 Amatör / Ev Yapımı</li>
+            <li class="category-item" onclick="filterCategory('show')">⭐ Özel Şov / Trend</li>
         </ul>
     </div>
 
     <!-- ÜST HEADER BAR -->
     <div class="header-bar">
-        <div style="font-size: 22px; cursor: pointer; padding: 5px;" id="btn-open-menu">☰</div>
-        <div class="header-logo" id="btn-home">2PBVAGE 🤍</div>
+        <div style="font-size: 22px; cursor: pointer; padding: 5px;" onclick="openMenu()">☰</div>
+        <div class="header-logo" onclick="goHome()">2PBVAGE 🤍</div>
         <div style="font-size: 18px; cursor: pointer; padding: 5px;">🔍</div>
     </div>
 
@@ -359,25 +358,25 @@
 
             <!-- VİDEO 2 (comatozze) -->
             <div class="video-post" data-cat="amateur">
-                <div class="video-thumbnail" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');" data-load-vid="v2">
+                <div class="video-thumbnail" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');" onclick="loadVideo('v2')">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title" data-load-vid="v2">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
+                <div class="post-title" onclick="loadVideo('v2')">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
                 <div class="post-meta">
-                    <span>📅 12 Eki &bull; <strong style="color:#ff4757; cursor:pointer;" data-profile-author="comatozze">comatozze</strong></span>
-                    <a href="javascript:void(0)" class="action-btn" data-load-vid="v2">🚀 Hemen İzle</a>
+                    <span>📅 12 Eki &bull; <strong style="color:#ff4757; cursor:pointer;" onclick="loadProfile('comatozze')">comatozze</strong></span>
+                    <a href="javascript:void(0)" class="action-btn" onclick="loadVideo('v2')">🚀 Hemen İzle</a>
                 </div>
             </div>
 
             <!-- VİDEO 1 (Sophie Rain) -->
             <div class="video-post" data-cat="show">
-                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" data-load-vid="v1">
+                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" onclick="loadVideo('v1')">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title" data-load-vid="v1">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
+                <div class="post-title" onclick="loadVideo('v1')">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
                 <div class="post-meta">
-                    <span>📅 12 Eki &bull; <strong style="color:#ff4757; cursor:pointer;" data-profile-author="Sophie Rain">Sophie Rain</strong></span>
-                    <a href="javascript:void(0)" class="action-btn" data-load-vid="v1">🚀 Hemen İzle</a>
+                    <span>📅 12 Eki &bull; <strong style="color:#ff4757; cursor:pointer;" onclick="loadProfile('Sophie Rain')">Sophie Rain</strong></span>
+                    <a href="javascript:void(0)" class="action-btn" onclick="loadVideo('v1')">🚀 Hemen İzle</a>
                 </div>
             </div>
 
@@ -385,14 +384,14 @@
 
         <!-- 2. VİDEO İZLEME SAYFASI -->
         <div id="sec-watch" class="page-sec">
-            <a href="javascript:void(0)" class="back-btn" id="btn-back-home">⬅ Ana Sayfaya Dön</a>
+            <a href="javascript:void(0)" class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</a>
             <h1 id="v-title" style="font-size: 18px; color: #fff;"></h1>
             
             <div class="video-player-box">
                 <iframe id="v-iframe" src="" allowfullscreen></iframe>
             </div>
 
-            <div class="channel-profile-card" id="v-card">
+            <div class="channel-profile-card" id="v-card" onclick="goCurrentProfile()">
                 <div class="channel-info-left">
                     <div class="channel-avatar" id="v-avatar"></div>
                     <div>
@@ -411,7 +410,7 @@
 
         <!-- 3. KANAL PROFİL SAYFASI -->
         <div id="sec-profile" class="page-sec">
-            <a href="javascript:void(0)" class="back-btn" id="btn-back-home-profile">⬅ Ana Sayfaya Dön</a>
+            <a href="javascript:void(0)" class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</a>
             <div class="channel-header">
                 <div class="channel-banner" id="p-banner"></div>
                 <div class="channel-details">
@@ -538,13 +537,13 @@
             document.getElementById("p-banner").style.backgroundImage = "url(" + item.avatar + ")";
 
             var htmlContent = '<div class="video-post">' +
-                '<div class="video-thumbnail" style="background-image: url(' + item.thumb + ');" data-load-vid="' + videoKey + '">' +
+                '<div class="video-thumbnail" style="background-image: url(' + item.thumb + ');" onclick="loadVideo(\'' + videoKey + '\')">' +
                     '<div class="play-button"></div>' +
                 '</div>' +
-                '<div class="post-title" data-load-vid="' + videoKey + '">' + item.title + '</div>' +
+                '<div class="post-title" onclick="loadVideo(\'' + videoKey + '\')">' + item.title + '</div>' +
                 '<div class="post-meta">' +
                     '<span>📅 12 Eki</span>' +
-                    '<a href="javascript:void(0)" class="action-btn" data-load-vid="' + videoKey + '">🚀 Hemen İzle</a>' +
+                    '<a href="javascript:void(0)" class="action-btn" onclick="loadVideo(\'' + videoKey + '\')">🚀 Hemen İzle</a>' +
                 '</div>' +
             '</div>';
 
@@ -559,9 +558,4 @@
         }
 
         function goHome() {
-            document.getElementById("v-iframe").src = "";
-            showSection("sec-feed");
-        }
-
-        // Event Listener Bağlantıları (Mobilde %100 Çalışması İçin)
-        
+            document.getElementById("v-ifra

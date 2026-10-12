@@ -45,6 +45,11 @@
         
         .post-title { padding: 14px 15px 8px 15px; font-size: 15px; font-weight: bold; color: #fff; cursor: pointer; line-height: 1.4; }
         .post-meta { padding: 0 15px 15px 15px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #aaa; }
+        
+        /* KANAL BİLGİSİ & AVATAR (Ana Sayfa) */
+        .author-box { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .author-avatar-small { width: 26px; height: 26px; border-radius: 50%; background-size: cover; background-position: center; border: 1.5px solid #ff4757; background-color: #222; }
+
         .action-btn { background-color: #ff4757; color: #fff !important; padding: 10px 18px; border-radius: 20px; font-weight: bold; border: none; cursor: pointer; text-decoration: none; font-size: 12px; }
 
         .video-player-box { position: relative; width: 100%; padding-bottom: 56.25%; background-color: #000; border-radius: 6px; overflow: hidden; }
@@ -124,7 +129,10 @@
                 </div>
                 <div class="post-title" onclick="askVideo('v2')">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
                 <div class="post-meta">
-                    <span>👁️ <span id="feed-views-v2">0</span> İzlenme &bull; <strong style="color:#ff4757; cursor:pointer;" onclick="openProfile('comatozze')">comatozze</strong></span>
+                    <div class="author-box" onclick="openProfile('comatozze')">
+                        <div class="author-avatar-small" style="background-image: url('https://ibb.co/pB3ntggN');"></div>
+                        <strong style="color:#ff4757;">comatozze</strong>
+                    </div>
                     <button class="action-btn" onclick="askVideo('v2')">🚀 Hemen İzle</button>
                 </div>
             </div>
@@ -136,7 +144,10 @@
                 </div>
                 <div class="post-title" onclick="askVideo('v1')">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
                 <div class="post-meta">
-                    <span>👁️ <span id="feed-views-v1">0</span> İzlenme &bull; <strong style="color:#ff4757; cursor:pointer;" onclick="openProfile('Sophie Rain')">Sophie Rain</strong></span>
+                    <div class="author-box" onclick="openProfile('Sophie Rain')">
+                        <div class="author-avatar-small" style="background-image: url('https://ibb.co/DPFjgyLy');"></div>
+                        <strong style="color:#ff4757;">Sophie Rain</strong>
+                    </div>
                     <button class="action-btn" onclick="askVideo('v1')">🚀 Hemen İzle</button>
                 </div>
             </div>
@@ -150,8 +161,6 @@
             <div class="video-player-box">
                 <iframe id="v-iframe" src="" allowfullscreen></iframe>
             </div>
-
-            <div style="font-size: 13px; color: #aaa; margin-top: -5px;" id="v-views"></div>
 
             <!-- KANAL KARTI -->
             <div class="channel-card" onclick="goCurrentAuthorProfile()">
@@ -198,8 +207,8 @@
 
     <script>
         var db = {
-            v1: { title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", url: "https://playmogo.com/e/1fvov3xdwsbq", thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", author: "Sophie Rain", avatar: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", views: 0, desc: "Sophie Rain özel şov gösterisi." },
-            v2: { title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...", url: "https://playmogo.com/e/ehhg2pcksir6", thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", author: "comatozze", avatar: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", views: 0, desc: "Evde baş başa kalan ikilinin gizli anları." }
+            v1: { title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", url: "https://playmogo.com/e/1fvov3xdwsbq", thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", author: "Sophie Rain", avatar: "https://ibb.co/DPFjgyLy", desc: "Sophie Rain özel şov gösterisi." },
+            v2: { title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...", url: "https://playmogo.com/e/ehhg2pcksir6", thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", author: "comatozze", avatar: "https://ibb.co/pB3ntggN", desc: "Evde baş başa kalan ikilinin gizli anları." }
         };
         var selectedVid = "";
         var activeAuthor = "";
@@ -211,11 +220,6 @@
         function toggleMenu(open) {
             document.getElementById('menu-overlay').style.display = open ? 'block' : 'none';
             document.getElementById('menu-drawer').className = open ? 'open' : '';
-        }
-
-        function updateAllViewCounters() {
-            document.getElementById('feed-views-v1').innerText = db.v1.views;
-            document.getElementById('feed-views-v2').innerText = db.v2.views;
         }
 
         function filterCat(cat) {
@@ -239,13 +243,8 @@
                 var item = db[selectedVid];
                 activeAuthor = item.author;
 
-                // İzlenmeyi artır ve anında ana sayfadaki tüm sayaçları güncelle
-                item.views++;
-                updateAllViewCounters();
-
                 document.getElementById('v-title').innerText = item.title;
                 document.getElementById('v-author').innerText = item.author;
-                document.getElementById('v-views').innerText = "👁️ " + item.views + " İzlenme";
                 document.getElementById('v-avatar').style.backgroundImage = "url('" + item.avatar + "')";
                 document.getElementById('v-desc').innerText = item.desc;
 
@@ -261,7 +260,6 @@
 
         function goHome() {
             document.getElementById('v-iframe').src = "";
-            updateAllViewCounters(); // Ana sayfaya her dönüldüğünde rakamları kesin olarak güncelle
             document.getElementById('sec-feed').className = 'page-sec active-sec';
             document.getElementById('sec-watch').className = 'page-sec';
             document.getElementById('sec-profile').className = 'page-sec';
@@ -277,7 +275,7 @@
             document.getElementById('p-avatar').style.backgroundImage = "url('" + item.avatar + "')";
             document.getElementById('p-banner').style.backgroundImage = "url('" + item.avatar + "')";
             
-            document.getElementById('p-videos').innerHTML = '<div class="video-post"><div class="video-thumbnail" style="background-image:url(\''+item.thumb+'\');" onclick="askVideo(\''+key+'\')"><div class="play-button"></div></div><div class="post-title" onclick="askVideo(\''+key+'\')">'+item.title+'</div><div class="post-meta"><span>👁️ '+item.views+' İzlenme</span><button class="action-btn" onclick="askVideo(\''+key+'\')">🚀 Hemen İzle</button></div></div>';
+            document.getElementById('p-videos').innerHTML = '<div class="video-post"><div class="video-thumbnail" style="background-image:url(\''+item.thumb+'\');" onclick="askVideo(\''+key+'\')"><div class="play-button"></div></div><div class="post-title" onclick="askVideo(\''+key+'\')">'+item.title+'</div><div class="post-meta"><div class="author-box" onclick="openProfile(\''+item.author+'\')"><div class="author-avatar-small" style="background-image:url(\''+item.avatar+'\');"></div><strong style="color:#ff4757;">'+item.author+'</strong></div><button class="action-btn" onclick="askVideo(\''+key+'\')">🚀 Hemen İzle</button></div></div>';
             
             document.getElementById('sec-feed').className = 'page-sec';
             document.getElementById('sec-watch').className = 'page-sec';

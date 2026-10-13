@@ -224,7 +224,8 @@
         }
 
         function goHome() {
-            document.getElementById('v-iframe').src = "";
+            var iframe = document.getElementById('v-iframe');
+            if (iframe) iframe.src = "";
             document.getElementById('sec-feed').className = 'page-sec active-sec';
             document.getElementById('sec-watch').className = 'page-sec';
             document.getElementById('sec-profile').className = 'page-sec';
@@ -294,4 +295,4 @@
                     var v = db[key];
                     if (v.author.toLowerCase() === targetName || v.title.toLowerCase().indexOf(targetName) !== -1) {
                         if (!avatarUrl) { avatarUrl = v.avatar; }
-                        htmlVideos += '<div class="video-post"><div class="video-thumbnail" style="background-image:url(\''+v.thumb+'\');" onclick="requestVideo(\''+key+'\')"><div class="play-button"></div></div><div class="post-title" onclick="requestVideo(\''+key+'\')">'+v.title+'</div><div class="post-meta"><div class="author-box" onclick="openProfile(\''+v.author+'\')"><div class="author-avatar-small" style="background-image:url(\''+v.avatar+'\');"></div><strong style="color:#ff4757;">'+v.author+' ✓</strong></div><button class="action-btn" onclick="requestVideo(\''+key+'\')">🚀 He
+                        htmlVideos += '<div class="video-post"><div class="video-thumbnail" style="background-image:url(\''+v.thumb+'\');" onclick="requestVideo(\''+key+'\')"><div class="play-button"></div></div><div class="post-title" onclick="requestVideo(\''+key+'\')">'+v.title+'</div><div class="post-meta"><div class="author-box" onclick="openProfile(\''+v.author+'\')"><div class="author-avatar-small" style="background-image:url(\''+v.avatar+'\');"></div><strong style="color:#ff4757;">'+v.author+' ✓</strong></div><button class="action-b

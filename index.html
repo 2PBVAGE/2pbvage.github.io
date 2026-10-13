@@ -262,7 +262,7 @@
                     var v = db[key];
                     if (v.author.toLowerCase() === targetName || v.title.toLowerCase().indexOf(targetName) !== -1) {
                         if (!avatarUrl) { avatarUrl = v.avatar; }
-                        htmlVideos += '<div class="video-post" data-cat="'+(key === 'v4' ? 'sub' : 'show')+'"><div class="v-thumbnail" style="background-image:url(\''+v.thumb+'\');" onclick="playVideo(\''+key+'\')"><div class="play-button"></div></div><div class="post-title" onclick="playVideo(\''+key+'\')">'+v.title+'</div><div class="post-meta"><div class="author-box" onclick="openProfile(\''+v.author+'\')"><div class="author-avatar-small" style="background-image:url(\''+v.avatar+'\');"></div><strong style="color:#ff4757;">'+v.author+' ✓</strong></div><button class="action-btn" onclick="playVideo(\''+key+'\')">🚀 Hemen İzle</button></div></div>';
+                        htmlVideos += '<div class="video-post" data-cat="'+(key === 'v4' ? 'sub' : 'show')+'"><div class="video-thumbnail" style="background-image:url(\''+v.thumb+'\');" onclick="playVideo(\''+key+'\')"><div class="play-button"></div></div><div class="post-title" onclick="playVideo(\''+key+'\')">'+v.title+'</div><div class="post-meta"><div class="author-box" onclick="openProfile(\''+v.author+'\')"><div class="author-avatar-small" style="background-image:url(\''+v.avatar+'\');"></div><strong style="color:#ff4757;">'+v.author+' ✓</strong></div><button class="action-btn" onclick="playVideo(\''+key+'\')">🚀 Hemen İzle</button></div></div>';
                     }
                 }
             }
@@ -282,7 +282,6 @@
             window.scrollTo(0,0);
         }
 
-        // Profil içerisindeki kanal kartı tıklamasını bağla
         document.addEventListener("DOMContentLoaded", function() {
             var card = document.getElementById('watch-channel-card');
             if(card) {

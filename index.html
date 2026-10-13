@@ -274,39 +274,24 @@
             var posts = document.querySelectorAll('.video-post');
             var title = document.getElementById('cat-title');
             
-            if(cat === 'all') { 
-                title.innerHTML = "🔥 Tüm Videolar"; 
-                posts.forEach(function(p) { p.style.display = 'block'; }); 
-            }
-            else if(cat === 'sub') { 
-                title.innerHTML = "🇹🇷 Türkçe Altyazılı"; 
-                posts.forEach(function(p) { 
-                    p.style.display = (p.getAttribute('data-cat') === 'sub') ? 'block' : 'none'; 
-                }); 
-            }
-            else if(cat === 'fullhd') { 
-                title.innerHTML = "🎬 Full HD Videolar"; 
-                posts.forEach(function(p) { 
-                    p.style.display = (p.getAttribute('data-cat') === 'fullhd') ? 'block' : 'none'; 
-                }); 
-            }
-            else if(cat === 'amateur') { 
-                title.innerHTML = "🏠 Amatör / Ev Yapımı"; 
-                posts.forEach(function(p) { 
-                    p.style.display = (p.getAttribute('data-cat') === 'amateur') ? 'block' : 'none'; 
-                }); 
-            }
-            else if(cat === 'show') { 
-                title.innerHTML = "⭐ Özel Şov / Trend"; 
-                posts.forEach(function(p) { 
-                    p.style.display = (p.getAttribute('data-cat') === 'show') ? 'block' : 'none'; 
-                }); 
-            }
-            else if(cat === 'group') { 
-                title.innerHTML = "👥 Grup / Özel Şov"; 
-                posts.forEach(function(p) { 
-                    p.style.display = (p.getAttribute('data-cat') === 'group') ? 'block' : 'none'; 
-                }); 
+            for (var i = 0; i < posts.length; i++) {
+                var p = posts[i];
+                if (cat === 'all') {
+                    title.innerHTML = "🔥 Tüm Videolar";
+                    p.style.display = 'block';
+                } else {
+                    if (cat === 'sub') title.innerHTML = "🇹🇷 Türkçe Altyazılı";
+                    else if (cat === 'fullhd') title.innerHTML = "🎬 Full HD Videolar";
+                    else if (cat === 'amateur') title.innerHTML = "🏠 Amatör / Ev Yapımı";
+                    else if (cat === 'show') title.innerHTML = "⭐ Özel Şov / Trend";
+                    else if (cat === 'group') title.innerHTML = "👥 Grup / Özel Şov";
+
+                    if (p.getAttribute('data-cat') === cat) {
+                        p.style.display = 'block';
+                    } else {
+                        p.style.display = 'none';
+                    }
+                }
             }
         }
 
@@ -320,4 +305,7 @@
                     var v = db[key];
                     if (v.author.toLowerCase() === targetName || v.title.toLowerCase().indexOf(targetName) !== -1) {
                         if (!avatarUrl) { avatarUrl = v.avatar; }
-                        htmlVideos += '<div class="video-post"><div class="
+                        htmlVideos += '<div class="video-post" data-cat="'+(key === 'v4' ? 'sub' : 'show')+'"><div class="video-thumbnail" style="background-image:url(\''+v.thumb+'\');" onclick="requestVideo(\''+key+'\')"><div class="play-button"></div></div><div class="post-title" onclick="requestVideo(\''+key+'\')">'+v.title+'</div><div class="post-meta"><div class="author-box" onclick="openProfile(\''+v.author+'\')"><div class="author-avatar-small" style="background-image:url(\''+v.avatar+'\');"></div><strong style="color:#ff4757;">'+v.author+' ✓</strong></div><button class="action-btn" onclick="requestVideo(\''+key+'\')">🚀 Hemen İzle</button></div></div>';
+                    }
+                }
+  

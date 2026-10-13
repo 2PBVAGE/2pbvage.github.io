@@ -101,7 +101,7 @@
         <div id="sec-feed" class="page-sec active-sec">
             <div id="cat-title" style="font-size: 15px; font-weight: bold; color: #ff4757; margin-bottom: 5px;">🔥 Tüm Videolar</div>
 
-            <!-- VİDEO 4 (SWEETIE FOX - TÜRKÇE ALTYAZILI) -->
+            <!-- VİDEO 4 (SWEETIE FOX) -->
             <div class="video-post" data-cat="sub">
                 <div class="video-thumbnail" style="background-image: url('https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg');" onclick="requestVideo('v4')">
                     <div class="play-button"></div>
@@ -278,11 +278,36 @@
                 title.innerHTML = "🔥 Tüm Videolar"; 
                 posts.forEach(function(p) { p.style.display = 'block'; }); 
             }
-            else if(cat === 'sub') { title.innerHTML = "🇹🇷 Türkçe Altyazılı"; posts.forEach(function(p) { p.style.display = (p.dataset.cat === 'sub') ? 'block' : 'none'; }); }
-            else if(cat === 'fullhd') { title.innerHTML = "🎬 Full HD Videolar"; posts.forEach(function(p) { p.style.display = (p.dataset.cat === 'fullhd') ? 'block' : 'none'; }); }
-            else if(cat === 'amateur') { title.innerHTML = "🏠 Amatör / Ev Yapımı"; posts.forEach(function(p) { p.style.display = (p.dataset.cat === 'amateur') ? 'block' : 'none'; }); }
-            else if(cat === 'show') { title.innerHTML = "⭐ Özel Şov / Trend"; posts.forEach(function(p) { p.style.display = (p.dataset.cat === 'show') ? 'block' : 'none'; }); }
-            else if(cat === 'group') { title.innerHTML = "👥 Grup / Özel Şov"; posts.forEach(function(p) { p.style.display = (p.dataset.cat === 'group') ? 'block' : 'none'; }); }
+            else if(cat === 'sub') { 
+                title.innerHTML = "🇹🇷 Türkçe Altyazılı"; 
+                posts.forEach(function(p) { 
+                    p.style.display = (p.getAttribute('data-cat') === 'sub') ? 'block' : 'none'; 
+                }); 
+            }
+            else if(cat === 'fullhd') { 
+                title.innerHTML = "🎬 Full HD Videolar"; 
+                posts.forEach(function(p) { 
+                    p.style.display = (p.getAttribute('data-cat') === 'fullhd') ? 'block' : 'none'; 
+                }); 
+            }
+            else if(cat === 'amateur') { 
+                title.innerHTML = "🏠 Amatör / Ev Yapımı"; 
+                posts.forEach(function(p) { 
+                    p.style.display = (p.getAttribute('data-cat') === 'amateur') ? 'block' : 'none'; 
+                }); 
+            }
+            else if(cat === 'show') { 
+                title.innerHTML = "⭐ Özel Şov / Trend"; 
+                posts.forEach(function(p) { 
+                    p.style.display = (p.getAttribute('data-cat') === 'show') ? 'block' : 'none'; 
+                }); 
+            }
+            else if(cat === 'group') { 
+                title.innerHTML = "👥 Grup / Özel Şov"; 
+                posts.forEach(function(p) { 
+                    p.style.display = (p.getAttribute('data-cat') === 'group') ? 'block' : 'none'; 
+                }); 
+            }
         }
 
         function openProfile(author) {
@@ -295,4 +320,4 @@
                     var v = db[key];
                     if (v.author.toLowerCase() === targetName || v.title.toLowerCase().indexOf(targetName) !== -1) {
                         if (!avatarUrl) { avatarUrl = v.avatar; }
-                        htmlVideos += '<div class="video-post"><div class="video-thumbnail" style="background-image:url(\''+v.thumb+'\');" onclick="requestVideo(\''+key+'\')"><div class="play-button"></div></div><div class="post-title" onclick="requestVideo(\''+key+'\')">'+v.title+'</div><div class="post-meta"><div class="author-box" onclick="openProfile(\''+v.author+'\')"><div class="author-avatar-small" style="background-image:url(\''+v.avatar+'\');"></div><strong style="color:#ff4757;">'+v.author+' ✓</strong></div><button class="action-b
+                        htmlVideos += '<div class="video-post"><div class="

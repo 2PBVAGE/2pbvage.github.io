@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta name="google" content="notranslate">
     <title>2PBVAGE 🤍</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -14,7 +13,7 @@
         .header-bar { width: 100%; max-width: 600px; background-color: #000; display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 1000; }
         .header-left { display: flex; align-items: center; gap: 10px; }
         .header-logo { color: #fff; font-size: 19px; font-weight: 800; cursor: pointer; }
-        .menu-icon-btn { font-size: 24px; cursor: pointer; padding: 5px; color: #fff; }
+        .menu-icon-btn { font-size: 26px; cursor: pointer; padding: 6px; color: #fff; background: none; border: none; }
         
         .user-auth-box { display: flex; align-items: center; gap: 10px; }
         .auth-btn { background-color: #ff4757; color: #fff; border: none; padding: 8px 14px; border-radius: 15px; font-size: 12px; font-weight: bold; cursor: pointer; }
@@ -76,14 +75,14 @@
     <!-- ÜYE OL / GİRİŞ YAP MODAL -->
     <div id="auth-modal" class="modal-overlay">
         <div class="auth-modal-card">
-            <span class="auth-close-btn" id="close-modal-x">✕</span>
+            <span class="auth-close-btn" onclick="toggleAuthModal(false)">✕</span>
             <div class="auth-tabs">
-                <div id="tab-login" class="auth-tab active">Giriş Yap</div>
-                <div id="tab-register" class="auth-tab">Kayıt Ol</div>
+                <div id="tab-login" class="auth-tab active" onclick="switchAuthTab('login')">Giriş Yap</div>
+                <div id="tab-register" class="auth-tab" onclick="switchAuthTab('register')">Kayıt Ol</div>
             </div>
 
             <!-- GİRİŞ FORMU -->
-            <form id="form-login" class="auth-form">
+            <form id="form-login" class="auth-form" onsubmit="handleLogin(event)">
                 <label style="font-size:12px; color:#aaa;">E-posta Adresi</label>
                 <input type="email" id="login-email" class="auth-input" placeholder="ornek@gmail.com" required>
                 <label style="font-size:12px; color:#aaa;">Şifre</label>
@@ -92,7 +91,7 @@
             </form>
 
             <!-- KAYIT FORMU -->
-            <form id="form-register" class="auth-form" style="display:none;">
+            <form id="form-register" class="auth-form" style="display:none;" onsubmit="handleRegister(event)">
                 <label style="font-size:12px; color:#aaa;">E-posta Adresi</label>
                 <input type="email" id="reg-email" class="auth-input" placeholder="ornek@gmail.com" required>
                 <label style="font-size:12px; color:#aaa;">Şifre Oluştur</label>
@@ -103,35 +102,35 @@
     </div>
 
     <!-- KATEGORİ MENÜSÜ -->
-    <div id="menu-overlay"></div>
+    <div id="menu-overlay" onclick="toggleMenu(false)"></div>
     <div id="menu-drawer">
         <div style="padding: 18px; background: #000; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222;">
             <span style="color:#ff4757; font-weight:bold;">📁 Kategoriler</span>
-            <span style="color:#aaa; font-size:22px; cursor:pointer;" id="close-menu-x">✕</span>
+            <span style="color:#aaa; font-size:22px; cursor:pointer;" onclick="toggleMenu(false)">✕</span>
         </div>
         <ul style="list-style: none; padding: 15px 0;">
-            <li class="cat-item" data-cat="all" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🔥 Tüm Videolar</li>
-            <li class="cat-item" data-cat="sub" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🇹🇷 Türkçe Altyazılı</li>
-            <li class="cat-item" data-cat="fullhd" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🎬 Full HD</li>
-            <li class="cat-item" data-cat="amateur" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🏠 Amatör / Ev Yapımı</li>
-            <li class="cat-item" data-cat="show" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">⭐ Özel Şov / Trend</li>
-            <li class="cat-item" data-cat="group" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">👥 Grup / Özel Şov</li>
+            <li onclick="filterCat('all')" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🔥 Tüm Videolar</li>
+            <li onclick="filterCat('sub')" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🇹🇷 Türkçe Altyazılı</li>
+            <li onclick="filterCat('fullhd')" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🎬 Full HD</li>
+            <li onclick="filterCat('amateur')" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🏠 Amatör / Ev Yapımı</li>
+            <li onclick="filterCat('show')" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">⭐ Özel Şov / Trend</li>
+            <li onclick="filterCat('group')" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">👥 Grup / Özel Şov</li>
         </ul>
     </div>
 
     <!-- HEADER -->
     <div class="header-bar">
         <div class="header-left">
-            <div class="menu-icon-btn" id="btn-open-menu">☰</div>
-            <div class="header-logo" id="btn-go-home">2PBVAGE 🤍</div>
+            <button class="menu-icon-btn" onclick="toggleMenu(true)" ontouchstart="toggleMenu(true)">☰</button>
+            <div class="header-logo" onclick="goHome()" ontouchstart="goHome()">2PBVAGE 🤍</div>
         </div>
         <div class="user-auth-box">
             <div id="auth-logged-out">
-                <button class="auth-btn" id="btn-open-auth">Giriş / Üye Ol</button>
+                <button class="auth-btn" onclick="toggleAuthModal(true)" ontouchstart="toggleAuthModal(true)">Giriş / Üye Ol</button>
             </div>
             <div id="auth-logged-in" style="display:none; flex-direction:row; align-items:center; gap:8px;">
                 <span class="user-email-tag" id="user-display-email"></span>
-                <button class="logout-btn" id="btn-logout">Çıkış</button>
+                <button class="logout-btn" onclick="handleLogout()" ontouchstart="handleLogout()">Çıkış</button>
             </div>
         </div>
     </div>
@@ -143,81 +142,81 @@
 
             <!-- VİDEO 4 (SWEETIE FOX) -->
             <div class="video-post" data-cat="sub">
-                <div class="video-thumbnail" style="background-image: url('https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg');" data-vid="v4">
+                <div class="video-thumbnail" style="background-image: url('https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg');" onclick="playVideo('v4')" ontouchstart="playVideo('v4')">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title" data-vid="v4">Tüylü Vajinalı Köylü Kızı Bir Yabancı Tarafından Sikişildi - Sweetie Fox</div>
+                <div class="post-title" onclick="playVideo('v4')" ontouchstart="playVideo('v4')">Tüylü Vajinalı Köylü Kızı Bir Yabancı Tarafından Sikişildi - Sweetie Fox</div>
                 <div class="post-meta">
-                    <div class="author-box" data-author="Sweetie Fox">
+                    <div class="author-box" onclick="openProfile('Sweetie Fox')" ontouchstart="openProfile('Sweetie Fox')">
                         <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/3ykGZ25/sweetie.jpg');"></div>
                         <strong style="color:#ff4757;">Sweetie Fox ✓</strong>
                     </div>
-                    <button class="action-btn" data-vid="v4">🚀 Hemen İzle</button>
+                    <button class="action-btn" onclick="playVideo('v4')" ontouchstart="playVideo('v4')">🚀 Hemen İzle</button>
                 </div>
             </div>
 
             <!-- VİDEO 3 -->
             <div class="video-post" data-cat="group">
-                <div class="video-thumbnail" style="background-image: url('https://i.postimg.cc/f3xPmkCr/XAz-Dr-ONXl-P3D8v3o-NMKp7LGK-640w.webp');" data-vid="v3">
+                <div class="video-thumbnail" style="background-image: url('https://i.postimg.cc/f3xPmkCr/XAz-Dr-ONXl-P3D8v3o-NMKp7LGK-640w.webp');" onclick="playVideo('v3')" ontouchstart="playVideo('v3')">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title" data-vid="v3">Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor</div>
+                <div class="post-title" onclick="playVideo('v3')" ontouchstart="playVideo('v3')">Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor</div>
                 <div class="post-meta">
-                    <div class="author-box" data-author="Sophie Rain">
+                    <div class="author-box" onclick="openProfile('Sophie Rain')" ontouchstart="openProfile('Sophie Rain')">
                         <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/DPFjgyLy/image.jpg');"></div>
                         <strong style="color:#ff4757;">Sophie Rain ✓</strong>
                     </div>
-                    <button class="action-btn" data-vid="v3">🚀 Hemen İzle</button>
+                    <button class="action-btn" onclick="playVideo('v3')" ontouchstart="playVideo('v3')">🚀 Hemen İzle</button>
                 </div>
             </div>
 
             <!-- VİDEO 2 -->
             <div class="video-post" data-cat="amateur">
-                <div class="video-thumbnail" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');" data-vid="v2">
+                <div class="video-thumbnail" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');" onclick="playVideo('v2')" ontouchstart="playVideo('v2')">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title" data-vid="v2">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
+                <div class="post-title" onclick="playVideo('v2')" ontouchstart="playVideo('v2')">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
                 <div class="post-meta">
-                    <div class="author-box" data-author="comatozze">
+                    <div class="author-box" onclick="openProfile('comatozze')" ontouchstart="openProfile('comatozze')">
                         <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/pB3ntggN/image.jpg');"></div>
                         <strong style="color:#ff4757;">comatozze ✓</strong>
                     </div>
-                    <button class="action-btn" data-vid="v2">🚀 Hemen İzle</button>
+                    <button class="action-btn" onclick="playVideo('v2')" ontouchstart="playVideo('v2')">🚀 Hemen İzle</button>
                 </div>
             </div>
 
             <!-- VİDEO 1 -->
             <div class="video-post" data-cat="show">
-                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" data-vid="v1">
+                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" onclick="playVideo('v1')" ontouchstart="playVideo('v1')">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title" data-vid="v1">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
+                <div class="post-title" onclick="playVideo('v1')" ontouchstart="playVideo('v1')">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
                 <div class="post-meta">
-                    <div class="author-box" data-author="Sophie Rain">
+                    <div class="author-box" onclick="openProfile('Sophie Rain')" ontouchstart="openProfile('Sophie Rain')">
                         <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/DPFjgyLy/image.jpg');"></div>
                         <strong style="color:#ff4757;">Sophie Rain ✓</strong>
                     </div>
-                    <button class="action-btn" data-vid="v1">🚀 Hemen İzle</button>
+                    <button class="action-btn" onclick="playVideo('v1')" ontouchstart="playVideo('v1')">🚀 Hemen İzle</button>
                 </div>
             </div>
         </div>
 
         <!-- İZLEME SAYFASI -->
         <div id="sec-watch" class="page-sec">
-            <button class="back-btn" id="btn-back-watch">⬅ Ana Sayfaya Dön</button>
+            <button class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</button>
             <h1 id="v-title" style="font-size: 18px; color: #fff;"></h1>
             <div class="video-player-box">
                 <iframe id="v-iframe" src="" allowfullscreen></iframe>
             </div>
             <div class="channel-card">
-                <div class="channel-info" id="watch-channel-box">
+                <div class="channel-info" onclick="openProfile(activeAuthor)">
                     <div class="channel-avatar" id="v-avatar"></div>
                     <div>
                         <div style="font-size: 15px; font-weight: bold; color: #fff;" id="v-author"></div>
                         <div style="font-size: 11px; color: #aaa;"><span id="v-sub-count">0</span> Abone</div>
                     </div>
                 </div>
-                <button class="sub-btn" id="v-sub-btn">Abone Ol</button>
+                <button class="sub-btn" id="v-sub-btn" onclick="toggleSubscribe(activeAuthor)">Abone Ol</button>
             </div>
             <div style="background:#1a1a1a; padding:15px; border-radius:8px; border:1px solid #2a2a2a;">
                 <div style="font-size:14px; font-weight:bold; color:#ff4757; margin-bottom:8px;">📌 Açıklama</div>
@@ -227,13 +226,13 @@
 
         <!-- PROFİL SAYFASI -->
         <div id="sec-profile" class="page-sec">
-            <button class="back-btn" id="btn-back-profile">⬅ Ana Sayfaya Dön</button>
+            <button class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</button>
             <div class="channel-header-box">
                 <div class="channel-banner" id="p-banner"></div>
                 <div class="channel-main-avatar" id="p-avatar"></div>
                 <div style="font-size: 20px; font-weight: bold; color: #fff;" id="p-title"></div>
                 <div style="font-size: 13px; color: #ff4757; margin-top: 5px; font-weight:bold;"><span id="p-sub-count">0</span> Abone</div>
-                <button class="sub-btn" id="p-sub-btn" style="margin-top:12px;">Abone Ol</button>
+                <button class="sub-btn" id="p-sub-btn" style="margin-top:12px;" onclick="toggleSubscribe(activeAuthor)">Abone Ol</button>
             </div>
             <div style="font-size: 15px; font-weight: bold; color: #ff4757; margin-top: 10px;">📹 Kanalın Videoları</div>
             <div id="p-videos"></div>
@@ -258,26 +257,4 @@
                     currentUser = JSON.parse(session);
                     document.getElementById('auth-logged-out').style.display = 'none';
                     document.getElementById('auth-logged-in').style.display = 'flex';
-                    document.getElementById('user-display-email').innerText = currentUser.email;
-                } catch(e) { currentUser = null; }
-            } else {
-                currentUser = null;
-                document.getElementById('auth-logged-out').style.display = 'block';
-                document.getElementById('auth-logged-in').style.display = 'none';
-            }
-        }
-
-        function toggleAuthModal(open) {
-            document.getElementById('auth-modal').style.display = open ? 'flex' : 'none';
-        }
-
-        function switchAuthTab(tab) {
-            if(tab === 'login') {
-                document.getElementById('tab-login').className = 'auth-tab active';
-                document.getElementById('tab-register').className = 'auth-tab';
-                document.getElementById('form-login').style.display = 'flex';
-                document.getElementById('form-register').style.display = 'none';
-            } else {
-                document.getElementById('tab-register').className = 'auth-tab active';
-                document.getElementById('tab-login').className = 'auth-tab';
-                document.getElementById('form-register').style.display =
+                    document.getElementById('user-display-email').innerText

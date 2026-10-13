@@ -255,10 +255,14 @@
         function checkAuthState() {
             var session = localStorage.getItem("2pbvage_session");
             if(session) {
-                currentUser = JSON.parse(session);
-                document.getElementById('auth-logged-out').style.display = 'none';
-                document.getElementById('auth-logged-in').style.display = 'flex';
-                document.getElementById('user-display-email').innerText = currentUser.email;
+                try {
+                    currentUser = JSON.parse(session);
+                    document.getElementById('auth-logged-out').style.display = 'none';
+                    document.getElementById('auth-logged-in').style.display = 'flex';
+                    document.getElementById('user-display-email').innerText = currentUser.email;
+                } catch(e) {
+                    currentUser = null;
+                }
             } else {
                 currentUser = null;
                 document.getElementById('auth-logged-out').style.display = 'block';
@@ -272,5 +276,4 @@
 
         function switchAuthTab(tab) {
             if(tab === 'login') {
-                document.getElementById('tab-login').className = 'auth-tab active';
-                document.getElementById('tab-regist
+          

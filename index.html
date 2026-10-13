@@ -50,26 +50,26 @@
 <body>
 
     <!-- KATEGORİ MENÜSÜ -->
-    <div id="menu-overlay"></div>
+    <div id="menu-overlay" onclick="toggleMenu(false)"></div>
     <div id="menu-drawer">
         <div style="padding: 18px; background: #000; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222;">
             <span style="color:#ff4757; font-weight:bold;">📁 Kategoriler</span>
-            <span style="color:#aaa; font-size:22px; cursor:pointer;" id="menu-close-btn">✕</span>
+            <span style="color:#aaa; font-size:22px; cursor:pointer;" onclick="toggleMenu(false)">✕</span>
         </div>
         <ul style="list-style: none; padding: 15px 0;">
-            <li class="cat-item" data-cat="all" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🔥 Tüm Videolar</li>
-            <li class="cat-item" data-cat="sub" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🇹🇷 Türkçe Altyazılı</li>
-            <li class="cat-item" data-cat="fullhd" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🎬 Full HD</li>
-            <li class="cat-item" data-cat="amateur" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🏠 Amatör / Ev Yapımı</li>
-            <li class="cat-item" data-cat="show" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">⭐ Özel Şov / Trend</li>
-            <li class="cat-item" data-cat="group" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">👥 Grup / Özel Şov</li>
+            <li onclick="filterCat('all')" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🔥 Tüm Videolar</li>
+            <li onclick="filterCat('sub')" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🇹🇷 Türkçe Altyazılı</li>
+            <li onclick="filterCat('fullhd')" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🎬 Full HD</li>
+            <li onclick="filterCat('amateur')" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🏠 Amatör / Ev Yapımı</li>
+            <li onclick="filterCat('show')" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">⭐ Özel Şov / Trend</li>
+            <li onclick="filterCat('group')" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">👥 Grup / Özel Şov</li>
         </ul>
     </div>
 
     <!-- HEADER -->
     <div class="header-bar">
-        <div class="menu-icon-btn" id="menu-open-btn">☰</div>
-        <div class="header-logo" id="home-logo-btn">2PBVAGE 🤍</div>
+        <div class="menu-icon-btn" onclick="toggleMenu(true)">☰</div>
+        <div class="header-logo" onclick="goHome()">2PBVAGE 🤍</div>
         <div style="font-size: 18px; cursor: pointer; padding: 5px;">🔍</div>
     </div>
 
@@ -80,68 +80,68 @@
 
             <!-- VİDEO 4 (SWEETIE FOX) -->
             <div class="video-post" data-cat="sub">
-                <div class="video-thumbnail" style="background-image: url('https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg');" data-vid="v4">
+                <div class="video-thumbnail" style="background-image: url('https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg');" onclick="playVideo('v4')">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title" data-vid="v4">Tüylü Vajinalı Köylü Kızı Bir Yabancı Tarafından Sikişildi - Sweetie Fox</div>
+                <div class="post-title" onclick="playVideo('v4')">Tüylü Vajinalı Köylü Kızı Bir Yabancı Tarafından Sikişildi - Sweetie Fox</div>
                 <div class="post-meta">
-                    <div class="author-box" data-author="Sweetie Fox">
+                    <div class="author-box" onclick="openProfile('Sweetie Fox')">
                         <div class="author-avatar-small" style="background-image: url('https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg');"></div>
                         <strong style="color:#ff4757;">Sweetie Fox ✓</strong>
                     </div>
-                    <button class="action-btn" data-vid="v4">🚀 Hemen İzle</button>
+                    <button class="action-btn" onclick="playVideo('v4')">🚀 Hemen İzle</button>
                 </div>
             </div>
 
             <!-- VİDEO 3 -->
             <div class="video-post" data-cat="group">
-                <div class="video-thumbnail" style="background-image: url('https://i.postimg.cc/f3xPmkCr/XAz-Dr-ONXl-P3D8v3o-NMKp7LGK-640w.webp');" data-vid="v3">
+                <div class="video-thumbnail" style="background-image: url('https://i.postimg.cc/f3xPmkCr/XAz-Dr-ONXl-P3D8v3o-NMKp7LGK-640w.webp');" onclick="playVideo('v3')">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title" data-vid="v3">Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor</div>
+                <div class="post-title" onclick="playVideo('v3')">Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor</div>
                 <div class="post-meta">
-                    <div class="author-box" data-author="Sophie Rain">
+                    <div class="author-box" onclick="openProfile('Sophie Rain')">
                         <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/DPFjgyLy/image.jpg');"></div>
                         <strong style="color:#ff4757;">Sophie Rain ✓</strong>
                     </div>
-                    <button class="action-btn" data-vid="v3">🚀 Hemen İzle</button>
+                    <button class="action-btn" onclick="playVideo('v3')">🚀 Hemen İzle</button>
                 </div>
             </div>
 
             <!-- VİDEO 2 -->
             <div class="video-post" data-cat="amateur">
-                <div class="video-thumbnail" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');" data-vid="v2">
+                <div class="video-thumbnail" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');" onclick="playVideo('v2')">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title" data-vid="v2">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
+                <div class="post-title" onclick="playVideo('v2')">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
                 <div class="post-meta">
-                    <div class="author-box" data-author="comatozze">
+                    <div class="author-box" onclick="openProfile('comatozze')">
                         <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/pB3ntggN/image.jpg');"></div>
                         <strong style="color:#ff4757;">comatozze ✓</strong>
                     </div>
-                    <button class="action-btn" data-vid="v2">🚀 Hemen İzle</button>
+                    <button class="action-btn" onclick="playVideo('v2')">🚀 Hemen İzle</button>
                 </div>
             </div>
 
             <!-- VİDEO 1 -->
             <div class="video-post" data-cat="show">
-                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" data-vid="v1">
+                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" onclick="playVideo('v1')">
                     <div class="play-button"></div>
                 </div>
-                <div class="post-title" data-vid="v1">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
+                <div class="post-title" onclick="playVideo('v1')">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
                 <div class="post-meta">
-                    <div class="author-box" data-author="Sophie Rain">
+                    <div class="author-box" onclick="openProfile('Sophie Rain')">
                         <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/DPFjgyLy/image.jpg');"></div>
                         <strong style="color:#ff4757;">Sophie Rain ✓</strong>
                     </div>
-                    <button class="action-btn" data-vid="v1">🚀 Hemen İzle</button>
+                    <button class="action-btn" onclick="playVideo('v1')">🚀 Hemen İzle</button>
                 </div>
             </div>
         </div>
 
         <!-- İZLEME SAYFASI -->
         <div id="sec-watch" class="page-sec">
-            <button class="back-btn" id="watch-back-btn">⬅ Ana Sayfaya Dön</button>
+            <button class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</button>
             <h1 id="v-title" style="font-size: 18px; color: #fff;"></h1>
             <div class="video-player-box">
                 <iframe id="v-iframe" src="" allowfullscreen></iframe>
@@ -164,7 +164,7 @@
 
         <!-- PROFİL SAYFASI -->
         <div id="sec-profile" class="page-sec">
-            <button class="back-btn" id="profile-back-btn">⬅ Ana Sayfaya Dön</button>
+            <button class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</button>
             <div class="channel-header-box">
                 <div class="channel-banner" id="p-banner"></div>
                 <div class="channel-main-avatar" id="p-avatar"></div>
@@ -262,7 +262,7 @@
                     var v = db[key];
                     if (v.author.toLowerCase() === targetName || v.title.toLowerCase().indexOf(targetName) !== -1) {
                         if (!avatarUrl) { avatarUrl = v.avatar; }
-                        htmlVideos += '<div class="video-post" data-cat="'+(key === 'v4' ? 'sub' : 'show')+'"><div class="video-thumbnail" style="background-image:url(\''+v.thumb+'\');" data-vid="'+key+'"><div class="play-button"></div></div><div class="post-title" data-vid="'+key+'">'+v.title+'</div><div class="post-meta"><div class="author-box" data-author="'+v.author+'"><div class="author-avatar-small" style="background-image:url(\''+v.avatar+'\');"></div><strong style="color:#ff4757;">'+v.author+' ✓</strong></div><button class="action-btn" data-vid="'+key+'">🚀 Hemen İzle</button></div></div>';
+                        htmlVideos += '<div class="video-post" data-cat="'+(key === 'v4' ? 'sub' : 'show')+'"><div class="v-thumbnail" style="background-image:url(\''+v.thumb+'\');" onclick="playVideo(\''+key+'\')"><div class="play-button"></div></div><div class="post-title" onclick="playVideo(\''+key+'\')">'+v.title+'</div><div class="post-meta"><div class="author-box" onclick="openProfile(\''+v.author+'\')"><div class="author-avatar-small" style="background-image:url(\''+v.avatar+'\');"></div><strong style="color:#ff4757;">'+v.author+' ✓</strong></div><button class="action-btn" onclick="playVideo(\''+key+'\')">🚀 Hemen İzle</button></div></div>';
                     }
                 }
             }
@@ -280,29 +280,15 @@
             document.getElementById('sec-watch').className = 'page-sec';
             document.getElementById('sec-profile').className = 'page-sec active-sec';
             window.scrollTo(0,0);
-            
-            attachEvents();
         }
 
-        function attachEvents() {
-            document.getElementById('menu-open-btn').onclick = function() { toggleMenu(true); };
-            document.getElementById('menu-close-btn').onclick = function() { toggleMenu(false); };
-            document.getElementById('menu-overlay').onclick = function() { toggleMenu(false); };
-            document.getElementById('home-logo-btn').onclick = function() { goHome(); };
-            document.getElementById('watch-back-btn').onclick = function() { goHome(); };
-            document.getElementById('profile-back-btn').onclick = function() { goHome(); };
-            document.getElementById('watch-channel-card').onclick = function() { openProfile(activeAuthor); };
-
-            var cats = document.querySelectorAll('.cat-item');
-            for(var i=0; i<cats.length; i++) {
-                cats[i].onclick = function() {
-                    filterCat(this.getAttribute('data-cat'));
-                };
+        // Profil içerisindeki kanal kartı tıklamasını bağla
+        document.addEventListener("DOMContentLoaded", function() {
+            var card = document.getElementById('watch-channel-card');
+            if(card) {
+                card.onclick = function() { openProfile(activeAuthor); };
             }
-
-            var vids = document.querySelectorAll('[data-vid]');
-            for(var j=0; j<vids.length; j++) {
-                vids[j].onclick = function(e) {
-                    e.stopPropagation();
-                    playVideo(this.getAttribute('data-vid'));
-                }
+        });
+    </script>
+</body>
+</html>

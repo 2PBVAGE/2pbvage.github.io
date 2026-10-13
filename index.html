@@ -64,12 +64,12 @@
 </head>
 <body>
 
-    <!-- 18+ MODAL -->
+    <!-- 18+ MODAL (Doğrudan buton içi tetikleyici ile) -->
     <div id="site-age-modal">
         <div class="modal-box">
             <h3 style="color:#ff4757; margin-bottom:10px;">⚠️ Yaş Sınırı (18+)</h3>
             <p style="font-size:14px; color:#ccc; margin-bottom:20px;">Bu videoyu izlemek için 18 yaşından büyük olmalısınız.</p>
-            <button class="modal-btn" onclick="confirmAge()">18+ Yaşından Büyüğüm</button>
+            <button class="modal-btn" onclick="document.getElementById('site-age-modal').style.display='none'; isAgeVerified=true; if(pendingVideoId){ playVideoDirect(pendingVideoId); pendingVideoId=null; }">18+ Yaşından Büyüğüm</button>
         </div>
     </div>
 
@@ -260,15 +260,6 @@
             }
         }
 
-        function confirmAge() {
-            isAgeVerified = true;
-            document.getElementById('site-age-modal').style.display = 'none';
-            if (pendingVideoId) {
-                playVideoDirect(pendingVideoId);
-                pendingVideoId = null;
-            }
-        }
-
         function filterCat(cat) {
             toggleMenu(false);
             goHome();
@@ -311,4 +302,6 @@
                 }
             }
 
-            var iframe = document.getElement
+            var iframe = document.getElementById('v-iframe');
+            if (iframe) iframe.src = "";
+            document.getElementById('p-title').i

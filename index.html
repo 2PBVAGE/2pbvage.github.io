@@ -4,27 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
+    <meta name="google" content="notranslate">
     <title>2PBVAGE 🤍</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         body { background-color: #121212 !important; color: #ffffff !important; font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
 
         /* HEADER */
-        .header-bar { width: 100%; max-width: 600px; background-color: #000; display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 10000; }
-        .header-left { display: flex; align-items: center; gap: 12px; }
+        .header-bar { width: 100%; max-width: 600px; background-color: #000; display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 1000; }
+        .header-left { display: flex; align-items: center; gap: 10px; }
         .header-logo { color: #fff; font-size: 19px; font-weight: 800; cursor: pointer; }
-        .menu-icon-btn { font-size: 26px; cursor: pointer; padding: 6px; color: #fff; user-select: none; z-index: 10001; }
+        .menu-icon-btn { font-size: 24px; cursor: pointer; padding: 5px; color: #fff; }
         
-        .user-auth-box { display: flex; align-items: center; gap: 10px; z-index: 10001; }
-        .auth-btn { background-color: #ff4757; color: #fff; border: none; padding: 8px 14px; border-radius: 15px; font-size: 12px; font-weight: bold; cursor: pointer; display: inline-block; }
+        .user-auth-box { display: flex; align-items: center; gap: 10px; }
+        .auth-btn { background-color: #ff4757; color: #fff; border: none; padding: 8px 14px; border-radius: 15px; font-size: 12px; font-weight: bold; cursor: pointer; }
         .user-email-tag { font-size: 11px; color: #ff4757; font-weight: bold; max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .logout-btn { background: #222; color: #aaa; border: 1px solid #333; padding: 6px 10px; border-radius: 12px; font-size: 11px; cursor: pointer; }
+        .logout-btn { background: #222; color: #aaa; border: 1px solid #333; padding: 4px 8px; border-radius: 12px; font-size: 11px; cursor: pointer; }
 
         /* MODAL / AUTH POPUP */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 99999; display: none; align-items: center; justify-content: center; padding: 20px; }
-        .auth-modal-card { background-color: #1a1a1a; border: 1px solid #333; border-radius: 14px; width: 100%; max-width: 360px; padding: 25px 20px; text-align: center; position: relative; z-index: 100000; }
+        .auth-modal-card { background-color: #1a1a1a; border: 1px solid #333; border-radius: 14px; width: 100%; max-width: 360px; padding: 25px 20px; text-align: center; position: relative; }
         .auth-close-btn { position: absolute; top: 12px; right: 15px; color: #aaa; font-size: 20px; cursor: pointer; padding: 5px; }
         
         .auth-tabs { display: flex; border-bottom: 1px solid #333; margin-bottom: 20px; }
@@ -77,14 +76,14 @@
     <!-- ÜYE OL / GİRİŞ YAP MODAL -->
     <div id="auth-modal" class="modal-overlay">
         <div class="auth-modal-card">
-            <span class="auth-close-btn" data-act="close-auth">✕</span>
+            <span class="auth-close-btn" id="close-modal-x">✕</span>
             <div class="auth-tabs">
-                <div id="tab-login" class="auth-tab active" data-act="switch-tab-login">Giriş Yap</div>
-                <div id="tab-register" class="auth-tab" data-act="switch-tab-reg">Kayıt Ol</div>
+                <div id="tab-login" class="auth-tab active">Giriş Yap</div>
+                <div id="tab-register" class="auth-tab">Kayıt Ol</div>
             </div>
 
             <!-- GİRİŞ FORMU -->
-            <form id="form-login" class="auth-form" onsubmit="handleLogin(event)">
+            <form id="form-login" class="auth-form">
                 <label style="font-size:12px; color:#aaa;">E-posta Adresi</label>
                 <input type="email" id="login-email" class="auth-input" placeholder="ornek@gmail.com" required>
                 <label style="font-size:12px; color:#aaa;">Şifre</label>
@@ -93,7 +92,7 @@
             </form>
 
             <!-- KAYIT FORMU -->
-            <form id="form-register" class="auth-form" style="display:none;" onsubmit="handleRegister(event)">
+            <form id="form-register" class="auth-form" style="display:none;">
                 <label style="font-size:12px; color:#aaa;">E-posta Adresi</label>
                 <input type="email" id="reg-email" class="auth-input" placeholder="ornek@gmail.com" required>
                 <label style="font-size:12px; color:#aaa;">Şifre Oluştur</label>
@@ -104,35 +103,35 @@
     </div>
 
     <!-- KATEGORİ MENÜSÜ -->
-    <div id="menu-overlay" data-act="close-menu"></div>
+    <div id="menu-overlay"></div>
     <div id="menu-drawer">
         <div style="padding: 18px; background: #000; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222;">
             <span style="color:#ff4757; font-weight:bold;">📁 Kategoriler</span>
-            <span style="color:#aaa; font-size:22px; cursor:pointer;" data-act="close-menu">✕</span>
+            <span style="color:#aaa; font-size:22px; cursor:pointer;" id="close-menu-x">✕</span>
         </div>
         <ul style="list-style: none; padding: 15px 0;">
-            <li data-cat="all" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🔥 Tüm Videolar</li>
-            <li data-cat="sub" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🇹🇷 Türkçe Altyazılı</li>
-            <li data-cat="fullhd" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🎬 Full HD</li>
-            <li data-cat="amateur" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🏠 Amatör / Ev Yapımı</li>
-            <li data-cat="show" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">⭐ Özel Şov / Trend</li>
-            <li data-cat="group" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">👥 Grup / Özel Şov</li>
+            <li class="cat-item" data-cat="all" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🔥 Tüm Videolar</li>
+            <li class="cat-item" data-cat="sub" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🇹🇷 Türkçe Altyazılı</li>
+            <li class="cat-item" data-cat="fullhd" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🎬 Full HD</li>
+            <li class="cat-item" data-cat="amateur" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🏠 Amatör / Ev Yapımı</li>
+            <li class="cat-item" data-cat="show" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">⭐ Özel Şov / Trend</li>
+            <li class="cat-item" data-cat="group" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">👥 Grup / Özel Şov</li>
         </ul>
     </div>
 
     <!-- HEADER -->
     <div class="header-bar">
         <div class="header-left">
-            <div class="menu-icon-btn" data-act="open-menu">☰</div>
-            <div class="header-logo" data-act="go-home">2PBVAGE 🤍</div>
+            <div class="menu-icon-btn" id="btn-open-menu">☰</div>
+            <div class="header-logo" id="btn-go-home">2PBVAGE 🤍</div>
         </div>
         <div class="user-auth-box">
             <div id="auth-logged-out">
-                <button class="auth-btn" data-act="open-auth">Giriş / Üye Ol</button>
+                <button class="auth-btn" id="btn-open-auth">Giriş / Üye Ol</button>
             </div>
             <div id="auth-logged-in" style="display:none; flex-direction:row; align-items:center; gap:8px;">
                 <span class="user-email-tag" id="user-display-email"></span>
-                <button class="logout-btn" data-act="logout">Çıkış</button>
+                <button class="logout-btn" id="btn-logout">Çıkış</button>
             </div>
         </div>
     </div>
@@ -205,20 +204,20 @@
 
         <!-- İZLEME SAYFASI -->
         <div id="sec-watch" class="page-sec">
-            <button class="back-btn" data-act="go-home">⬅ Ana Sayfaya Dön</button>
+            <button class="back-btn" id="btn-back-watch">⬅ Ana Sayfaya Dön</button>
             <h1 id="v-title" style="font-size: 18px; color: #fff;"></h1>
             <div class="video-player-box">
                 <iframe id="v-iframe" src="" allowfullscreen></iframe>
             </div>
             <div class="channel-card">
-                <div class="channel-info" data-act="go-active-author">
+                <div class="channel-info" id="watch-channel-box">
                     <div class="channel-avatar" id="v-avatar"></div>
                     <div>
                         <div style="font-size: 15px; font-weight: bold; color: #fff;" id="v-author"></div>
                         <div style="font-size: 11px; color: #aaa;"><span id="v-sub-count">0</span> Abone</div>
                     </div>
                 </div>
-                <button class="sub-btn" id="v-sub-btn" data-act="toggle-sub">Abone Ol</button>
+                <button class="sub-btn" id="v-sub-btn">Abone Ol</button>
             </div>
             <div style="background:#1a1a1a; padding:15px; border-radius:8px; border:1px solid #2a2a2a;">
                 <div style="font-size:14px; font-weight:bold; color:#ff4757; margin-bottom:8px;">📌 Açıklama</div>
@@ -228,13 +227,13 @@
 
         <!-- PROFİL SAYFASI -->
         <div id="sec-profile" class="page-sec">
-            <button class="back-btn" data-act="go-home">⬅ Ana Sayfaya Dön</button>
+            <button class="back-btn" id="btn-back-profile">⬅ Ana Sayfaya Dön</button>
             <div class="channel-header-box">
                 <div class="channel-banner" id="p-banner"></div>
                 <div class="channel-main-avatar" id="p-avatar"></div>
                 <div style="font-size: 20px; font-weight: bold; color: #fff;" id="p-title"></div>
                 <div style="font-size: 13px; color: #ff4757; margin-top: 5px; font-weight:bold;"><span id="p-sub-count">0</span> Abone</div>
-                <button class="sub-btn" id="p-sub-btn" style="margin-top:12px;" data-act="toggle-sub">Abone Ol</button>
+                <button class="sub-btn" id="p-sub-btn" style="margin-top:12px;">Abone Ol</button>
             </div>
             <div style="font-size: 15px; font-weight: bold; color: #ff4757; margin-top: 10px;">📹 Kanalın Videoları</div>
             <div id="p-videos"></div>
@@ -279,3 +278,6 @@
                 document.getElementById('form-login').style.display = 'flex';
                 document.getElementById('form-register').style.display = 'none';
             } else {
+                document.getElementById('tab-register').className = 'auth-tab active';
+                document.getElementById('tab-login').className = 'auth-tab';
+                document.getElementById('form-register').style.display =

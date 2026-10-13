@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta name="google" content="notranslate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>2PBVAGE 🤍</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -251,7 +252,6 @@
         var activeAuthor = "";
         var currentUser = null;
 
-        // AUTH & HESAP YÖNETİMİ
         function checkAuthState() {
             var session = localStorage.getItem("2pbvage_session");
             if(session) {
@@ -275,5 +275,4 @@
         }
 
         function switchAuthTab(tab) {
-            if(tab === 'login') {
-          
+            if(tab === 'login'

@@ -54,8 +54,6 @@
         .author-avatar-small { width: 26px; height: 26px; border-radius: 50%; background-color: #333; background-size: cover; background-position: center; border: 1.5px solid #ff4757; }
 
         .action-btn { background-color: #ff4757; color: #fff !important; padding: 10px 16px; border-radius: 20px; font-weight: bold; border: none; cursor: pointer; font-size: 13px; }
-        .sub-btn { background-color: #ff4757; color: #fff; border: none; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; cursor: pointer; }
-        .sub-btn.subscribed { background-color: #333 !important; color: #aaa !important; border: 1px solid #444; }
 
         .video-player-box { position: relative; width: 100%; padding-bottom: 56.25%; background-color: #000; border-radius: 6px; overflow: hidden; }
         .video-player-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
@@ -65,7 +63,7 @@
         .channel-info { display: flex; align-items: center; gap: 12px; cursor: pointer; }
         .channel-avatar { width: 48px; height: 48px; border-radius: 50%; background-color: #333; background-size: cover; background-position: center; border: 2px solid #ff4757; }
         .channel-header-box { background-color: #1a1a1a; border-radius: 12px; overflow: hidden; border: 1px solid #2a2a2a; text-align: center; padding-bottom: 20px; }
-        .channel-banner { width: 100%; height: 100px; background-color: #222; background-size: cover; background-position: center; }
+        .channel-banner { width: 100%; height: 120px; background-color: #222; background-size: cover; background-position: center; }
         .channel-main-avatar { width: 80px; height: 80px; border-radius: 50%; border: 3px solid #ff4757; margin: -40px auto 10px auto; background-color: #333; background-size: cover; background-position: center; }
     </style>
 </head>
@@ -142,7 +140,7 @@
                 <div class="post-title trigger-play" data-id="v4">Tüylü Vajinalı Köylü Kızı Bir Yabancı Tarafından Sikişildi - Sweetie Fox</div>
                 <div class="post-meta">
                     <div class="author-box trigger-profile" data-author="Sweetie Fox">
-                        <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/3ykGZ25/sweetie.jpg');"></div>
+                        <div class="author-avatar-small" style="background-image: url('https://ei.phncdn.com/(m=ewILGCjadOf)(mh=59qrk8LnBE3Z9kTL)43ca43da-b27e-42f2-b237-40c5c13261b1.jpg');"></div>
                         <strong style="color:#ff4757;">Sweetie Fox ✓</strong>
                     </div>
                     <button class="action-btn trigger-play" data-id="v4">🚀 Hemen İzle</button>
@@ -200,17 +198,15 @@
             <button class="back-btn" id="btn-back-watch">⬅ Ana Sayfaya Dön</button>
             <h1 id="v-title" style="font-size: 18px; color: #fff;"></h1>
             <div class="video-player-box">
-                <iframe id="v-iframe" src="" allowfullscreen></iframe>
+                <iframe id="v-iframe" src="" allowfullscreen sandbox="allow-scripts allow-same-origin allow-presentation"></iframe>
             </div>
             <div class="channel-card">
                 <div class="channel-info" id="watch-profile-box">
                     <div class="channel-avatar" id="v-avatar"></div>
                     <div>
                         <div style="font-size: 15px; font-weight: bold; color: #fff;" id="v-author"></div>
-                        <div style="font-size: 11px; color: #aaa;"><span id="v-sub-count">0</span> Abone</div>
                     </div>
                 </div>
-                <button class="sub-btn" id="v-sub-btn">Abone Ol</button>
             </div>
             <div style="background:#1a1a1a; padding:15px; border-radius:8px; border:1px solid #2a2a2a;">
                 <div style="font-size:14px; font-weight:bold; color:#ff4757; margin-bottom:8px;">📌 Açıklama</div>
@@ -225,8 +221,6 @@
                 <div class="channel-banner" id="p-banner"></div>
                 <div class="channel-main-avatar" id="p-avatar"></div>
                 <div style="font-size: 20px; font-weight: bold; color: #fff;" id="p-title"></div>
-                <div style="font-size: 13px; color: #ff4757; margin-top: 5px; font-weight:bold;"><span id="p-sub-count">0</span> Abone</div>
-                <button class="sub-btn" id="p-sub-btn-profile" style="margin-top:12px;">Abone Ol</button>
             </div>
             <div style="font-size: 15px; font-weight: bold; color: #ff4757; margin-top: 10px;">📹 Kanalın Videoları</div>
             <div id="p-videos"></div>
@@ -235,26 +229,46 @@
 
     <script>
         var db = {
-            v1: { title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", url: "https://playmogo.com/e/1fvov3xdwsbq", thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", baseSubs: 1850, desc: "Sophie Rain'in en çok konuşulan siyah iç çamaşırı şovu bu videoda sizlerle. İyi seyirler!" },
-            v2: { title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...", url: "https://playmogo.com/e/ehhg2pcksir6", thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", author: "comatozze", avatar: "https://i.ibb.co/pB3ntggN/image.jpg", baseSubs: 940, desc: "Evde baş başa kalan ikilinin sürpriz ve heyecan dolu gizli anları." },
-            v3: { title: "Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor", url: "https://playmogo.com/e/xmiqbgo3vrz4", thumb: "https://i.postimg.cc/f3xPmkCr/XAz-Dr-ONXl-P3D8v3o-NMKp7LGK-640w.webp", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", baseSubs: 1850, desc: "Sophie Rain ve Piper Aishah kameralar karşısında eğlenceli ve özel anlar yaşatıyor." },
-            v4: { title: "Tüylü Vajinalı Köylü Kızı Bir Yabancı Tarafından Sikişildi - Sweetie Fox", url: "https://voe.sx/e/hoshht3fdzl0", thumb: "https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg", author: "Sweetie Fox", avatar: "https://i.ibb.co/3ykGZ25/sweetie.jpg", baseSubs: 1420, desc: "Sweetie Fox'un Türkçe altyazılı köylü kızı temalı popüler özel gösterisi." }
+            v1: { 
+                title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", 
+                url: "https://playmogo.com/e/1fvov3xdwsbq", 
+                thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", 
+                author: "Sophie Rain", 
+                avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", 
+                banner: "https://i.ibb.co/DPFjgyLy/image.jpg",
+                desc: "Sophie Rain'in en çok konuşulan siyah iç çamaşırı şovu bu videoda sizlerle. İyi seyirler!" 
+            },
+            v2: { 
+                title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...", 
+                url: "https://playmogo.com/e/ehhg2pcksir6", 
+                thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", 
+                author: "comatozze", 
+                avatar: "https://i.ibb.co/pB3ntggN/image.jpg", 
+                banner: "https://i.ibb.co/pB3ntggN/image.jpg",
+                desc: "Evde baş başa kalan ikilinin sürpriz ve heyecan dolu gizli anları." 
+            },
+            v3: { 
+                title: "Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor", 
+                url: "https://playmogo.com/e/xmiqbgo3vrz4", 
+                thumb: "https://i.postimg.cc/f3xPmkCr/XAz-Dr-ONXl-P3D8v3o-NMKp7LGK-640w.webp", 
+                author: "Sophie Rain", 
+                avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", 
+                banner: "https://i.ibb.co/DPFjgyLy/image.jpg",
+                desc: "Sophie Rain ve Piper Aishah kameralar karşısında eğlenceli ve özel anlar yaşatıyor." 
+            },
+            v4: { 
+                title: "Tüylü Vajinalı Köylü Kızı Bir Yabancı Tarafından Sikişildi - Sweetie Fox", 
+                url: "https://voe.sx/e/hoshht3fdzl0", 
+                thumb: "https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg", 
+                author: "Sweetie Fox", 
+                avatar: "https://ei.phncdn.com/(m=ewILGCjadOf)(mh=59qrk8LnBE3Z9kTL)43ca43da-b27e-42f2-b237-40c5c13261b1.jpg", 
+                banner: "https://ei.phncdn.com/pics/users/0009/2995/3741/cover30266955/(m=eRSa4qFxcWaAb)(mh=ciR9a4JESHJ-g9rp)1323x270.jpg",
+                desc: "Sweetie Fox'un Türkçe altyazılı köylü kızı temalı popüler özel gösterisi." 
+            }
         };
 
         var activeAuthor = "";
         var currentUser = null;
-
-        // Görsel Yüklenme Hata Önleyicisi (404 Karşıtı)
-        function preloadImages() {
-            for (var key in db) {
-                if (db.hasOwnProperty(key)) {
-                    var imgThumb = new Image();
-                    imgThumb.src = db[key].thumb;
-                    var imgAvatar = new Image();
-                    imgAvatar.src = db[key].avatar;
-                }
-            }
-        }
 
         function checkAuthState() {
             try {
@@ -305,7 +319,6 @@
             localStorage.setItem("2pbvage_session", JSON.stringify({ email: email }));
             checkAuthState();
             toggleAuthModal(false);
-            updateSubscribeButtonState(activeAuthor);
         };
 
         document.getElementById('form-register').onsubmit = function(e) {
@@ -322,14 +335,12 @@
             localStorage.setItem("2pbvage_session", JSON.stringify({ email: email }));
             checkAuthState();
             toggleAuthModal(false);
-            updateSubscribeButtonState(activeAuthor);
             alert("Hesabınız oluşturuldu ve giriş yapıldı!");
         };
 
         document.getElementById('btn-logout').onclick = function() {
             localStorage.removeItem("2pbvage_session");
             checkAuthState();
-            updateSubscribeButtonState(activeAuthor);
         };
 
         function toggleMenu(open) {
@@ -364,68 +375,6 @@
         document.getElementById('btn-open-auth').onclick = function() { toggleAuthModal(true); };
         document.getElementById('btn-close-modal').onclick = function() { toggleAuthModal(false); };
 
-        function getBaseSubsForAuthor(author) {
-            for(var k in db) {
-                if(db[k].author.toLowerCase() === author.toLowerCase()) {
-                    return db[k].baseSubs || 1000;
-                }
-            }
-            return 1000;
-        }
-
-        function updateSubscribeButtonState(author) {
-            if(!author) return;
-            var subs = JSON.parse(localStorage.getItem('2pbvage_subs') || '{}');
-            var isSubbed = currentUser && subs[currentUser.email] && subs[currentUser.email].includes(author);
-            
-            var base = getBaseSubsForAuthor(author);
-            var totalCount = isSubbed ? (base + 1) : base;
-
-            var vSubCount = document.getElementById('v-sub-count');
-            var pSubCount = document.getElementById('p-sub-count');
-            if(vSubCount) vSubCount.innerText = totalCount;
-            if(pSubCount) pSubCount.innerText = totalCount;
-
-            var btnWatch = document.getElementById('v-sub-btn');
-            var btnProfile = document.getElementById('p-sub-btn-profile');
-
-            if (isSubbed) {
-                if(btnWatch) { btnWatch.innerText = "Abone Olundu ✓"; btnWatch.className = "sub-btn subscribed"; }
-                if(btnProfile) { btnProfile.innerText = "Abone Olundu ✓"; btnProfile.className = "sub-btn subscribed"; }
-            } else {
-                if(btnWatch) { btnWatch.innerText = "Abone Ol"; btnWatch.className = "sub-btn"; }
-                if(btnProfile) { btnProfile.innerText = "Abone Ol"; btnProfile.className = "sub-btn"; }
-            }
-        }
-
-        function toggleSubscribe() {
-            if(!currentUser) {
-                alert("Abone olmak için lütfen önce giriş yapın!");
-                toggleAuthModal(true);
-                return;
-            }
-
-            var subs = JSON.parse(localStorage.getItem('2pbvage_subs') || '{}');
-            if(!subs[currentUser.email]) {
-                subs[currentUser.email] = [];
-            }
-
-            var index = subs[currentUser.email].indexOf(activeAuthor);
-            if(index > -1) {
-                subs[currentUser.email].splice(index, 1);
-                alert(activeAuthor + " aboneliğinden çıkıldı.");
-            } else {
-                subs[currentUser.email].push(activeAuthor);
-                alert(activeAuthor + " kanalına abone olundu! 🤍");
-            }
-
-            localStorage.setItem('2pbvage_subs', JSON.stringify(subs));
-            updateSubscribeButtonState(activeAuthor);
-        }
-
-        document.getElementById('v-sub-btn').onclick = toggleSubscribe;
-        document.getElementById('p-sub-btn-profile').onclick = toggleSubscribe;
-
         function playVideo(id) {
             var item = db[id];
             if(item) {
@@ -434,8 +383,6 @@
                 document.getElementById('v-author').innerText = item.author;
                 document.getElementById('v-avatar').style.backgroundImage = "url('" + item.avatar + "')";
                 document.getElementById('v-desc').innerText = item.desc;
-
-                updateSubscribeButtonState(activeAuthor);
 
                 document.getElementById('sec-feed').className = 'page-sec';
                 document.getElementById('sec-watch').className = 'page-sec active-sec';
@@ -497,6 +444,7 @@
             activeAuthor = author;
             var targetName = author.toLowerCase();
             var avatarUrl = "";
+            var bannerUrl = "";
             var htmlVideos = "";
 
             for (var key in db) {
@@ -504,6 +452,7 @@
                     var v = db[key];
                     if (v.author.toLowerCase() === targetName || v.title.toLowerCase().indexOf(targetName) !== -1) {
                         if (!avatarUrl) { avatarUrl = v.avatar; }
+                        if (!bannerUrl) { bannerUrl = v.banner; }
                         htmlVideos += '<div class="video-post">' +
                             '<div class="video-thumbnail trigger-play" data-id="' + key + '" style="background-image:url(\'' + v.thumb + '\');" onclick="playVideo(\'' + key + '\')"><div class="play-button"></div></div>' +
                             '<div class="post-title trigger-play" data-id="' + key + '" onclick="playVideo(\'' + key + '\')">' + v.title + '</div>' +
@@ -524,11 +473,11 @@
             document.getElementById('p-title').innerText = author;
             if (avatarUrl) {
                 document.getElementById('p-avatar').style.backgroundImage = "url('" + avatarUrl + "')";
-                document.getElementById('p-banner').style.backgroundImage = "url('" + avatarUrl + "')";
+            }
+            if (bannerUrl) {
+                document.getElementById('p-banner').style.backgroundImage = "url('" + bannerUrl + "')";
             }
             document.getElementById('p-videos').innerHTML = htmlVideos;
-            
-            updateSubscribeButtonState(activeAuthor);
 
             document.getElementById('sec-feed').className = 'page-sec';
             document.getElementById('sec-watch').className = 'page-sec';
@@ -548,7 +497,6 @@
             if(activeAuthor) openProfile(activeAuthor);
         };
 
-        preloadImages();
         checkAuthState();
     </script>
 </body>

@@ -10,92 +10,119 @@
             --bg-color: #121212;
             --card-bg: #1e1e1e;
             --card-border: #222;
+            --text-color: #ffffff;
+            --text-sub: #aaa;
+            --header-bg: #000000;
+            --input-bg: #111111;
+        }
+
+        body.light-theme {
+            --bg-color: #f4f5f7;
+            --card-bg: #ffffff;
+            --card-border: #e1e4e8;
+            --text-color: #1c1e21;
+            --text-sub: #606770;
+            --header-bg: #ffffff;
+            --input-bg: #f0f2f5;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--bg-color); color: #ffffff; font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding-bottom: 50px; }
+        body { background-color: var(--bg-color); color: var(--text-color); font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding-bottom: 50px; transition: background-color 0.3s, color 0.3s; }
 
         /* HEADER */
-        .header-bar { width: 100%; max-width: 600px; background-color: #000; display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; }
+        .header-bar { width: 100%; max-width: 1000px; background-color: var(--header-bg); display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--card-border); position: sticky; top: 0; z-index: 100; }
         .header-left { display: flex; align-items: center; gap: 10px; }
-        .header-logo { color: #fff; font-size: 19px; font-weight: 800; cursor: pointer; padding: 5px; }
-        .menu-icon-btn { font-size: 20px; cursor: pointer; padding: 8px 14px; color: #fff; background: #222; border: 1px solid #444; border-radius: 6px; }
+        .header-logo { color: var(--text-color); font-size: 19px; font-weight: 800; cursor: pointer; padding: 5px; }
+        .menu-icon-btn { font-size: 20px; cursor: pointer; padding: 8px 14px; color: var(--text-color); background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 6px; }
         
         .user-auth-box { display: flex; align-items: center; gap: 8px; }
         .auth-btn { background-color: var(--primary-color); color: #fff; border: none; padding: 10px 14px; border-radius: 15px; font-size: 12px; font-weight: bold; cursor: pointer; }
-        .user-email-tag { font-size: 11px; color: var(--primary-color); font-weight: bold; max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .logout-btn { background: #222; color: #aaa; border: 1px solid #333; padding: 6px 10px; border-radius: 12px; font-size: 11px; cursor: pointer; }
+        .user-email-tag { font-size: 11px; color: var(--primary-color); font-weight: bold; max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .logout-btn { background: var(--card-bg); color: var(--text-sub); border: 1px solid var(--card-border); padding: 6px 10px; border-radius: 12px; font-size: 11px; cursor: pointer; }
+
+        .theme-toggle-btn { background: var(--card-bg); color: var(--text-color); border: 1px solid var(--card-border); padding: 6px 12px; border-radius: 15px; font-size: 12px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 4px; }
 
         /* SEARCH BAR */
-        .search-container { width: 100%; max-width: 600px; padding: 10px 15px 0 15px; }
-        .search-input { width: 100%; background: #1a1a1a; border: 1px solid #333; color: #fff; padding: 10px 15px; border-radius: 20px; font-size: 13px; outline: none; }
+        .search-container { width: 100%; max-width: 1000px; padding: 12px 15px 0 15px; }
+        .search-input { width: 100%; background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text-color); padding: 10px 15px; border-radius: 20px; font-size: 13px; outline: none; }
         .search-input:focus { border-color: var(--primary-color); }
 
         /* MODAL */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
-        .auth-modal-card { background-color: #1a1a1a; border: 1px solid #333; border-radius: 14px; width: 100%; max-width: 360px; padding: 25px 20px; text-align: center; position: relative; }
-        .auth-close-btn { position: absolute; top: 12px; right: 15px; color: #aaa; font-size: 22px; cursor: pointer; padding: 5px; }
+        .auth-modal-card { background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; width: 100%; max-width: 360px; padding: 25px 20px; text-align: center; position: relative; color: var(--text-color); }
+        .auth-close-btn { position: absolute; top: 12px; right: 15px; color: var(--text-sub); font-size: 22px; cursor: pointer; padding: 5px; }
         
-        .auth-tabs { display: flex; border-bottom: 1px solid #333; margin-bottom: 20px; }
-        .auth-tab { flex: 1; padding: 10px; color: #aaa; font-weight: bold; font-size: 14px; cursor: pointer; }
+        .auth-tabs { display: flex; border-bottom: 1px solid var(--card-border); margin-bottom: 20px; }
+        .auth-tab { flex: 1; padding: 10px; color: var(--text-sub); font-weight: bold; font-size: 14px; cursor: pointer; }
         .auth-tab.active { color: var(--primary-color); border-bottom: 2px solid var(--primary-color); }
         
         .auth-form { display: flex; flex-direction: column; gap: 12px; text-align: left; }
-        .auth-input { background-color: #111; border: 1px solid #333; color: #fff; padding: 12px; border-radius: 8px; font-size: 13px; outline: none; }
+        .auth-input { background-color: var(--input-bg); border: 1px solid var(--card-border); color: var(--text-color); padding: 12px; border-radius: 8px; font-size: 13px; outline: none; }
         .auth-input:focus { border-color: var(--primary-color); }
         .auth-submit-btn { background-color: var(--primary-color); color: #fff; border: none; padding: 12px; border-radius: 20px; font-weight: bold; font-size: 14px; cursor: pointer; margin-top: 5px; }
 
         /* MENÜ */
         #menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 200; display: none; }
-        #menu-drawer { position: fixed; top: 0; left: -260px; width: 260px; height: 100%; background-color: #1a1a1a; z-index: 300; transition: left 0.25s ease; display: flex; flex-direction: column; overflow-y: auto; }
+        #menu-drawer { position: fixed; top: 0; left: -260px; width: 260px; height: 100%; background-color: var(--card-bg); z-index: 300; transition: left 0.25s ease; display: flex; flex-direction: column; overflow-y: auto; border-right: 1px solid var(--card-border); }
         #menu-drawer.open { left: 0; }
 
-        .content-container { width: 100%; max-width: 600px; padding: 15px; display: flex; flex-direction: column; gap: 15px; }
+        .content-container { width: 100%; max-width: 1000px; padding: 15px; display: flex; flex-direction: column; gap: 15px; }
         .page-sec { display: none; width: 100%; flex-direction: column; gap: 15px; }
         .active-sec { display: flex !important; }
 
-        .video-post { background-color: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); margin-bottom: 15px; }
+        /* MASAÜSTÜ & PC DÜZENİ (GRID LAYOUT) */
+        .video-grid { display: flex; flex-direction: column; gap: 15px; }
+        
+        @media (min-width: 768px) {
+            .video-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+
+        .video-post { background-color: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); display: flex; flex-direction: column; justify-content: space-between; }
         .video-thumbnail { position: relative; width: 100%; padding-bottom: 56.25%; background-color: #222; background-size: cover; background-position: center; display: block; cursor: pointer; }
         .play-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50px; height: 50px; background: rgba(255, 71, 87, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; pointer-events: none; z-index: 2; }
         .play-button::after { content: ""; border-style: solid; border-width: 8px 0 8px 14px; border-color: transparent transparent transparent #fff; margin-left: 3px; }
         
-        .post-title { padding: 14px 15px 4px 15px; font-size: 15px; font-weight: bold; color: #fff; cursor: pointer; }
-        .post-date-info { padding: 0 15px 8px 15px; font-size: 11px; color: #888; display: flex; gap: 12px; }
-        .post-meta { padding: 0 15px 15px 15px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #aaa; }
+        .post-title { padding: 14px 15px 4px 15px; font-size: 15px; font-weight: bold; color: var(--text-color); cursor: pointer; }
+        .post-date-info { padding: 0 15px 8px 15px; font-size: 11px; color: var(--text-sub); display: flex; gap: 12px; }
+        .post-meta { padding: 0 15px 15px 15px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-sub); }
         
         .author-box { display: flex; align-items: center; gap: 8px; cursor: pointer; }
         .author-avatar-small { width: 26px; height: 26px; border-radius: 50%; background-color: #333; background-size: cover; background-position: center; border: 1.5px solid var(--primary-color); }
 
         .post-actions-right { display: flex; align-items: center; gap: 8px; }
-        .fav-btn { background: #2a2a2a; color: #aaa; border: 1px solid #333; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; }
-        .fav-btn.active { color: #ff4757; border-color: #ff4757; background: #2b1d1f; }
+        .fav-btn { background: var(--input-bg); color: var(--text-sub); border: 1px solid var(--card-border); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; }
+        .fav-btn.active { color: #ff4757; border-color: #ff4757; }
 
         .action-btn { background-color: var(--primary-color); color: #fff !important; padding: 8px 14px; border-radius: 20px; font-weight: bold; border: none; cursor: pointer; font-size: 12px; }
 
         .video-player-box { position: relative; width: 100%; padding-bottom: 56.25%; background-color: #000; border-radius: 6px; overflow: hidden; }
         .video-player-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        .back-btn { align-self: flex-start; background-color: #222; color: var(--primary-color); padding: 10px 16px; border-radius: 8px; border: 1px solid #333; cursor: pointer; font-weight: bold; font-size: 13px; }
+        .back-btn { align-self: flex-start; background-color: var(--card-bg); color: var(--primary-color); padding: 10px 16px; border-radius: 8px; border: 1px solid var(--card-border); cursor: pointer; font-weight: bold; font-size: 13px; }
 
-        .channel-card { background-color: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 10px; padding: 12px 15px; display: flex; align-items: center; justify-content: space-between; }
+        .channel-card { background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 10px; padding: 12px 15px; display: flex; align-items: center; justify-content: space-between; }
         .channel-info { display: flex; align-items: center; gap: 12px; cursor: pointer; }
         .channel-avatar { width: 48px; height: 48px; border-radius: 50%; background-color: #333; background-size: cover; background-position: center; border: 2px solid var(--primary-color); }
-        .channel-header-box { background-color: #1a1a1a; border-radius: 12px; overflow: hidden; border: 1px solid #2a2a2a; text-align: center; padding-bottom: 20px; }
-        .channel-banner { width: 100%; height: 120px; background-color: #222; background-size: cover; background-position: center; }
+        .channel-header-box { background-color: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); text-align: center; padding-bottom: 20px; }
+        .channel-banner { width: 100%; height: 140px; background-color: #222; background-size: cover; background-position: center; }
         .channel-main-avatar { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--primary-color); margin: -40px auto 10px auto; background-color: #333; background-size: cover; background-position: center; }
 
         /* COMMENTS */
-        .comments-sec { background: #1a1a1a; padding: 15px; border-radius: 8px; border: 1px solid #2a2a2a; display: flex; flex-direction: column; gap: 10px; }
+        .comments-sec { background: var(--card-bg); padding: 15px; border-radius: 8px; border: 1px solid var(--card-border); display: flex; flex-direction: column; gap: 10px; }
         .comment-input-box { display: flex; gap: 8px; }
-        .comment-input { flex: 1; background: #111; border: 1px solid #333; color: #fff; padding: 10px; border-radius: 6px; font-size: 12px; outline: none; }
+        .comment-input { flex: 1; background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text-color); padding: 10px; border-radius: 6px; font-size: 12px; outline: none; }
         .comment-send-btn { background: var(--primary-color); color: #fff; border: none; padding: 0 15px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; }
-        .comment-item { background: #121212; padding: 10px; border-radius: 6px; border: 1px solid #222; font-size: 12px; }
+        .comment-item { background: var(--bg-color); padding: 10px; border-radius: 6px; border: 1px solid var(--card-border); font-size: 12px; }
         .comment-user { color: var(--primary-color); font-weight: bold; margin-bottom: 3px; }
-        .comment-text { color: #ddd; }
+        .comment-text { color: var(--text-color); }
 
         /* THEME SELECTOR */
-        .theme-box { display: flex; gap: 8px; padding: 10px 20px; border-bottom: 1px solid #222; }
+        .theme-box { display: flex; gap: 8px; padding: 10px 20px; border-bottom: 1px solid var(--card-border); }
         .theme-dot { width: 22px; height: 22px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; }
-        .theme-dot.active { border-color: #fff; }
+        .theme-dot.active { border-color: var(--text-color); }
     </style>
 </head>
 <body>
@@ -109,17 +136,17 @@
             </div>
 
             <form id="form-login" class="auth-form">
-                <label style="font-size:12px; color:#aaa;">E-posta Adresi</label>
+                <label style="font-size:12px; color:var(--text-sub);">E-posta Adresi</label>
                 <input type="email" id="login-email" class="auth-input" placeholder="ornek@gmail.com" required>
-                <label style="font-size:12px; color:#aaa;">Şifre</label>
+                <label style="font-size:12px; color:var(--text-sub);">Şifre</label>
                 <input type="password" id="login-password" class="auth-input" placeholder="••••••••" required>
                 <button type="submit" class="auth-submit-btn">Giriş Yap</button>
             </form>
 
             <form id="form-register" class="auth-form" style="display:none;">
-                <label style="font-size:12px; color:#aaa;">E-posta Adresi</label>
+                <label style="font-size:12px; color:var(--text-sub);">E-posta Adresi</label>
                 <input type="email" id="reg-email" class="auth-input" placeholder="ornek@gmail.com" required>
-                <label style="font-size:12px; color:#aaa;">Şifre Oluştur</label>
+                <label style="font-size:12px; color:var(--text-sub);">Şifre Oluştur</label>
                 <input type="password" id="reg-password" class="auth-input" placeholder="En az 6 karakter" required minlength="6">
                 <button type="submit" class="auth-submit-btn">Hesap Oluştur</button>
             </form>
@@ -128,13 +155,13 @@
 
     <div id="menu-overlay"></div>
     <div id="menu-drawer">
-        <div style="padding: 18px; background: #000; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222;">
+        <div style="padding: 18px; background: var(--header-bg); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border);">
             <span style="color:var(--primary-color); font-weight:bold;">📁 Menü & Kategoriler</span>
-            <span style="color:#aaa; font-size:22px; cursor:pointer;" id="btn-close-drawer">✕</span>
+            <span style="color:var(--text-sub); font-size:22px; cursor:pointer;" id="btn-close-drawer">✕</span>
         </div>
 
         <div class="theme-box">
-            <span style="font-size:11px; color:#aaa; align-self:center;">Tema:</span>
+            <span style="font-size:11px; color:var(--text-sub); align-self:center;">Vurgu:</span>
             <div class="theme-dot active" style="background:#ff4757;" onclick="setTheme('#ff4757')"></div>
             <div class="theme-dot" style="background:#1e90ff;" onclick="setTheme('#1e90ff')"></div>
             <div class="theme-dot" style="background:#2ed573;" onclick="setTheme('#2ed573')"></div>
@@ -143,16 +170,16 @@
         </div>
 
         <ul style="list-style: none; padding: 10px 0;">
-            <li data-cat="all" class="cat-item" style="padding: 14px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🔥 Tüm Videolar</li>
-            <li id="btn-favs-menu" style="padding: 14px 20px; color: #ff4757; cursor: pointer; border-bottom: 1px solid #222; font-weight:bold;">❤️ Favorilerim</li>
-            <li id="btn-random-menu" style="padding: 14px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🎲 Rastgele Video İzle</li>
-            <li data-cat="sub" class="cat-item" style="padding: 14px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🇹🇷 Türkçe Altyazılı</li>
-            <li data-cat="amateur" class="cat-item" style="padding: 14px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🏠 Amatör</li>
-            <li data-cat="mom" class="cat-item" style="padding: 14px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">👩‍👧‍👦 Anne</li>
-            <li data-cat="sibling" class="cat-item" style="padding: 14px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">👧 Kardeş</li>
-            <li data-cat="bath" class="cat-item" style="padding: 14px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">自由 Banyo</li>
-            <li data-cat="fullhd" class="cat-item" style="padding: 14px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🎬 Full HD</li>
-            <li data-cat="lesbian" class="cat-item" style="padding: 14px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">👭 Lezbiyen</li>
+            <li data-cat="all" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">🔥 Tüm Videolar</li>
+            <li id="btn-favs-menu" style="padding: 14px 20px; color: var(--primary-color); cursor: pointer; border-bottom: 1px solid var(--card-border); font-weight:bold;">❤️ Favorilerim</li>
+            <li id="btn-random-menu" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">🎲 Rastgele Video İzle</li>
+            <li data-cat="sub" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">🇹🇷 Türkçe Altyazılı</li>
+            <li data-cat="amateur" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">🏠 Amatör</li>
+            <li data-cat="mom" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">👩‍👧‍👦 Anne</li>
+            <li data-cat="sibling" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">👧 Kardeş</li>
+            <li data-cat="bath" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">🛁 Banyo</li>
+            <li data-cat="fullhd" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">🎬 Full HD</li>
+            <li data-cat="lesbian" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">👭 Lezbiyen</li>
         </ul>
     </div>
 
@@ -162,6 +189,9 @@
             <div class="header-logo" id="logo-home">2PBVAGE 🤍</div>
         </div>
         <div class="user-auth-box">
+            <button class="theme-toggle-btn" id="btn-toggle-daynight">
+                <span id="daynight-icon">☀️</span> <span id="daynight-text">Gündüz</span>
+            </button>
             <div id="auth-logged-out">
                 <button class="auth-btn" id="btn-open-auth">Giriş / Üye Ol</button>
             </div>
@@ -181,90 +211,92 @@
         <div id="sec-feed" class="page-sec active-sec">
             <div id="cat-title" style="font-size: 15px; font-weight: bold; color: var(--primary-color); margin-bottom: 5px;">🔥 Tüm Videolar</div>
 
-            <!-- VİDEO 4 -->
-            <div class="video-post" data-id="v4" data-cats="sub,fullhd">
-                <div class="video-thumbnail trigger-play" data-id="v4" style="background-image: url('https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg');">
-                    <div class="play-button"></div>
-                </div>
-                <div class="post-title trigger-play" data-id="v4">Tüylü Vajinalı Köylü Kızı Bir Yabancı Tarafından Sikişildi - Sweetie Fox</div>
-                <div class="post-date-info">
-                    <span>📅 13 Ekim 2026</span>
-                    <span>👁️ <span class="view-tag-v4">0</span> izlenme</span>
-                </div>
-                <div class="post-meta">
-                    <div class="author-box trigger-profile" data-author="Sweetie Fox">
-                        <div class="author-avatar-small" style="background-image: url('https://ei.phncdn.com/(m=ewILGCjadOf)(mh=59qrk8LnBE3Z9kTL)43ca43da-b27e-42f2-b237-40c5c13261b1.jpg');"></div>
-                        <strong style="color:var(--primary-color);">Sweetie Fox ✓</strong>
+            <div class="video-grid">
+                <!-- VİDEO 4 -->
+                <div class="video-post" data-id="v4" data-cats="sub,fullhd">
+                    <div class="video-thumbnail trigger-play" data-id="v4" style="background-image: url('https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg');">
+                        <div class="play-button"></div>
                     </div>
-                    <div class="post-actions-right">
-                        <button class="fav-btn trigger-fav" data-id="v4">♥</button>
-                        <button class="action-btn trigger-play" data-id="v4">🚀 İzle</button>
+                    <div class="post-title trigger-play" data-id="v4">Tüylü Vajinalı Köylü Kızı Bir Yabancı Tarafından Sikişildi - Sweetie Fox</div>
+                    <div class="post-date-info">
+                        <span>📅 13 Ekim 2026</span>
+                        <span>👁️ <span class="view-tag-v4">0</span> izlenme</span>
+                    </div>
+                    <div class="post-meta">
+                        <div class="author-box trigger-profile" data-author="Sweetie Fox">
+                            <div class="author-avatar-small" style="background-image: url('https://ei.phncdn.com/(m=ewILGCjadOf)(mh=59qrk8LnBE3Z9kTL)43ca43da-b27e-42f2-b237-40c5c13261b1.jpg');"></div>
+                            <strong style="color:var(--primary-color);">Sweetie Fox ✓</strong>
+                        </div>
+                        <div class="post-actions-right">
+                            <button class="fav-btn trigger-fav" data-id="v4">♥</button>
+                            <button class="action-btn trigger-play" data-id="v4">🚀 İzle</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- VİDEO 3 -->
-            <div class="video-post" data-id="v3" data-cats="lesbian,fullhd">
-                <div class="video-thumbnail trigger-play" data-id="v3" style="background-image: url('https://i.postimg.cc/f3xPmkCr/XAz-Dr-ONXl-P3D8v3o-NMKp7LGK-640w.webp');">
-                    <div class="play-button"></div>
-                </div>
-                <div class="post-title trigger-play" data-id="v3">Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor</div>
-                <div class="post-date-info">
-                    <span>📅 12 Ekim 2026</span>
-                    <span>👁️ <span class="view-tag-v3">0</span> izlenme</span>
-                </div>
-                <div class="post-meta">
-                    <div class="author-box trigger-profile" data-author="Sophie Rain">
-                        <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/DPFjgyLy/image.jpg');"></div>
-                        <strong style="color:var(--primary-color);">Sophie Rain ✓</strong>
+                <!-- VİDEO 3 -->
+                <div class="video-post" data-id="v3" data-cats="lesbian,fullhd">
+                    <div class="video-thumbnail trigger-play" data-id="v3" style="background-image: url('https://i.postimg.cc/f3xPmkCr/XAz-Dr-ONXl-P3D8v3o-NMKp7LGK-640w.webp');">
+                        <div class="play-button"></div>
                     </div>
-                    <div class="post-actions-right">
-                        <button class="fav-btn trigger-fav" data-id="v3">♥</button>
-                        <button class="action-btn trigger-play" data-id="v3">🚀 İzle</button>
+                    <div class="post-title trigger-play" data-id="v3">Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor</div>
+                    <div class="post-date-info">
+                        <span>📅 12 Ekim 2026</span>
+                        <span>👁️ <span class="view-tag-v3">0</span> izlenme</span>
+                    </div>
+                    <div class="post-meta">
+                        <div class="author-box trigger-profile" data-author="Sophie Rain">
+                            <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/DPFjgyLy/image.jpg');"></div>
+                            <strong style="color:var(--primary-color);">Sophie Rain ✓</strong>
+                        </div>
+                        <div class="post-actions-right">
+                            <button class="fav-btn trigger-fav" data-id="v3">♥</button>
+                            <button class="action-btn trigger-play" data-id="v3">🚀 İzle</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- VİDEO 2 -->
-            <div class="video-post" data-id="v2" data-cats="amateur">
-                <div class="video-thumbnail trigger-play" data-id="v2" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');">
-                    <div class="play-button"></div>
-                </div>
-                <div class="post-title trigger-play" data-id="v2">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
-                <div class="post-date-info">
-                    <span>📅 12 Ekim 2026</span>
-                    <span>👁️ <span class="view-tag-v2">0</span> izlenme</span>
-                </div>
-                <div class="post-meta">
-                    <div class="author-box trigger-profile" data-author="comatozze">
-                        <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/pB3ntggN/image.jpg');"></div>
-                        <strong style="color:var(--primary-color);">comatozze ✓</strong>
+                <!-- VİDEO 2 -->
+                <div class="video-post" data-id="v2" data-cats="amateur">
+                    <div class="video-thumbnail trigger-play" data-id="v2" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');">
+                        <div class="play-button"></div>
                     </div>
-                    <div class="post-actions-right">
-                        <button class="fav-btn trigger-fav" data-id="v2">♥</button>
-                        <button class="action-btn trigger-play" data-id="v2">🚀 İzle</button>
+                    <div class="post-title trigger-play" data-id="v2">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
+                    <div class="post-date-info">
+                        <span>📅 12 Ekim 2026</span>
+                        <span>👁️ <span class="view-tag-v2">0</span> izlenme</span>
+                    </div>
+                    <div class="post-meta">
+                        <div class="author-box trigger-profile" data-author="comatozze">
+                            <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/pB3ntggN/image.jpg');"></div>
+                            <strong style="color:var(--primary-color);">comatozze ✓</strong>
+                        </div>
+                        <div class="post-actions-right">
+                            <button class="fav-btn trigger-fav" data-id="v2">♥</button>
+                            <button class="action-btn trigger-play" data-id="v2">🚀 İzle</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- VİDEO 1 -->
-            <div class="video-post" data-id="v1" data-cats="fullhd">
-                <div class="video-thumbnail trigger-play" data-id="v1" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');">
-                    <div class="play-button"></div>
-                </div>
-                <div class="post-title trigger-play" data-id="v1">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
-                <div class="post-date-info">
-                    <span>📅 12 Ekim 2026</span>
-                    <span>👁️ <span class="view-tag-v1">0</span> izlenme</span>
-                </div>
-                <div class="post-meta">
-                    <div class="author-box trigger-profile" data-author="Sophie Rain">
-                        <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/DPFjgyLy/image.jpg');"></div>
-                        <strong style="color:var(--primary-color);">Sophie Rain ✓</strong>
+                <!-- VİDEO 1 -->
+                <div class="video-post" data-id="v1" data-cats="fullhd">
+                    <div class="video-thumbnail trigger-play" data-id="v1" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');">
+                        <div class="play-button"></div>
                     </div>
-                    <div class="post-actions-right">
-                        <button class="fav-btn trigger-fav" data-id="v1">♥</button>
-                        <button class="action-btn trigger-play" data-id="v1">🚀 İzle</button>
+                    <div class="post-title trigger-play" data-id="v1">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
+                    <div class="post-date-info">
+                        <span>📅 12 Ekim 2026</span>
+                        <span>👁️ <span class="view-tag-v1">0</span> izlenme</span>
+                    </div>
+                    <div class="post-meta">
+                        <div class="author-box trigger-profile" data-author="Sophie Rain">
+                            <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/DPFjgyLy/image.jpg');"></div>
+                            <strong style="color:var(--primary-color);">Sophie Rain ✓</strong>
+                        </div>
+                        <div class="post-actions-right">
+                            <button class="fav-btn trigger-fav" data-id="v1">♥</button>
+                            <button class="action-btn trigger-play" data-id="v1">🚀 İzle</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -273,8 +305,8 @@
         <!-- İZLEME SAYFASI -->
         <div id="sec-watch" class="page-sec">
             <button class="back-btn" id="btn-back-watch">⬅ Ana Sayfaya Dön</button>
-            <h1 id="v-title" style="font-size: 18px; color: #fff;"></h1>
-            <div style="font-size: 12px; color: #888; display: flex; gap: 15px; margin-top: -5px;">
+            <h1 id="v-title" style="font-size: 18px; color: var(--text-color);"></h1>
+            <div style="font-size: 12px; color: var(--text-sub); display: flex; gap: 15px; margin-top: -5px;">
                 <span id="v-date">📅 -</span>
                 <span>👁️ <span id="v-views">0</span> izlenme</span>
             </div>
@@ -285,13 +317,13 @@
                 <div class="channel-info" id="watch-profile-box">
                     <div class="channel-avatar" id="v-avatar"></div>
                     <div>
-                        <div style="font-size: 15px; font-weight: bold; color: #fff;" id="v-author"></div>
+                        <div style="font-size: 15px; font-weight: bold; color: var(--text-color);" id="v-author"></div>
                     </div>
                 </div>
             </div>
-            <div style="background:#1a1a1a; padding:15px; border-radius:8px; border:1px solid #2a2a2a;">
+            <div style="background:var(--card-bg); padding:15px; border-radius:8px; border:1px solid var(--card-border);">
                 <div style="font-size:14px; font-weight:bold; color:var(--primary-color); margin-bottom:8px;">📌 Açıklama</div>
-                <div id="v-desc" style="font-size:13px; color:#ccc; line-height:1.5;"></div>
+                <div id="v-desc" style="font-size:13px; color:var(--text-color); line-height:1.5;"></div>
             </div>
 
             <!-- YORUM ALANI -->
@@ -311,10 +343,10 @@
             <div class="channel-header-box">
                 <div class="channel-banner" id="p-banner"></div>
                 <div class="channel-main-avatar" id="p-avatar"></div>
-                <div style="font-size: 20px; font-weight: bold; color: #fff;" id="p-title"></div>
+                <div style="font-size: 20px; font-weight: bold; color: var(--text-color);" id="p-title"></div>
             </div>
             <div style="font-size: 15px; font-weight: bold; color: var(--primary-color); margin-top: 10px;">📹 Kanalın Videoları</div>
-            <div id="p-videos"></div>
+            <div id="p-videos" class="video-grid"></div>
         </div>
     </div>
 
@@ -332,6 +364,29 @@
         var currentVideoId = "";
         var currentUser = null;
 
+        // GECE / GÜNDÜZ TEMA SİSTEMİ
+        function toggleDayNightTheme() {
+            var isLight = document.body.classList.toggle('light-theme');
+            localStorage.setItem('2pbvage_daynight', isLight ? 'light' : 'dark');
+            updateDayNightUI(isLight);
+        }
+
+        function updateDayNightUI(isLight) {
+            document.getElementById('daynight-icon').innerText = isLight ? '🌙' : '☀️';
+            document.getElementById('daynight-text').innerText = isLight ? 'Gece' : 'Gündüz';
+        }
+
+        var savedMode = localStorage.getItem('2pbvage_daynight');
+        if(savedMode === 'light') {
+            document.body.classList.add('light-theme');
+            updateDayNightUI(true);
+        } else {
+            updateDayNightUI(false);
+        }
+
+        document.getElementById('btn-toggle-daynight').onclick = toggleDayNightTheme;
+
+        // RENK VURGU TEMA SİSTEMİ
         function setTheme(color) {
             document.documentElement.style.setProperty('--primary-color', color);
             localStorage.setItem('2pbvage_theme', color);
@@ -509,7 +564,7 @@
                     '<div class="comment-text">' + list[i].text + '</div>' +
                 '</div>';
             }
-            document.getElementById('comments-list').innerHTML = html || '<div style="font-size:12px; color:#666;">Henüz yorum yapılmamış. İlk yorumu sen yap!</div>';
+            document.getElementById('comments-list').innerHTML = html || '<div style="font-size:12px; color:var(--text-sub);">Henüz yorum yapılmamış. İlk yorumu sen yap!</div>';
         }
 
         document.getElementById('btn-add-comment').onclick = function() {
@@ -580,7 +635,7 @@
                 var id = posts[i].getAttribute('data-id');
                 var item = db[id];
                 if(item && (item.title.toLowerCase().indexOf(q) > -1 || item.author.toLowerCase().indexOf(q) > -1)) {
-                    posts[i].style.display = 'block';
+                    posts[i].style.display = 'flex';
                 } else {
                     posts[i].style.display = 'none';
                 }
@@ -595,7 +650,7 @@
             var posts = document.querySelectorAll('.video-post');
             for(var i=0; i<posts.length; i++) {
                 var id = posts[i].getAttribute('data-id');
-                posts[i].style.display = (favs.indexOf(id) > -1) ? 'block' : 'none';
+                posts[i].style.display = (favs.indexOf(id) > -1) ? 'flex' : 'none';
             }
         };
 
@@ -628,12 +683,12 @@
             for (var i = 0; i < posts.length; i++) {
                 var p = posts[i];
                 if (cat === 'all') {
-                    p.style.display = 'block';
+                    p.style.display = 'flex';
                 } else {
                     var catsAttr = p.getAttribute('data-cats') || '';
                     var catList = catsAttr.split(',');
                     if (catList.indexOf(cat) !== -1) {
-                        p.style.display = 'block';
+                        p.style.display = 'flex';
                     } else {
                         p.style.display = 'none';
                     }

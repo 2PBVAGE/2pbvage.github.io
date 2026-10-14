@@ -6,36 +6,36 @@
     <title>2PBVAGE 🤍</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { background-color: #121212; color: #ffffff; font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        body { background-color: #121212; color: #ffffff; font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding-bottom: 50px; }
 
         /* HEADER */
-        .header-bar { width: 100%; max-width: 600px; background-color: #000; display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 99999; }
+        .header-bar { width: 100%; max-width: 600px; background-color: #000; display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; }
         .header-left { display: flex; align-items: center; gap: 10px; }
         .header-logo { color: #fff; font-size: 19px; font-weight: 800; cursor: pointer; padding: 5px; }
-        .menu-icon-btn { font-size: 24px; cursor: pointer; padding: 8px 12px; color: #fff; background: #222; border: 1px solid #444; border-radius: 6px; user-select: none; touch-action: manipulation; }
+        .menu-icon-btn { font-size: 20px; cursor: pointer; padding: 8px 14px; color: #fff; background: #222; border: 1px solid #444; border-radius: 6px; }
         
         .user-auth-box { display: flex; align-items: center; gap: 10px; }
-        .auth-btn { background-color: #ff4757; color: #fff; border: none; padding: 10px 16px; border-radius: 15px; font-size: 12px; font-weight: bold; cursor: pointer; touch-action: manipulation; }
-        .user-email-tag { font-size: 11px; color: #ff4757; font-weight: bold; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .logout-btn { background: #222; color: #aaa; border: 1px solid #333; padding: 6px 10px; border-radius: 12px; font-size: 11px; cursor: pointer; touch-action: manipulation; }
+        .auth-btn { background-color: #ff4757; color: #fff; border: none; padding: 10px 16px; border-radius: 15px; font-size: 12px; font-weight: bold; cursor: pointer; }
+        .user-email-tag { font-size: 11px; color: #ff4757; font-weight: bold; max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .logout-btn { background: #222; color: #aaa; border: 1px solid #333; padding: 6px 10px; border-radius: 12px; font-size: 11px; cursor: pointer; }
 
-        /* MODAL / AUTH POPUP */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 999999; display: none; align-items: center; justify-content: center; padding: 20px; }
+        /* MODAL */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
         .auth-modal-card { background-color: #1a1a1a; border: 1px solid #333; border-radius: 14px; width: 100%; max-width: 360px; padding: 25px 20px; text-align: center; position: relative; }
-        .auth-close-btn { position: absolute; top: 12px; right: 15px; color: #aaa; font-size: 22px; cursor: pointer; padding: 5px; touch-action: manipulation; }
+        .auth-close-btn { position: absolute; top: 12px; right: 15px; color: #aaa; font-size: 22px; cursor: pointer; padding: 5px; }
         
         .auth-tabs { display: flex; border-bottom: 1px solid #333; margin-bottom: 20px; }
-        .auth-tab { flex: 1; padding: 10px; color: #aaa; font-weight: bold; font-size: 14px; cursor: pointer; touch-action: manipulation; }
+        .auth-tab { flex: 1; padding: 10px; color: #aaa; font-weight: bold; font-size: 14px; cursor: pointer; }
         .auth-tab.active { color: #ff4757; border-bottom: 2px solid #ff4757; }
         
         .auth-form { display: flex; flex-direction: column; gap: 12px; text-align: left; }
         .auth-input { background-color: #111; border: 1px solid #333; color: #fff; padding: 12px; border-radius: 8px; font-size: 13px; outline: none; }
         .auth-input:focus { border-color: #ff4757; }
-        .auth-submit-btn { background-color: #ff4757; color: #fff; border: none; padding: 12px; border-radius: 20px; font-weight: bold; font-size: 14px; cursor: pointer; margin-top: 5px; touch-action: manipulation; }
+        .auth-submit-btn { background-color: #ff4757; color: #fff; border: none; padding: 12px; border-radius: 20px; font-weight: bold; font-size: 14px; cursor: pointer; margin-top: 5px; }
 
-        /* KATEGORİ MENÜSÜ */
-        #menu-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); z-index: 88888; display: none; }
-        #menu-drawer { position: fixed; top: 0; left: -280px; width: 260px; height: 100vh; background-color: #1a1a1a; z-index: 99999; transition: left 0.3s ease; display: flex; flex-direction: column; }
+        /* MENÜ ÇEKMECESİ */
+        #menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 200; display: none; }
+        #menu-drawer { position: fixed; top: 0; left: -260px; width: 260px; height: 100%; background-color: #1a1a1a; z-index: 300; transition: left 0.25s ease; display: flex; flex-direction: column; }
         #menu-drawer.open { left: 0; }
 
         .content-container { width: 100%; max-width: 600px; padding: 15px; display: flex; flex-direction: column; gap: 15px; }
@@ -43,27 +43,26 @@
         .active-sec { display: flex !important; }
 
         .video-post { background-color: #1e1e1e; border-radius: 12px; overflow: hidden; border: 1px solid #222; margin-bottom: 15px; }
-        .video-thumbnail { position: relative; width: 100%; padding-bottom: 56.25%; background-size: cover; background-position: center; display: block; cursor: pointer; background-color: #000; touch-action: manipulation; }
-        .play-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 55px; height: 55px; background: rgba(255, 71, 87, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; pointer-events: none; }
-        .play-button::after { content: ""; border-style: solid; border-width: 10px 0 10px 18px; border-color: transparent transparent transparent #fff; margin-left: 4px; }
+        .video-thumbnail { position: relative; width: 100%; padding-bottom: 56.25%; background-size: cover; background-position: center; display: block; cursor: pointer; background-color: #000; }
+        .play-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50px; height: 50px; background: rgba(255, 71, 87, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+        .play-button::after { content: ""; border-style: solid; border-width: 8px 0 8px 14px; border-color: transparent transparent transparent #fff; margin-left: 3px; }
         
-        .post-title { padding: 14px 15px 8px 15px; font-size: 15px; font-weight: bold; color: #fff; cursor: pointer; touch-action: manipulation; }
+        .post-title { padding: 14px 15px 8px 15px; font-size: 15px; font-weight: bold; color: #fff; cursor: pointer; }
         .post-meta { padding: 0 15px 15px 15px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #aaa; }
         
-        .author-box { display: flex; align-items: center; gap: 8px; cursor: pointer; touch-action: manipulation; }
+        .author-box { display: flex; align-items: center; gap: 8px; cursor: pointer; }
         .author-avatar-small { width: 26px; height: 26px; border-radius: 50%; background-size: cover; background-position: center; border: 1.5px solid #ff4757; }
 
-        .action-btn { background-color: #ff4757; color: #fff !important; padding: 12px 20px; border-radius: 20px; font-weight: bold; border: none; cursor: pointer; font-size: 13px; touch-action: manipulation; }
-        
-        .sub-btn { background-color: #ff4757; color: #fff; border: none; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; cursor: pointer; touch-action: manipulation; }
+        .action-btn { background-color: #ff4757; color: #fff !important; padding: 10px 16px; border-radius: 20px; font-weight: bold; border: none; cursor: pointer; font-size: 13px; }
+        .sub-btn { background-color: #ff4757; color: #fff; border: none; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; cursor: pointer; }
         .sub-btn.subscribed { background-color: #333 !important; color: #aaa !important; border: 1px solid #444; }
 
         .video-player-box { position: relative; width: 100%; padding-bottom: 56.25%; background-color: #000; border-radius: 6px; overflow: hidden; }
         .video-player-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        .back-btn { align-self: flex-start; background-color: #222; color: #ff4757; padding: 10px 16px; border-radius: 8px; border: 1px solid #333; cursor: pointer; font-weight: bold; font-size: 13px; touch-action: manipulation; }
+        .back-btn { align-self: flex-start; background-color: #222; color: #ff4757; padding: 10px 16px; border-radius: 8px; border: 1px solid #333; cursor: pointer; font-weight: bold; font-size: 13px; }
 
         .channel-card { background-color: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 10px; padding: 12px 15px; display: flex; align-items: center; justify-content: space-between; }
-        .channel-info { display: flex; align-items: center; gap: 12px; cursor: pointer; touch-action: manipulation; }
+        .channel-info { display: flex; align-items: center; gap: 12px; cursor: pointer; }
         .channel-avatar { width: 48px; height: 48px; border-radius: 50%; background-size: cover; background-position: center; border: 2px solid #ff4757; }
         .channel-header-box { background-color: #1a1a1a; border-radius: 12px; overflow: hidden; border: 1px solid #2a2a2a; text-align: center; padding-bottom: 20px; }
         .channel-banner { width: 100%; height: 100px; background-size: cover; background-position: center; background-color: #ff4757; }
@@ -72,7 +71,7 @@
 </head>
 <body>
 
-    <!-- ÜYE OL / GİRİŞ YAP MODAL -->
+    <!-- MODAL -->
     <div id="auth-modal" class="modal-overlay">
         <div class="auth-modal-card">
             <span class="auth-close-btn" id="btn-close-modal">✕</span>
@@ -99,7 +98,7 @@
         </div>
     </div>
 
-    <!-- KATEGORİ MENÜSÜ -->
+    <!-- MENÜ ÇEKMECESİ -->
     <div id="menu-overlay"></div>
     <div id="menu-drawer">
         <div style="padding: 18px; background: #000; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222;">
@@ -230,7 +229,7 @@
                 <div class="channel-main-avatar" id="p-avatar"></div>
                 <div style="font-size: 20px; font-weight: bold; color: #fff;" id="p-title"></div>
                 <div style="font-size: 13px; color: #ff4757; margin-top: 5px; font-weight:bold;"><span id="p-sub-count">1420</span> Abone</div>
-                <button class="sub-btn" id="p-sub-btn" style="margin-top:12px;">Abone Ol</button>
+                <button class="sub-btn" id="p-sub-btn-profile" style="margin-top:12px;">Abone Ol</button>
             </div>
             <div style="font-size: 15px; font-weight: bold; color: #ff4757; margin-top: 10px;">📹 Kanalın Videoları</div>
             <div id="p-videos"></div>
@@ -269,4 +268,10 @@
         }
 
         function switchTab(tab) {
-        
+            if(tab === 'login') {
+                document.getElementById('tab-login').className = 'auth-tab active';
+                document.getElementById('tab-register').className = 'auth-tab';
+                document.getElementById('form-login').style.display = 'flex';
+                document.getElementById('form-register').style.display = 'none';
+            } else {
+                document.getElementById('

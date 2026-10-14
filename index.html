@@ -198,7 +198,7 @@
             <button class="back-btn" id="btn-back-watch">⬅ Ana Sayfaya Dön</button>
             <h1 id="v-title" style="font-size: 18px; color: #fff;"></h1>
             <div class="video-player-box">
-                <iframe id="v-iframe" src="" allowfullscreen sandbox="allow-scripts allow-same-origin allow-presentation"></iframe>
+                <iframe id="v-iframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
             </div>
             <div class="channel-card">
                 <div class="channel-info" id="watch-profile-box">
@@ -228,6 +228,9 @@
     </div>
 
     <script>
+        // Reklam ve Yeni Sekme Engelleme Sistemi
+        window.open = function() { return null; };
+
         var db = {
             v1: { 
                 title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", 

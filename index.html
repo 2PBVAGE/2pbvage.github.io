@@ -70,7 +70,7 @@
         .page-sec { display: none; width: 100%; flex-direction: column; gap: 15px; }
         .active-sec { display: flex !important; }
 
-        /* MASAÜSTÜ & PC DÜZENİ (GRID LAYOUT) */
+        /* MASAÜSTÜ & PC DÜZENİ */
         .video-grid { display: flex; flex-direction: column; gap: 15px; }
         
         @media (min-width: 768px) {
@@ -109,15 +109,6 @@
         .channel-header-box { background-color: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); text-align: center; padding-bottom: 20px; }
         .channel-banner { width: 100%; height: 140px; background-color: #222; background-size: cover; background-position: center; }
         .channel-main-avatar { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--primary-color); margin: -40px auto 10px auto; background-color: #333; background-size: cover; background-position: center; }
-
-        /* COMMENTS */
-        .comments-sec { background: var(--card-bg); padding: 15px; border-radius: 8px; border: 1px solid var(--card-border); display: flex; flex-direction: column; gap: 10px; }
-        .comment-input-box { display: flex; gap: 8px; }
-        .comment-input { flex: 1; background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text-color); padding: 10px; border-radius: 6px; font-size: 12px; outline: none; }
-        .comment-send-btn { background: var(--primary-color); color: #fff; border: none; padding: 0 15px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; }
-        .comment-item { background: var(--bg-color); padding: 10px; border-radius: 6px; border: 1px solid var(--card-border); font-size: 12px; }
-        .comment-user { color: var(--primary-color); font-weight: bold; margin-bottom: 3px; }
-        .comment-text { color: var(--text-color); }
 
         /* THEME SELECTOR */
         .theme-box { display: flex; gap: 8px; padding: 10px 20px; border-bottom: 1px solid var(--card-border); }
@@ -220,7 +211,6 @@
                     <div class="post-title trigger-play" data-id="v4">Tüylü Vajinalı Köylü Kızı Bir Yabancı Tarafından Sikişildi - Sweetie Fox</div>
                     <div class="post-date-info">
                         <span>📅 13 Ekim 2026</span>
-                        <span>👁️ <span class="view-tag-v4">0</span> izlenme</span>
                     </div>
                     <div class="post-meta">
                         <div class="author-box trigger-profile" data-author="Sweetie Fox">
@@ -242,7 +232,6 @@
                     <div class="post-title trigger-play" data-id="v3">Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor</div>
                     <div class="post-date-info">
                         <span>📅 12 Ekim 2026</span>
-                        <span>👁️ <span class="view-tag-v3">0</span> izlenme</span>
                     </div>
                     <div class="post-meta">
                         <div class="author-box trigger-profile" data-author="Sophie Rain">
@@ -264,7 +253,6 @@
                     <div class="post-title trigger-play" data-id="v2">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
                     <div class="post-date-info">
                         <span>📅 12 Ekim 2026</span>
-                        <span>👁️ <span class="view-tag-v2">0</span> izlenme</span>
                     </div>
                     <div class="post-meta">
                         <div class="author-box trigger-profile" data-author="comatozze">
@@ -286,7 +274,6 @@
                     <div class="post-title trigger-play" data-id="v1">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
                     <div class="post-date-info">
                         <span>📅 12 Ekim 2026</span>
-                        <span>👁️ <span class="view-tag-v1">0</span> izlenme</span>
                     </div>
                     <div class="post-meta">
                         <div class="author-box trigger-profile" data-author="Sophie Rain">
@@ -308,7 +295,6 @@
             <h1 id="v-title" style="font-size: 18px; color: var(--text-color);"></h1>
             <div style="font-size: 12px; color: var(--text-sub); display: flex; gap: 15px; margin-top: -5px;">
                 <span id="v-date">📅 -</span>
-                <span>👁️ <span id="v-views">0</span> izlenme</span>
             </div>
             <div class="video-player-box">
                 <iframe id="v-iframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
@@ -324,16 +310,6 @@
             <div style="background:var(--card-bg); padding:15px; border-radius:8px; border:1px solid var(--card-border);">
                 <div style="font-size:14px; font-weight:bold; color:var(--primary-color); margin-bottom:8px;">📌 Açıklama</div>
                 <div id="v-desc" style="font-size:13px; color:var(--text-color); line-height:1.5;"></div>
-            </div>
-
-            <!-- YORUM ALANI -->
-            <div class="comments-sec">
-                <div style="font-size: 14px; font-weight: bold; color: var(--primary-color);">💬 Yorumlar</div>
-                <div class="comment-input-box">
-                    <input type="text" id="comment-text" class="comment-input" placeholder="Yorumunuzu yazın...">
-                    <button class="comment-send-btn" id="btn-add-comment">Gönder</button>
-                </div>
-                <div id="comments-list" style="display:flex; flex-direction:column; gap:8px; margin-top:5px;"></div>
             </div>
         </div>
 
@@ -394,26 +370,6 @@
 
         var savedTheme = localStorage.getItem('2pbvage_theme');
         if(savedTheme) setTheme(savedTheme);
-
-        function getViews() {
-            return JSON.parse(localStorage.getItem('2pbvage_views') || '{}');
-        }
-
-        function updateViewsUI() {
-            var views = getViews();
-            for(var id in db) {
-                var count = views[id] || 0;
-                var tags = document.querySelectorAll('.view-tag-' + id);
-                for(var i=0; i<tags.length; i++) tags[i].innerText = count;
-            }
-        }
-
-        function addView(id) {
-            var views = getViews();
-            views[id] = (views[id] || 0) + 1;
-            localStorage.setItem('2pbvage_views', JSON.stringify(views));
-            updateViewsUI();
-        }
 
         function getFavs() {
             var email = currentUser ? currentUser.email : 'guest';
@@ -486,35 +442,50 @@
         document.getElementById('tab-login').onclick = function() { switchTab('login'); };
         document.getElementById('tab-register').onclick = function() { switchTab('register'); };
 
+        // DÜZELTİLMİŞ GİRİŞ YAP FORMU
         document.getElementById('form-login').onsubmit = function(e) {
             e.preventDefault();
-            var email = document.getElementById('login-email').value.trim();
+            var email = document.getElementById('login-email').value.trim().toLowerCase();
             var password = document.getElementById('login-password').value.trim();
-            var users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
+            
+            var users = {};
+            try {
+                users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
+            } catch(err) { users = {}; }
+
             if(!users[email] || users[email].password !== password) {
                 alert("Hatalı e-posta veya şifre!");
                 return;
             }
+            
             localStorage.setItem("2pbvage_session", JSON.stringify({ email: email }));
             checkAuthState();
             toggleAuthModal(false);
+            alert("Başarıyla giriş yapıldı!");
         };
 
+        // DÜZELTİLMİŞ KAYIT OL FORMU
         document.getElementById('form-register').onsubmit = function(e) {
             e.preventDefault();
-            var email = document.getElementById('reg-email').value.trim();
+            var email = document.getElementById('reg-email').value.trim().toLowerCase();
             var password = document.getElementById('reg-password').value.trim();
-            var users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
+            
+            var users = {};
+            try {
+                users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
+            } catch(err) { users = {}; }
+
             if(users[email]) {
                 alert("Bu e-posta adresi zaten kayıtlı!");
                 return;
             }
+            
             users[email] = { password: password };
             localStorage.setItem('2pbvage_users', JSON.stringify(users));
             localStorage.setItem("2pbvage_session", JSON.stringify({ email: email }));
             checkAuthState();
             toggleAuthModal(false);
-            alert("Hesabınız oluşturuldu ve giriş yapıldı!");
+            alert("Hesabınız oluşturuldu ve otomatik giriş yapıldı!");
         };
 
         document.getElementById('btn-logout').onclick = function() {
@@ -554,51 +525,17 @@
         document.getElementById('btn-open-auth').onclick = function() { toggleAuthModal(true); };
         document.getElementById('btn-close-modal').onclick = function() { toggleAuthModal(false); };
 
-        function loadComments(id) {
-            var allComms = JSON.parse(localStorage.getItem('2pbvage_comments') || '{}');
-            var list = allComms[id] || [];
-            var html = "";
-            for(var i=0; i<list.length; i++) {
-                html += '<div class="comment-item">' +
-                    '<div class="comment-user">' + list[i].user + '</div>' +
-                    '<div class="comment-text">' + list[i].text + '</div>' +
-                '</div>';
-            }
-            document.getElementById('comments-list').innerHTML = html || '<div style="font-size:12px; color:var(--text-sub);">Henüz yorum yapılmamış. İlk yorumu sen yap!</div>';
-        }
-
-        document.getElementById('btn-add-comment').onclick = function() {
-            if(!currentUser) {
-                alert("Yorum yapmak için lütfen giriş yapın!");
-                toggleAuthModal(true);
-                return;
-            }
-            var text = document.getElementById('comment-text').value.trim();
-            if(!text) return;
-            var allComms = JSON.parse(localStorage.getItem('2pbvage_comments') || '{}');
-            if(!allComms[currentVideoId]) allComms[currentVideoId] = [];
-            allComms[currentVideoId].push({ user: currentUser.email.split('@')[0], text: text });
-            localStorage.setItem('2pbvage_comments', JSON.stringify(allComms));
-            document.getElementById('comment-text').value = '';
-            loadComments(currentVideoId);
-        };
-
         function playVideo(id) {
             var item = db[id];
             if(item) {
                 currentVideoId = id;
                 activeAuthor = item.author;
 
-                addView(id);
-
                 document.getElementById('v-title').innerText = item.title;
                 document.getElementById('v-author').innerText = item.author;
                 document.getElementById('v-date').innerText = '📅 ' + item.date;
-                document.getElementById('v-views').innerText = (getViews()[id] || 0);
                 document.getElementById('v-avatar').style.backgroundImage = "url('" + item.avatar + "')";
                 document.getElementById('v-desc').innerText = item.desc;
-
-                loadComments(id);
 
                 document.getElementById('sec-feed').className = 'page-sec';
                 document.getElementById('sec-watch').className = 'page-sec active-sec';
@@ -673,7 +610,7 @@
                 amateur: "🏠 Amatör Videolar",
                 mom: "👩‍👧‍👦 Anne Videoları",
                 sibling: "👧 Kardeş Videoları",
-                bath: "🛁 Banyo Videoları",
+                bath: "自由 Banyo Videoları",
                 fullhd: "🎬 Full HD Videolar",
                 lesbian: "👭 Lezbiyen Videolar"
             };
@@ -720,7 +657,7 @@
                         htmlVideos += '<div class="video-post">' +
                             '<div class="video-thumbnail trigger-play" data-id="' + key + '" style="background-image:url(\'' + v.thumb + '\');" onclick="playVideo(\'' + key + '\')"><div class="play-button"></div></div>' +
                             '<div class="post-title trigger-play" data-id="' + key + '" onclick="playVideo(\'' + key + '\')">' + v.title + '</div>' +
-                            '<div class="post-date-info"><span>📅 ' + v.date + '</span><span>👁️ <span class="view-tag-' + key + '">0</span> izlenme</span></div>' +
+                            '<div class="post-date-info"><span>📅 ' + v.date + '</span></div>' +
                             '<div class="post-meta">' +
                                 '<div class="author-box" onclick="openProfile(\'' + v.author + '\')">' +
                                     '<div class="author-avatar-small" style="background-image:url(\'' + v.avatar + '\');"></div>' +
@@ -748,7 +685,6 @@
             document.getElementById('sec-watch').className = 'page-sec';
             document.getElementById('sec-profile').className = 'page-sec active-sec';
             window.scrollTo(0,0);
-            updateViewsUI();
         }
 
         var profileTriggers = document.querySelectorAll('.trigger-profile');
@@ -764,7 +700,6 @@
         };
 
         checkAuthState();
-        updateViewsUI();
     </script>
 </body>
 </html>

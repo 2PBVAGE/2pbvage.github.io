@@ -3,274 +3,450 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>2PBVAGE 🤍</title>
+    <title>2pbvage - Video Platformu</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { background-color: #121212; color: #ffffff; font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-        /* HEADER */
-        .header-bar { width: 100%; max-width: 600px; background-color: #000; display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 99999; }
-        .header-left { display: flex; align-items: center; gap: 10px; }
-        .header-logo { color: #fff; font-size: 19px; font-weight: 800; cursor: pointer; padding: 5px; }
-        .menu-icon-btn { font-size: 24px; cursor: pointer; padding: 8px 12px; color: #fff; background: #222; border: 1px solid #444; border-radius: 6px; user-select: none; }
-        
-        .user-auth-box { display: flex; align-items: center; gap: 10px; }
-        .auth-btn { background-color: #ff4757; color: #fff; border: none; padding: 10px 16px; border-radius: 15px; font-size: 12px; font-weight: bold; cursor: pointer; }
-        .user-email-tag { font-size: 11px; color: #ff4757; font-weight: bold; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .logout-btn { background: #222; color: #aaa; border: 1px solid #333; padding: 6px 10px; border-radius: 12px; font-size: 11px; cursor: pointer; }
+        body {
+            background-color: #0f0f0f;
+            color: #ffffff;
+            padding-bottom: 60px;
+        }
 
-        /* MODAL / AUTH POPUP */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 999999; display: none; align-items: center; justify-content: center; padding: 20px; }
-        .auth-modal-card { background-color: #1a1a1a; border: 1px solid #333; border-radius: 14px; width: 100%; max-width: 360px; padding: 25px 20px; text-align: center; position: relative; }
-        .auth-close-btn { position: absolute; top: 12px; right: 15px; color: #aaa; font-size: 22px; cursor: pointer; padding: 5px; }
-        
-        .auth-tabs { display: flex; border-bottom: 1px solid #333; margin-bottom: 20px; }
-        .auth-tab { flex: 1; padding: 10px; color: #aaa; font-weight: bold; font-size: 14px; cursor: pointer; }
-        .auth-tab.active { color: #ff4757; border-bottom: 2px solid #ff4757; }
-        
-        .auth-form { display: flex; flex-direction: column; gap: 12px; text-align: left; }
-        .auth-input { background-color: #111; border: 1px solid #333; color: #fff; padding: 12px; border-radius: 8px; font-size: 13px; outline: none; }
-        .auth-input:focus { border-color: #ff4757; }
-        .auth-submit-btn { background-color: #ff4757; color: #fff; border: none; padding: 12px; border-radius: 20px; font-weight: bold; font-size: 14px; cursor: pointer; margin-top: 5px; }
+        /* Navbar Header */
+        header {
+            position: sticky;
+            top: 0;
+            background-color: #0f0f0f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid #272727;
+            z-index: 1000;
+        }
 
-        /* KATEGORİ MENÜSÜ */
-        #menu-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); z-index: 88888; display: none; }
-        #menu-drawer { position: fixed; top: 0; left: -280px; width: 260px; height: 100vh; background-color: #1a1a1a; z-index: 99999; transition: left 0.3s ease; display: flex; flex-direction: column; }
-        #menu-drawer.open { left: 0; }
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff0000;
+            text-decoration: none;
+        }
 
-        .content-container { width: 100%; max-width: 600px; padding: 15px; display: flex; flex-direction: column; gap: 15px; }
-        .page-sec { display: none; width: 100%; flex-direction: column; gap: 15px; }
-        .active-sec { display: flex !important; }
+        .nav-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
 
-        .video-post { background-color: #1e1e1e; border-radius: 12px; overflow: hidden; border: 1px solid #222; margin-bottom: 15px; }
-        .video-thumbnail { position: relative; width: 100%; padding-bottom: 56.25%; background-size: cover; background-position: center; display: block; cursor: pointer; background-color: #000; }
-        .play-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 55px; height: 55px; background: rgba(255, 71, 87, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; pointer-events: none; }
-        .play-button::after { content: ""; border-style: solid; border-width: 10px 0 10px 18px; border-color: transparent transparent transparent #fff; margin-left: 4px; }
-        
-        .post-title { padding: 14px 15px 8px 15px; font-size: 15px; font-weight: bold; color: #fff; cursor: pointer; }
-        .post-meta { padding: 0 15px 15px 15px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #aaa; }
-        
-        .author-box { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-        .author-avatar-small { width: 26px; height: 26px; border-radius: 50%; background-size: cover; background-position: center; border: 1.5px solid #ff4757; }
+        /* Garantili Tıklanabilir Buton Stilleri */
+        .btn {
+            background-color: #272727;
+            color: #fff;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            touch-action: manipulation;
+            position: relative;
+            z-index: 10;
+        }
 
-        .action-btn { background-color: #ff4757; color: #fff !important; padding: 12px 20px; border-radius: 20px; font-weight: bold; border: none; cursor: pointer; font-size: 13px; }
-        
-        /* ABONE BUTONU STİLLERİ */
-        .sub-btn { background-color: #ff4757; color: #fff; border: none; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; cursor: pointer; }
-        .sub-btn.subscribed { background-color: #333 !important; color: #aaa !important; border: 1px solid #444; }
+        .btn:active {
+            opacity: 0.7;
+            transform: scale(0.98);
+        }
 
-        .video-player-box { position: relative; width: 100%; padding-bottom: 56.25%; background-color: #000; border-radius: 6px; overflow: hidden; }
-        .video-player-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        .back-btn { align-self: flex-start; background-color: #222; color: #ff4757; padding: 10px 16px; border-radius: 8px; border: 1px solid #333; cursor: pointer; font-weight: bold; font-size: 13px; }
+        .btn-primary {
+            background-color: #cc0000;
+            color: white;
+        }
 
-        .channel-card { background-color: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 10px; padding: 12px 15px; display: flex; align-items: center; justify-content: space-between; }
-        .channel-info { display: flex; align-items: center; gap: 12px; cursor: pointer; }
-        .channel-avatar { width: 48px; height: 48px; border-radius: 50%; background-size: cover; background-position: center; border: 2px solid #ff4757; }
-        .channel-header-box { background-color: #1a1a1a; border-radius: 12px; overflow: hidden; border: 1px solid #2a2a2a; text-align: center; padding-bottom: 20px; }
-        .channel-banner { width: 100%; height: 100px; background-size: cover; background-position: center; background-color: #ff4757; }
-        .channel-main-avatar { width: 80px; height: 80px; border-radius: 50%; border: 3px solid #ff4757; margin: -40px auto 10px auto; background-size: cover; background-position: center; }
+        /* Arama Kutusu */
+        .search-container {
+            padding: 12px 16px;
+            background-color: #0f0f0f;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px 16px;
+            background-color: #121212;
+            border: 1px solid #303030;
+            border-radius: 22px;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .search-box:focus {
+            border-color: #ff0000;
+        }
+
+        /* Video Listesi Grid */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            padding: 16px;
+        }
+
+        .video-card {
+            background-color: #181818;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .thumbnail-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            background-color: #202020;
+        }
+
+        .thumbnail-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-info {
+            padding: 12px;
+        }
+
+        .video-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            line-height: 1.3;
+            color: #fff;
+        }
+
+        .video-meta {
+            font-size: 13px;
+            color: #aaa;
+        }
+
+        /* Modal Player (Video Oynatıcı) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            flex-direction: column;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 16px;
+            background-color: #0f0f0f;
+        }
+
+        .player-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            padding-top: 56.25%;
+        }
+
+        .player-container iframe, 
+        .player-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .player-details {
+            padding: 16px;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .action-bar {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        /* Yan Menü (Sidebar) */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background-color: #0f0f0f;
+            z-index: 3000;
+            transition: left 0.25s ease;
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            z-index: 2500;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .menu-item {
+            display: block;
+            padding: 14px 0;
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px solid #222;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- ÜYE OL / GİRİŞ YAP MODAL -->
-    <div id="auth-modal" class="modal-overlay">
-        <div class="auth-modal-card">
-            <span class="auth-close-btn" onclick="toggleAuthModal(false)">✕</span>
-            <div class="auth-tabs">
-                <div id="tab-login" class="auth-tab active" onclick="switchTab('login')">Giriş Yap</div>
-                <div id="tab-register" class="auth-tab" onclick="switchTab('register')">Kayıt Ol</div>
-            </div>
-
-            <!-- GİRİŞ FORMU -->
-            <form id="form-login" class="auth-form" onsubmit="handleLogin(event)">
-                <label style="font-size:12px; color:#aaa;">E-posta Adresi</label>
-                <input type="email" id="login-email" class="auth-input" placeholder="ornek@gmail.com" required>
-                <label style="font-size:12px; color:#aaa;">Şifre</label>
-                <input type="password" id="login-password" class="auth-input" placeholder="••••••••" required>
-                <button type="submit" class="auth-submit-btn">Giriş Yap</button>
-            </form>
-
-            <!-- KAYIT FORMU -->
-            <form id="form-register" class="auth-form" style="display:none;" onsubmit="handleRegister(event)">
-                <label style="font-size:12px; color:#aaa;">E-posta Adresi</label>
-                <input type="email" id="reg-email" class="auth-input" placeholder="ornek@gmail.com" required>
-                <label style="font-size:12px; color:#aaa;">Şifre Oluştur</label>
-                <input type="password" id="reg-password" class="auth-input" placeholder="En az 6 karakter" required minlength="6">
-                <button type="submit" class="auth-submit-btn">Hesap Oluştur</button>
-            </form>
+    <!-- Header -->
+    <header>
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <button class="btn" id="btn-menu">☰</button>
+            <a href="#" class="logo">2pbvage</a>
         </div>
+        <div class="nav-actions">
+            <button class="btn btn-primary" id="btn-login">Giriş Yap</button>
+        </div>
+    </header>
+
+    <!-- Side Navigation Menu -->
+    <div class="overlay" id="overlay"></div>
+    <div class="sidebar" id="sidebar">
+        <h2 style="margin-bottom: 20px; color: #ff0000;">2pbvage</h2>
+        <a href="#" class="menu-item" id="nav-home">Ana Sayfa</a>
+        <a href="#" class="menu-item" id="nav-popular">Popüler</a>
+        <a href="#" class="menu-item" id="nav-about">Hakkında</a>
+        <button class="btn" id="btn-close-menu" style="margin-top: 20px; width: 100%;">Kapat</button>
     </div>
 
-    <!-- KATEGORİ MENÜSÜ -->
-    <div id="menu-overlay" onclick="toggleMenu(false)"></div>
-    <div id="menu-drawer">
-        <div style="padding: 18px; background: #000; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222;">
-            <span style="color:#ff4757; font-weight:bold;">📁 Kategoriler</span>
-            <span style="color:#aaa; font-size:22px; cursor:pointer;" onclick="toggleMenu(false)">✕</span>
-        </div>
-        <ul style="list-style: none; padding: 15px 0;">
-            <li onclick="filterCat('all')" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🔥 Tüm Videolar</li>
-            <li onclick="filterCat('sub')" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🇹🇷 Türkçe Altyazılı</li>
-            <li onclick="filterCat('fullhd')" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🎬 Full HD</li>
-            <li onclick="filterCat('amateur')" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🏠 Amatör / Ev Yapımı</li>
-            <li onclick="filterCat('show')" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">⭐ Özel Şov / Trend</li>
-            <li onclick="filterCat('group')" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">👥 Grup / Özel Şov</li>
-        </ul>
+    <!-- Search Area -->
+    <div class="search-container">
+        <input type="text" class="search-box" id="search-input" placeholder="Video ara...">
     </div>
 
-    <!-- HEADER -->
-    <div class="header-bar">
-        <div class="header-left">
-            <button class="menu-icon-btn" onclick="toggleMenu(true)">☰</button>
-            <div class="header-logo" onclick="goHome()">2PBVAGE 🤍</div>
+    <!-- Main Video Grid -->
+    <main class="video-grid" id="video-grid">
+        <!-- Videolar JavaScript ile yüklenecek -->
+    </main>
+
+    <!-- Video Modal Player -->
+    <div class="modal" id="video-modal">
+        <div class="modal-header">
+            <span style="font-weight: bold;" id="modal-title">Video Başlığı</span>
+            <button class="btn" id="btn-close-modal">✕ Kapat</button>
         </div>
-        <div class="user-auth-box">
-            <div id="auth-logged-out">
-                <button class="auth-btn" onclick="toggleAuthModal(true)">Giriş / Üye Ol</button>
-            </div>
-            <div id="auth-logged-in" style="display:none; flex-direction:row; align-items:center; gap:8px;">
-                <span class="user-email-tag" id="user-display-email"></span>
-                <button class="logout-btn" onclick="logout()">Çıkış</button>
-            </div>
+        <div class="player-container">
+            <iframe id="video-iframe" src="" allowfullscreen></iframe>
         </div>
-    </div>
-
-    <div class="content-container">
-        <!-- ANA SAYFA -->
-        <div id="sec-feed" class="page-sec active-sec">
-            <div id="cat-title" style="font-size: 15px; font-weight: bold; color: #ff4757; margin-bottom: 5px;">🔥 Tüm Videolar</div>
-
-            <!-- VİDEO 4 -->
-            <div class="video-post" data-cat="sub">
-                <div class="video-thumbnail" style="background-image: url('https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg');" onclick="playVideo('v4')">
-                    <div class="play-button"></div>
-                </div>
-                <div class="post-title" onclick="playVideo('v4')">Tüylü Vajinalı Köylü Kızı Bir Yabancı Tarafından Sikişildi - Sweetie Fox</div>
-                <div class="post-meta">
-                    <div class="author-box" onclick="openProfile('Sweetie Fox')">
-                        <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/3ykGZ25/sweetie.jpg');"></div>
-                        <strong style="color:#ff4757;">Sweetie Fox ✓</strong>
-                    </div>
-                    <button class="action-btn" onclick="playVideo('v4')">🚀 Hemen İzle</button>
-                </div>
+        <div class="player-details">
+            <h3 id="player-video-title" style="margin-bottom: 8px;"></h3>
+            <p id="player-video-meta" style="color: #aaa; font-size: 14px;"></p>
+            <div class="action-bar">
+                <button class="btn" id="btn-like">👍 <span id="like-count">0</span></button>
+                <button class="btn" id="btn-subscribe">Abone Ol</button>
             </div>
-
-            <!-- VİDEO 3 -->
-            <div class="video-post" data-cat="group">
-                <div class="video-thumbnail" style="background-image: url('https://i.postimg.cc/f3xPmkCr/XAz-Dr-ONXl-P3D8v3o-NMKp7LGK-640w.webp');" onclick="playVideo('v3')">
-                    <div class="play-button"></div>
-                </div>
-                <div class="post-title" onclick="playVideo('v3')">Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor</div>
-                <div class="post-meta">
-                    <div class="author-box" onclick="openProfile('Sophie Rain')">
-                        <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/DPFjgyLy/image.jpg');"></div>
-                        <strong style="color:#ff4757;">Sophie Rain ✓</strong>
-                    </div>
-                    <button class="action-btn" onclick="playVideo('v3')">🚀 Hemen İzle</button>
-                </div>
-            </div>
-
-            <!-- VİDEO 2 -->
-            <div class="video-post" data-cat="amateur">
-                <div class="video-thumbnail" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');" onclick="playVideo('v2')">
-                    <div class="play-button"></div>
-                </div>
-                <div class="post-title" onclick="playVideo('v2')">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
-                <div class="post-meta">
-                    <div class="author-box" onclick="openProfile('comatozze')">
-                        <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/pB3ntggN/image.jpg');"></div>
-                        <strong style="color:#ff4757;">comatozze ✓</strong>
-                    </div>
-                    <button class="action-btn" onclick="playVideo('v2')">🚀 Hemen İzle</button>
-                </div>
-            </div>
-
-            <!-- VİDEO 1 -->
-            <div class="video-post" data-cat="show">
-                <div class="video-thumbnail" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');" onclick="playVideo('v1')">
-                    <div class="play-button"></div>
-                </div>
-                <div class="post-title" onclick="playVideo('v1')">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
-                <div class="post-meta">
-                    <div class="author-box" onclick="openProfile('Sophie Rain')">
-                        <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/DPFjgyLy/image.jpg');"></div>
-                        <strong style="color:#ff4757;">Sophie Rain ✓</strong>
-                    </div>
-                    <button class="action-btn" onclick="playVideo('v1')">🚀 Hemen İzle</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- İZLEME SAYFASI -->
-        <div id="sec-watch" class="page-sec">
-            <button class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</button>
-            <h1 id="v-title" style="font-size: 18px; color: #fff;"></h1>
-            <div class="video-player-box">
-                <iframe id="v-iframe" src="" allowfullscreen></iframe>
-            </div>
-            <div class="channel-card">
-                <div class="channel-info" onclick="openProfile(activeAuthor)">
-                    <div class="channel-avatar" id="v-avatar"></div>
-                    <div>
-                        <div style="font-size: 15px; font-weight: bold; color: #fff;" id="v-author"></div>
-                        <div style="font-size: 11px; color: #aaa;"><span id="v-sub-count">1420</span> Abone</div>
-                    </div>
-                </div>
-                <button class="sub-btn" id="v-sub-btn" onclick="toggleSubscribe()">Abone Ol</button>
-            </div>
-            <div style="background:#1a1a1a; padding:15px; border-radius:8px; border:1px solid #2a2a2a;">
-                <div style="font-size:14px; font-weight:bold; color:#ff4757; margin-bottom:8px;">📌 Açıklama</div>
-                <div id="v-desc" style="font-size:13px; color:#ccc; line-height:1.5;"></div>
-            </div>
-        </div>
-
-        <!-- PROFİL SAYFASI -->
-        <div id="sec-profile" class="page-sec">
-            <button class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</button>
-            <div class="channel-header-box">
-                <div class="channel-banner" id="p-banner"></div>
-                <div class="channel-main-avatar" id="p-avatar"></div>
-                <div style="font-size: 20px; font-weight: bold; color: #fff;" id="p-title"></div>
-                <div style="font-size: 13px; color: #ff4757; margin-top: 5px; font-weight:bold;"><span id="p-sub-count">1420</span> Abone</div>
-                <button class="sub-btn" id="p-sub-btn" style="margin-top:12px;" onclick="toggleSubscribe()">Abone Ol</button>
-            </div>
-            <div style="font-size: 15px; font-weight: bold; color: #ff4757; margin-top: 10px;">📹 Kanalın Videoları</div>
-            <div id="p-videos"></div>
         </div>
     </div>
 
     <script>
-        var db = {
-            v1: { title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", url: "https://playmogo.com/e/1fvov3xdwsbq", thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", desc: "Sophie Rain'in en çok konuşulan siyah iç çamaşırı şovu bu videoda sizlerle. İyi seyirler!" },
-            v2: { title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...", url: "https://playmogo.com/e/ehhg2pcksir6", thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", author: "comatozze", avatar: "https://i.ibb.co/pB3ntggN/image.jpg", desc: "Evde baş başa kalan ikilinin sürpriz ve heyecan dolu gizli anları." },
-            v3: { title: "Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor", url: "https://playmogo.com/e/xmiqbgo3vrz4", thumb: "https://i.postimg.cc/f3xPmkCr/XAz-Dr-ONXl-P3D8v3o-NMKp7LGK-640w.webp", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", desc: "Sophie Rain ve Piper Aishah kameralar karşısında eğlenceli ve özel anlar yaşatıyor." },
-            v4: { title: "Tüylü Vajinalı Köylü Kızı Bir Yabancı Tarafından Sikişildi - Sweetie Fox", url: "https://voe.sx/e/hoshht3fdzl0", thumb: "https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg", author: "Sweetie Fox", avatar: "https://i.ibb.co/3ykGZ25/sweetie.jpg", desc: "Sweetie Fox'un Türkçe altyazılı köylü kızı temalı popüler özel gösterisi." }
-        };
+        // Örnek Veritabanı
+        const db = [
+            {
+                id: "1",
+                title: "Harika Doğa Manzaraları 4K",
+                author: "Doğa Kanalı",
+                views: "125 B",
+                likes: 1240,
+                embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                thumb: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=500&auto=format&fit=crop"
+            },
+            {
+                id: "2",
+                title: "JavaScript ile Web Geliştirme Dersleri",
+                author: "Yazılım Kulübü",
+                views: "45 B",
+                likes: 850,
+                embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                thumb: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&auto=format&fit=crop"
+            },
+            {
+                id: "3",
+                title: "Mobil Cihazlar İçin UI Tasarım İpuçları",
+                author: "Tasarım Vadisi",
+                views: "89 B",
+                likes: 2100,
+                embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                thumb: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500&auto=format&fit=crop"
+            }
+        ];
 
-        var activeAuthor = "";
-        var currentUser = null;
+        // Mobil ve Masaüstü Uyumlu Event Ekleme Fonksiyonu
+        function addFastClick(element, handler) {
+            if (!element) return;
+            let touched = false;
 
-        function checkAuthState() {
-            try {
-                var session = localStorage.getItem("2pbvage_session");
-                if(session) {
-                    currentUser = JSON.parse(session);
-                    document.getElementById('auth-logged-out').style.display = 'none';
-                    document.getElementById('auth-logged-in').style.display = 'flex';
-                    document.getElementById('user-display-email').innerText = currentUser.email;
-                } else {
-                    currentUser = null;
-                    document.getElementById('auth-logged-out').style.display = 'block';
-                    document.getElementById('auth-logged-in').style.display = 'none';
+            element.addEventListener('touchend', function (e) {
+                touched = true;
+                e.preventDefault();
+                handler(e);
+            }, { passive: false });
+
+            element.addEventListener('click', function (e) {
+                if (!touched) {
+                    handler(e);
                 }
-            } catch(e) { currentUser = null; }
+                touched = false;
+            });
         }
 
-        function toggleAuthModal(open) {
-            document.getElementById('auth-modal').style.display = open ? 'flex' : 'none';
+        // DOM Elemanları
+        const videoGrid = document.getElementById('video-grid');
+        const searchInput = document.getElementById('search-input');
+        const btnMenu = document.getElementById('btn-menu');
+        const btnCloseMenu = document.getElementById('btn-close-menu');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const btnLogin = document.getElementById('btn-login');
+        const videoModal = document.getElementById('video-modal');
+        const btnCloseModal = document.getElementById('btn-close-modal');
+        const videoIframe = document.getElementById('video-iframe');
+        const modalTitle = document.getElementById('modal-title');
+        const playerVideoTitle = document.getElementById('player-video-title');
+        const playerVideoMeta = document.getElementById('player-video-meta');
+        const btnLike = document.getElementById('btn-like');
+        const likeCount = document.getElementById('like-count');
+        const btnSubscribe = document.getElementById('btn-subscribe');
+
+        let currentLikes = 0;
+        let isSubscribed = false;
+
+        // Videoları Ekrana Basma
+        function renderVideos(videos) {
+            videoGrid.innerHTML = '';
+            videos.forEach(video => {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                card.innerHTML = `
+                    <div class="thumbnail-container">
+                        <img src="${video.thumb}" alt="${video.title}">
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">${video.title}</div>
+                        <div class="video-meta">${video.author} • ${video.views} izlenme</div>
+                    </div>
+                `;
+                addFastClick(card, () => openVideo(video));
+                videoGrid.appendChild(card);
+            });
         }
 
-        function switchTab(tab) {
-            if(tab === 'login') {
-                documen
+        // Video Açma Modal
+        function openVideo(video) {
+            videoIframe.src = video.embedUrl + "?autoplay=1";
+            modalTitle.textContent = video.title;
+            playerVideoTitle.textContent = video.title;
+            playerVideoMeta.textContent = `${video.author} • ${video.views} izlenme`;
+            currentLikes = video.likes;
+            likeCount.textContent = currentLikes;
+            videoModal.classList.add('active');
+        }
+
+        // Video Kapatma Modal
+        function closeVideo() {
+            videoIframe.src = '';
+            videoModal.classList.remove('active');
+        }
+
+        // Menü Aç/Kapat
+        function toggleSidebar(show) {
+            if (show) {
+                sidebar.classList.add('open');
+                overlay.classList.add('active');
+            } else {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+            }
+        }
+
+        // Event Listener Bağlamaları (Tıklama Garantili)
+        addFastClick(btnMenu, () => toggleSidebar(true));
+        addFastClick(btnCloseMenu, () => toggleSidebar(false));
+        addFastClick(overlay, () => toggleSidebar(false));
+        addFastClick(btnCloseModal, closeVideo);
+
+        addFastClick(btnLogin, () => {
+            alert('Giriş Yap butonuna tıklandı!');
+        });
+
+        addFastClick(btnLike, () => {
+            currentLikes++;
+            likeCount.textContent = currentLikes;
+        });
+
+        addFastClick(btnSubscribe, () => {
+            isSubscribed = !isSubscribed;
+            btnSubscribe.textContent = isSubscribed ? 'Abone Olundu' : 'Abone Ol';
+            btnSubscribe.style.backgroundColor = isSubscribed ? '#333' : '#cc0000';
+        });
+
+        // Arama Dinleyicisi
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const filtered = db.filter(v => v.title.toLowerCase().includes(query) || v.author.toLowerCase().includes(query));
+            renderVideos(filtered);
+        });
+
+        // İlk Yükleme
+        renderVideos(db);
+    </script>
+</body>
+</html>

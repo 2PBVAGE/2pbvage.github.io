@@ -104,10 +104,12 @@
         <ul style="list-style: none; padding: 15px 0;">
             <li data-cat="all" class="cat-item" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🔥 Tüm Videolar</li>
             <li data-cat="sub" class="cat-item" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🇹🇷 Türkçe Altyazılı</li>
+            <li data-cat="amateur" class="cat-item" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🏠 Amatör</li>
+            <li data-cat="mom" class="cat-item" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">👩‍👧‍👦 Anne</li>
+            <li data-cat="sibling" class="cat-item" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">👧 Kardeş</li>
+            <li data-cat="bath" class="cat-item" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🛁 Banyo</li>
             <li data-cat="fullhd" class="cat-item" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🎬 Full HD</li>
-            <li data-cat="amateur" class="cat-item" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">🏠 Amatör / Ev Yapımı</li>
-            <li data-cat="show" class="cat-item" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">⭐ Özel Şov / Trend</li>
-            <li data-cat="group" class="cat-item" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">👥 Grup / Özel Şov</li>
+            <li data-cat="lesbian" class="cat-item" style="padding: 16px 20px; color: #ddd; cursor: pointer; border-bottom: 1px solid #222;">👭 Lezbiyen</li>
         </ul>
     </div>
 
@@ -133,7 +135,7 @@
             <div id="cat-title" style="font-size: 15px; font-weight: bold; color: #ff4757; margin-bottom: 5px;">🔥 Tüm Videolar</div>
 
             <!-- VİDEO 4 -->
-            <div class="video-post" data-cat="sub">
+            <div class="video-post" data-cats="sub,fullhd">
                 <div class="video-thumbnail trigger-play" data-id="v4" style="background-image: url('https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg');">
                     <div class="play-button"></div>
                 </div>
@@ -148,7 +150,7 @@
             </div>
 
             <!-- VİDEO 3 -->
-            <div class="video-post" data-cat="group">
+            <div class="video-post" data-cats="lesbian,bath,fullhd,sibling">
                 <div class="video-thumbnail trigger-play" data-id="v3" style="background-image: url('https://i.postimg.cc/f3xPmkCr/XAz-Dr-ONXl-P3D8v3o-NMKp7LGK-640w.webp');">
                     <div class="play-button"></div>
                 </div>
@@ -163,7 +165,7 @@
             </div>
 
             <!-- VİDEO 2 -->
-            <div class="video-post" data-cat="amateur">
+            <div class="video-post" data-cats="amateur,mom,sibling">
                 <div class="video-thumbnail trigger-play" data-id="v2" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');">
                     <div class="play-button"></div>
                 </div>
@@ -178,7 +180,7 @@
             </div>
 
             <!-- VİDEO 1 -->
-            <div class="video-post" data-cat="show">
+            <div class="video-post" data-cats="bath,fullhd">
                 <div class="video-thumbnail trigger-play" data-id="v1" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');">
                     <div class="play-button"></div>
                 </div>
@@ -413,10 +415,12 @@
             var titles = {
                 all: "🔥 Tüm Videolar",
                 sub: "🇹🇷 Türkçe Altyazılı",
+                amateur: "🏠 Amatör Videolar",
+                mom: "👩‍👧‍👦 Anne Videoları",
+                sibling: "👧 Kardeş Videoları",
+                bath: "自由 Banyo Videoları",
                 fullhd: "🎬 Full HD Videolar",
-                amateur: "🏠 Amatör / Ev Yapımı",
-                show: "⭐ Özel Şov / Trend",
-                group: "👥 Grup / Özel Şov"
+                lesbian: "👭 Lezbiyen Videolar"
             };
 
             title.innerHTML = titles[cat] || "🔥 Tüm Videolar";
@@ -426,7 +430,9 @@
                 if (cat === 'all') {
                     p.style.display = 'block';
                 } else {
-                    if (p.getAttribute('data-cat') === cat) {
+                    var catsAttr = p.getAttribute('data-cats') || '';
+                    var catList = catsAttr.split(',');
+                    if (catList.indexOf(cat) !== -1) {
                         p.style.display = 'block';
                     } else {
                         p.style.display = 'none';

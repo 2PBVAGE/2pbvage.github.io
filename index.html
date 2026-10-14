@@ -36,6 +36,8 @@
         .menu-icon-btn { font-size: 20px; cursor: pointer; padding: 8px 14px; color: var(--text-color); background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 6px; }
         
         .user-auth-box { display: flex; align-items: center; gap: 8px; }
+        .noti-btn { background: var(--card-bg); color: var(--text-color); border: 1px solid var(--card-border); padding: 6px 10px; border-radius: 50%; font-size: 14px; cursor: pointer; position: relative; }
+        .noti-badge { position: absolute; top: -3px; right: -3px; background: var(--primary-color); color: #fff; font-size: 9px; font-weight: bold; width: 14px; height: 14px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
         .auth-btn { background-color: var(--primary-color); color: #fff; border: none; padding: 10px 14px; border-radius: 15px; font-size: 12px; font-weight: bold; cursor: pointer; }
         .user-email-tag { font-size: 11px; color: var(--primary-color); font-weight: bold; max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .logout-btn { background: var(--card-bg); color: var(--text-sub); border: 1px solid var(--card-border); padding: 6px 10px; border-radius: 12px; font-size: 11px; cursor: pointer; }
@@ -60,6 +62,12 @@
         .auth-input { background-color: var(--input-bg); border: 1px solid var(--card-border); color: var(--text-color); padding: 12px; border-radius: 8px; font-size: 13px; outline: none; }
         .auth-input:focus { border-color: var(--primary-color); }
         .auth-submit-btn { background-color: var(--primary-color); color: #fff; border: none; padding: 12px; border-radius: 20px; font-weight: bold; font-size: 14px; cursor: pointer; margin-top: 5px; }
+
+        /* BİLDİRİM PENCERESİ */
+        .noti-item { padding: 10px; border-bottom: 1px solid var(--card-border); text-align: left; font-size: 12px; }
+        .noti-item:last-child { border-bottom: none; }
+        .noti-title { font-weight: bold; color: var(--primary-color); margin-bottom: 3px; }
+        .noti-desc { color: var(--text-color); }
 
         /* MENÜ */
         #menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 200; display: none; }
@@ -106,6 +114,11 @@
         .channel-banner { width: 100%; height: 140px; background-color: #222; background-size: cover; background-position: center; }
         .channel-main-avatar { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--primary-color); margin: -40px auto 10px auto; background-color: #333; background-size: cover; background-position: center; }
 
+        /* ETIKET SİSTEMİ */
+        .tags-container { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+        .tag-badge { background: var(--input-bg); color: var(--primary-color); border: 1px solid var(--card-border); padding: 4px 10px; border-radius: 12px; font-size: 11px; cursor: pointer; font-weight: bold; }
+        .tag-badge:hover { background: var(--primary-color); color: #fff; }
+
         /* THEME SELECTOR */
         .theme-box { display: flex; gap: 8px; padding: 10px 20px; border-bottom: 1px solid var(--card-border); }
         .theme-dot { width: 22px; height: 22px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; }
@@ -114,6 +127,7 @@
 </head>
 <body>
 
+    <!-- GİRİŞ / KAYIT MODAL -->
     <div id="auth-modal" class="modal-overlay">
         <div class="auth-modal-card">
             <span class="auth-close-btn" id="btn-close-modal">✕</span>
@@ -140,6 +154,24 @@
         </div>
     </div>
 
+    <!-- BİLDİRİM DUYURU MODAL -->
+    <div id="noti-modal" class="modal-overlay">
+        <div class="auth-modal-card">
+            <span class="auth-close-btn" id="btn-close-noti">✕</span>
+            <div style="font-size:16px; font-weight:bold; color:var(--primary-color); margin-bottom:15px;">📢 Duyurular & Güncellemeler</div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+                <div class="noti-item">
+                    <div class="noti-title">🎬 Yeni Video Eklendi!</div>
+                    <div class="noti-desc">Sophie Rain'in en yeni seksi siyah renk kıyafetli özel şovu yayında!</div>
+                </div>
+                <div class="noti-item">
+                    <div class="noti-title">✨ Yeni Özellikler Geldi</div>
+                    <div class="noti-desc">Sitemize Benzer Videolar, Etiket Arama Sistemi ve Bildirim Kutusu eklendi.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="menu-overlay"></div>
     <div id="menu-drawer">
         <div style="padding: 18px; background: var(--header-bg); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border);">
@@ -163,7 +195,7 @@
             <li data-cat="amateur" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">🏠 Amatör</li>
             <li data-cat="mom" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">👩‍👧‍👦 Anne</li>
             <li data-cat="sibling" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">👧 Kardeş</li>
-            <li data-cat="bath" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">🛁 Banyo</li>
+            <li data-cat="bath" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">自由 Banyo</li>
             <li data-cat="fullhd" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">🎬 Full HD</li>
             <li data-cat="lesbian" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">👭 Lezbiyen</li>
         </ul>
@@ -175,6 +207,7 @@
             <div class="header-logo" id="logo-home">2PBVAGE 🤍</div>
         </div>
         <div class="user-auth-box">
+            <button class="noti-btn" id="btn-open-noti">🔔<span class="noti-badge">2</span></button>
             <button class="theme-toggle-btn" id="btn-toggle-daynight">
                 <span id="daynight-icon">☀️</span> <span id="daynight-text">Gündüz</span>
             </button>
@@ -189,7 +222,7 @@
     </div>
 
     <div class="search-container">
-        <input type="text" id="search-input" class="search-input" placeholder="🔍 Video veya kanal ara...">
+        <input type="text" id="search-input" class="search-input" placeholder="🔍 Video, etiket veya kanal ara...">
     </div>
 
     <div class="content-container">
@@ -199,7 +232,7 @@
 
             <div class="video-grid">
                 <!-- VİDEO 5 -->
-                <div class="video-post" data-id="v5" data-cats="fullhd">
+                <div class="video-post" data-id="v5" data-cats="fullhd" data-tags="sophierain,fullhd,özelşov,siyah">
                     <div class="video-thumbnail trigger-play" data-id="v5" style="background-image: url('https://www.porn4fans.com/contents/videos_screenshots/5000/5268/800x450/1.jpg');">
                         <div class="play-button"></div>
                     </div>
@@ -217,7 +250,7 @@
                 </div>
 
                 <!-- VİDEO 4 -->
-                <div class="video-post" data-id="v4" data-cats="sub,fullhd">
+                <div class="video-post" data-id="v4" data-cats="sub,fullhd" data-tags="sweetiefox,altyazılı,fullhd,köylü">
                     <div class="video-thumbnail trigger-play" data-id="v4" style="background-image: url('https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg');">
                         <div class="play-button"></div>
                     </div>
@@ -234,417 +267,5 @@
                     </div>
                 </div>
 
-                <!-- VİDEO 3 (GÜNCELLENEN KAPAK) -->
-                <div class="video-post" data-id="v3" data-cats="lesbian,fullhd">
-                    <div class="video-thumbnail trigger-play" data-id="v3" style="background-image: url('https://pimpbunny.com/contents/videos_screenshots/513000/513225/800x450/39.jpg');">
-                        <div class="play-button"></div>
-                    </div>
-                    <div class="post-title trigger-play" data-id="v3">Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor</div>
-                    <div class="post-date-info">
-                        <span>📅 12 Ekim 2026</span>
-                    </div>
-                    <div class="post-meta">
-                        <div class="author-box trigger-profile" data-author="Sophie Rain">
-                            <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/DPFjgyLy/image.jpg');"></div>
-                            <strong style="color:var(--primary-color);">Sophie Rain ✓</strong>
-                        </div>
-                        <button class="action-btn trigger-play" data-id="v3">🚀 İzle</button>
-                    </div>
-                </div>
-
-                <!-- VİDEO 2 -->
-                <div class="video-post" data-id="v2" data-cats="amateur">
-                    <div class="video-thumbnail trigger-play" data-id="v2" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');">
-                        <div class="play-button"></div>
-                    </div>
-                    <div class="post-title trigger-play" data-id="v2">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
-                    <div class="post-date-info">
-                        <span>📅 12 Ekim 2026</span>
-                    </div>
-                    <div class="post-meta">
-                        <div class="author-box trigger-profile" data-author="comatozze">
-                            <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/pB3ntggN/image.jpg');"></div>
-                            <strong style="color:var(--primary-color);">comatozze ✓</strong>
-                        </div>
-                        <button class="action-btn trigger-play" data-id="v2">🚀 İzle</button>
-                    </div>
-                </div>
-
-                <!-- VİDEO 1 -->
-                <div class="video-post" data-id="v1" data-cats="fullhd">
-                    <div class="video-thumbnail trigger-play" data-id="v1" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');">
-                        <div class="play-button"></div>
-                    </div>
-                    <div class="post-title trigger-play" data-id="v1">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
-                    <div class="post-date-info">
-                        <span>📅 12 Ekim 2026</span>
-                    </div>
-                    <div class="post-meta">
-                        <div class="author-box trigger-profile" data-author="Sophie Rain">
-                            <div class="author-avatar-small" style="background-image: url('https://i.ibb.co/DPFjgyLy/image.jpg');"></div>
-                            <strong style="color:var(--primary-color);">Sophie Rain ✓</strong>
-                        </div>
-                        <button class="action-btn trigger-play" data-id="v1">🚀 İzle</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- İZLEME SAYFASI -->
-        <div id="sec-watch" class="page-sec">
-            <button class="back-btn" id="btn-back-watch">⬅ Ana Sayfaya Dön</button>
-            <h1 id="v-title" style="font-size: 18px; color: var(--text-color);"></h1>
-            <div style="font-size: 12px; color: var(--text-sub); display: flex; gap: 15px; margin-top: -5px;">
-                <span id="v-date">📅 -</span>
-            </div>
-            <div class="video-player-box">
-                <iframe id="v-iframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
-            </div>
-            <div class="channel-card">
-                <div class="channel-info" id="watch-profile-box">
-                    <div class="channel-avatar" id="v-avatar"></div>
-                    <div>
-                        <div style="font-size: 15px; font-weight: bold; color: var(--text-color);" id="v-author"></div>
-                    </div>
-                </div>
-            </div>
-            <div style="background:var(--card-bg); padding:15px; border-radius:8px; border:1px solid var(--card-border);">
-                <div style="font-size:14px; font-weight:bold; color:var(--primary-color); margin-bottom:8px;">📌 Açıklama</div>
-                <div id="v-desc" style="font-size:13px; color:var(--text-color); line-height:1.5;"></div>
-            </div>
-        </div>
-
-        <!-- PROFİL SAYFASI -->
-        <div id="sec-profile" class="page-sec">
-            <button class="back-btn" id="btn-back-profile">⬅ Ana Sayfaya Dön</button>
-            <div class="channel-header-box">
-                <div class="channel-banner" id="p-banner"></div>
-                <div class="channel-main-avatar" id="p-avatar"></div>
-                <div style="font-size: 20px; font-weight: bold; color: var(--text-color);" id="p-title"></div>
-            </div>
-            <div style="font-size: 15px; font-weight: bold; color: var(--primary-color); margin-top: 10px;">📹 Kanalın Videoları</div>
-            <div id="p-videos" class="video-grid"></div>
-        </div>
-    </div>
-
-    <script>
-        window.open = function() { return null; };
-
-        var db = {
-            v1: { title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", url: "https://playmogo.com/e/1fvov3xdwsbq", thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", banner: "https://i.ibb.co/DPFjgyLy/image.jpg", date: "12 Ekim 2026", desc: "Sophie Rain'in en çok konuşulan siyah iç çamaşırı şovu bu videoda sizlerle. İyi seyirler!" },
-            v2: { title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...", url: "https://playmogo.com/e/ehhg2pcksir6", thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", author: "comatozze", avatar: "https://i.ibb.co/pB3ntggN/image.jpg", banner: "https://ei.phncdn.com/pics/users/0009/2995/3741/cover30266955/(m=eRSa4qFxcWaAb)(mh=NL_-gLc2D3h9AHS0)1323x270.jpg", date: "12 Ekim 2026", desc: "Evde baş başa kalan ikilinin sürpriz ve heyecan dolu gizli anları." },
-            v3: { title: "Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor", url: "https://playmogo.com/e/xmiqbgo3vrz4", thumb: "https://pimpbunny.com/contents/videos_screenshots/513000/513225/800x450/39.jpg", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", banner: "https://i.ibb.co/DPFjgyLy/image.jpg", date: "12 Ekim 2026", desc: "Sophie Rain ve Piper Aishah kameralar karşısında eğlenceli ve özel anlar yaşatıyor." },
-            v4: { title: "Tüylü Vajinalı Köylü Kızı Bir Yabancı Tarafından Sikişildi - Sweetie Fox", url: "https://voe.sx/e/hoshht3fdzl0", thumb: "https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg", author: "Sweetie Fox", avatar: "https://ei.phncdn.com/(m=ewILGCjadOf)(mh=59qrk8LnBE3Z9kTL)43ca43da-b27e-42f2-b237-40c5c13261b1.jpg", banner: "https://ei.phncdn.com/pics/users/0009/2995/3741/cover30266955/(m=eRSa4qFxcWaAb)(mh=ciR9a4JESHJ-g9rp)1323x270.jpg", date: "13 Ekim 2026", desc: "Sweetie Fox'un Türkçe altyazılı köylü kızı temalı popüler özel gösterisi." },
-            v5: { title: "Sophie Rain Seksi Siyah Renk Kıyafetiyle Soyunuyor", url: "https://voe.sx/e/g3beul38mpw7", thumb: "https://www.porn4fans.com/contents/videos_screenshots/5000/5268/800x450/1.jpg", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", banner: "https://i.ibb.co/DPFjgyLy/image.jpg", date: "14 Ekim 2026", desc: "Sophie Rain'in en yeni seksi siyah kıyafetli özel gösterisi." }
-        };
-
-        var activeAuthor = "";
-        var currentVideoId = "";
-        var currentUser = null;
-
-        // GECE / GÜNDÜZ TEMA SİSTEMİ
-        function toggleDayNightTheme() {
-            var isLight = document.body.classList.toggle('light-theme');
-            localStorage.setItem('2pbvage_daynight', isLight ? 'light' : 'dark');
-            updateDayNightUI(isLight);
-        }
-
-        function updateDayNightUI(isLight) {
-            document.getElementById('daynight-icon').innerText = isLight ? '🌙' : '☀️';
-            document.getElementById('daynight-text').innerText = isLight ? 'Gece' : 'Gündüz';
-        }
-
-        var savedMode = localStorage.getItem('2pbvage_daynight');
-        if(savedMode === 'light') {
-            document.body.classList.add('light-theme');
-            updateDayNightUI(true);
-        } else {
-            updateDayNightUI(false);
-        }
-
-        document.getElementById('btn-toggle-daynight').onclick = toggleDayNightTheme;
-
-        // RENK VURGU TEMA SİSTEMİ
-        function setTheme(color) {
-            document.documentElement.style.setProperty('--primary-color', color);
-            localStorage.setItem('2pbvage_theme', color);
-        }
-
-        var savedTheme = localStorage.getItem('2pbvage_theme');
-        if(savedTheme) setTheme(savedTheme);
-
-        function checkAuthState() {
-            try {
-                var session = localStorage.getItem("2pbvage_session");
-                if(session) {
-                    currentUser = JSON.parse(session);
-                    document.getElementById('auth-logged-out').style.display = 'none';
-                    document.getElementById('auth-logged-in').style.display = 'flex';
-                    document.getElementById('user-display-email').innerText = currentUser.email;
-                } else {
-                    currentUser = null;
-                    document.getElementById('auth-logged-out').style.display = 'block';
-                    document.getElementById('auth-logged-in').style.display = 'none';
-                }
-            } catch(e) { currentUser = null; }
-        }
-
-        function toggleAuthModal(open) {
-            document.getElementById('auth-modal').style.display = open ? 'flex' : 'none';
-        }
-
-        function switchTab(tab) {
-            if(tab === 'login') {
-                document.getElementById('tab-login').className = 'auth-tab active';
-                document.getElementById('tab-register').className = 'auth-tab';
-                document.getElementById('form-login').style.display = 'flex';
-                document.getElementById('form-register').style.display = 'none';
-            } else {
-                document.getElementById('tab-register').className = 'auth-tab active';
-                document.getElementById('tab-login').className = 'auth-tab';
-                document.getElementById('form-register').style.display = 'flex';
-                document.getElementById('form-login').style.display = 'none';
-            }
-        }
-
-        document.getElementById('tab-login').onclick = function() { switchTab('login'); };
-        document.getElementById('tab-register').onclick = function() { switchTab('register'); };
-
-        document.getElementById('form-login').onsubmit = function(e) {
-            e.preventDefault();
-            var email = document.getElementById('login-email').value.trim().toLowerCase();
-            var password = document.getElementById('login-password').value.trim();
-            
-            var users = {};
-            try {
-                users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
-            } catch(err) { users = {}; }
-
-            if(!users[email] || users[email].password !== password) {
-                alert("Hatalı e-posta veya şifre!");
-                return;
-            }
-            
-            localStorage.setItem("2pbvage_session", JSON.stringify({ email: email }));
-            checkAuthState();
-            toggleAuthModal(false);
-            alert("Başarıyla giriş yapıldı!");
-        };
-
-        document.getElementById('form-register').onsubmit = function(e) {
-            e.preventDefault();
-            var email = document.getElementById('reg-email').value.trim().toLowerCase();
-            var password = document.getElementById('reg-password').value.trim();
-            
-            var users = {};
-            try {
-                users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
-            } catch(err) { users = {}; }
-
-            if(users[email]) {
-                alert("Bu e-posta adresi zaten kayıtlı!");
-                return;
-            }
-            
-            users[email] = { password: password };
-            localStorage.setItem('2pbvage_users', JSON.stringify(users));
-            localStorage.setItem("2pbvage_session", JSON.stringify({ email: email }));
-            checkAuthState();
-            toggleAuthModal(false);
-            alert("Hesabınız oluşturuldu ve otomatik giriş yapıldı!");
-        };
-
-        document.getElementById('btn-logout').onclick = function() {
-            localStorage.removeItem("2pbvage_session");
-            checkAuthState();
-        };
-
-        function toggleMenu(open) {
-            var overlay = document.getElementById('menu-overlay');
-            var drawer = document.getElementById('menu-drawer');
-            if (open) {
-                overlay.style.display = 'block';
-                drawer.classList.add('open');
-            } else {
-                overlay.style.display = 'none';
-                drawer.classList.remove('open');
-            }
-        }
-
-        document.getElementById('btn-open-menu').onclick = function() { toggleMenu(true); };
-        document.getElementById('menu-overlay').onclick = function() { toggleMenu(false); };
-        document.getElementById('btn-close-drawer').onclick = function() { toggleMenu(false); };
-
-        function goHome() {
-            var iframe = document.getElementById('v-iframe');
-            if (iframe) iframe.src = "";
-            document.getElementById('sec-feed').className = 'page-sec active-sec';
-            document.getElementById('sec-watch').className = 'page-sec';
-            document.getElementById('sec-profile').className = 'page-sec';
-            window.scrollTo(0,0);
-        }
-
-        document.getElementById('logo-home').onclick = goHome;
-        document.getElementById('btn-back-watch').onclick = goHome;
-        document.getElementById('btn-back-profile').onclick = goHome;
-
-        document.getElementById('btn-open-auth').onclick = function() { toggleAuthModal(true); };
-        document.getElementById('btn-close-modal').onclick = function() { toggleAuthModal(false); };
-
-        function playVideo(id) {
-            var item = db[id];
-            if(item) {
-                currentVideoId = id;
-                activeAuthor = item.author;
-
-                document.getElementById('v-title').innerText = item.title;
-                document.getElementById('v-author').innerText = item.author;
-                document.getElementById('v-date').innerText = '📅 ' + item.date;
-                document.getElementById('v-avatar').style.backgroundImage = "url('" + item.avatar + "')";
-                document.getElementById('v-desc').innerText = item.desc;
-
-                document.getElementById('sec-feed').className = 'page-sec';
-                document.getElementById('sec-watch').className = 'page-sec active-sec';
-                document.getElementById('sec-profile').className = 'page-sec';
-                window.scrollTo(0,0);
-                
-                document.getElementById('v-iframe').src = item.url;
-            }
-        }
-
-        var triggers = document.querySelectorAll('.trigger-play');
-        for(var i = 0; i < triggers.length; i++) {
-            triggers[i].onclick = function() {
-                var id = this.getAttribute('data-id');
-                if(id) playVideo(id);
-            };
-        }
-
-        document.getElementById('search-input').oninput = function() {
-            var q = this.value.toLowerCase().trim();
-            goHome();
-            document.getElementById('cat-title').innerText = q ? "🔍 Arama Sonuçları" : "🔥 Tüm Videolar";
-            var posts = document.querySelectorAll('.video-post');
-            for(var i=0; i<posts.length; i++) {
-                var id = posts[i].getAttribute('data-id');
-                var item = db[id];
-                if(item && (item.title.toLowerCase().indexOf(q) > -1 || item.author.toLowerCase().indexOf(q) > -1)) {
-                    posts[i].style.display = 'flex';
-                } else {
-                    posts[i].style.display = 'none';
-                }
-            }
-        };
-
-        document.getElementById('btn-random-menu').onclick = function() {
-            toggleMenu(false);
-            var keys = Object.keys(db);
-            var randKey = keys[Math.floor(Math.random() * keys.length)];
-            playVideo(randKey);
-        };
-
-        function filterCat(cat) {
-            toggleMenu(false);
-            goHome();
-            var posts = document.querySelectorAll('.video-post');
-            var title = document.getElementById('cat-title');
-            
-            var titles = {
-                all: "🔥 Tüm Videolar",
-                sub: "🇹🇷 Türkçe Altyazılı",
-                amateur: "🏠 Amatör Videolar",
-                mom: "👩‍👧‍👦 Anne Videoları",
-                sibling: "👧 Kardeş Videoları",
-                bath: "🛁 Banyo Videoları",
-                fullhd: "🎬 Full HD Videolar",
-                lesbian: "👭 Lezbiyen Videolar"
-            };
-
-            title.innerHTML = titles[cat] || "🔥 Tüm Videolar";
-
-            for (var i = 0; i < posts.length; i++) {
-                var p = posts[i];
-                if (cat === 'all') {
-                    p.style.display = 'flex';
-                } else {
-                    var catsAttr = p.getAttribute('data-cats') || '';
-                    var catList = catsAttr.split(',');
-                    if (catList.indexOf(cat) !== -1) {
-                        p.style.display = 'flex';
-                    } else {
-                        p.style.display = 'none';
-                    }
-                }
-            }
-        }
-
-        var catItems = document.querySelectorAll('.cat-item');
-        for(var i = 0; i < catItems.length; i++) {
-            catItems[i].onclick = function() {
-                var cat = this.getAttribute('data-cat');
-                filterCat(cat);
-            };
-        }
-
-        function openProfile(author) {
-            activeAuthor = author;
-            var targetName = author.toLowerCase();
-            var avatarUrl = "";
-            var bannerUrl = "";
-            var htmlVideos = "";
-
-            for (var key in db) {
-                if (db.hasOwnProperty(key)) {
-                    var v = db[key];
-                    if (v.author.toLowerCase() === targetName || v.title.toLowerCase().indexOf(targetName) !== -1) {
-                        if (!avatarUrl) { avatarUrl = v.avatar; }
-                        if (!bannerUrl) { bannerUrl = v.banner; }
-                        htmlVideos += '<div class="video-post">' +
-                            '<div class="video-thumbnail trigger-play" data-id="' + key + '" style="background-image:url(\'' + v.thumb + '\');" onclick="playVideo(\'' + key + '\')"><div class="play-button"></div></div>' +
-                            '<div class="post-title trigger-play" data-id="' + key + '" onclick="playVideo(\'' + key + '\')">' + v.title + '</div>' +
-                            '<div class="post-date-info"><span>📅 ' + v.date + '</span></div>' +
-                            '<div class="post-meta">' +
-                                '<div class="author-box" onclick="openProfile(\'' + v.author + '\')">' +
-                                    '<div class="author-avatar-small" style="background-image:url(\'' + v.avatar + '\');"></div>' +
-                                    '<strong style="color:var(--primary-color);">' + v.author + ' ✓</strong>' +
-                                '</div>' +
-                                '<button class="action-btn trigger-play" data-id="' + key + '" onclick="playVideo(\'' + key + '\')">🚀 İzle</button>' +
-                            '</div>' +
-                        '</div>';
-                    }
-                }
-            }
-
-            var iframe = document.getElementById('v-iframe');
-            if (iframe) iframe.src = "";
-            document.getElementById('p-title').innerText = author;
-            if (avatarUrl) {
-                document.getElementById('p-avatar').style.backgroundImage = "url('" + avatarUrl + "')";
-            }
-            if (bannerUrl) {
-                document.getElementById('p-banner').style.backgroundImage = "url('" + bannerUrl + "')";
-            }
-            document.getElementById('p-videos').innerHTML = htmlVideos;
-
-            document.getElementById('sec-feed').className = 'page-sec';
-            document.getElementById('sec-watch').className = 'page-sec';
-            document.getElementById('sec-profile').className = 'page-sec active-sec';
-            window.scrollTo(0,0);
-        }
-
-        var profileTriggers = document.querySelectorAll('.trigger-profile');
-        for(var i = 0; i < profileTriggers.length; i++) {
-            profileTriggers[i].onclick = function() {
-                var author = this.getAttribute('data-author');
-                if(author) openProfile(author);
-            };
-        }
-
-        document.getElementById('watch-profile-box').onclick = function() {
-            if(activeAuthor) openProfile(activeAuthor);
-        };
-
-        checkAuthState();
-    </script>
-</body>
-</html>
+                <!-- VİDEO 3 -->
+                <div class="video-post" data-id="v3" data-c

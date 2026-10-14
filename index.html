@@ -63,6 +63,12 @@
         .auth-input:focus { border-color: var(--primary-color); }
         .auth-submit-btn { background-color: var(--primary-color); color: #fff; border: none; padding: 12px; border-radius: 20px; font-weight: bold; font-size: 14px; cursor: pointer; margin-top: 5px; }
 
+        /* YAŞ DOĞRULAMA STİLLERİ */
+        .age-modal-card { background-color: var(--card-bg); border: 2px solid var(--primary-color); border-radius: 16px; width: 100%; max-width: 400px; padding: 30px 20px; text-align: center; color: var(--text-color); box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+        .age-badge { display: inline-block; background: var(--primary-color); color: #fff; font-weight: 900; font-size: 20px; padding: 8px 16px; border-radius: 50%; margin-bottom: 12px; }
+        .age-btn-accept { background-color: var(--primary-color); color: #fff; border: none; padding: 12px 20px; border-radius: 25px; font-weight: bold; font-size: 14px; cursor: pointer; width: 100%; margin-top: 15px; }
+        .age-btn-decline { background: transparent; color: var(--text-sub); border: 1px solid var(--card-border); padding: 10px 20px; border-radius: 25px; font-size: 13px; cursor: pointer; width: 100%; margin-top: 8px; }
+
         /* BİLDİRİM PENCERESİ */
         .noti-item { padding: 10px; border-bottom: 1px solid var(--card-border); text-align: left; font-size: 12px; }
         .noti-item:last-child { border-bottom: none; }
@@ -94,6 +100,9 @@
         .play-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50px; height: 50px; background: rgba(255, 71, 87, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; pointer-events: none; z-index: 2; }
         .play-button::after { content: ""; border-style: solid; border-width: 8px 0 8px 14px; border-color: transparent transparent transparent #fff; margin-left: 3px; }
         
+        /* SÜRE ETİKETİ STİLİ */
+        .video-duration { position: absolute; bottom: 8px; right: 8px; background: rgba(0, 0, 0, 0.82); color: #fff; font-size: 11px; font-weight: bold; padding: 3px 6px; border-radius: 4px; pointer-events: none; z-index: 3; letter-spacing: 0.5px; border: 1px solid rgba(255,255,255,0.15); }
+
         .post-title { padding: 14px 15px 4px 15px; font-size: 15px; font-weight: bold; color: var(--text-color); cursor: pointer; }
         .post-date-info { padding: 0 15px 8px 15px; font-size: 11px; color: var(--text-sub); display: flex; gap: 12px; }
         .post-meta { padding: 0 15px 15px 15px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-sub); }
@@ -126,6 +135,17 @@
     </style>
 </head>
 <body>
+
+    <!-- 18+ YAŞ DOĞRULAMA MODAL -->
+    <div id="age-modal" class="modal-overlay" style="display:flex;">
+        <div class="age-modal-card">
+            <div class="age-badge">18+</div>
+            <h2 style="font-size:18px; margin-bottom:10px; color:var(--text-color);">Yetişkin İçerik Uyarısı</h2>
+            <p style="font-size:13px; color:var(--text-sub); line-height:1.5;">Bu web sitesi yetişkinlere yönelik içerikler barındırmaktadır. Devam edebilmek için 18 yaşından büyük olduğunuzu onaylamanız gerekmektedir.</p>
+            <button class="age-btn-accept" id="btn-age-accept">18 Yaşından Büyüğüm (Giriş Yap)</button>
+            <button class="age-btn-decline" id="btn-age-decline">Ayrıl (18 Yaşından Küçüğüm)</button>
+        </div>
+    </div>
 
     <!-- GİRİŞ / KAYIT MODAL -->
     <div id="auth-modal" class="modal-overlay">
@@ -166,7 +186,7 @@
                 </div>
                 <div class="noti-item">
                     <div class="noti-title">✨ Yeni Özellikler Geldi</div>
-                    <div class="noti-desc">Sitemize Benzer Videolar, Etiket Arama Sistemi ve Bildirim Kutusu eklendi.</div>
+                    <div class="noti-desc">Sitemize Video Süre Etiketleri ve 18+ Yaş Doğrulama Uyarısı eklendi.</div>
                 </div>
             </div>
         </div>
@@ -195,7 +215,7 @@
             <li data-cat="amateur" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">🏠 Amatör</li>
             <li data-cat="mom" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">👩‍👧‍👦 Anne</li>
             <li data-cat="sibling" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">👧 Kardeş</li>
-            <li data-cat="bath" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">🛁 Banyo</li>
+            <li data-cat="bath" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">自由 Banyo</li>
             <li data-cat="fullhd" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">🎬 Full HD</li>
             <li data-cat="lesbian" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">👭 Lezbiyen</li>
         </ul>
@@ -235,6 +255,7 @@
                 <div class="video-post" data-id="v5" data-cats="fullhd" data-tags="sophierain,fullhd,özelşov,siyah">
                     <div class="video-thumbnail trigger-play" data-id="v5" style="background-image: url('https://www.porn4fans.com/contents/videos_screenshots/5000/5268/800x450/1.jpg');">
                         <div class="play-button"></div>
+                        <div class="video-duration">08:15</div>
                     </div>
                     <div class="post-title trigger-play" data-id="v5">Sophie Rain Seksi Siyah Renk Kıyafetiyle Soyunuyor</div>
                     <div class="post-date-info">
@@ -253,6 +274,7 @@
                 <div class="video-post" data-id="v4" data-cats="sub,fullhd" data-tags="sweetiefox,altyazılı,fullhd,köylü">
                     <div class="video-thumbnail trigger-play" data-id="v4" style="background-image: url('https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg');">
                         <div class="play-button"></div>
+                        <div class="video-duration">14:40</div>
                     </div>
                     <div class="post-title trigger-play" data-id="v4">Tüylü Vajinalı Köylü Kızı Bir Yabancı Tarafından Sikişildi - Sweetie Fox</div>
                     <div class="post-date-info">
@@ -271,6 +293,7 @@
                 <div class="video-post" data-id="v3" data-cats="lesbian,fullhd" data-tags="sophierain,lezbiyen,fullhd,piperaishah">
                     <div class="video-thumbnail trigger-play" data-id="v3" style="background-image: url('https://pimpbunny.com/contents/videos_screenshots/513000/513225/800x450/39.jpg');">
                         <div class="play-button"></div>
+                        <div class="video-duration">11:05</div>
                     </div>
                     <div class="post-title trigger-play" data-id="v3">Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor</div>
                     <div class="post-date-info">
@@ -289,6 +312,7 @@
                 <div class="video-post" data-id="v2" data-cats="amateur" data-tags="comatozze,amatör,evde,gizli">
                     <div class="video-thumbnail trigger-play" data-id="v2" style="background-image: url('https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif');">
                         <div class="play-button"></div>
+                        <div class="video-duration">06:50</div>
                     </div>
                     <div class="post-title trigger-play" data-id="v2">Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...</div>
                     <div class="post-date-info">
@@ -307,6 +331,7 @@
                 <div class="video-post" data-id="v1" data-cats="fullhd" data-tags="sophierain,üstsüz,fullhd,özelşov">
                     <div class="video-thumbnail trigger-play" data-id="v1" style="background-image: url('https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp');">
                         <div class="play-button"></div>
+                        <div class="video-duration">09:32</div>
                     </div>
                     <div class="post-title trigger-play" data-id="v1">Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor</div>
                     <div class="post-date-info">
@@ -329,6 +354,7 @@
             <h1 id="v-title" style="font-size: 18px; color: var(--text-color);"></h1>
             <div style="font-size: 12px; color: var(--text-sub); display: flex; gap: 15px; margin-top: -5px;">
                 <span id="v-date">📅 -</span>
+                <span id="v-duration" style="color:var(--primary-color); font-weight:bold;">⏱️ -</span>
             </div>
             <div class="video-player-box">
                 <iframe id="v-iframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
@@ -370,12 +396,29 @@
     <script>
         window.open = function() { return null; };
 
+        // 18+ YAŞ KONTROLÜ
+        var isAgeVerified = localStorage.getItem('2pbvage_18plus');
+        if (isAgeVerified === 'true') {
+            document.getElementById('age-modal').style.display = 'none';
+        } else {
+            document.getElementById('age-modal').style.display = 'flex';
+        }
+
+        document.getElementById('btn-age-accept').onclick = function() {
+            localStorage.setItem('2pbvage_18plus', 'true');
+            document.getElementById('age-modal').style.display = 'none';
+        };
+
+        document.getElementById('btn-age-decline').onclick = function() {
+            window.location.href = "https://www.google.com";
+        };
+
         var db = {
-            v1: { title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", url: "https://playmogo.com/e/1fvov3xdwsbq", thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", banner: "https://i.ibb.co/DPFjgyLy/image.jpg", date: "12 Ekim 2026", desc: "Sophie Rain'in en çok konuşulan siyah iç çamaşırı şovu bu videoda sizlerle. İyi seyirler!", tags: ["sophierain", "fullhd", "özelşov", "üstsüz"] },
-            v2: { title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...", url: "https://playmogo.com/e/ehhg2pcksir6", thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", author: "comatozze", avatar: "https://i.ibb.co/pB3ntggN/image.jpg", banner: "https://ei.phncdn.com/pics/users/0009/2995/3741/cover30266955/(m=eRSa4qFxcWaAb)(mh=NL_-gLc2D3h9AHS0)1323x270.jpg", date: "12 Ekim 2026", desc: "Evde baş başa kalan ikilinin sürpriz ve heyecan dolu gizli anları.", tags: ["comatozze", "amatör", "evde", "gizli"] },
-            v3: { title: "Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor", url: "https://playmogo.com/e/xmiqbgo3vrz4", thumb: "https://pimpbunny.com/contents/videos_screenshots/513000/513225/800x450/39.jpg", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", banner: "https://i.ibb.co/DPFjgyLy/image.jpg", date: "12 Ekim 2026", desc: "Sophie Rain and Piper Aishah kameralar karşısında eğlenceli ve özel anlar yaşatıyor.", tags: ["sophierain", "lezbiyen", "fullhd", "piperaishah"] },
-            v4: { title: "Tüylü Vajinalı Köylü Kızı Bir Yabancı Tarafından Sikişildi - Sweetie Fox", url: "https://voe.sx/e/hoshht3fdzl0", thumb: "https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg", author: "Sweetie Fox", avatar: "https://ei.phncdn.com/(m=ewILGCjadOf)(mh=59qrk8LnBE3Z9kTL)43ca43da-b27e-42f2-b237-40c5c13261b1.jpg", banner: "https://ei.phncdn.com/pics/users/0009/2995/3741/cover30266955/(m=eRSa4qFxcWaAb)(mh=ciR9a4JESHJ-g9rp)1323x270.jpg", date: "13 Ekim 2026", desc: "Sweetie Fox'un Türkçe altyazılı köylü kızı temalı popüler özel gösterisi.", tags: ["sweetiefox", "altyazılı", "fullhd", "köylü"] },
-            v5: { title: "Sophie Rain Seksi Siyah Renk Kıyafetiyle Soyunuyor", url: "https://voe.sx/e/g3beul38mpw7", thumb: "https://www.porn4fans.com/contents/videos_screenshots/5000/5268/800x450/1.jpg", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", banner: "https://i.ibb.co/DPFjgyLy/image.jpg", date: "14 Ekim 2026", desc: "Sophie Rain'in en yeni seksi siyah kıyafetli özel gösterisi.", tags: ["sophierain", "fullhd", "özelşov", "siyah"] }
+            v1: { title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", url: "https://playmogo.com/e/1fvov3xdwsbq", thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", banner: "https://i.ibb.co/DPFjgyLy/image.jpg", date: "12 Ekim 2026", duration: "09:32", desc: "Sophie Rain'in en çok konuşulan siyah iç çamaşırı şovu bu videoda sizlerle. İyi seyirler!", tags: ["sophierain", "fullhd", "özelşov", "üstsüz"] },
+            v2: { title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...", url: "https://playmogo.com/e/ehhg2pcksir6", thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", author: "comatozze", avatar: "https://i.ibb.co/pB3ntggN/image.jpg", banner: "https://ei.phncdn.com/pics/users/0009/2995/3741/cover30266955/(m=eRSa4qFxcWaAb)(mh=NL_-gLc2D3h9AHS0)1323x270.jpg", date: "12 Ekim 2026", duration: "06:50", desc: "Evde baş başa kalan ikilinin sürpriz ve heyecan dolu gizli anları.", tags: ["comatozze", "amatör", "evde", "gizli"] },
+            v3: { title: "Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor", url: "https://playmogo.com/e/xmiqbgo3vrz4", thumb: "https://pimpbunny.com/contents/videos_screenshots/513000/513225/800x450/39.jpg", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", banner: "https://i.ibb.co/DPFjgyLy/image.jpg", date: "12 Ekim 2026", duration: "11:05", desc: "Sophie Rain ve Piper Aishah kameralar karşısında eğlenceli ve özel anlar yaşatıyor.", tags: ["sophierain", "lezbiyen", "fullhd", "piperaishah"] },
+            v4: { title: "Tüylü Vajinalı Köylü Kızı Bir Yabancı Tarafından Sikişildi - Sweetie Fox", url: "https://voe.sx/e/hoshht3fdzl0", thumb: "https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg", author: "Sweetie Fox", avatar: "https://ei.phncdn.com/(m=ewILGCjadOf)(mh=59qrk8LnBE3Z9kTL)43ca43da-b27e-42f2-b237-40c5c13261b1.jpg", banner: "https://ei.phncdn.com/pics/users/0009/2995/3741/cover30266955/(m=eRSa4qFxcWaAb)(mh=ciR9a4JESHJ-g9rp)1323x270.jpg", date: "13 Ekim 2026", duration: "14:40", desc: "Sweetie Fox'un Türkçe altyazılı köylü kızı temalı popüler özel gösterisi.", tags: ["sweetiefox", "altyazılı", "fullhd", "köylü"] },
+            v5: { title: "Sophie Rain Seksi Siyah Renk Kıyafetiyle Soyunuyor", url: "https://voe.sx/e/g3beul38mpw7", thumb: "https://www.porn4fans.com/contents/videos_screenshots/5000/5268/800x450/1.jpg", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", banner: "https://i.ibb.co/DPFjgyLy/image.jpg", date: "14 Ekim 2026", duration: "08:15", desc: "Sophie Rain'in en yeni seksi siyah kıyafetli özel gösterisi.", tags: ["sophierain", "fullhd", "özelşov", "siyah"] }
         };
 
         var activeAuthor = "";
@@ -530,7 +573,6 @@
             document.getElementById('sec-watch').className = 'page-sec';
             document.getElementById('sec-profile').className = 'page-sec';
             
-            // Tüm videoları görünür yap
             var posts = document.querySelectorAll('.video-post');
             for(var i=0; i<posts.length; i++) {
                 posts[i].style.display = 'flex';
@@ -574,7 +616,7 @@
                     var v = db[key];
                     if(v.author === currentItem.author || count < 2) {
                         html += '<div class="video-post">' +
-                            '<div class="video-thumbnail trigger-play" data-id="' + key + '" style="background-image:url(\'' + v.thumb + '\');" onclick="playVideo(\'' + key + '\')"><div class="play-button"></div></div>' +
+                            '<div class="video-thumbnail trigger-play" data-id="' + key + '" style="background-image:url(\'' + v.thumb + '\');" onclick="playVideo(\'' + key + '\')"><div class="play-button"></div><div class="video-duration">' + (v.duration || '05:00') + '</div></div>' +
                             '<div class="post-title trigger-play" data-id="' + key + '" onclick="playVideo(\'' + key + '\')">' + v.title + '</div>' +
                             '<div class="post-date-info"><span>📅 ' + v.date + '</span></div>' +
                             '<div class="post-meta">' +
@@ -602,6 +644,7 @@
                 document.getElementById('v-title').innerText = item.title;
                 document.getElementById('v-author').innerText = item.author;
                 document.getElementById('v-date').innerText = '📅 ' + item.date;
+                document.getElementById('v-duration').innerText = '⏱️ ' + (item.duration || '05:00');
                 document.getElementById('v-avatar').style.backgroundImage = "url('" + item.avatar + "')";
                 document.getElementById('v-desc').innerText = item.desc;
 
@@ -688,7 +731,7 @@
                 amateur: "🏠 Amatör Videolar",
                 mom: "👩‍👧‍👦 Anne Videoları",
                 sibling: "👧 Kardeş Videoları",
-                bath: "🛁 Banyo Videoları",
+                bath: "自由 Banyo Videoları",
                 fullhd: "🎬 Full HD Videolar",
                 lesbian: "👭 Lezbiyen Videolar"
             };
@@ -733,7 +776,7 @@
                         if (!avatarUrl) { avatarUrl = v.avatar; }
                         if (!bannerUrl) { bannerUrl = v.banner; }
                         htmlVideos += '<div class="video-post">' +
-                            '<div class="video-thumbnail trigger-play" data-id="' + key + '" style="background-image:url(\'' + v.thumb + '\');"><div class="play-button"></div></div>' +
+                            '<div class="video-thumbnail trigger-play" data-id="' + key + '" style="background-image:url(\'' + v.thumb + '\');"><div class="play-button"></div><div class="video-duration">' + (v.duration || '05:00') + '</div></div>' +
                             '<div class="post-title trigger-play" data-id="' + key + '">' + v.title + '</div>' +
                             '<div class="post-date-info"><span>📅 ' + v.date + '</span></div>' +
                             '<div class="post-meta">' +

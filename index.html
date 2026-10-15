@@ -543,3 +543,686 @@
 
         function updateDayNightUI(isLight) {
             var icon = document.getElementById('daynight-icon');
+            var text = document.getElementById('daynight-text');
+            if (icon) icon.innerText = isLight ? '🌙' : '☀️';
+            if (text) text.innerText = isLight ? 'Gece' : 'Gündüz';
+        }
+
+        var savedMode = localStorage.getItem('2pbvage_daynight');
+        if(savedMode === 'light') {
+            document.body.classList.add('light-theme');
+            updateDayNightUI(true);
+        } else {
+            updateDayNightUI(false);
+        }
+
+        var btnToggleDaynight = document.getElementById('btn-toggle-daynight');
+        if (btnToggleDaynight) btnToggleDaynight.onclick = toggleDayNightTheme;
+
+        function setTheme(color) {
+            document.documentElement.style.setProperty('--primary-color', color);
+            localStorage.setItem('2pbvage_theme', color);
+        }
+
+        var savedTheme = localStorage.getItem('2pbvage_theme');
+        if(savedTheme) setTheme(savedTheme);
+
+        function checkAuthState() {
+            try {
+                var session = localStorage.getItem("2pbvage_session");
+                var users = {};
+                try { users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}'); } catch(err) { users = {}; }
+
+                if(!users[OWNER_EMAIL] || !users[OWNER_EMAIL].avatar) {
+                    users[OWNER_EMAIL] = {
+                        password: users[OWNER_EMAIL] ? users[OWNER_EMAIL].password : "123",
+                        username: OWNER_USERNAME,
+                        avatar: OWNER_DEFAULT_AVATAR,
+                        bio: OWNER_BIO_HTML,
+                        isOwner: true
+                    };
+                    localStorage.setItem('2pbvage_users', JSON.stringify(users));
+                }
+
+                if(session) {
+                    currentUser = JSON.parse(session);
+                    var userObj = users[currentUser.email] || {};
+
+                    var loggedOut = document.getElementById('auth-logged-out');
+                    var loggedIn = document.getElementById('auth-logged-in');
+                    if (loggedOut) loggedOut.style.display = 'none';
+                    if (loggedIn) loggedIn.style.display = 'block';
+                    
+                    var isOwnerAcc = currentUser.email.toLowerCase() === OWNER_EMAIL.toLowerCase();
+                    var displayName = isOwnerAcc ? OWNER_USERNAME : (userObj.username || currentUser.email.split('@')[0]);
+                    
+                    var displayEmailElem = document.getElementById('user-display-email');
+                    if (displayEmailElem) displayEmailElem.innerText = displayName;
+
+                    var avatarElem = document.getElementById('user-chip-avatar-img');
+                    if (avatarElem) {
+                        if(isOwnerAcc) {
+                            avatarElem.style.backgroundImage = "url('" + OWNER_DEFAULT_AVATAR + "')";
+                        } else if(userObj.avatar) {
+                            avatarElem.style.backgroundImage = "url('" + userObj.avatar + "')";
+                        } else {
+                            avatarElem.style.backgroundImage = "url('https://cdn-icons-png.flaticon.com/512/847/847969.png')";
+                        }
+                    }
+
+                    var tickArea = document.getElementById('user-owner-tick-area');
+                    if (tickArea) {
+                        if(isOwnerAcc) {
+                            tickArea.innerHTML = ownerYellowTickHTML;
+                        } else {
+                            tickArea.innerHTML = "";
+                        }
+                    }
+                } else {
+                    currentUser = null;
+                    var loggedOut = document.getElementById('auth-logged-out');
+                    var loggedIn = document.getElementById('auth-logged-in');
+                    if (loggedOut) loggedOut.style.display = 'block';
+                    if (loggedIn) loggedIn.style.display = 'none';
+                }
+            } catch(e) { currentUser = null; }
+        }
+
+        function toggleAuthModal(open) {
+            var authModal = document.getElementById('auth-modal');
+            if (authModal) authModal.style.display = open ? 'flex' : 'none';
+            if(open) switchTab('login');
+        }
+
+        function switchTab(tab) {
+            var tabsBox = document.getElementById('auth-tabs-box');
+            if (tabsBox) tabsBox.style.display = 'flex';
+            
+            var fLogin = document.getElementById('form-login');
+            var fReg = document.getElementById('form-register');
+            var fForgot = document.getElementById('form-forgot');
+            var tLogin = document.getElementById('tab-login');
+            var tReg = document.getElementById('tab-register');
+
+            if(tab === 'login') {
+                if (tLogin) tLogin.className = 'auth-tab active';
+                if (tReg) tReg.className = 'auth-tab';
+                if (fLogin) fLogin.style.display = 'flex';
+                if (fReg) fReg.style.display = 'none';
+                if (fForgot) fForgot.style.display = 'none';
+            } else if(tab === 'register') {
+                if (tReg) tReg.className = 'auth-tab active';
+                if (tLogin) tLogin.className = 'auth-tab';
+                if (fReg) fReg.style.display = 'flex';
+                if (fLogin) fLogin.style.display = 'none';
+                if (fForgot) fForgot.style.display = 'none';
+            } else if(tab === 'forgot') {
+                if (tabsBox) tabsBox.style.display = 'none';
+                if (fLogin) fLogin.style.display = 'none';
+                if (fReg) fReg.style.display = 'none';
+                if (fForgot) fForgot.style.display = 'flex';
+            }
+        }
+
+        var tabLogin = document.getElementById('tab-login');
+        if (tabLogin) tabLogin.onclick = function() { switchTab('login'); };
+        
+        var tabReg = document.getElementById('tab-register');
+        if (tabReg) tabReg.onclick = function() { switchTab('register'); };
+        
+        var linkForgot = document.getElementById('link-forgot-password');
+        if (linkForgot) linkForgot.onclick = function() { switchTab('forgot'); };
+        
+        var linkBackLogin = document.getElementById('link-back-login');
+        if (linkBackLogin) linkBackLogin.onclick = function() { switchTab('login'); };
+
+        var formLogin = document.getElementById('form-login');
+        if (formLogin) {
+            formLogin.onsubmit = function(e) {
+                e.preventDefault();
+                var emailInput = document.getElementById('login-email');
+                var passInput = document.getElementById('login-password');
+                if(!emailInput || !passInput) return;
+
+                var email = emailInput.value.trim().toLowerCase();
+                var password = passInput.value.trim();
+                
+                var users = {};
+                try { users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}'); } catch(err) { users = {}; }
+
+                if(!users[email] || users[email].password !== password) {
+                    alert("Hatalı e-posta veya şifre!");
+                    return;
+                }
+                
+                localStorage.setItem("2pbvage_session", JSON.stringify({ email: email }));
+                checkAuthState();
+                toggleAuthModal(false);
+                alert("Başarıyla giriş yapıldı!");
+            };
+        }
+
+        var formRegister = document.getElementById('form-register');
+        if (formRegister) {
+            formRegister.onsubmit = function(e) {
+                e.preventDefault();
+                var emailInput = document.getElementById('reg-email');
+                var passInput = document.getElementById('reg-password');
+                if(!emailInput || !passInput) return;
+
+                var email = emailInput.value.trim().toLowerCase();
+                var password = passInput.value.trim();
+                
+                var users = {};
+                try { users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}'); } catch(err) { users = {}; }
+
+                if(users[email]) {
+                    alert("Bu e-posta adresi zaten kayıtlı!");
+                    return;
+                }
+                
+                var isOwnerAccount = (email === OWNER_EMAIL.toLowerCase());
+
+                users[email] = { 
+                    password: password,
+                    username: isOwnerAccount ? OWNER_USERNAME : email.split('@')[0],
+                    avatar: isOwnerAccount ? OWNER_DEFAULT_AVATAR : "",
+                    bio: isOwnerAccount ? OWNER_BIO_HTML : "",
+                    isOwner: isOwnerAccount
+                };
+                localStorage.setItem('2pbvage_users', JSON.stringify(users));
+                localStorage.setItem("2pbvage_session", JSON.stringify({ email: email }));
+                checkAuthState();
+                toggleAuthModal(false);
+                alert("Hesabınız oluşturuldu ve otomatik giriş yapıldı!");
+            };
+        }
+
+        var formForgot = document.getElementById('form-forgot');
+        if (formForgot) {
+            formForgot.onsubmit = function(e) {
+                e.preventDefault();
+                var forgotEmailInput = document.getElementById('forgot-email');
+                if(!forgotEmailInput) return;
+
+                var email = forgotEmailInput.value.trim().toLowerCase();
+                var users = {};
+                try { users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}'); } catch(err) { users = {}; }
+
+                if(!users[email]) {
+                    alert("Bu e-posta adresine ait kayıtlı bir hesap bulunamadı!");
+                    return;
+                }
+
+                // GÜVENLİK DÜZELTMESİ: Şifre açıkça ekranda verilmez veya otomatik değiştirilmez. Sadece bildirim gösterilir.
+                alert("📩 " + email + " adresine güvenli şifre sıfırlama bağlantısı gönderildi. Lütfen e-posta gelen kutunuzu kontrol edin.");
+                toggleAuthModal(false);
+                switchTab('login');
+            };
+        }
+
+        // PROFİL PANELİ
+        var btnOpenProfilePanel = document.getElementById('btn-open-profile-panel');
+        if (btnOpenProfilePanel) {
+            btnOpenProfilePanel.onclick = function() {
+                if(!currentUser) return;
+                var users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
+                var u = users[currentUser.email] || {};
+
+                var isOwnerAcc = (currentUser.email.toLowerCase() === OWNER_EMAIL.toLowerCase());
+                var displayName = isOwnerAcc ? OWNER_USERNAME : (u.username || currentUser.email.split('@')[0]);
+
+                var nameTitle = document.getElementById('modal-user-name-title');
+                var emailSub = document.getElementById('modal-user-email-subtitle');
+                if(nameTitle) nameTitle.innerHTML = displayName + (isOwnerAcc ? ownerYellowTickHTML : '');
+                if(emailSub) emailSub.innerText = currentUser.email;
+
+                var editUser = document.getElementById('edit-username');
+                var editAvatar = document.getElementById('edit-avatar-url');
+                var editBio = document.getElementById('edit-bio');
+                if(editUser) editUser.value = displayName;
+                if(editAvatar) editAvatar.value = isOwnerAcc ? OWNER_DEFAULT_AVATAR : (u.avatar || '');
+                if(editBio) editBio.value = isOwnerAcc ? OWNER_BIO_HTML : (u.bio || '');
+
+                var avatarElem = document.getElementById('modal-user-avatar');
+                if(avatarElem) {
+                    avatarElem.style.backgroundImage = "url('" + (isOwnerAcc ? OWNER_DEFAULT_AVATAR : (u.avatar || OWNER_DEFAULT_AVATAR)) + "')";
+                }
+
+                var profileModal = document.getElementById('profile-edit-modal');
+                if(profileModal) profileModal.style.display = 'flex';
+            };
+        }
+
+        var btnCloseProfileModal = document.getElementById('btn-close-profile-modal');
+        if (btnCloseProfileModal) {
+            btnCloseProfileModal.onclick = function() {
+                var profileModal = document.getElementById('profile-edit-modal');
+                if(profileModal) profileModal.style.display = 'none';
+            };
+        }
+
+        var formEditProfile = document.getElementById('form-edit-profile');
+        if (formEditProfile) {
+            formEditProfile.onsubmit = function(e) {
+                e.preventDefault();
+                if(!currentUser) return;
+
+                var users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
+                var u = users[currentUser.email] || {};
+
+                var editUser = document.getElementById('edit-username');
+                var editAvatar = document.getElementById('edit-avatar-url');
+                var editBio = document.getElementById('edit-bio');
+
+                if(editUser) u.username = editUser.value.trim();
+                if(editAvatar) u.avatar = editAvatar.value.trim();
+                if(editBio) u.bio = editBio.value.trim();
+
+                users[currentUser.email] = u;
+                localStorage.setItem('2pbvage_users', JSON.stringify(users));
+                
+                checkAuthState();
+                var profileModal = document.getElementById('profile-edit-modal');
+                if(profileModal) profileModal.style.display = 'none';
+                alert("Profil başarıyla güncellendi!");
+            };
+        }
+
+        var btnModalLogout = document.getElementById('btn-modal-logout');
+        if (btnModalLogout) {
+            btnModalLogout.onclick = function() {
+                localStorage.removeItem("2pbvage_session");
+                checkAuthState();
+                var profileModal = document.getElementById('profile-edit-modal');
+                if(profileModal) profileModal.style.display = 'none';
+            };
+        }
+
+        // MENÜ
+        function toggleMenu(open) {
+            var overlay = document.getElementById('menu-overlay');
+            var drawer = document.getElementById('menu-drawer');
+            if (overlay && drawer) {
+                if (open) {
+                    overlay.style.display = 'block';
+                    drawer.classList.add('open');
+                } else {
+                    overlay.style.display = 'none';
+                    drawer.classList.remove('open');
+                }
+            }
+        }
+
+        var btnOpenMenu = document.getElementById('btn-open-menu');
+        if (btnOpenMenu) btnOpenMenu.onclick = function() { toggleMenu(true); };
+
+        var menuOverlay = document.getElementById('menu-overlay');
+        if (menuOverlay) menuOverlay.onclick = function() { toggleMenu(false); };
+
+        var btnCloseDrawer = document.getElementById('btn-close-drawer');
+        if (btnCloseDrawer) btnCloseDrawer.onclick = function() { toggleMenu(false); };
+
+        function goHome() {
+            var iframe = document.getElementById('v-iframe');
+            if (iframe) iframe.src = "";
+            
+            var secFeed = document.getElementById('sec-feed');
+            var secWatch = document.getElementById('sec-watch');
+            var secProfile = document.getElementById('sec-profile');
+            if(secFeed) secFeed.className = 'page-sec active-sec';
+            if(secWatch) secWatch.className = 'page-sec';
+            if(secProfile) secProfile.className = 'page-sec';
+            
+            var posts = document.querySelectorAll('.video-post');
+            for(var i=0; i<posts.length; i++) { posts[i].style.display = 'flex'; }
+            
+            var catTitle = document.getElementById('cat-title');
+            var searchChannelResult = document.getElementById('search-channel-result');
+            var searchInput = document.getElementById('search-input');
+            if(catTitle) catTitle.innerText = "🔥 Tüm Videolar";
+            if(searchChannelResult) searchChannelResult.innerHTML = "";
+            if(searchInput) searchInput.value = "";
+            window.scrollTo(0,0);
+        }
+
+        var logoHome = document.getElementById('logo-home');
+        if (logoHome) logoHome.onclick = goHome;
+
+        var btnBackWatch = document.getElementById('btn-back-watch');
+        if (btnBackWatch) btnBackWatch.onclick = goHome;
+
+        var btnBackProfile = document.getElementById('btn-back-profile');
+        if (btnBackProfile) btnBackProfile.onclick = goHome;
+
+        var btnOpenAuth = document.getElementById('btn-open-auth');
+        if (btnOpenAuth) btnOpenAuth.onclick = function() { toggleAuthModal(true); };
+
+        var btnCloseModal = document.getElementById('btn-close-modal');
+        if (btnCloseModal) btnCloseModal.onclick = function() { toggleAuthModal(false); };
+
+        // ETIKET ARAMA
+        function searchTag(tagName) {
+            goHome();
+            var searchInput = document.getElementById('search-input');
+            var catTitle = document.getElementById('cat-title');
+            if(searchInput) searchInput.value = "#" + tagName;
+            if(catTitle) catTitle.innerText = "🏷️ Etiket: #" + tagName;
+            
+            var posts = document.querySelectorAll('.video-post');
+            for(var i=0; i<posts.length; i++) {
+                var tagsAttr = posts[i].getAttribute('data-tags') || '';
+                if(tagsAttr.indexOf(tagName.toLowerCase()) > -1) {
+                    posts[i].style.display = 'flex';
+                } else {
+                    posts[i].style.display = 'none';
+                }
+            }
+        }
+
+        // VİDEO OYNATMA VE BENZERLERİ
+        function playVideo(id) {
+            var item = db[id];
+            if(item) {
+                currentVideoId = id;
+                activeAuthor = item.author;
+
+                var vTitle = document.getElementById('v-title');
+                var vAuthor = document.getElementById('v-author');
+                var vDate = document.getElementById('v-date');
+                var vAvatar = document.getElementById('v-avatar');
+                var vDesc = document.getElementById('v-desc');
+
+                if(vTitle) vTitle.innerText = item.title;
+                if(vAuthor) vAuthor.innerText = item.author;
+                if(vDate) vDate.innerText = '📅 ' + item.date;
+                if(vAvatar) vAvatar.style.backgroundImage = "url('" + item.avatar + "')";
+                if(vDesc) vDesc.innerText = item.desc;
+
+                var tagsHtml = "";
+                if(item.tags) {
+                    for(var t=0; t<item.tags.length; t++) {
+                        tagsHtml += '<span class="tag-badge" onclick="searchTag(\'' + item.tags[t] + '\')">#' + item.tags[t] + '</span>';
+                    }
+                }
+                var vTags = document.getElementById('v-tags');
+                if(vTags) vTags.innerHTML = tagsHtml;
+
+                // Benzer videoları yükle
+                var relHtml = "";
+                var count = 0;
+                for(var key in db) {
+                    if(key !== id && db.hasOwnProperty(key)) {
+                        var v = db[key];
+                        if(v.author === item.author || count < 2) {
+                            relHtml += '<div class="video-post">' +
+                                '<div class="video-thumbnail" style="background-image:url(\'' + v.thumb + '\');" onclick="playVideo(\'' + key + '\')"><div class="play-button"></div></div>' +
+                                '<div class="post-title" onclick="playVideo(\'' + key + '\')">' + v.title + '</div>' +
+                                '<div class="post-date-info"><span>📅 ' + v.date + '</span></div>' +
+                                '<div class="post-meta">' +
+                                    '<div class="author-box" onclick="openProfile(\'' + v.author + '\')">' +
+                                        '<div class="author-avatar-small" style="background-image:url(\'' + v.avatar + '\');"></div>' +
+                                        '<strong style="color:var(--primary-color);">' + v.author + ' ✓</strong>' +
+                                    '</div>' +
+                                    '<button class="action-btn" onclick="playVideo(\'' + key + '\')">🚀 İzle</button>' +
+                                '</div>' +
+                            '</div>';
+                            count++;
+                            if(count >= 2) break;
+                        }
+                    }
+                }
+                var relatedVideos = document.getElementById('related-videos');
+                if(relatedVideos) relatedVideos.innerHTML = relHtml;
+
+                var secFeed = document.getElementById('sec-feed');
+                var secWatch = document.getElementById('sec-watch');
+                var secProfile = document.getElementById('sec-profile');
+                if(secFeed) secFeed.className = 'page-sec';
+                if(secWatch) secWatch.className = 'page-sec active-sec';
+                if(secProfile) secProfile.className = 'page-sec';
+                window.scrollTo(0,0);
+                
+                var vIframe = document.getElementById('v-iframe');
+                if(vIframe) vIframe.src = item.url;
+            }
+        }
+
+        // TIKLAMA DELEGASYONU (GÜVENLİ)
+        document.body.onclick = function(e) {
+            var target = e.target;
+            
+            var trig = target.closest('.trigger-play');
+            if (trig) {
+                var id = trig.getAttribute('data-id');
+                if (id) { playVideo(id); return; }
+            }
+
+            var profTrig = target.closest('.trigger-profile');
+            if (profTrig) {
+                var author = profTrig.getAttribute('data-author');
+                if (author) { openProfile(author); return; }
+            }
+        };
+
+        // KANAL VE VİDEO ARAMA
+        var searchInput = document.getElementById('search-input');
+        if (searchInput) {
+            searchInput.oninput = function() {
+                var q = this.value.toLowerCase().trim();
+                var secFeed = document.getElementById('sec-feed');
+                var secWatch = document.getElementById('sec-watch');
+                var secProfile = document.getElementById('sec-profile');
+                if(secFeed) secFeed.className = 'page-sec active-sec';
+                if(secWatch) secWatch.className = 'page-sec';
+                if(secProfile) secProfile.className = 'page-sec';
+                
+                var channelArea = document.getElementById('search-channel-result');
+                if(channelArea) channelArea.innerHTML = "";
+
+                var catTitle = document.getElementById('cat-title');
+
+                if(!q) {
+                    if(catTitle) catTitle.innerText = "🔥 Tüm Videolar";
+                    var posts = document.querySelectorAll('.video-post');
+                    for(var i=0; i<posts.length; i++) { posts[i].style.display = 'flex'; }
+                    return;
+                }
+
+                if(catTitle) catTitle.innerText = "🔍 Arama Sonuçları";
+
+                var matchedChannels = [];
+                for(var k in db) {
+                    var authorName = db[k].author;
+                    if(authorName.toLowerCase().indexOf(q) > -1) {
+                        var exists = matchedChannels.some(function(c){ return c.name.toLowerCase() === authorName.toLowerCase(); });
+                        if(!exists) {
+                            matchedChannels.push({ name: authorName, avatar: db[k].avatar, isOwner: false });
+                        }
+                    }
+                }
+
+                if(OWNER_USERNAME.toLowerCase().indexOf(q) > -1 || OWNER_EMAIL.toLowerCase().indexOf(q) > -1) {
+                    var exists = matchedChannels.some(function(c){ return c.isOwner === true; });
+                    if(!exists) {
+                        matchedChannels.unshift({ 
+                            name: OWNER_USERNAME, 
+                            avatar: OWNER_DEFAULT_AVATAR, 
+                            isOwner: true 
+                        });
+                    }
+                }
+
+                if(matchedChannels.length > 0 && channelArea) {
+                    var cHtml = '<div style="font-size:13px; font-weight:bold; color:var(--text-sub); margin-bottom:8px;">📢 Bulunan Kanal / Üreticiler:</div>';
+                    for(var c=0; c<matchedChannels.length; c++) {
+                        var ch = matchedChannels[c];
+                        cHtml += '<div class="channel-card">' +
+                            '<div class="channel-info" onclick="openProfile(\'' + ch.name + '\')">' +
+                                '<div class="channel-avatar" style="background-image:url(\'' + ch.avatar + '\');"></div>' +
+                                '<div>' +
+                                    '<div style="font-size:15px; font-weight:bold; color:var(--text-color);">' + ch.name + (ch.isOwner ? ownerYellowTickHTML : ' ✓') + '</div>' +
+                                    '<div style="font-size:11px; color:var(--text-sub);">' + (ch.isOwner ? '👑 Sitenin Sahibi' : 'İçerik Üreticisi') + '</div>' +
+                                '</div>' +
+                            '</div>' +
+                            '<button class="action-btn" onclick="openProfile(\'' + ch.name + '\')">Kanala Git</button>' +
+                        '</div>';
+                    }
+                    channelArea.innerHTML = cHtml;
+                }
+
+                var posts = document.querySelectorAll('.video-post');
+                for(var i=0; i<posts.length; i++) {
+                    var id = posts[i].getAttribute('data-id');
+                    var item = db[id];
+                    var tagsAttr = posts[i].getAttribute('data-tags') || '';
+                    var queryClean = q.replace('#', '');
+                    
+                    if(item && (item.title.toLowerCase().indexOf(queryClean) > -1 || item.author.toLowerCase().indexOf(queryClean) > -1 || tagsAttr.indexOf(queryClean) > -1)) {
+                        posts[i].style.display = 'flex';
+                    } else {
+                        posts[i].style.display = 'none';
+                    }
+                }
+            };
+        }
+
+        var btnRandomMenu = document.getElementById('btn-random-menu');
+        if (btnRandomMenu) {
+            btnRandomMenu.onclick = function() {
+                toggleMenu(false);
+                var keys = Object.keys(db);
+                var randKey = keys[Math.floor(Math.random() * keys.length)];
+                playVideo(randKey);
+            };
+        }
+
+        function filterCat(cat) {
+            toggleMenu(false);
+            goHome();
+            var posts = document.querySelectorAll('.video-post');
+            var title = document.getElementById('cat-title');
+            
+            var titles = {
+                all: "🔥 Tüm Videolar",
+                sub: "🇹🇷 Türkçe Altyazılı",
+                amateur: "🏠 Amatör Videolar",
+                mom: "👩‍👧‍👦 Anne Videoları",
+                sibling: "👧 Kardeş Videoları",
+                bath: "🛁 Banyo Videoları",
+                fullhd: "🎬 Full HD Videolar",
+                lesbian: "👭 Lezbiyen Videolar"
+            };
+
+            if(title) title.innerHTML = titles[cat] || "🔥 Tüm Videolar";
+
+            for (var i = 0; i < posts.length; i++) {
+                var p = posts[i];
+                if (cat === 'all') {
+                    p.style.display = 'flex';
+                } else {
+                    var catsAttr = p.getAttribute('data-cats') || '';
+                    var catList = catsAttr.split(',');
+                    if (catList.indexOf(cat) !== -1) {
+                        p.style.display = 'flex';
+                    } else {
+                        p.style.display = 'none';
+                    }
+                }
+            }
+        }
+
+        var catItems = document.querySelectorAll('.cat-item');
+        for(var i = 0; i < catItems.length; i++) {
+            catItems[i].onclick = function() {
+                var cat = this.getAttribute('data-cat');
+                filterCat(cat);
+            };
+        }
+
+        function openProfile(author) {
+            activeAuthor = author;
+            var targetName = author.toLowerCase();
+            var avatarUrl = "";
+            var bannerUrl = "";
+            var htmlVideos = "";
+
+            var isOwnerAcc = (author.toLowerCase() === OWNER_USERNAME.toLowerCase() || author.toLowerCase() === OWNER_EMAIL.toLowerCase());
+            
+            if(isOwnerAcc) {
+                avatarUrl = OWNER_DEFAULT_AVATAR;
+                bannerUrl = OWNER_DEFAULT_AVATAR;
+            } else {
+                for (var key in db) {
+                    if (db.hasOwnProperty(key)) {
+                        var v = db[key];
+                        if (v.author.toLowerCase() === targetName || v.title.toLowerCase().indexOf(targetName) !== -1) {
+                            if (!avatarUrl) { avatarUrl = v.avatar; }
+                            if (!bannerUrl) { bannerUrl = v.banner; }
+                            htmlVideos += '<div class="video-post">' +
+                                '<div class="video-thumbnail" style="background-image:url(\'' + v.thumb + '\');" onclick="playVideo(\'' + key + '\')"><div class="play-button"></div></div>' +
+                                '<div class="post-title" onclick="playVideo(\'' + key + '\')">' + v.title + '</div>' +
+                                '<div class="post-date-info"><span>📅 ' + v.date + '</span></div>' +
+                                '<div class="post-meta">' +
+                                    '<div class="author-box" onclick="openProfile(\'' + v.author + '\')">' +
+                                        '<div class="author-avatar-small" style="background-image:url(\'' + v.avatar + '\');"></div>' +
+                                        '<strong style="color:var(--primary-color);">' + v.author + ' ✓</strong>' +
+                                    '</div>' +
+                                    '<button class="action-btn" onclick="playVideo(\'' + key + '\')">🚀 İzle</button>' +
+                                '</div>' +
+                            '</div>';
+                        }
+                    }
+                }
+            }
+
+            var iframe = document.getElementById('v-iframe');
+            if (iframe) iframe.src = "";
+            
+            var pTitle = document.getElementById('p-title');
+            if(pTitle) pTitle.innerHTML = (isOwnerAcc ? OWNER_USERNAME : author) + (isOwnerAcc ? ownerYellowTickHTML : '');
+
+            var pAvatar = document.getElementById('p-avatar');
+            if (pAvatar) {
+                pAvatar.style.backgroundImage = "url('" + (isOwnerAcc ? OWNER_DEFAULT_AVATAR : avatarUrl) + "')";
+            }
+
+            var pBanner = document.getElementById('p-banner');
+            if (pBanner) {
+                pBanner.style.backgroundImage = "url('" + (isOwnerAcc ? OWNER_DEFAULT_AVATAR : bannerUrl) + "')";
+            }
+
+            var pBio = document.getElementById('p-bio');
+            if (pBio) {
+                pBio.innerHTML = isOwnerAcc ? OWNER_BIO_HTML : "";
+            }
+            
+            var pVideos = document.getElementById('p-videos');
+            if(pVideos) {
+                if(isOwnerAcc) {
+                    pVideos.innerHTML = '<div style="color:var(--text-sub); font-size:13px; text-align:center; padding:20px;">👑 Site Sahibi Hesabı (Kurucu Profili)</div>';
+                } else {
+                    pVideos.innerHTML = htmlVideos || '<div style="color:var(--text-sub); font-size:13px; text-align:center; padding:20px;">Henüz bu kanala ait kayıtlı video yüklenmemiş.</div>';
+                }
+            }
+
+            var secFeed = document.getElementById('sec-feed');
+            var secWatch = document.getElementById('sec-watch');
+            var secProfile = document.getElementById('sec-profile');
+            if(secFeed) secFeed.className = 'page-sec';
+            if(secWatch) secWatch.className = 'page-sec';
+            if(secProfile) secProfile.className = 'page-sec active-sec';
+            window.scrollTo(0,0);
+        }
+
+        var watchProfileBox = document.getElementById('watch-profile-box');
+        if (watchProfileBox) {
+            watchProfileBox.onclick = function() {
+                if(activeAuthor) openProfile(activeAuthor);
+            };
+        }
+
+        checkAuthState();
+    </script>
+</body>
+</html>

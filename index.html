@@ -67,9 +67,6 @@
         .auth-input:focus { border-color: var(--primary-color); }
         .auth-submit-btn { background-color: var(--primary-color); color: #fff; border: none; padding: 12px; border-radius: 20px; font-weight: bold; font-size: 14px; cursor: pointer; margin-top: 5px; }
 
-        .forgot-pass-link { font-size: 11px; color: var(--primary-color); cursor: pointer; text-align: right; margin-top: -5px; display: block; }
-        .forgot-pass-link:hover { text-decoration: underline; }
-
         /* SARI TİK ROZETİ VE TOOLTİP */
         .yellow-tick { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; background: #ffd700; color: #000; border-radius: 50%; font-size: 11px; font-weight: 900; margin-left: 4px; cursor: pointer; position: relative; vertical-align: middle; box-shadow: 0 0 6px rgba(255, 215, 0, 0.6); }
         .yellow-tick .tick-tooltip { visibility: hidden; width: 140px; background-color: #111; color: #ffd700; text-align: center; border-radius: 6px; padding: 6px 8px; position: absolute; z-index: 1005; bottom: 125%; left: 50%; transform: translateX(-50%); opacity: 0; transition: opacity 0.2s; font-size: 10px; border: 1px solid #ffd700; pointer-events: none; white-space: normal; line-height: 1.2; }
@@ -156,7 +153,7 @@
         </div>
     </div>
 
-    <!-- GİRİŞ / KAYIT / ŞİFRE SIFIRLAMA MODAL -->
+    <!-- GİRİŞ / KAYIT MODAL -->
     <div id="auth-modal" class="modal-overlay">
         <div class="auth-modal-card">
             <span class="auth-close-btn" id="btn-close-modal">✕</span>
@@ -171,8 +168,7 @@
                 <input type="email" id="login-email" class="auth-input" placeholder="ornek@gmail.com" required>
                 <label style="font-size:12px; color:var(--text-sub);">Şifre</label>
                 <input type="password" id="login-password" class="auth-input" placeholder="••••••••" required>
-                <span class="forgot-pass-link" id="link-forgot-password">Şifremi Unuttum?</span>
-                <button type="submit" class="auth-submit-btn">Giriş Yap</button>
+                <button type="submit" class="auth-submit-btn" style="margin-top:10px;">Giriş Yap</button>
             </form>
 
             <!-- KAYIT FORMU -->
@@ -181,17 +177,7 @@
                 <input type="email" id="reg-email" class="auth-input" placeholder="ornek@gmail.com" required>
                 <label style="font-size:12px; color:var(--text-sub);">Şifre Oluştur</label>
                 <input type="password" id="reg-password" class="auth-input" placeholder="En az 6 karakter" required minlength="6">
-                <button type="submit" class="auth-submit-btn">Hesap Oluştur</button>
-            </form>
-
-            <!-- GÜVENLİ ŞİFREMİ UNUTTUM FORMU -->
-            <form id="form-forgot" class="auth-form" style="display:none;">
-                <div style="font-size:15px; font-weight:bold; color:var(--primary-color); text-align:center; margin-bottom:5px;">🔑 Güvenli Şifre Sıfırlama</div>
-                <p style="font-size:11px; color:var(--text-sub); text-align:center; margin-bottom:10px;">E-posta adresinize simüle edilmiş bir sıfırlama bağlantısı gönderilir. Güvenlik için e-postanıza erişiminiz olmalıdır.</p>
-                <label style="font-size:12px; color:var(--text-sub);">Kayıtlı E-posta Adresi</label>
-                <input type="email" id="forgot-email" class="auth-input" placeholder="ornek@gmail.com" required>
-                <button type="submit" class="auth-submit-btn">Sıfırlama Bağlantısı Gönder</button>
-                <span class="forgot-pass-link" id="link-back-login" style="text-align:center; margin-top:8px;">⬅ Giriş Ekranına Dön</span>
+                <button type="submit" class="auth-submit-btn" style="margin-top:10px;">Hesap Oluştur</button>
             </form>
         </div>
     </div>
@@ -211,12 +197,6 @@
             <form id="form-edit-profile" class="auth-form">
                 <label style="font-size:12px; color:var(--text-sub);">Kullanıcı Adı</label>
                 <input type="text" id="edit-username" class="auth-input" placeholder="Kullanıcı adınızı girin">
-
-                <label style="font-size:12px; color:var(--text-sub);">Profil Resmi Bağlantısı (URL)</label>
-                <input type="url" id="edit-avatar-url" class="auth-input" placeholder="https://ornek.com/resim.jpg">
-
-                <label style="font-size:12px; color:var(--text-sub);">Biyografi / Hakkımda</label>
-                <textarea id="edit-bio" class="auth-input" rows="3" placeholder="Kendinizden bahsedin..." style="resize:none;"></textarea>
 
                 <div style="background:rgba(255, 71, 87, 0.1); border:1px solid var(--primary-color); padding:10px; border-radius:8px; font-size:11px; color:var(--primary-color); text-align:center; margin-top:5px;">
                     🚫 <strong>Video Yükleme:</strong> Standart kullanıcı hesaplarında video yükleme yetkisi kapalıdır.
@@ -474,6 +454,8 @@
         var OWNER_EMAIL = "poyrazre6@gmail.com"; 
         var OWNER_USERNAME = "WQEHCLYY";
         var OWNER_DEFAULT_AVATAR = "https://cdn.phototourl.com/member/2026-10-15-83266f74-97b3-42ff-82ee-e8e955a628ca.jpg";
+        var SOPHIE_AVATAR = "https://i.ibb.co/DPFjgyLy/image.jpg";
+        var DEFAULT_USER_AVATAR = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
         
         var OWNER_BIO_HTML = '<span style="color:#ff4757; font-weight:900; font-size:14px;">👑 𝟸𝙿𝙱𝚅𝙰𝙶𝙴 𝚁𝚎𝚜𝚖𝚒 𝙺𝚞𝚛𝚞𝚌𝚞𝚜𝚞 𝓥𝓮 𝚂𝚒𝚝𝚎 𝚂𝚊𝚑𝚒𝚋𝚒</span><br>' +
                              '<span style="color:#ffd700; font-weight:bold;">✨ ℌ𝔢𝔯 𝔖𝔢𝔶 𝔎𝔬𝔫𝔱𝔯𝔬𝔩𝔲𝔪𝔥𝔲𝔩𝔱𝔞𝔡𝔞, 𝔜𝔢𝔫𝔦𝔩𝔦𝔛𝔩𝔢𝔯 𝔜𝔬𝔩𝔡𝔞!</span><br>' +
@@ -507,11 +489,11 @@
         }
 
         var db = {
-            v1: { title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", url: "https://playmogo.com/e/1fvov3xdwsbq", thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", banner: "https://i.ibb.co/DPFjgyLy/image.jpg", date: "12 Ekim 2026", desc: "Sophie Rain'in en çok konuşulan siyah iç çamaşırı şovu bu videoda sizlerle. İyi seyirler!", tags: ["sophierain", "fullhd", "özelşov", "üstsüz"] },
+            v1: { title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", url: "https://playmogo.com/e/1fvov3xdwsbq", thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", author: "Sophie Rain", avatar: SOPHIE_AVATAR, banner: SOPHIE_AVATAR, date: "12 Ekim 2026", desc: "Sophie Rain'in en çok konuşulan siyah iç çamaşırı şovu bu videoda sizlerle. İyi seyirler!", tags: ["sophierain", "fullhd", "özelşov", "üstsüz"] },
             v2: { title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...", url: "https://playmogo.com/e/ehhg2pcksir6", thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", author: "comatozze", avatar: "https://i.ibb.co/pB3ntggN/image.jpg", banner: "https://ei.phncdn.com/pics/users/0009/2995/3741/cover30266955/(m=eRSa4qFxcWaAb)(mh=NL_-gLc2D3h9AHS0)1323x270.jpg", date: "12 Ekim 2026", desc: "Evde baş başa kalan ikilinin sürpriz ve heyecan dolu gizli anları.", tags: ["comatozze", "amatör", "evde", "gizli"] },
-            v3: { title: "Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor", url: "https://playmogo.com/e/xmiqbgo3vrz4", thumb: "https://pimpbunny.com/contents/videos_screenshots/513000/513225/800x450/39.jpg", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", banner: "https://i.ibb.co/DPFjgyLy/image.jpg", date: "12 Ekim 2026", desc: "Sophie Rain ve Piper Aishah kameralar karşısında eğlenceli ve özel anlar yaşatıyor.", tags: ["sophierain", "lezbiyen", "fullhd", "piperaishah"] },
+            v3: { title: "Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor", url: "https://playmogo.com/e/xmiqbgo3vrz4", thumb: "https://pimpbunny.com/contents/videos_screenshots/513000/513225/800x450/39.jpg", author: "Sophie Rain", avatar: SOPHIE_AVATAR, banner: SOPHIE_AVATAR, date: "12 Ekim 2026", desc: "Sophie Rain ve Piper Aishah kameralar karşısında eğlenceli ve özel anlar yaşatıyor.", tags: ["sophierain", "lezbiyen", "fullhd", "piperaishah"] },
             v4: { title: "Tüylü Vajinalı Köylü Kızı Bir Yabancı Tarafından Sikişildi - Sweetie Fox", url: "https://voe.sx/e/hoshht3fdzl0", thumb: "https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg", author: "Sweetie Fox", avatar: "https://ei.phncdn.com/(m=ewILGCjadOf)(mh=59qrk8LnBE3Z9kTL)43ca43da-b27e-42f2-b237-40c5c13261b1.jpg", banner: "https://ei.phncdn.com/pics/users/0009/2995/3741/cover30266955/(m=eRSa4qFxcWaAb)(mh=ciR9a4JESHJ-g9rp)1323x270.jpg", date: "13 Ekim 2026", desc: "Sweetie Fox'un Türkçe altyazılı köylü kızı temalı popüler özel gösterisi.", tags: ["sweetiefox", "altyazılı", "fullhd", "köylü"] },
-            v5: { title: "Sophie Rain Seksi Siyah Renk Kıyafetiyle Soyunuyor", url: "https://voe.sx/e/g3beul38mpw7", thumb: "https://www.porn4fans.com/contents/videos_screenshots/5000/5268/800x450/1.jpg", author: "Sophie Rain", avatar: "https://i.ibb.co/DPFjgyLy/image.jpg", banner: "https://i.ibb.co/DPFjgyLy/image.jpg", date: "14 Ekim 2026", desc: "Sophie Rain'in en yeni seksi siyah kıyafetli özel gösterisi.", tags: ["sophierain", "fullhd", "özelşov", "siyah"] },
+            v5: { title: "Sophie Rain Seksi Siyah Renk Kıyafetiyle Soyunuyor", url: "https://voe.sx/e/g3beul38mpw7", thumb: "https://www.porn4fans.com/contents/videos_screenshots/5000/5268/800x450/1.jpg", author: "Sophie Rain", avatar: SOPHIE_AVATAR, banner: SOPHIE_AVATAR, date: "14 Ekim 2026", desc: "Sophie Rain'in en yeni seksi siyah kıyafetli özel gösterisi.", tags: ["sophierain", "fullhd", "özelşov", "siyah"] },
             v6: { title: "Sıcak Çift Kanepede Tutkulu Bir Şekilde Seks Yapıyor. Comatozze", url: "https://voe.sx/e/kmnwp6pf63nc", thumb: "https://pix-cdn77.phncdn.com/c6251/videos/202608/28/60540585/original/01a04a3d-19f4-75ce-8894-ec3e35046639.jpg/plain/rs:fit:320:180?hash=4rWUDpXINRqByoKYMq0AUA5KbyY=&validto=1792094511", author: "comatozze", avatar: "https://i.ibb.co/pB3ntggN/image.jpg", banner: "https://ei.phncdn.com/pics/users/0009/2995/3741/cover30266955/(m=eRSa4qFxcWaAb)(mh=NL_-gLc2D3h9AHS0)1323x270.jpg", date: "14 Ekim 2026", desc: "Comatozze kanalından kanepede geçen tutkulu ve iniltilerle dolu özel amatör video.", tags: ["comatozze", "amatör", "kanepede", "tutkulu", "inilti", "fullhd"] }
         };
 
@@ -573,12 +555,10 @@
                 var users = {};
                 try { users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}'); } catch(err) { users = {}; }
 
-                if(!users[OWNER_EMAIL] || !users[OWNER_EMAIL].avatar) {
+                if(!users[OWNER_EMAIL]) {
                     users[OWNER_EMAIL] = {
-                        password: users[OWNER_EMAIL] ? users[OWNER_EMAIL].password : "123",
+                        password: "123",
                         username: OWNER_USERNAME,
-                        avatar: OWNER_DEFAULT_AVATAR,
-                        bio: OWNER_BIO_HTML,
                         isOwner: true
                     };
                     localStorage.setItem('2pbvage_users', JSON.stringify(users));
@@ -603,10 +583,10 @@
                     if (avatarElem) {
                         if(isOwnerAcc) {
                             avatarElem.style.backgroundImage = "url('" + OWNER_DEFAULT_AVATAR + "')";
-                        } else if(userObj.avatar) {
-                            avatarElem.style.backgroundImage = "url('" + userObj.avatar + "')";
+                        } else if(displayName.toLowerCase() === "sophie rain") {
+                            avatarElem.style.backgroundImage = "url('" + SOPHIE_AVATAR + "')";
                         } else {
-                            avatarElem.style.backgroundImage = "url('https://cdn-icons-png.flaticon.com/512/847/847969.png')";
+                            avatarElem.style.backgroundImage = "url('" + DEFAULT_USER_AVATAR + "')";
                         }
                     }
 
@@ -640,7 +620,6 @@
             
             var fLogin = document.getElementById('form-login');
             var fReg = document.getElementById('form-register');
-            var fForgot = document.getElementById('form-forgot');
             var tLogin = document.getElementById('tab-login');
             var tReg = document.getElementById('tab-register');
 
@@ -649,18 +628,11 @@
                 if (tReg) tReg.className = 'auth-tab';
                 if (fLogin) fLogin.style.display = 'flex';
                 if (fReg) fReg.style.display = 'none';
-                if (fForgot) fForgot.style.display = 'none';
             } else if(tab === 'register') {
                 if (tReg) tReg.className = 'auth-tab active';
                 if (tLogin) tLogin.className = 'auth-tab';
                 if (fReg) fReg.style.display = 'flex';
                 if (fLogin) fLogin.style.display = 'none';
-                if (fForgot) fForgot.style.display = 'none';
-            } else if(tab === 'forgot') {
-                if (tabsBox) tabsBox.style.display = 'none';
-                if (fLogin) fLogin.style.display = 'none';
-                if (fReg) fReg.style.display = 'none';
-                if (fForgot) fForgot.style.display = 'flex';
             }
         }
 
@@ -669,12 +641,6 @@
         
         var tabReg = document.getElementById('tab-register');
         if (tabReg) tabReg.onclick = function() { switchTab('register'); };
-        
-        var linkForgot = document.getElementById('link-forgot-password');
-        if (linkForgot) linkForgot.onclick = function() { switchTab('forgot'); };
-        
-        var linkBackLogin = document.getElementById('link-back-login');
-        if (linkBackLogin) linkBackLogin.onclick = function() { switchTab('login'); };
 
         var formLogin = document.getElementById('form-login');
         if (formLogin) {
@@ -726,8 +692,6 @@
                 users[email] = { 
                     password: password,
                     username: isOwnerAccount ? OWNER_USERNAME : email.split('@')[0],
-                    avatar: isOwnerAccount ? OWNER_DEFAULT_AVATAR : "",
-                    bio: isOwnerAccount ? OWNER_BIO_HTML : "",
                     isOwner: isOwnerAccount
                 };
                 localStorage.setItem('2pbvage_users', JSON.stringify(users));
@@ -735,29 +699,6 @@
                 checkAuthState();
                 toggleAuthModal(false);
                 alert("Hesabınız oluşturuldu ve otomatik giriş yapıldı!");
-            };
-        }
-
-        var formForgot = document.getElementById('form-forgot');
-        if (formForgot) {
-            formForgot.onsubmit = function(e) {
-                e.preventDefault();
-                var forgotEmailInput = document.getElementById('forgot-email');
-                if(!forgotEmailInput) return;
-
-                var email = forgotEmailInput.value.trim().toLowerCase();
-                var users = {};
-                try { users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}'); } catch(err) { users = {}; }
-
-                if(!users[email]) {
-                    alert("Bu e-posta adresine ait kayıtlı bir hesap bulunamadı!");
-                    return;
-                }
-
-                // GÜVENLİK DÜZELTMESİ: Şifre açıkça ekranda verilmez veya otomatik değiştirilmez. Sadece bildirim gösterilir.
-                alert("📩 " + email + " adresine güvenli şifre sıfırlama bağlantısı gönderildi. Lütfen e-posta gelen kutunuzu kontrol edin.");
-                toggleAuthModal(false);
-                switchTab('login');
             };
         }
 
@@ -778,15 +719,17 @@
                 if(emailSub) emailSub.innerText = currentUser.email;
 
                 var editUser = document.getElementById('edit-username');
-                var editAvatar = document.getElementById('edit-avatar-url');
-                var editBio = document.getElementById('edit-bio');
                 if(editUser) editUser.value = displayName;
-                if(editAvatar) editAvatar.value = isOwnerAcc ? OWNER_DEFAULT_AVATAR : (u.avatar || '');
-                if(editBio) editBio.value = isOwnerAcc ? OWNER_BIO_HTML : (u.bio || '');
 
                 var avatarElem = document.getElementById('modal-user-avatar');
                 if(avatarElem) {
-                    avatarElem.style.backgroundImage = "url('" + (isOwnerAcc ? OWNER_DEFAULT_AVATAR : (u.avatar || OWNER_DEFAULT_AVATAR)) + "')";
+                    if(isOwnerAcc) {
+                        avatarElem.style.backgroundImage = "url('" + OWNER_DEFAULT_AVATAR + "')";
+                    } else if(displayName.toLowerCase() === "sophie rain") {
+                        avatarElem.style.backgroundImage = "url('" + SOPHIE_AVATAR + "')";
+                    } else {
+                        avatarElem.style.backgroundImage = "url('" + DEFAULT_USER_AVATAR + "')";
+                    }
                 }
 
                 var profileModal = document.getElementById('profile-edit-modal');
@@ -812,12 +755,7 @@
                 var u = users[currentUser.email] || {};
 
                 var editUser = document.getElementById('edit-username');
-                var editAvatar = document.getElementById('edit-avatar-url');
-                var editBio = document.getElementById('edit-bio');
-
                 if(editUser) u.username = editUser.value.trim();
-                if(editAvatar) u.avatar = editAvatar.value.trim();
-                if(editBio) u.bio = editBio.value.trim();
 
                 users[currentUser.email] = u;
                 localStorage.setItem('2pbvage_users', JSON.stringify(users));
@@ -1148,30 +1086,34 @@
             var htmlVideos = "";
 
             var isOwnerAcc = (author.toLowerCase() === OWNER_USERNAME.toLowerCase() || author.toLowerCase() === OWNER_EMAIL.toLowerCase());
+            var isSophieAcc = (author.toLowerCase() === "sophie rain");
             
             if(isOwnerAcc) {
                 avatarUrl = OWNER_DEFAULT_AVATAR;
                 bannerUrl = OWNER_DEFAULT_AVATAR;
-            } else {
-                for (var key in db) {
-                    if (db.hasOwnProperty(key)) {
-                        var v = db[key];
-                        if (v.author.toLowerCase() === targetName || v.title.toLowerCase().indexOf(targetName) !== -1) {
-                            if (!avatarUrl) { avatarUrl = v.avatar; }
-                            if (!bannerUrl) { bannerUrl = v.banner; }
-                            htmlVideos += '<div class="video-post">' +
-                                '<div class="video-thumbnail" style="background-image:url(\'' + v.thumb + '\');" onclick="playVideo(\'' + key + '\')"><div class="play-button"></div></div>' +
-                                '<div class="post-title" onclick="playVideo(\'' + key + '\')">' + v.title + '</div>' +
-                                '<div class="post-date-info"><span>📅 ' + v.date + '</span></div>' +
-                                '<div class="post-meta">' +
-                                    '<div class="author-box" onclick="openProfile(\'' + v.author + '\')">' +
-                                        '<div class="author-avatar-small" style="background-image:url(\'' + v.avatar + '\');"></div>' +
-                                        '<strong style="color:var(--primary-color);">' + v.author + ' ✓</strong>' +
-                                    '</div>' +
-                                    '<button class="action-btn" onclick="playVideo(\'' + key + '\')">🚀 İzle</button>' +
+            } else if(isSophieAcc) {
+                avatarUrl = SOPHIE_AVATAR;
+                bannerUrl = SOPHIE_AVATAR;
+            }
+
+            for (var key in db) {
+                if (db.hasOwnProperty(key)) {
+                    var v = db[key];
+                    if (v.author.toLowerCase() === targetName || v.title.toLowerCase().indexOf(targetName) !== -1) {
+                        if (!avatarUrl) { avatarUrl = v.avatar; }
+                        if (!bannerUrl) { bannerUrl = v.banner; }
+                        htmlVideos += '<div class="video-post">' +
+                            '<div class="video-thumbnail" style="background-image:url(\'' + v.thumb + '\');" onclick="playVideo(\'' + key + '\')"><div class="play-button"></div></div>' +
+                            '<div class="post-title" onclick="playVideo(\'' + key + '\')">' + v.title + '</div>' +
+                            '<div class="post-date-info"><span>📅 ' + v.date + '</span></div>' +
+                            '<div class="post-meta">' +
+                                '<div class="author-box" onclick="openProfile(\'' + v.author + '\')">' +
+                                    '<div class="author-avatar-small" style="background-image:url(\'' + v.avatar + '\');"></div>' +
+                                    '<strong style="color:var(--primary-color);">' + v.author + ' ✓</strong>' +
                                 '</div>' +
-                            '</div>';
-                        }
+                                '<button class="action-btn" onclick="playVideo(\'' + key + '\')">🚀 İzle</button>' +
+                            '</div>' +
+                        '</div>';
                     }
                 }
             }
@@ -1180,16 +1122,16 @@
             if (iframe) iframe.src = "";
             
             var pTitle = document.getElementById('p-title');
-            if(pTitle) pTitle.innerHTML = (isOwnerAcc ? OWNER_USERNAME : author) + (isOwnerAcc ? ownerYellowTickHTML : '');
+            if(pTitle) pTitle.innerHTML = author + (isOwnerAcc ? ownerYellowTickHTML : ' ✓');
 
             var pAvatar = document.getElementById('p-avatar');
             if (pAvatar) {
-                pAvatar.style.backgroundImage = "url('" + (isOwnerAcc ? OWNER_DEFAULT_AVATAR : avatarUrl) + "')";
+                pAvatar.style.backgroundImage = "url('" + (isOwnerAcc ? OWNER_DEFAULT_AVATAR : (isSophieAcc ? SOPHIE_AVATAR : (avatarUrl || DEFAULT_USER_AVATAR))) + "')";
             }
 
             var pBanner = document.getElementById('p-banner');
             if (pBanner) {
-                pBanner.style.backgroundImage = "url('" + (isOwnerAcc ? OWNER_DEFAULT_AVATAR : bannerUrl) + "')";
+                pBanner.style.backgroundImage = "url('" + (isOwnerAcc ? OWNER_DEFAULT_AVATAR : (isSophieAcc ? SOPHIE_AVATAR : (bannerUrl || DEFAULT_USER_AVATAR))) + "')";
             }
 
             var pBio = document.getElementById('p-bio');

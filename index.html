@@ -571,9 +571,23 @@
         function checkAuthState() {
             try {
                 var session = localStorage.getItem("2pbvage_session");
+                var users = {};
+                try { users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}'); } catch(err) { users = {}; }
+
+                // SİTE SAHİBİ HESABI HER ZAMAN VERİTABANINDA VAR OLSUN (GARANTİ)
+                if(!users[OWNER_EMAIL]) {
+                    users[OWNER_EMAIL] = {
+                        password: "123", // Varsayılan şifre (istenirse değiştirilebilir)
+                        username: OWNER_USERNAME,
+                        avatar: "https://i.ibb.co/pB3ntggN/image.jpg",
+                        bio: "2PBVAGE Kurucusu ve Site Sahibi",
+                        isOwner: true
+                    };
+                    localStorage.setItem('2pbvage_users', JSON.stringify(users));
+                }
+
                 if(session) {
                     currentUser = JSON.parse(session);
-                    var users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
                     var userObj = users[currentUser.email] || {};
 
                     var loggedOut = document.getElementById('auth-logged-out');
@@ -1073,7 +1087,7 @@
                     if(!exists) {
                         matchedChannels.unshift({ 
                             name: OWNER_USERNAME, 
-                            avatar: u.avatar || 'https://cdn-icons-png.flaticon.com/512/847/847969.png', 
+                            avatar: u.avatar || 'https://i.ibb.co/pB3ntggN/image.jpg', 
                             isOwner: true 
                         });
                     }
@@ -1209,13 +1223,17 @@
                 } else if(isOwnerAcc) {
                     var users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
                     var u = users[OWNER_EMAIL] || {};
-                    pAvatar.style.backgroundImage = u.avatar ? "url('" + u.avatar + "')" : "url('https://cdn-icons-png.flaticon.com/512/847/847969.png')";
+                    pAvatar.style.backgroundImage = u.avatar ? "url('" + u.avatar + "')" : "url('https://i.ibb.co/pB3ntggN/image.jpg')";
                 }
             }
 
             var pBanner = document.getElementById('p-banner');
-            if (pBanner && bannerUrl) {
-                pBanner.style.backgroundImage = "url('" + bannerUrl + "')";
+            if (pBanner) {
+                if(bannerUrl) {
+                    pBanner.style.backgroundImage = "url('" + bannerUrl + "')";
+                } else if(isOwnerAcc) {
+                    pBanner.style.backgroundImage = "url('https://i.ibb.co/pB3ntggN/image.jpg')";
+                }
             }
             
             var pVideos = document.getElementById('p-videos');

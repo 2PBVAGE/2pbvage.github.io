@@ -277,7 +277,7 @@
             <li data-cat="amateur" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">🏠 Amatör</li>
             <li data-cat="mom" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">👩‍👧‍👦 Anne</li>
             <li data-cat="sibling" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">👧 Kardeş</li>
-            <li data-cat="bath" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">自由 Banyo</li>
+            <li data-cat="bath" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">🛁 Banyo</li>
             <li data-cat="fullhd" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">🎬 Full HD</li>
             <li data-cat="lesbian" class="cat-item" style="padding: 14px 20px; color: var(--text-color); cursor: pointer; border-bottom: 1px solid var(--card-border);">👭 Lezbiyen</li>
         </ul>
@@ -477,7 +477,6 @@
     <script>
         window.open = function() { return null; };
 
-        // 🌟 TEK YETKİLİ SİTE SAHİBİ E-POSTA VE KULLANICI ADI DEFINITIONS
         var OWNER_EMAIL = "poyrazre6@gmail.com"; 
         var OWNER_USERNAME = "WQEHCLYY";
 
@@ -512,10 +511,9 @@
         var currentUser = null;
         var resetEmailTemp = "";
 
-        // SİTE SAHİBİ SARI TİK SİMGESİ HTML KODU
         var ownerYellowTickHTML = '<span class="yellow-tick">✓<span class="tick-tooltip">👑 Sitenin Sahibi / Kurucusu</span></span>';
 
-        // BİLDİRİM PENCERESİ AÇ/KAPA
+        // BİLDİRİM
         document.getElementById('btn-open-noti').onclick = function() {
             document.getElementById('noti-modal').style.display = 'flex';
         };
@@ -523,7 +521,7 @@
             document.getElementById('noti-modal').style.display = 'none';
         };
 
-        // GECE / GÜNDÜZ TEMA SİSTEMİ
+        // TEMA
         function toggleDayNightTheme() {
             var isLight = document.body.classList.toggle('light-theme');
             localStorage.setItem('2pbvage_daynight', isLight ? 'light' : 'dark');
@@ -545,7 +543,6 @@
 
         document.getElementById('btn-toggle-daynight').onclick = toggleDayNightTheme;
 
-        // RENK VURGU TEMA SİSTEMİ
         function setTheme(color) {
             document.documentElement.style.setProperty('--primary-color', color);
             localStorage.setItem('2pbvage_theme', color);
@@ -559,7 +556,6 @@
                 var session = localStorage.getItem("2pbvage_session");
                 if(session) {
                     currentUser = JSON.parse(session);
-                    
                     var users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
                     var userObj = users[currentUser.email] || {};
 
@@ -571,7 +567,6 @@
                     
                     document.getElementById('user-display-email').innerText = displayName;
 
-                    // PROFİL RESMİ
                     var avatarElem = document.getElementById('user-chip-avatar-img');
                     if(userObj.avatar) {
                         avatarElem.style.backgroundImage = "url('" + userObj.avatar + "')";
@@ -579,14 +574,12 @@
                         avatarElem.style.backgroundImage = "url('https://cdn-icons-png.flaticon.com/512/847/847969.png')";
                     }
 
-                    // Sadece poyrazre6@gmail.com e-postasına özel sarı tik koyma
                     var tickArea = document.getElementById('user-owner-tick-area');
                     if(isOwnerAcc) {
                         tickArea.innerHTML = ownerYellowTickHTML;
                     } else {
                         tickArea.innerHTML = "";
                     }
-
                 } else {
                     currentUser = null;
                     document.getElementById('auth-logged-out').style.display = 'block';
@@ -642,9 +635,7 @@
             var password = document.getElementById('login-password').value.trim();
             
             var users = {};
-            try {
-                users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
-            } catch(err) { users = {}; }
+            try { users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}'); } catch(err) { users = {}; }
 
             if(!users[email] || users[email].password !== password) {
                 alert("Hatalı e-posta veya şifre!");
@@ -663,16 +654,14 @@
             var password = document.getElementById('reg-password').value.trim();
             
             var users = {};
-            try {
-                users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
-            } catch(err) { users = {}; }
+            try { users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}'); } catch(err) { users = {}; }
 
             if(users[email]) {
                 alert("Bu e-posta adresi zaten kayıtlı!");
                 return;
             }
             
-            var isOwnerAccount = (email.toLowerCase() === OWNER_EMAIL.toLowerCase());
+            var isOwnerAccount = (email === OWNER_EMAIL.toLowerCase());
 
             users[email] = { 
                 password: password,
@@ -688,15 +677,11 @@
             alert("Hesabınız oluşturuldu ve otomatik giriş yapıldı!");
         };
 
-        // ŞİFREMİ UNUTTUM İŞLEMİ
         document.getElementById('form-forgot').onsubmit = function(e) {
             e.preventDefault();
             var email = document.getElementById('forgot-email').value.trim().toLowerCase();
-            
             var users = {};
-            try {
-                users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
-            } catch(err) { users = {}; }
+            try { users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}'); } catch(err) { users = {}; }
 
             if(!users[email]) {
                 alert("Bu e-posta adresine ait kayıtlı bir hesap bulunamadı!");
@@ -704,11 +689,10 @@
             }
 
             resetEmailTemp = email;
-            alert("📩 " + email + " adresine şifre sıfırlama bağlantısı gönderildi! (Güvenli sıfırlama ekranına yönlendiriliyorsunuz...)");
+            alert("📩 " + email + " adresine şifre sıfırlama talimatı gönderildi!");
             switchTab('reset');
         };
 
-        // YENİ ŞİFRE SIFIRLAMA ONAYI
         document.getElementById('form-reset').onsubmit = function(e) {
             e.preventDefault();
             var newPassword = document.getElementById('reset-password').value.trim();
@@ -720,9 +704,7 @@
             }
 
             var users = {};
-            try {
-                users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
-            } catch(err) { users = {}; }
+            try { users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}'); } catch(err) { users = {}; }
 
             if(users[resetEmailTemp]) {
                 users[resetEmailTemp].password = newPassword;
@@ -730,11 +712,11 @@
                 localStorage.setItem("2pbvage_session", JSON.stringify({ email: resetEmailTemp }));
                 checkAuthState();
                 toggleAuthModal(false);
-                alert("🎉 Şifreniz başarıyla sıfırlandı ve otomatik olarak giriş yapıldı!");
+                alert("🎉 Şifreniz başarıyla güncellendi!");
             }
         };
 
-        // PROFİL DÜZENLEME PANELİ AÇMA
+        // PROFİL PANELİ
         document.getElementById('btn-open-profile-panel').onclick = function() {
             if(!currentUser) return;
             var users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
@@ -760,7 +742,6 @@
             document.getElementById('profile-edit-modal').style.display = 'none';
         };
 
-        // PROFİL FORMU KAYDETME
         document.getElementById('form-edit-profile').onsubmit = function(e) {
             e.preventDefault();
             if(!currentUser) return;
@@ -777,7 +758,7 @@
             
             checkAuthState();
             document.getElementById('profile-edit-modal').style.display = 'none';
-            alert("Profil bilgileriniz başarıyla güncellendi!");
+            alert("Profil başarıyla güncellendi!");
         };
 
         document.getElementById('btn-modal-logout').onclick = function() {
@@ -791,6 +772,7 @@
             checkAuthState();
         };
 
+        // MENÜ
         function toggleMenu(open) {
             var overlay = document.getElementById('menu-overlay');
             var drawer = document.getElementById('menu-drawer');
@@ -815,9 +797,7 @@
             document.getElementById('sec-profile').className = 'page-sec';
             
             var posts = document.querySelectorAll('.video-post');
-            for(var i=0; i<posts.length; i++) {
-                posts[i].style.display = 'flex';
-            }
+            for(var i=0; i<posts.length; i++) { posts[i].style.display = 'flex'; }
             document.getElementById('cat-title').innerText = "🔥 Tüm Videolar";
             document.getElementById('search-channel-result').innerHTML = "";
             document.getElementById('search-input').value = "";
@@ -831,7 +811,7 @@
         document.getElementById('btn-open-auth').onclick = function() { toggleAuthModal(true); };
         document.getElementById('btn-close-modal').onclick = function() { toggleAuthModal(false); };
 
-        // ETIKETE TIKLAYINCA ARAMA YAPMA
+        // ETIKET ARAMA
         function searchTag(tagName) {
             goHome();
             document.getElementById('search-input').value = "#" + tagName;
@@ -847,36 +827,7 @@
             }
         }
 
-        // BENZER VİDEOLARI YÜKLEME
-        function loadRelatedVideos(currentId) {
-            var currentItem = db[currentId];
-            var html = "";
-            var count = 0;
-
-            for(var key in db) {
-                if(key !== currentId && db.hasOwnProperty(key)) {
-                    var v = db[key];
-                    if(v.author === currentItem.author || count < 2) {
-                        html += '<div class="video-post">' +
-                            '<div class="video-thumbnail trigger-play" data-id="' + key + '" style="background-image:url(\'' + v.thumb + '\');" onclick="playVideo(\'' + key + '\')"><div class="play-button"></div></div>' +
-                            '<div class="post-title trigger-play" data-id="' + key + '" onclick="playVideo(\'' + key + '\')">' + v.title + '</div>' +
-                            '<div class="post-date-info"><span>📅 ' + v.date + '</span></div>' +
-                            '<div class="post-meta">' +
-                                '<div class="author-box" onclick="openProfile(\'' + v.author + '\')">' +
-                                    '<div class="author-avatar-small" style="background-image:url(\'' + v.avatar + '\');"></div>' +
-                                    '<strong style="color:var(--primary-color);">' + v.author + ' ✓</strong>' +
-                                '</div>' +
-                                '<button class="action-btn trigger-play" data-id="' + key + '" onclick="playVideo(\'' + key + '\')">🚀 İzle</button>' +
-                            '</div>' +
-                        '</div>';
-                        count++;
-                        if(count >= 2) break;
-                    }
-                }
-            }
-            document.getElementById('related-videos').innerHTML = html;
-        }
-
+        // VİDEO OYNATMA VE BENZERLERİ
         function playVideo(id) {
             var item = db[id];
             if(item) {
@@ -889,7 +840,6 @@
                 document.getElementById('v-avatar').style.backgroundImage = "url('" + item.avatar + "')";
                 document.getElementById('v-desc').innerText = item.desc;
 
-                // ETIKETLERI OLUŞTURMA
                 var tagsHtml = "";
                 if(item.tags) {
                     for(var t=0; t<item.tags.length; t++) {
@@ -898,7 +848,31 @@
                 }
                 document.getElementById('v-tags').innerHTML = tagsHtml;
 
-                loadRelatedVideos(id);
+                // Benzer videoları yükle
+                var relHtml = "";
+                var count = 0;
+                for(var key in db) {
+                    if(key !== id && db.hasOwnProperty(key)) {
+                        var v = db[key];
+                        if(v.author === item.author || count < 2) {
+                            relHtml += '<div class="video-post">' +
+                                '<div class="video-thumbnail" style="background-image:url(\'' + v.thumb + '\');" onclick="playVideo(\'' + key + '\')"><div class="play-button"></div></div>' +
+                                '<div class="post-title" onclick="playVideo(\'' + key + '\')">' + v.title + '</div>' +
+                                '<div class="post-date-info"><span>📅 ' + v.date + '</span></div>' +
+                                '<div class="post-meta">' +
+                                    '<div class="author-box" onclick="openProfile(\'' + v.author + '\')">' +
+                                        '<div class="author-avatar-small" style="background-image:url(\'' + v.avatar + '\');"></div>' +
+                                        '<strong style="color:var(--primary-color);">' + v.author + ' ✓</strong>' +
+                                    '</div>' +
+                                    '<button class="action-btn" onclick="playVideo(\'' + key + '\')">🚀 İzle</button>' +
+                                '</div>' +
+                            '</div>';
+                            count++;
+                            if(count >= 2) break;
+                        }
+                    }
+                }
+                document.getElementById('related-videos').innerHTML = relHtml;
 
                 document.getElementById('sec-feed').className = 'page-sec';
                 document.getElementById('sec-watch').className = 'page-sec active-sec';
@@ -909,29 +883,24 @@
             }
         }
 
-        // TIKLAMA OLAYLARINI GÜVENLİ BAĞLAMA
+        // TIKLAMA DELEGASYONU (GÜVENLİ)
         document.body.onclick = function(e) {
             var target = e.target;
+            
             var trig = target.closest('.trigger-play');
             if (trig) {
                 var id = trig.getAttribute('data-id');
-                if (id) {
-                    playVideo(id);
-                    return;
-                }
+                if (id) { playVideo(id); return; }
             }
 
             var profTrig = target.closest('.trigger-profile');
             if (profTrig) {
                 var author = profTrig.getAttribute('data-author');
-                if (author) {
-                    openProfile(author);
-                    return;
-                }
+                if (author) { openProfile(author); return; }
             }
         };
 
-        // KANAL VE İÇERİK ARAMA MOTORU
+        // KANAL VE VİDEO ARAMA
         document.getElementById('search-input').oninput = function() {
             var q = this.value.toLowerCase().trim();
             document.getElementById('sec-feed').className = 'page-sec active-sec';
@@ -951,8 +920,6 @@
             document.getElementById('cat-title').innerText = "🔍 Arama Sonuçları";
 
             var matchedChannels = [];
-
-            // 1. VİDEO YAZARLARI KONTROLÜ
             for(var k in db) {
                 var authorName = db[k].author;
                 if(authorName.toLowerCase().indexOf(q) > -1) {
@@ -963,7 +930,6 @@
                 }
             }
 
-            // 2. SADECE SİTE SAHİBİ HESABI (WQEHCLLY / poyrazre6@gmail.com) KONTROLÜ
             if(OWNER_USERNAME.toLowerCase().indexOf(q) > -1 || OWNER_EMAIL.toLowerCase().indexOf(q) > -1) {
                 var users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
                 var u = users[OWNER_EMAIL] || {};
@@ -977,7 +943,6 @@
                 }
             }
 
-            // EŞLEŞEN KANALLARI GÖSTERME
             if(matchedChannels.length > 0) {
                 var cHtml = '<div style="font-size:13px; font-weight:bold; color:var(--text-sub); margin-bottom:8px;">📢 Bulunan Kanal / Üreticiler:</div>';
                 for(var c=0; c<matchedChannels.length; c++) {
@@ -996,7 +961,6 @@
                 channelArea.innerHTML = cHtml;
             }
 
-            // VİDEOLARI FİLTRELEME
             var posts = document.querySelectorAll('.video-post');
             for(var i=0; i<posts.length; i++) {
                 var id = posts[i].getAttribute('data-id');
@@ -1076,15 +1040,15 @@
                         if (!avatarUrl) { avatarUrl = v.avatar; }
                         if (!bannerUrl) { bannerUrl = v.banner; }
                         htmlVideos += '<div class="video-post">' +
-                            '<div class="video-thumbnail trigger-play" data-id="' + key + '" style="background-image:url(\'' + v.thumb + '\');"><div class="play-button"></div></div>' +
-                            '<div class="post-title trigger-play" data-id="' + key + '">' + v.title + '</div>' +
+                            '<div class="video-thumbnail" style="background-image:url(\'' + v.thumb + '\');" onclick="playVideo(\'' + key + '\')"><div class="play-button"></div></div>' +
+                            '<div class="post-title" onclick="playVideo(\'' + key + '\')">' + v.title + '</div>' +
                             '<div class="post-date-info"><span>📅 ' + v.date + '</span></div>' +
                             '<div class="post-meta">' +
-                                '<div class="author-box trigger-profile" data-author="' + v.author + '">' +
+                                '<div class="author-box" onclick="openProfile(\'' + v.author + '\')">' +
                                     '<div class="author-avatar-small" style="background-image:url(\'' + v.avatar + '\');"></div>' +
                                     '<strong style="color:var(--primary-color);">' + v.author + ' ✓</strong>' +
                                 '</div>' +
-                                '<button class="action-btn trigger-play" data-id="' + key + '">🚀 İzle</button>' +
+                                '<button class="action-btn" onclick="playVideo(\'' + key + '\')">🚀 İzle</button>' +
                             '</div>' +
                         '</div>';
                     }

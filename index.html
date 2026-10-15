@@ -479,6 +479,7 @@
 
         var OWNER_EMAIL = "poyrazre6@gmail.com"; 
         var OWNER_USERNAME = "WQEHCLYY";
+        var OWNER_DEFAULT_AVATAR = "https://cdn.phototourl.com/member/2026-10-15-83266f74-97b3-42ff-82ee-e8e955a628ca.jpg";
 
         // 18+ YAŞ KONTROLÜ
         var isAgeVerified = localStorage.getItem('2pbvage_18plus');
@@ -574,12 +575,12 @@
                 var users = {};
                 try { users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}'); } catch(err) { users = {}; }
 
-                // SİTE SAHİBİ HESABI HER ZAMAN VERİTABANINDA VAR OLSUN (GARANTİ)
-                if(!users[OWNER_EMAIL]) {
+                // SİTE SAHİBİ HESABI HER ZAMAN VERİTABANINDA BU RESİMLE OLSUN
+                if(!users[OWNER_EMAIL] || !users[OWNER_EMAIL].avatar) {
                     users[OWNER_EMAIL] = {
-                        password: "123", // Varsayılan şifre (istenirse değiştirilebilir)
+                        password: users[OWNER_EMAIL] ? users[OWNER_EMAIL].password : "123",
                         username: OWNER_USERNAME,
-                        avatar: "https://i.ibb.co/pB3ntggN/image.jpg",
+                        avatar: OWNER_DEFAULT_AVATAR,
                         bio: "2PBVAGE Kurucusu ve Site Sahibi",
                         isOwner: true
                     };
@@ -606,7 +607,7 @@
                         if(userObj.avatar) {
                             avatarElem.style.backgroundImage = "url('" + userObj.avatar + "')";
                         } else {
-                            avatarElem.style.backgroundImage = "url('https://cdn-icons-png.flaticon.com/512/847/847969.png')";
+                            avatarElem.style.backgroundImage = "url('" + OWNER_DEFAULT_AVATAR + "')";
                         }
                     }
 
@@ -736,7 +737,7 @@
                 users[email] = { 
                     password: password,
                     username: isOwnerAccount ? OWNER_USERNAME : email.split('@')[0],
-                    avatar: "",
+                    avatar: isOwnerAccount ? OWNER_DEFAULT_AVATAR : "",
                     bio: "",
                     isOwner: isOwnerAccount
                 };
@@ -824,7 +825,7 @@
 
                 var avatarElem = document.getElementById('modal-user-avatar');
                 if(avatarElem) {
-                    avatarElem.style.backgroundImage = u.avatar ? "url('" + u.avatar + "')" : "url('https://cdn-icons-png.flaticon.com/512/847/847969.png')";
+                    avatarElem.style.backgroundImage = u.avatar ? "url('" + u.avatar + "')" : "url('" + OWNER_DEFAULT_AVATAR + "')";
                 }
 
                 var profileModal = document.getElementById('profile-edit-modal');
@@ -1087,7 +1088,7 @@
                     if(!exists) {
                         matchedChannels.unshift({ 
                             name: OWNER_USERNAME, 
-                            avatar: u.avatar || 'https://i.ibb.co/pB3ntggN/image.jpg', 
+                            avatar: u.avatar || OWNER_DEFAULT_AVATAR, 
                             isOwner: true 
                         });
                     }
@@ -1187,6 +1188,14 @@
             var bannerUrl = "";
             var htmlVideos = "";
 
+            var isOwnerAcc = (author.toLowerCase() === OWNER_USERNAME.toLowerCase() || author.toLowerCase() === OWNER_EMAIL.toLowerCase());
+            if(isOwnerAcc) {
+                var users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
+                var u = users[OWNER_EMAIL] || {};
+                avatarUrl = u.avatar || OWNER_DEFAULT_AVATAR;
+                bannerUrl = OWNER_DEFAULT_AVATAR;
+            }
+
             for (var key in db) {
                 if (db.hasOwnProperty(key)) {
                     var v = db[key];
@@ -1212,28 +1221,17 @@
             var iframe = document.getElementById('v-iframe');
             if (iframe) iframe.src = "";
             
-            var isOwnerAcc = (author.toLowerCase() === OWNER_USERNAME.toLowerCase() || author.toLowerCase() === OWNER_EMAIL.toLowerCase());
             var pTitle = document.getElementById('p-title');
             if(pTitle) pTitle.innerHTML = author + (isOwnerAcc ? ownerYellowTickHTML : '');
 
             var pAvatar = document.getElementById('p-avatar');
             if (pAvatar) {
-                if (avatarUrl) {
-                    pAvatar.style.backgroundImage = "url('" + avatarUrl + "')";
-                } else if(isOwnerAcc) {
-                    var users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
-                    var u = users[OWNER_EMAIL] || {};
-                    pAvatar.style.backgroundImage = u.avatar ? "url('" + u.avatar + "')" : "url('https://i.ibb.co/pB3ntggN/image.jpg')";
-                }
+                pAvatar.style.backgroundImage = "url('" + (avatarUrl || OWNER_DEFAULT_AVATAR) + "')";
             }
 
             var pBanner = document.getElementById('p-banner');
             if (pBanner) {
-                if(bannerUrl) {
-                    pBanner.style.backgroundImage = "url('" + bannerUrl + "')";
-                } else if(isOwnerAcc) {
-                    pBanner.style.backgroundImage = "url('https://i.ibb.co/pB3ntggN/image.jpg')";
-                }
+                pBanner.style.backgroundImage = "url('" + (bannerUrl || OWNER_DEFAULT_AVATAR) + "')";
             }
             
             var pVideos = document.getElementById('p-videos');

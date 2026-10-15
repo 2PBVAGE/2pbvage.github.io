@@ -41,7 +41,7 @@
         .noti-badge { position: absolute; top: -3px; right: -3px; background: var(--primary-color); color: #fff; font-size: 9px; font-weight: bold; width: 14px; height: 14px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
         .auth-btn { background-color: var(--primary-color); color: #fff; border: none; padding: 10px 14px; border-radius: 15px; font-size: 12px; font-weight: bold; cursor: pointer; }
         
-        /* SAĞ ÜST KULLANICI PROFİL BUTONU */
+        /* SAĞ ÜST KULLANICI PROFİL ÇİPİ */
         .user-profile-chip { display: flex; align-items: center; gap: 6px; background: var(--card-bg); border: 1px solid var(--card-border); padding: 4px 10px 4px 6px; border-radius: 20px; cursor: pointer; }
         .user-chip-avatar { width: 26px; height: 26px; border-radius: 50%; background-color: #333; background-size: cover; background-position: center; border: 1px solid var(--primary-color); }
         .user-email-tag { font-size: 11px; color: var(--text-color); font-weight: bold; max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -194,7 +194,7 @@
                 <span class="forgot-pass-link" id="link-back-login" style="text-align:center; margin-top:8px;">⬅ Giriş Ekranına Dön</span>
             </form>
 
-            <!-- YENİ ŞİFRE BELİRLEME FORMU -->
+            <!-- YENİ ŞİFRE SIFIRLAMA FORMU -->
             <form id="form-reset" class="auth-form" style="display:none;">
                 <div style="font-size:15px; font-weight:bold; color:var(--primary-color); text-align:center; margin-bottom:5px;">🔒 Yeni Şifre Oluştur</div>
                 <label style="font-size:12px; color:var(--text-sub);">Yeni Şifreniz</label>
@@ -559,7 +559,7 @@
                     var userObj = users[currentUser.email] || {};
 
                     document.getElementById('auth-logged-out').style.display = 'none';
-                    document.getElementById('auth-logged-in').style.display = 'flex';
+                    document.getElementById('auth-logged-in').style.display = 'block';
                     
                     var displayName = userObj.username || currentUser.email.split('@')[0];
                     document.getElementById('user-display-email').innerText = displayName;
@@ -665,7 +665,6 @@
                 return;
             }
             
-            // İlk kayıt olan hesap veya özel e-posta doğrudan Sitenin Sahibi (Sarı Tik) haklarına sahip olur
             var isOwnerAccount = (Object.keys(users).length === 0) || email === "2pbvage@gmail.com" || email === "admin@2pbvage.com";
 
             users[email] = { 
@@ -778,11 +777,6 @@
             document.getElementById('profile-edit-modal').style.display = 'none';
         };
 
-        document.getElementById('btn-logout').onclick = function() {
-            localStorage.removeItem("2pbvage_session");
-            checkAuthState();
-        };
-
         function toggleMenu(open) {
             var overlay = document.getElementById('menu-overlay');
             var drawer = document.getElementById('menu-drawer');
@@ -849,15 +843,15 @@
                     var v = db[key];
                     if(v.author === currentItem.author || count < 2) {
                         html += '<div class="video-post">' +
-                            '<div class="video-thumbnail trigger-play" data-id="' + key + '" style="background-image:url(\'' + v.thumb + '\');" onclick="playVideo(\'' + key + '\')"><div class="play-button"></div></div>' +
-                            '<div class="post-title trigger-play" data-id="' + key + '" onclick="playVideo(\'' + key + '\')">' + v.title + '</div>' +
+                            '<div class="video-thumbnail trigger-play" data-id="' + key + '" style="background-image:url(\'' + v.thumb + '\');"><div class="play-button"></div></div>' +
+                            '<div class="post-title trigger-play" data-id="' + key + '">' + v.title + '</div>' +
                             '<div class="post-date-info"><span>📅 ' + v.date + '</span></div>' +
                             '<div class="post-meta">' +
-                                '<div class="author-box" onclick="openProfile(\'' + v.author + '\')">' +
+                                '<div class="author-box trigger-profile" data-author="' + v.author + '">' +
                                     '<div class="author-avatar-small" style="background-image:url(\'' + v.avatar + '\');"></div>' +
                                     '<strong style="color:var(--primary-color);">' + v.author + ' ✓</strong>' +
                                 '</div>' +
-                                '<button class="action-btn trigger-play" data-id="' + key + '" onclick="playVideo(\'' + key + '\')">🚀 İzle</button>' +
+                                '<button class="action-btn trigger-play" data-id="' + key + '">🚀 İzle</button>' +
                             '</div>' +
                         '</div>';
                         count++;

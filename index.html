@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>2PBVAGE 🤍</title>
+    <title>2PBVAGE 🤍 | Bedava Türkçe Altyazılı Porno HD</title>
+    <meta name="description" content="2PBVAGE resmi web sitesi. Bedava Türkçe altyazılı, HD ve amatör video içerikleri.">
     <style>
         :root {
             --primary-color: #ff4757;
@@ -39,8 +40,11 @@
         .noti-btn { background: var(--card-bg); color: var(--text-color); border: 1px solid var(--card-border); padding: 6px 10px; border-radius: 50%; font-size: 14px; cursor: pointer; position: relative; }
         .noti-badge { position: absolute; top: -3px; right: -3px; background: var(--primary-color); color: #fff; font-size: 9px; font-weight: bold; width: 14px; height: 14px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
         .auth-btn { background-color: var(--primary-color); color: #fff; border: none; padding: 10px 14px; border-radius: 15px; font-size: 12px; font-weight: bold; cursor: pointer; }
-        .user-email-tag { font-size: 11px; color: var(--primary-color); font-weight: bold; max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .logout-btn { background: var(--card-bg); color: var(--text-sub); border: 1px solid var(--card-border); padding: 6px 10px; border-radius: 12px; font-size: 11px; cursor: pointer; }
+        
+        /* SAĞ ÜST KULLANICI PROFİL BUTONU */
+        .user-profile-chip { display: flex; align-items: center; gap: 6px; background: var(--card-bg); border: 1px solid var(--card-border); padding: 4px 10px 4px 6px; border-radius: 20px; cursor: pointer; }
+        .user-chip-avatar { width: 26px; height: 26px; border-radius: 50%; background-color: #333; background-size: cover; background-position: center; border: 1px solid var(--primary-color); }
+        .user-email-tag { font-size: 11px; color: var(--text-color); font-weight: bold; max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
         .theme-toggle-btn { background: var(--card-bg); color: var(--text-color); border: 1px solid var(--card-border); padding: 6px 12px; border-radius: 15px; font-size: 12px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 4px; }
 
@@ -51,7 +55,7 @@
 
         /* MODAL */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
-        .auth-modal-card { background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; width: 100%; max-width: 360px; padding: 25px 20px; text-align: center; position: relative; color: var(--text-color); }
+        .auth-modal-card { background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; width: 100%; max-width: 380px; padding: 25px 20px; text-align: center; position: relative; color: var(--text-color); max-height: 90vh; overflow-y: auto; }
         .auth-close-btn { position: absolute; top: 12px; right: 15px; color: var(--text-sub); font-size: 22px; cursor: pointer; padding: 5px; }
         
         .auth-tabs { display: flex; border-bottom: 1px solid var(--card-border); margin-bottom: 20px; }
@@ -62,6 +66,14 @@
         .auth-input { background-color: var(--input-bg); border: 1px solid var(--card-border); color: var(--text-color); padding: 12px; border-radius: 8px; font-size: 13px; outline: none; }
         .auth-input:focus { border-color: var(--primary-color); }
         .auth-submit-btn { background-color: var(--primary-color); color: #fff; border: none; padding: 12px; border-radius: 20px; font-weight: bold; font-size: 14px; cursor: pointer; margin-top: 5px; }
+
+        .forgot-pass-link { font-size: 11px; color: var(--primary-color); cursor: pointer; text-align: right; margin-top: -5px; display: block; }
+        .forgot-pass-link:hover { text-decoration: underline; }
+
+        /* SARI TİK ROZETİ VE TOOLTİP */
+        .yellow-tick { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; background: #ffd700; color: #000; border-radius: 50%; font-size: 11px; font-weight: 900; margin-left: 4px; cursor: pointer; position: relative; vertical-align: middle; box-shadow: 0 0 6px rgba(255, 215, 0, 0.6); }
+        .yellow-tick .tick-tooltip { visibility: hidden; width: 140px; background-color: #111; color: #ffd700; text-align: center; border-radius: 6px; padding: 6px 8px; position: absolute; z-index: 1005; bottom: 125%; left: 50%; transform: translateX(-50%); opacity: 0; transition: opacity 0.2s; font-size: 10px; border: 1px solid #ffd700; pointer-events: none; white-space: normal; line-height: 1.2; }
+        .yellow-tick:hover .tick-tooltip, .yellow-tick:active .tick-tooltip { visibility: visible; opacity: 1; }
 
         /* YAŞ DOĞRULAMA STİLLERİ */
         .age-modal-card { background-color: var(--card-bg); border: 2px solid var(--primary-color); border-radius: 16px; width: 100%; max-width: 400px; padding: 30px 20px; text-align: center; color: var(--text-color); box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
@@ -144,29 +156,82 @@
         </div>
     </div>
 
-    <!-- GİRİŞ / KAYIT MODAL -->
+    <!-- GİRİŞ / KAYIT / ŞİFRE SIFIRLAMA MODAL -->
     <div id="auth-modal" class="modal-overlay">
         <div class="auth-modal-card">
             <span class="auth-close-btn" id="btn-close-modal">✕</span>
-            <div class="auth-tabs">
+            <div class="auth-tabs" id="auth-tabs-box">
                 <div id="tab-login" class="auth-tab active">Giriş Yap</div>
                 <div id="tab-register" class="auth-tab">Kayıt Ol</div>
             </div>
 
+            <!-- GİRİŞ FORMU -->
             <form id="form-login" class="auth-form">
                 <label style="font-size:12px; color:var(--text-sub);">E-posta Adresi</label>
                 <input type="email" id="login-email" class="auth-input" placeholder="ornek@gmail.com" required>
                 <label style="font-size:12px; color:var(--text-sub);">Şifre</label>
                 <input type="password" id="login-password" class="auth-input" placeholder="••••••••" required>
+                <span class="forgot-pass-link" id="link-forgot-password">Şifremi Unuttum?</span>
                 <button type="submit" class="auth-submit-btn">Giriş Yap</button>
             </form>
 
+            <!-- KAYIT FORMU -->
             <form id="form-register" class="auth-form" style="display:none;">
                 <label style="font-size:12px; color:var(--text-sub);">E-posta Adresi</label>
                 <input type="email" id="reg-email" class="auth-input" placeholder="ornek@gmail.com" required>
                 <label style="font-size:12px; color:var(--text-sub);">Şifre Oluştur</label>
                 <input type="password" id="reg-password" class="auth-input" placeholder="En az 6 karakter" required minlength="6">
                 <button type="submit" class="auth-submit-btn">Hesap Oluştur</button>
+            </form>
+
+            <!-- ŞİFREMİ UNUTTUM FORMU -->
+            <form id="form-forgot" class="auth-form" style="display:none;">
+                <div style="font-size:15px; font-weight:bold; color:var(--primary-color); text-align:center; margin-bottom:5px;">🔑 Şifre Sıfırlama</div>
+                <p style="font-size:11px; color:var(--text-sub); text-align:center; margin-bottom:10px;">Hesabınıza kayıtlı e-posta adresinizi girin.</p>
+                <label style="font-size:12px; color:var(--text-sub);">Kayıtlı E-posta Adresi</label>
+                <input type="email" id="forgot-email" class="auth-input" placeholder="ornek@gmail.com" required>
+                <button type="submit" class="auth-submit-btn">Sıfırlama Bağlantısı Gönder</button>
+                <span class="forgot-pass-link" id="link-back-login" style="text-align:center; margin-top:8px;">⬅ Giriş Ekranına Dön</span>
+            </form>
+
+            <!-- YENİ ŞİFRE BELİRLEME FORMU -->
+            <form id="form-reset" class="auth-form" style="display:none;">
+                <div style="font-size:15px; font-weight:bold; color:var(--primary-color); text-align:center; margin-bottom:5px;">🔒 Yeni Şifre Oluştur</div>
+                <label style="font-size:12px; color:var(--text-sub);">Yeni Şifreniz</label>
+                <input type="password" id="reset-password" class="auth-input" placeholder="Yeni en az 6 karakter şifre" required minlength="6">
+                <button type="submit" class="auth-submit-btn">Şifreyi Güncelle & Giriş Yap</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- KULLANICI PROFİL DÜZENLEME MODAL -->
+    <div id="profile-edit-modal" class="modal-overlay">
+        <div class="auth-modal-card">
+            <span class="auth-close-btn" id="btn-close-profile-modal">✕</span>
+            <div style="font-size:17px; font-weight:bold; color:var(--text-color); margin-bottom:15px;">👤 Profil Paneli</div>
+            
+            <div style="display:flex; flex-direction:column; align-items:center; margin-bottom:15px;">
+                <div id="modal-user-avatar" style="width:70px; height:70px; border-radius:50%; background-color:#333; background-size:cover; background-position:center; border:2px solid var(--primary-color); margin-bottom:8px;"></div>
+                <div style="font-size:14px; font-weight:bold; color:var(--text-color);" id="modal-user-name-title"></div>
+                <div style="font-size:11px; color:var(--text-sub);" id="modal-user-email-subtitle"></div>
+            </div>
+
+            <form id="form-edit-profile" class="auth-form">
+                <label style="font-size:12px; color:var(--text-sub);">Kullanıcı Adı</label>
+                <input type="text" id="edit-username" class="auth-input" placeholder="Kullanıcı adınızı girin">
+
+                <label style="font-size:12px; color:var(--text-sub);">Profil Resmi Bağlantısı (URL)</label>
+                <input type="url" id="edit-avatar-url" class="auth-input" placeholder="https://ornek.com/resim.jpg">
+
+                <label style="font-size:12px; color:var(--text-sub);">Biyografi / Hakkımda</label>
+                <textarea id="edit-bio" class="auth-input" rows="3" placeholder="Kendinizden bahsedin..." style="resize:none;"></textarea>
+
+                <div style="background:rgba(255, 71, 87, 0.1); border:1px solid var(--primary-color); padding:10px; border-radius:8px; font-size:11px; color:var(--primary-color); text-align:center; margin-top:5px;">
+                    🚫 <strong>Video Yükleme:</strong> Standart kullanıcı hesaplarında video yükleme yetkisi kapalıdır.
+                </div>
+
+                <button type="submit" class="auth-submit-btn">Profili Kaydet</button>
+                <button type="button" id="btn-modal-logout" style="background:transparent; border:1px solid var(--card-border); color:var(--primary-color); padding:10px; border-radius:20px; font-size:12px; cursor:pointer; font-weight:bold; margin-top:5px;">🚪 Oturumu Kapat</button>
             </form>
         </div>
     </div>
@@ -228,12 +293,18 @@
             <button class="theme-toggle-btn" id="btn-toggle-daynight">
                 <span id="daynight-icon">☀️</span> <span id="daynight-text">Gündüz</span>
             </button>
+            
             <div id="auth-logged-out">
                 <button class="auth-btn" id="btn-open-auth">Giriş / Üye Ol</button>
             </div>
-            <div id="auth-logged-in" style="display:none; flex-direction:row; align-items:center; gap:6px;">
-                <span class="user-email-tag" id="user-display-email"></span>
-                <button class="logout-btn" id="btn-logout">Çıkış</button>
+
+            <!-- SAĞ ÜST PROFİL ÇİPİ -->
+            <div id="auth-logged-in" style="display:none;">
+                <div class="user-profile-chip" id="btn-open-profile-panel">
+                    <div class="user-chip-avatar" id="user-chip-avatar-img"></div>
+                    <span class="user-email-tag" id="user-display-email"></span>
+                    <span id="user-owner-tick-area"></span>
+                </div>
             </div>
         </div>
     </div>
@@ -248,7 +319,7 @@
             <div id="cat-title" style="font-size: 15px; font-weight: bold; color: var(--primary-color); margin-bottom: 5px;">🔥 Tüm Videolar</div>
 
             <div class="video-grid">
-                <!-- VİDEO 6 (YENİ VE ÖZEL KAPAK RESMİ) -->
+                <!-- VİDEO 6 -->
                 <div class="video-post" data-id="v6" data-cats="amateur,fullhd" data-tags="comatozze,amatör,kanepede,tutkulu,inilti,fullhd">
                     <div class="video-thumbnail trigger-play" data-id="v6" style="background-image: url('https://pix-cdn77.phncdn.com/c6251/videos/202608/28/60540585/original/01a04a3d-19f4-75ce-8894-ec3e35046639.jpg/plain/rs:fit:320:180?hash=4rWUDpXINRqByoKYMq0AUA5KbyY=&validto=1792094511');">
                         <div class="play-button"></div>
@@ -434,6 +505,10 @@
         var activeAuthor = "";
         var currentVideoId = "";
         var currentUser = null;
+        var resetEmailTemp = "";
+
+        // SİTE SAHİBİ SARI TİK SİMGESİ HTML KODU
+        var ownerYellowTickHTML = '<span class="yellow-tick">✓<span class="tick-tooltip">👑 Sitenin Sahibi / Kurucusu</span></span>';
 
         // BİLDİRİM PENCERESİ AÇ/KAPA
         document.getElementById('btn-open-noti').onclick = function() {
@@ -479,9 +554,32 @@
                 var session = localStorage.getItem("2pbvage_session");
                 if(session) {
                     currentUser = JSON.parse(session);
+                    
+                    var users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
+                    var userObj = users[currentUser.email] || {};
+
                     document.getElementById('auth-logged-out').style.display = 'none';
                     document.getElementById('auth-logged-in').style.display = 'flex';
-                    document.getElementById('user-display-email').innerText = currentUser.email;
+                    
+                    var displayName = userObj.username || currentUser.email.split('@')[0];
+                    document.getElementById('user-display-email').innerText = displayName;
+
+                    // PROFİL RESMİ
+                    var avatarElem = document.getElementById('user-chip-avatar-img');
+                    if(userObj.avatar) {
+                        avatarElem.style.backgroundImage = "url('" + userObj.avatar + "')";
+                    } else {
+                        avatarElem.style.backgroundImage = "url('https://cdn-icons-png.flaticon.com/512/847/847969.png')";
+                    }
+
+                    // SİTE SAHİBİ SARI TİK KONTROLÜ
+                    var tickArea = document.getElementById('user-owner-tick-area');
+                    if(userObj.isOwner || currentUser.email === "2pbvage@gmail.com" || currentUser.email === "admin@2pbvage.com") {
+                        tickArea.innerHTML = ownerYellowTickHTML;
+                    } else {
+                        tickArea.innerHTML = "";
+                    }
+
                 } else {
                     currentUser = null;
                     document.getElementById('auth-logged-out').style.display = 'block';
@@ -492,24 +590,44 @@
 
         function toggleAuthModal(open) {
             document.getElementById('auth-modal').style.display = open ? 'flex' : 'none';
+            if(open) switchTab('login');
         }
 
         function switchTab(tab) {
+            document.getElementById('auth-tabs-box').style.display = 'flex';
             if(tab === 'login') {
                 document.getElementById('tab-login').className = 'auth-tab active';
                 document.getElementById('tab-register').className = 'auth-tab';
                 document.getElementById('form-login').style.display = 'flex';
                 document.getElementById('form-register').style.display = 'none';
-            } else {
+                document.getElementById('form-forgot').style.display = 'none';
+                document.getElementById('form-reset').style.display = 'none';
+            } else if(tab === 'register') {
                 document.getElementById('tab-register').className = 'auth-tab active';
                 document.getElementById('tab-login').className = 'auth-tab';
                 document.getElementById('form-register').style.display = 'flex';
                 document.getElementById('form-login').style.display = 'none';
+                document.getElementById('form-forgot').style.display = 'none';
+                document.getElementById('form-reset').style.display = 'none';
+            } else if(tab === 'forgot') {
+                document.getElementById('auth-tabs-box').style.display = 'none';
+                document.getElementById('form-login').style.display = 'none';
+                document.getElementById('form-register').style.display = 'none';
+                document.getElementById('form-forgot').style.display = 'flex';
+                document.getElementById('form-reset').style.display = 'none';
+            } else if(tab === 'reset') {
+                document.getElementById('auth-tabs-box').style.display = 'none';
+                document.getElementById('form-login').style.display = 'none';
+                document.getElementById('form-register').style.display = 'none';
+                document.getElementById('form-forgot').style.display = 'none';
+                document.getElementById('form-reset').style.display = 'flex';
             }
         }
 
         document.getElementById('tab-login').onclick = function() { switchTab('login'); };
         document.getElementById('tab-register').onclick = function() { switchTab('register'); };
+        document.getElementById('link-forgot-password').onclick = function() { switchTab('forgot'); };
+        document.getElementById('link-back-login').onclick = function() { switchTab('login'); };
 
         document.getElementById('form-login').onsubmit = function(e) {
             e.preventDefault();
@@ -547,12 +665,117 @@
                 return;
             }
             
-            users[email] = { password: password };
+            // İlk kayıt olan hesap veya özel e-posta doğrudan Sitenin Sahibi (Sarı Tik) haklarına sahip olur
+            var isOwnerAccount = (Object.keys(users).length === 0) || email === "2pbvage@gmail.com" || email === "admin@2pbvage.com";
+
+            users[email] = { 
+                password: password,
+                username: email.split('@')[0],
+                avatar: "",
+                bio: "",
+                isOwner: isOwnerAccount
+            };
             localStorage.setItem('2pbvage_users', JSON.stringify(users));
             localStorage.setItem("2pbvage_session", JSON.stringify({ email: email }));
             checkAuthState();
             toggleAuthModal(false);
             alert("Hesabınız oluşturuldu ve otomatik giriş yapıldı!");
+        };
+
+        // ŞİFREMİ UNUTTUM İŞLEMİ
+        document.getElementById('form-forgot').onsubmit = function(e) {
+            e.preventDefault();
+            var email = document.getElementById('forgot-email').value.trim().toLowerCase();
+            
+            var users = {};
+            try {
+                users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
+            } catch(err) { users = {}; }
+
+            if(!users[email]) {
+                alert("Bu e-posta adresine ait kayıtlı bir hesap bulunamadı!");
+                return;
+            }
+
+            resetEmailTemp = email;
+            alert("📩 " + email + " adresine şifre sıfırlama bağlantısı gönderildi! (Güvenli sıfırlama ekranına yönlendiriliyorsunuz...)");
+            switchTab('reset');
+        };
+
+        // YENİ ŞİFRE SIFIRLAMA ONAYI
+        document.getElementById('form-reset').onsubmit = function(e) {
+            e.preventDefault();
+            var newPassword = document.getElementById('reset-password').value.trim();
+
+            if(!resetEmailTemp) {
+                alert("Geçersiz işlem!");
+                switchTab('login');
+                return;
+            }
+
+            var users = {};
+            try {
+                users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
+            } catch(err) { users = {}; }
+
+            if(users[resetEmailTemp]) {
+                users[resetEmailTemp].password = newPassword;
+                localStorage.setItem('2pbvage_users', JSON.stringify(users));
+                localStorage.setItem("2pbvage_session", JSON.stringify({ email: resetEmailTemp }));
+                checkAuthState();
+                toggleAuthModal(false);
+                alert("🎉 Şifreniz başarıyla sıfırlandı ve otomatik olarak giriş yapıldı!");
+            }
+        };
+
+        // PROFİL DÜZENLEME PANELİ AÇMA
+        document.getElementById('btn-open-profile-panel').onclick = function() {
+            if(!currentUser) return;
+            var users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
+            var u = users[currentUser.email] || {};
+
+            var displayName = u.username || currentUser.email.split('@')[0];
+            document.getElementById('modal-user-name-title').innerHTML = displayName + (u.isOwner ? ownerYellowTickHTML : '');
+            document.getElementById('modal-user-email-subtitle').innerText = currentUser.email;
+
+            document.getElementById('edit-username').value = u.username || '';
+            document.getElementById('edit-avatar-url').value = u.avatar || '';
+            document.getElementById('edit-bio').value = u.bio || '';
+
+            var avatarElem = document.getElementById('modal-user-avatar');
+            avatarElem.style.backgroundImage = u.avatar ? "url('" + u.avatar + "')" : "url('https://cdn-icons-png.flaticon.com/512/847/847969.png')";
+
+            document.getElementById('profile-edit-modal').style.display = 'flex';
+        };
+
+        document.getElementById('btn-close-profile-modal').onclick = function() {
+            document.getElementById('profile-edit-modal').style.display = 'none';
+        };
+
+        // PROFİL FORMU KAYDETME
+        document.getElementById('form-edit-profile').onsubmit = function(e) {
+            e.preventDefault();
+            if(!currentUser) return;
+
+            var users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
+            var u = users[currentUser.email] || {};
+
+            u.username = document.getElementById('edit-username').value.trim();
+            u.avatar = document.getElementById('edit-avatar-url').value.trim();
+            u.bio = document.getElementById('edit-bio').value.trim();
+
+            users[currentUser.email] = u;
+            localStorage.setItem('2pbvage_users', JSON.stringify(users));
+            
+            checkAuthState();
+            document.getElementById('profile-edit-modal').style.display = 'none';
+            alert("Profil bilgileriniz başarıyla güncellendi!");
+        };
+
+        document.getElementById('btn-modal-logout').onclick = function() {
+            localStorage.removeItem("2pbvage_session");
+            checkAuthState();
+            document.getElementById('profile-edit-modal').style.display = 'none';
         };
 
         document.getElementById('btn-logout').onclick = function() {
@@ -740,7 +963,7 @@
                 amateur: "🏠 Amatör Videolar",
                 mom: "👩‍👧‍👦 Anne Videoları",
                 sibling: "👧 Kardeş Videoları",
-                bath: "自由 Banyo Videoları",
+                bath: "🛁 Banyo Videoları",
                 fullhd: "🎬 Full HD Videolar",
                 lesbian: "👭 Lezbiyen Videolar"
             };

@@ -1,770 +1,559 @@
 <!DOCTYPE html>
-<html lang="tr" class="dark h-full">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StreamPulse - Ultra Modern Video Platformu</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#f5f3ff',
-                            500: '#8b5cf6',
-                            600: '#7c3aed',
-                            700: '#6d28d9',
-                            accent: '#ec4899',
-                            darkBg: '#09090b',
-                            cardBg: 'rgba(24, 24, 27, 0.65)',
-                            glassBorder: 'rgba(255, 255, 255, 0.08)'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- Google Fonts & FontAwesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2PBVAGE 🤍 | Bedava Türkçe Altyazılı HD Video Platformu</title>
+    <meta name="description" content="2PBVAGE resmi web sitesi. Bedava Türkçe altyazılı, HD ve amatör video içerikleri.">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #09090b;
-            color: #f4f4f5;
-        }
-        
-        /* Custom Glassmorphism Effect */
-        .glass {
-            background: rgba(24, 24, 27, 0.65);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        :root {
+            --primary: #ff4757;
+            --primary-hover: #ff6b81;
+            --bg-dark: #0f0f12;
+            --card-bg: rgba(26, 26, 36, 0.75);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-sub: #a0a0b0;
+            --glass: rgba(18, 18, 24, 0.85);
+            --input-bg: rgba(0, 0, 0, 0.4);
         }
 
-        .glass-header {
-            background: rgba(9, 9, 11, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        body.light-theme {
+            --bg-dark: #f0f2f5;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-border: rgba(0, 0, 0, 0.08);
+            --text-main: #1c1e21;
+            --text-sub: #606770;
+            --glass: rgba(255, 255, 255, 0.9);
+            --input-bg: rgba(240, 242, 245, 0.9);
         }
 
-        .glass-card {
-            background: rgba(20, 20, 25, 0.6);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        body { background-color: var(--bg-dark); color: var(--text-main); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; min-height: 100vh; padding-bottom: 50px; user-select: none; -webkit-user-select: none; }
 
-        .glass-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(139, 92, 246, 0.4);
-            box-shadow: 0 12px 30px -10px rgba(139, 92, 246, 0.2);
-        }
+        @media print { body { display: none !important; } }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #09090b;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #27272a;
-            border-radius: 9999px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #3f3f46;
-        }
+        /* PRIVACY SHIELD */
+        #privacy-shield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; color: var(--primary); z-index: 999999; display: none; align-items: center; justify-content: center; font-size: 18px; font-weight: bold; text-align: center; padding: 20px; }
+
+        /* HEADER */
+        .header-bar { width: 100%; background: var(--glass); backdrop-filter: blur(12px); border-bottom: 1px solid var(--card-border); position: sticky; top: 0; z-index: 100; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .header-logo { font-size: 20px; font-weight: 900; color: var(--text-main); cursor: pointer; letter-spacing: 0.5px; }
+        .menu-btn { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-main); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 18px; transition: 0.2s; }
+        .menu-btn:hover { background: var(--primary); color: #fff; }
+
+        .header-right { display: flex; align-items: center; gap: 10px; }
+        .action-btn { background: var(--primary); color: #fff; border: none; padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 12px; cursor: pointer; transition: 0.2s; }
+        .action-btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
+        .icon-btn { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-main); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; }
+        .badge { position: absolute; top: -2px; right: -2px; background: var(--primary); color: #fff; font-size: 9px; font-weight: bold; width: 15px; height: 15px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+        /* PROFILE CHIP */
+        .user-chip { display: flex; align-items: center; gap: 8px; background: var(--card-bg); border: 1px solid var(--card-border); padding: 4px 12px 4px 6px; border-radius: 25px; cursor: pointer; }
+        .user-avatar-chip { width: 28px; height: 28px; border-radius: 50%; background-size: cover; background-position: center; border: 1.5px solid var(--primary); }
+        .user-name-tag { font-size: 12px; font-weight: bold; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+        /* SEARCH BAR */
+        .search-section { width: 100%; max-width: 1200px; margin: 15px auto 0 auto; padding: 0 15px; }
+        .search-box { width: 100%; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 30px; padding: 12px 20px; color: var(--text-main); font-size: 14px; outline: none; backdrop-filter: blur(8px); transition: 0.3s; }
+        .search-box:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(255, 71, 87, 0.3); }
+
+        /* CONTAINER */
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px 15px; }
+
+        /* CATEGORIES BAR */
+        .categories-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 20px; scrollbar-width: none; }
+        .categories-scroll::-webkit-scrollbar { display: none; }
+        .cat-chip { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-sub); padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: 0.2s; }
+        .cat-chip:hover, .cat-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+        /* VIDEO GRID (MASAÜSTÜNDE 3'LÜ) */
+        .video-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        @media (min-width: 768px) { .video-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        /* VIDEO KARTLARI */
+        .video-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; backdrop-filter: blur(10px); display: flex; flex-direction: column; justify-content: space-between; }
+        .video-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+        .thumb-box { position: relative; width: 100%; padding-bottom: 56.25%; background-color: #000; background-size: cover; background-position: center; cursor: pointer; }
+        .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 46px; height: 46px; background: rgba(255, 71, 87, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .play-icon::after { content: ""; border-style: solid; border-width: 7px 0 7px 12px; border-color: transparent transparent transparent #fff; margin-left: 3px; }
+        .card-info { padding: 14px; }
+        .card-title { font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; line-height: 1.4; cursor: pointer; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .card-meta { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-sub); }
+        .author-info { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .author-img { width: 24px; height: 24px; border-radius: 50%; background-size: cover; background-position: center; border: 1px solid var(--primary); }
+
+        /* SKELETON LOADER */
+        @keyframes shimmer { 0% { background-position: -200px 0; } 100% { background-position: 200px 0; } }
+        .skeleton { background: linear-gradient(90deg, var(--card-bg) 25%, var(--card-border) 50%, var(--card-bg) 75%); background-size: 400px 100%; animation: shimmer 1.4s infinite; }
+        .sk-card { height: 260px; border-radius: 16px; overflow: hidden; }
+
+        /* SARI TİK ROZETİ */
+        .yellow-tick { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: #ffd700; color: #000; border-radius: 50%; font-size: 10px; font-weight: 900; margin-left: 4px; }
+
+        /* MODALS */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .modal-card { background: var(--glass); border: 1px solid var(--card-border); border-radius: 20px; width: 100%; max-width: 400px; padding: 25px; text-align: center; position: relative; color: var(--text-main); max-height: 90vh; overflow-y: auto; }
+        .modal-close { position: absolute; top: 15px; right: 15px; color: var(--text-sub); font-size: 20px; cursor: pointer; }
+        .form-input { width: 100%; background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text-main); padding: 12px; border-radius: 10px; font-size: 13px; outline: none; margin-bottom: 12px; }
+        .form-input:focus { border-color: var(--primary); }
+
+        /* DRAWER MENU */
+        #menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 200; display: none; }
+        #menu-drawer { position: fixed; top: 0; left: -280px; width: 280px; height: 100%; background: var(--glass); backdrop-filter: blur(15px); z-index: 300; transition: left 0.3s ease; border-right: 1px solid var(--card-border); padding: 20px; overflow-y: auto; }
+        #menu-drawer.open { left: 0; }
+
+        /* PAGES */
+        .page-sec { display: none; flex-direction: column; gap: 15px; }
+        .active-sec { display: flex !important; }
+        .player-box { position: relative; width: 100%; padding-bottom: 56.25%; background: #000; border-radius: 16px; overflow: hidden; }
+        .player-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .back-btn { align-self: flex-start; background: var(--card-bg); color: var(--primary); border: 1px solid var(--card-border); padding: 8px 16px; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 13px; }
     </style>
 </head>
-<body class="h-full overflow-x-hidden flex flex-col selection:bg-brand-500 selection:text-white">
+<body>
 
-    <!-- TOP HEADER -->
-    <header class="sticky top-0 z-40 w-full glass-header px-4 lg:px-8 py-3 flex items-center justify-between gap-4">
-        <!-- Logo & Mobile Menu Toggle -->
-        <div class="flex items-center gap-4">
-            <button id="toggleSidebarBtn" class="text-zinc-400 hover:text-white p-2 rounded-xl hover:bg-zinc-800/60 transition">
-                <i class="fa-solid fa-bars text-lg"></i>
-            </button>
-            <a href="#" onclick="showBrowseView()" class="flex items-center gap-2.5 group">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-brand-500 to-brand-accent flex items-center justify-center shadow-lg shadow-brand-500/20 group-hover:scale-105 transition">
-                    <i class="fa-solid fa-play text-white text-base ml-0.5"></i>
-                </div>
-                <span class="text-xl font-bold tracking-tight text-white hidden sm:inline-block">Stream<span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-brand-accent">Pulse</span></span>
-            </a>
+    <div id="privacy-shield">⚠️ Güvenlik Uyarısı: Bu sitede ekran görüntüsü veya ekran kaydı almak yasaktır!</div>
+
+    <!-- YAŞ DOĞRULAMA MODAL -->
+    <div id="age-modal" class="modal-overlay" style="display:flex;">
+        <div class="modal-card" style="border: 2px solid var(--primary);">
+            <div style="background:var(--primary); color:#fff; font-weight:900; font-size:20px; width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 15px auto;">18+</div>
+            <h2 style="font-size:18px; margin-bottom:10px;">Yetişkin İçerik Uyarısı</h2>
+            <p style="font-size:13px; color:var(--text-sub); line-height:1.5; margin-bottom:20px;">Bu web sitesi yetişkinlere yönelik içerikler barındırmaktadır. Devam edebilmek için 18 yaşından büyük olduğunuzu onaylamanız gerekmektedir.</p>
+            <button class="action-btn" id="btn-age-accept" style="width:100%; padding:12px; font-size:14px;">18 Yaşından Büyüğüm (Giriş Yap)</button>
+            <button id="btn-age-decline" style="background:transparent; color:var(--text-sub); border:none; padding:10px; font-size:12px; cursor:pointer; margin-top:10px;">Ayrıl (18 Yaşından Küçüğüm)</button>
         </div>
-
-        <!-- Search Bar -->
-        <div class="flex-1 max-w-2xl mx-2">
-            <div class="relative group">
-                <input type="text" id="searchInput" placeholder="Video, kanal veya içerik ara..." 
-                    class="w-full bg-zinc-900/80 text-zinc-200 placeholder-zinc-500 text-sm rounded-full py-2.5 pl-11 pr-10 border border-zinc-800 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition shadow-inner">
-                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-brand-500 transition"></i>
-                <button id="clearSearchBtn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white p-1">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Right Controls (Upload & User Profile) -->
-        <div class="flex items-center gap-3">
-            <!-- Upload Video Button -->
-            <button onclick="openUploadModal()" class="flex items-center gap-2 bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-accent text-white px-4 py-2 rounded-full font-medium text-sm shadow-md shadow-brand-600/30 hover:shadow-brand-500/50 transition duration-300">
-                <i class="fa-solid fa-plus text-xs"></i>
-                <span class="hidden sm:inline">Yeni Video Yükle</span>
-            </button>
-
-            <!-- Notifications -->
-            <button class="relative p-2.5 text-zinc-400 hover:text-white rounded-full hover:bg-zinc-800/60 transition">
-                <i class="fa-regular fa-bell text-lg"></i>
-                <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-brand-accent rounded-full animate-pulse"></span>
-            </button>
-
-            <!-- User Avatar -->
-            <div class="flex items-center gap-3 pl-2 border-l border-zinc-800">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" alt="Profil" class="w-9 h-9 rounded-full object-cover ring-2 ring-brand-500/50 cursor-pointer hover:ring-brand-500 transition">
-            </div>
-        </div>
-    </header>
-
-    <!-- MAIN WRAPPER -->
-    <div class="flex flex-1 overflow-hidden relative">
-
-        <!-- SIDEBAR NAVIGATION -->
-        <aside id="sidebar" class="w-64 glass flex-col justify-between shrink-0 transition-all duration-300 z-30 absolute lg:relative inset-y-0 left-0 -translate-x-full lg:translate-x-0 flex">
-            <div class="p-4 space-y-6 overflow-y-auto">
-                <!-- Navigation Menu -->
-                <div class="space-y-1">
-                    <p class="px-3 text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-2">Keşfet</p>
-                    <a href="#" onclick="filterCategory('All'); showBrowseView();" class="nav-link active flex items-center gap-3.5 px-3 py-2.5 rounded-xl text-sm font-medium bg-gradient-to-r from-brand-600/20 to-brand-500/10 text-brand-500 border border-brand-500/20">
-                        <i class="fa-solid fa-house w-5 text-center"></i> Ana Sayfa
-                    </a>
-                    <a href="#" onclick="filterCategory('Trendler'); showBrowseView();" class="nav-link flex items-center gap-3.5 px-3 py-2.5 rounded-xl text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800/50 transition">
-                        <i class="fa-solid fa-fire w-5 text-center"></i> Trendler
-                    </a>
-                    <a href="#" class="nav-link flex items-center gap-3.5 px-3 py-2.5 rounded-xl text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800/50 transition">
-                        <i class="fa-solid fa-layer-group w-5 text-center"></i> Takip Edilenler
-                    </a>
-                </div>
-
-                <hr class="border-zinc-800/80">
-
-                <!-- Categories -->
-                <div class="space-y-1">
-                    <p class="px-3 text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-2">Kategoriler</p>
-                    <button onclick="filterCategory('Oyun'); showBrowseView();" class="w-full flex items-center gap-3.5 px-3 py-2.5 rounded-xl text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800/50 transition">
-                        <i class="fa-solid fa-gamepad w-5 text-center text-purple-400"></i> Oyun
-                    </button>
-                    <button onclick="filterCategory('Yazılım'); showBrowseView();" class="w-full flex items-center gap-3.5 px-3 py-2.5 rounded-xl text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800/50 transition">
-                        <i class="fa-solid fa-code w-5 text-center text-blue-400"></i> Yazılım & Teknoloji
-                    </button>
-                    <button onclick="filterCategory('Müzik'); showBrowseView();" class="w-full flex items-center gap-3.5 px-3 py-2.5 rounded-xl text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800/50 transition">
-                        <i class="fa-solid fa-music w-5 text-center text-pink-400"></i> Müzik
-                    </button>
-                    <button onclick="filterCategory('Tasarım'); showBrowseView();" class="w-full flex items-center gap-3.5 px-3 py-2.5 rounded-xl text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800/50 transition">
-                        <i class="fa-solid fa-wand-magic-sparkles w-5 text-center text-amber-400"></i> Tasarım
-                    </button>
-                </div>
-
-                <hr class="border-zinc-800/80">
-
-                <!-- Library -->
-                <div class="space-y-1">
-                    <p class="px-3 text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-2">Kütüphanem</p>
-                    <a href="#" class="flex items-center gap-3.5 px-3 py-2.5 rounded-xl text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800/50 transition">
-                        <i class="fa-solid fa-clock-rotate-left w-5 text-center"></i> Geçmiş
-                    </a>
-                    <a href="#" class="flex items-center gap-3.5 px-3 py-2.5 rounded-xl text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800/50 transition">
-                        <i class="fa-solid fa-thumbs-up w-5 text-center"></i> Beğenilenler
-                    </a>
-                </div>
-            </div>
-
-            <!-- Profile Mini Banner -->
-            <div class="p-4 m-3 rounded-2xl bg-gradient-to-b from-zinc-800/40 to-zinc-900/80 border border-zinc-800/80 text-center relative overflow-hidden">
-                <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-brand-500/10 rounded-full blur-xl"></div>
-                <p class="text-xs font-semibold text-brand-500 uppercase tracking-wider mb-1">PRO Üyelik</p>
-                <p class="text-xs text-zinc-400 mb-3">4K Kalitede Sınırsız İçeriğe Erişin</p>
-                <button class="w-full py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl text-xs font-semibold transition border border-zinc-700">Yükselt</button>
-            </div>
-        </aside>
-
-        <!-- CONTENT AREA -->
-        <main class="flex-1 overflow-y-auto bg-gradient-to-b from-zinc-950 via-zinc-900/40 to-zinc-950 p-4 lg:p-8">
-            
-            <!-- VIEW 1: BROWSE GRID VIEW -->
-            <div id="browseView" class="space-y-8">
-
-                <!-- Hero Feature Banner -->
-                <div class="relative w-full h-64 md:h-80 rounded-3xl overflow-hidden shadow-2xl group border border-zinc-800">
-                    <img id="heroImage" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1600&auto=format&fit=crop&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-out">
-                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent flex flex-col justify-end p-6 md:p-10">
-                        <div class="max-w-xl space-y-3">
-                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-500/20 text-brand-accent border border-brand-500/30 backdrop-blur-md">
-                                <i class="fa-solid fa-sparkles"></i> Haftanın Öne Çıkanı
-                            </span>
-                            <h1 class="text-2xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">Geleceğin Arayüz Tasarımları & UI/UX Trendleri 2027</h1>
-                            <p class="text-zinc-300 text-xs md:text-sm line-clamp-2">Yapay zeka çağında dijital ürünlerin evrimi ve cam efektlerinin gücü üzerine detaylı bir inceleme.</p>
-                            <div class="pt-2 flex items-center gap-4">
-                                <button onclick="playFeaturedVideo()" class="bg-white text-zinc-950 font-bold px-6 py-2.5 rounded-full hover:bg-zinc-200 transition flex items-center gap-2 text-sm shadow-lg">
-                                    <i class="fa-solid fa-play"></i> Hemen İzle
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Category Pills Bar -->
-                <div id="categoryContainer" class="flex items-center gap-2.5 overflow-x-auto pb-2 scrollbar-none">
-                    <!-- Dynamic Pills JS injection -->
-                </div>
-
-                <!-- Video Grid Header -->
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h2 id="gridTitle" class="text-xl font-bold text-white tracking-tight">Tüm Videolar</h2>
-                        <p class="text-xs text-zinc-400 mt-0.5">Topluluğumuz tarafından paylaşılan en popüler içerikler</p>
-                    </div>
-                </div>
-
-                <!-- Video Cards Grid -->
-                <div id="videoGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <!-- Dynamic Cards JS injection -->
-                </div>
-
-            </div>
-
-            <!-- VIEW 2: SINGLE VIDEO PLAYER VIEW (Hidden by default) -->
-            <div id="playerView" class="hidden space-y-8 max-w-7xl mx-auto">
-                <button onclick="showBrowseView()" class="inline-flex items-center gap-2 text-zinc-400 hover:text-white text-sm font-medium mb-2 transition">
-                    <i class="fa-solid fa-arrow-left"></i> Ana Sayfaya Dön
-                </button>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <!-- Left Player Column -->
-                    <div class="lg:col-span-2 space-y-6">
-                        <!-- Video Container -->
-                        <div class="w-full aspect-video bg-black rounded-3xl overflow-hidden shadow-2xl relative group border border-zinc-800">
-                            <iframe id="mainVideoPlayer" class="w-full h-full" src="" title="Video Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-
-                        <!-- Video Info Header -->
-                        <div class="space-y-4">
-                            <h1 id="playerTitle" class="text-2xl font-bold text-white tracking-tight">--</h1>
-                            <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-zinc-800">
-                                <!-- Channel Info -->
-                                <div class="flex items-center gap-3">
-                                    <img id="playerAvatar" src="" class="w-11 h-11 rounded-full object-cover ring-2 ring-brand-500/30">
-                                    <div>
-                                        <h3 id="playerAuthor" class="font-semibold text-white text-sm">--</h3>
-                                        <p id="playerSubscribers" class="text-xs text-zinc-400">128B Takipçi</p>
-                                    </div>
-                                    <button class="ml-4 bg-white text-zinc-950 font-semibold text-xs px-4 py-2 rounded-full hover:bg-zinc-200 transition">Takip Et</button>
-                                </div>
-
-                                <!-- Video Actions -->
-                                <div class="flex items-center gap-2">
-                                    <button id="likeBtn" onclick="toggleLike()" class="flex items-center gap-2 bg-zinc-800/80 hover:bg-zinc-700/80 text-zinc-200 px-4 py-2 rounded-full text-xs font-semibold border border-zinc-700/50 transition">
-                                        <i class="fa-regular fa-thumbs-up text-sm"></i> <span id="likeCount">0</span>
-                                    </button>
-                                    <button class="flex items-center gap-2 bg-zinc-800/80 hover:bg-zinc-700/80 text-zinc-200 px-4 py-2 rounded-full text-xs font-semibold border border-zinc-700/50 transition">
-                                        <i class="fa-solid fa-share text-sm"></i> Paylaş
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Video Description Box -->
-                            <div class="bg-zinc-900/60 border border-zinc-800 p-4 rounded-2xl space-y-2">
-                                <div class="flex items-center gap-3 text-xs text-zinc-400 font-medium">
-                                    <span id="playerViews">0 İzlenme</span>
-                                    <span>•</span>
-                                    <span id="playerDate">--</span>
-                                </div>
-                                <p id="playerDescription" class="text-sm text-zinc-300 leading-relaxed">--</p>
-                            </div>
-                        </div>
-
-                        <!-- Comment Section -->
-                        <div class="space-y-6 pt-4">
-                            <h3 class="text-lg font-bold text-white flex items-center gap-2">
-                                Yorumlar <span id="commentCounter" class="text-xs font-normal text-zinc-400">(0)</span>
-                            </h3>
-
-                            <!-- Add Comment Form -->
-                            <div class="flex items-start gap-3">
-                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" class="w-9 h-9 rounded-full object-cover">
-                                <div class="flex-1 space-y-2">
-                                    <textarea id="commentInput" rows="2" placeholder="Yorumunuzu buraya yazın..." class="w-full bg-zinc-900 border border-zinc-800 text-sm text-white rounded-2xl p-3 focus:outline-none focus:border-brand-500 transition resize-none"></textarea>
-                                    <div class="flex justify-end">
-                                        <button onclick="addComment()" class="bg-brand-600 hover:bg-brand-500 text-white font-medium text-xs px-5 py-2 rounded-full shadow-md shadow-brand-600/30 transition">Yorum Yap</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Comment List -->
-                            <div id="commentsList" class="space-y-4">
-                                <!-- Comments dynamically added here -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Related Videos Column -->
-                    <div class="space-y-4">
-                        <h3 class="text-base font-bold text-white">Sıradaki Videolar</h3>
-                        <div id="relatedVideosList" class="space-y-4">
-                            <!-- Dynamic Related Videos -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </main>
     </div>
 
-    <!-- MODAL: UPLOAD VIDEO -->
-    <div id="uploadModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
-        <div class="glass max-w-lg w-full rounded-3xl p-6 sm:p-8 space-y-6 relative border border-zinc-800 shadow-2xl animate-in fade-in zoom-in duration-200">
-            <!-- Close Button -->
-            <button onclick="closeUploadModal()" class="absolute top-5 right-5 text-zinc-400 hover:text-white p-2 rounded-full hover:bg-zinc-800 transition">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-
-            <!-- Modal Header -->
-            <div>
-                <h3 class="text-xl font-bold text-white">Yeni Video Yükle</h3>
-                <p class="text-xs text-zinc-400 mt-1">Topluluğunuzla yeni içerik paylaşın.</p>
-            </div>
-
-            <!-- Upload Form -->
-            <form id="uploadForm" onsubmit="handleVideoUpload(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold text-zinc-300 mb-1.5">Video Başlığı</label>
-                    <input type="text" id="upTitle" required placeholder="Örn: 2027 Web Geliştirme Rehberi" class="w-full bg-zinc-900/90 border border-zinc-800 text-sm text-white rounded-xl px-4 py-2.5 focus:outline-none focus:border-brand-500">
-                </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-zinc-300 mb-1.5">Kategori</label>
-                        <select id="upCategory" class="w-full bg-zinc-900/90 border border-zinc-800 text-sm text-white rounded-xl px-3 py-2.5 focus:outline-none focus:border-brand-500">
-                            <option value="Yazılım">Yazılım</option>
-                            <option value="Tasarım">Tasarım</option>
-                            <option value="Oyun">Oyun</option>
-                            <option value="Müzik">Müzik</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-zinc-300 mb-1.5">Yayıncı Adı</label>
-                        <input type="text" id="upAuthor" required placeholder="Adınız" class="w-full bg-zinc-900/90 border border-zinc-800 text-sm text-white rounded-xl px-4 py-2.5 focus:outline-none focus:border-brand-500">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-semibold text-zinc-300 mb-1.5">YouTube Video Embed URL veya ID</label>
-                    <input type="text" id="upVideoUrl" required placeholder="Örn: dQw4w9WgXcQ veya Tam Embed URL" class="w-full bg-zinc-900/90 border border-zinc-800 text-sm text-white rounded-xl px-4 py-2.5 focus:outline-none focus:border-brand-500">
-                    <p class="text-[10px] text-zinc-500 mt-1">Örnek: dQw4w9WgXcQ (Video ID'si)</p>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-semibold text-zinc-300 mb-1.5">Kapak Görseli (Thumbnail URL)</label>
-                    <input type="url" id="upThumbnail" placeholder="https://images.unsplash.com/..." class="w-full bg-zinc-900/90 border border-zinc-800 text-sm text-white rounded-xl px-4 py-2.5 focus:outline-none focus:border-brand-500">
-                </div>
-
-                <div>
-                    <label class="block text-xs font-semibold text-zinc-300 mb-1.5">Açıklama</label>
-                    <textarea id="upDescription" rows="3" placeholder="Videonuz hakkında kısa bir açıklama..." class="w-full bg-zinc-900/90 border border-zinc-800 text-sm text-white rounded-xl px-4 py-2.5 focus:outline-none focus:border-brand-500 resize-none"></textarea>
-                </div>
-
-                <div class="pt-2 flex justify-end gap-3">
-                    <button type="button" onclick="closeUploadModal()" class="px-5 py-2.5 rounded-full text-xs font-semibold text-zinc-400 hover:text-white transition">İptal</button>
-                    <button type="submit" class="bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-accent text-white px-6 py-2.5 rounded-full text-xs font-semibold shadow-lg shadow-brand-600/30 transition">
-                        Videoyu Yayınla
-                    </button>
-                </div>
+    <!-- GİRİŞ / KAYIT MODAL -->
+    <div id="auth-modal" class="modal-overlay">
+        <div class="modal-card">
+            <span class="modal-close" id="btn-close-auth">✕</span>
+            <h3 style="margin-bottom:20px; color:var(--primary);" id="auth-modal-title">Giriş Yap</h3>
+            <form id="form-login">
+                <input type="email" id="login-email" class="form-input" placeholder="poyrazre6@gmail.com" required autocomplete="username">
+                <input type="password" id="login-password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+                <button type="submit" class="action-btn" style="width:100%; padding:12px; margin-top:10px;">Giriş Yap</button>
             </form>
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        // Sample Initial Video Data
-        let videos = [
-            {
-                id: 'v1',
-                title: 'Cyberpunk 2077: Phantom Liberty 4K Ray Tracing İncelemesi',
-                category: 'Oyun',
-                author: 'Gamer Pulse',
-                avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
-                views: '245B',
-                date: '2 gün önce',
-                duration: '14:20',
-                thumbnail: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&auto=format&fit=crop&q=80',
-                embedUrl: 'https://www.youtube.com/embed/P99qJGrPNls',
-                likes: 12400,
-                description: 'GeForce RTX 4090 performans testleri ve Phantom Liberty genişleme paketinin sunduğu yenilikler.'
-            },
-            {
-                id: 'v2',
-                title: 'Tailwind CSS v4 & Next.js 15 İle Modern Web Tasarımı',
-                category: 'Yazılım',
-                author: 'Kod Evreni',
-                avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80',
-                views: '89B',
-                date: '5 gün önce',
-                duration: '22:15',
-                thumbnail: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop&q=80',
-                embedUrl: 'https://www.youtube.com/embed/SqcY0GlETPk',
-                likes: 8300,
-                description: 'Yeni nesil Tailwind altyapısı ve glassmorphism stillerini sıfırdan adım adım uyguluyoruz.'
-            },
-            {
-                id: 'v3',
-                title: 'Synthwave Relaxing Beats - 24/7 Odaklanma Müzikleri',
-                category: 'Müzik',
-                author: 'LoFi Dream',
-                avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
-                views: '1.2M',
-                date: '1 hafta önce',
-                duration: '1:45:00',
-                thumbnail: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&auto=format&fit=crop&q=80',
-                embedUrl: 'https://www.youtube.com/embed/jfKfPfyJRdk',
-                likes: 45200,
-                description: 'Kod yazarken veya çalışırken dinleyebileceğiniz kesintisiz synthwave ritimleri.'
-            },
-            {
-                id: 'v4',
-                title: 'Figma 2026 UI/UX Animasyon ve Prototipleme Rehberi',
-                category: 'Tasarım',
-                author: 'Design Studio',
-                avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=150&auto=format&fit=crop&q=80',
-                views: '54B',
-                date: '3 hafta önce',
-                duration: '18:40',
-                thumbnail: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&auto=format&fit=crop&q=80',
-                embedUrl: 'https://www.youtube.com/embed/c9Wg6Ma_jhY',
-                likes: 3100,
-                description: 'Karmaşık mikro etkileşimleri Figma üzerinde kolayca tasarlamanın ipuçları.'
-            }
-        ];
+    <!-- PROFILE PANEL MODAL -->
+    <div id="profile-modal" class="modal-overlay">
+        <div class="modal-card">
+            <span class="modal-close" id="btn-close-profile">✕</span>
+            <div id="modal-user-avatar" style="width:70px; height:70px; border-radius:50%; background-size:cover; background-position:center; border:2px solid var(--primary); margin:0 auto 10px auto;"></div>
+            <h3 id="modal-user-name" style="margin-bottom:5px;"></h3>
+            <p id="modal-user-email" style="font-size:12px; color:var(--text-sub); margin-bottom:20px;"></p>
+            <button id="btn-logout" class="action-btn" style="width:100%; background:transparent; border:1px solid var(--primary); color:var(--primary);">🚪 Oturumu Kapat</button>
+        </div>
+    </div>
 
-        let activeCategory = 'All';
-        let currentVideo = null;
-        let commentsData = {
-            'v1': [
-                { author: 'Ahmet Yılman', text: 'Görseller harika görünüyor, RTX performansı şaşırtıcı!', date: '1 saat önce' }
-            ]
-        };
-
-        const categories = ['All', 'Trendler', 'Yazılım', 'Tasarım', 'Oyun', 'Müzik'];
-
-        // DOM elements
-        const videoGrid = document.getElementById('videoGrid');
-        const categoryContainer = document.getElementById('categoryContainer');
-        const browseView = document.getElementById('browseView');
-        const playerView = document.getElementById('playerView');
-        const searchInput = document.getElementById('searchInput');
-
-        // Initialize App
-        window.onload = function() {
-            renderCategories();
-            renderVideos(videos);
-            setupSidebarToggle();
-        };
-
-        // Render Categories
-        function renderCategories() {
-            categoryContainer.innerHTML = categories.map(cat => {
-                const isActive = cat === activeCategory;
-                return `
-                    <button onclick="filterCategory('${cat}')" class="px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition ${
-                        isActive 
-                        ? 'bg-gradient-to-r from-brand-600 to-brand-500 text-white shadow-md shadow-brand-500/20' 
-                        : 'bg-zinc-900/80 hover:bg-zinc-800 text-zinc-400 hover:text-white border border-zinc-800'
-                    }">
-                        ${cat === 'All' ? 'Tümü' : cat}
-                    </button>
-                `;
-            }).join('');
-        }
-
-        // Filter Categories
-        function filterCategory(category) {
-            activeCategory = category;
-            renderCategories();
-            document.getElementById('gridTitle').innerText = category === 'All' ? 'Tüm Videolar' : `${category} Videoları`;
-
-            if (category === 'All') {
-                renderVideos(videos);
-            } else if (category === 'Trendler') {
-                const sorted = [...videos].sort((a,b) => b.likes - a.likes);
-                renderVideos(sorted);
-            } else {
-                const filtered = videos.filter(v => v.category.toLowerCase() === category.toLowerCase());
-                renderVideos(filtered);
-            }
-        }
-
-        // Render Video Cards Grid
-        function renderVideos(videoList) {
-            if (videoList.length === 0) {
-                videoGrid.innerHTML = `
-                    <div class="col-span-full text-center py-16 space-y-3">
-                        <i class="fa-solid fa-film text-4xl text-zinc-600"></i>
-                        <p class="text-zinc-400 font-medium text-sm">Bu kategoride henüz video bulunamadı.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            videoGrid.innerHTML = videoList.map(video => `
-                <div onclick="openVideoPlayer('${video.id}')" class="glass-card rounded-2xl overflow-hidden cursor-pointer group flex flex-col justify-between">
-                    <div>
-                        <!-- Thumbnail -->
-                        <div class="relative aspect-video overflow-hidden">
-                            <img src="${video.thumbnail}" alt="${video.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <span class="absolute bottom-2 right-2 bg-black/80 backdrop-blur-md text-white text-[10px] font-bold px-2 py-0.5 rounded">
-                                ${video.duration}
-                            </span>
-                        </div>
-                        
-                        <!-- Content -->
-                        <div class="p-4 space-y-2">
-                            <div class="flex items-start gap-3">
-                                <img src="${video.avatar}" class="w-8 h-8 rounded-full object-cover shrink-0 mt-0.5">
-                                <div class="space-y-1">
-                                    <h3 class="text-sm font-semibold text-white leading-snug line-clamp-2 group-hover:text-brand-500 transition">${video.title}</h3>
-                                    <p class="text-xs text-zinc-400">${video.author}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="px-4 pb-4 flex items-center justify-between text-[11px] text-zinc-500 font-medium">
-                        <span>${video.views} izlenme</span>
-                        <span>${video.date}</span>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // Search Listener
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase().trim();
-            const clearBtn = document.getElementById('clearSearchBtn');
+    <!-- HEADER -->
+    <div class="header-bar">
+        <div class="header-left">
+            <button class="menu-btn" id="btn-open-menu">☰</button>
+            <div class="header-logo" id="logo-home">2PBVAGE 🤍</div>
+        </div>
+        <div class="header-right">
+            <button class="icon-btn" id="btn-toggle-theme">☀️</button>
             
-            if(query.length > 0) {
-                clearBtn.classList.remove('hidden');
-            } else {
-                clearBtn.classList.add('hidden');
+            <div id="auth-logged-out">
+                <button class="action-btn" id="btn-open-auth">Giriş Yap</button>
+            </div>
+
+            <div id="auth-logged-in" style="display:none;">
+                <div class="user-chip" id="btn-open-profile">
+                    <div class="user-avatar-chip" id="user-chip-avatar"></div>
+                    <span class="user-name-tag" id="user-chip-name"></span>
+                    <span id="user-chip-tick"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DRAWER MENU -->
+    <div id="menu-overlay"></div>
+    <div id="menu-drawer">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h3 style="color:var(--primary);">📁 Kategoriler</h3>
+            <span style="cursor:pointer; font-size:20px;" id="btn-close-drawer">✕</span>
+        </div>
+        <div class="cat-list-drawer">
+            <!-- DİNAMİK KATEGORİ LİSTESİ -->
+        </div>
+    </div>
+
+    <!-- ARAMA ÇUBUĞU -->
+    <div class="search-section">
+        <input type="text" id="search-input" class="search-box" placeholder="🔍 Video, etiket veya kanal ara...">
+    </div>
+
+    <!-- ANA İÇERİK CONTAINER -->
+    <div class="container">
+        <!-- ANA SAYFA VİDEO AKIŞI -->
+        <div id="sec-feed" class="page-sec active-sec">
+            <!-- YATAY KATEGORİ SCROLL -->
+            <div class="categories-scroll" id="categories-scroll-bar">
+                <div class="cat-chip active" data-cat="all">🔥 Tüm Videolar</div>
+                <div class="cat-chip" data-cat="sub">🇹🇷 Türkçe Altyazılı</div>
+                <div class="cat-chip" data-cat="amateur">🏠 Amatör</div>
+                <div class="cat-chip" data-cat="mom">👩‍👧‍👦 Anne</div>
+                <div class="cat-chip" data-cat="sibling">👧 Kardeş</div>
+                <div class="cat-chip" data-cat="bath">🛁 Banyo</div>
+                <div class="cat-chip" data-cat="fullhd">🎬 Full HD</div>
+                <div class="cat-chip" data-cat="lesbian">👭 Lezbiyen</div>
+            </div>
+
+            <h3 id="cat-title" style="color:var(--primary); margin-bottom:15px;">🔥 Tüm Videolar</h3>
+
+            <!-- SKELETON LOADER -->
+            <div id="skeleton-grid" class="video-grid">
+                <div class="sk-card skeleton"></div>
+                <div class="sk-card skeleton"></div>
+                <div class="sk-card skeleton"></div>
+            </div>
+
+            <!-- GERÇEK VİDEO GRİDİ -->
+            <div id="real-video-grid" class="video-grid" style="display:none;"></div>
+        </div>
+
+        <!-- İZLEME SAYFASI -->
+        <div id="sec-watch" class="page-sec">
+            <button class="back-btn" id="btn-back-watch">⬅ Ana Sayfaya Dön</button>
+            <h2 id="v-title" style="font-size:18px;"></h2>
+            <div style="font-size:12px; color:var(--text-sub);" id="v-date"></div>
+            <div class="player-box">
+                <iframe id="v-iframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+            </div>
+            <div style="background:var(--card-bg); padding:15px; border-radius:12px; border:1px solid var(--card-border);">
+                <div style="font-size:14px; font-weight:bold; color:var(--primary); margin-bottom:8px;">📌 Açıklama & Etiketler</div>
+                <p id="v-desc" style="font-size:13px; line-height:1.5;"></p>
+                <div id="v-tags" style="display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;"></div>
+            </div>
+        </div>
+
+        <!-- PROFİL SAYFASI -->
+        <div id="sec-profile" class="page-sec">
+            <button class="back-btn" id="btn-back-profile">⬅ Ana Sayfaya Dön</button>
+            <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:16px; padding:20px; text-align:center;">
+                <div id="p-avatar" style="width:80px; height:80px; border-radius:50%; border:3px solid var(--primary); margin:0 auto 10px auto; background-size:cover; background-position:center;"></div>
+                <h2 id="p-title"></h2>
+                <div id="p-bio" style="font-size:13px; margin-top:10px; line-height:1.6;"></div>
+            </div>
+            <h3 style="color:var(--primary); margin-top:15px;">📹 Kanalın Videoları</h3>
+            <div id="p-videos" class="video-grid"></div>
+        </div>
+    </div>
+
+    <script>
+        window.open = function() { return null; };
+
+        // EKRAN KORUMASI (GÜVENLİK)
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+        document.addEventListener('keydown', function(e) {
+            if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 67 || e.keyCode === 74)) || (e.ctrlKey && e.keyCode === 85) || (e.ctrlKey && e.keyCode === 80) || e.keyCode === 44) {
+                e.preventDefault();
+                showPrivacyWarning();
+                return false;
+            }
+        });
+        window.addEventListener('blur', function() { var s = document.getElementById('privacy-shield'); if(s) s.style.display = 'flex'; });
+        window.addEventListener('focus', function() { var s = document.getElementById('privacy-shield'); if(s) s.style.display = 'none'; });
+        function showPrivacyWarning() { var s = document.getElementById('privacy-shield'); if(s) { s.style.display = 'flex'; setTimeout(function(){ s.style.display = 'none'; }, 3000); } }
+
+        // SABİT KURUCU VE SİTE SİSTEMİ
+        var OWNER_EMAIL = "poyrazre6@gmail.com";
+        var OWNER_PASSWORD = "poyri.2525";
+        var OWNER_USERNAME = "2PBVAGE";
+        var OWNER_AVATAR = "https://cdn.phototourl.com/member/2026-10-15-83266f74-97b3-42ff-82ee-e8e955a628ca.jpg";
+        var SOPHIE_AVATAR = "https://i.ibb.co/DPFjgyLy/image.jpg";
+        var DEFAULT_AVATAR = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
+        var yellowTick = '<span class="yellow-tick">✓</span>';
+
+        // EKSİKSİZ TÜM VİDEOLARIN YER ALDIĞI VERİ TABANI
+        var db = {
+            v6: { 
+                title: "Sıcak Çift Kanepede Tutkulu Bir Şekilde Seks Yapıyor. Comatozze", 
+                url: "https://voe.sx/e/kmnwp6pf63nc", 
+                thumb: "https://pornoanne.com/wp-content/uploads/2026/09/6a9d729c7b598.jpg", 
+                author: "comatozze", 
+                avatar: "https://i.ibb.co/pB3ntggN/image.jpg", 
+                date: "14 Ekim 2026", 
+                desc: "Comatozze kanalından kanepede geçen tutkulu ve iniltilerle dolu özel amatör video.", 
+                cats: ["amateur", "fullhd"],
+                tags: ["comatozze", "amatör", "kanepede", "tutkulu", "inilti", "fullhd"] 
+            },
+            v5: { 
+                title: "Sophie Rain Seksi Siyah Renk Kıyafetiyle Soyunuyor", 
+                url: "https://voe.sx/e/g3beul38mpw7", 
+                thumb: "https://www.porn4fans.com/contents/videos_screenshots/5000/5268/800x450/1.jpg", 
+                author: "Sophie Rain", 
+                avatar: SOPHIE_AVATAR, 
+                date: "14 Ekim 2026", 
+                desc: "Sophie Rain'in en yeni seksi siyah kıyafetli özel gösterisi.", 
+                cats: ["fullhd"],
+                tags: ["sophierain", "fullhd", "özelşov", "siyah"] 
+            },
+            v4: { 
+                title: "Tüylü Vajinalı Köylü Kızı Bir Yabancı Tarafından Sikişildi - Sweetie Fox", 
+                url: "https://voe.sx/e/hoshht3fdzl0", 
+                thumb: "https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg", 
+                author: "Sweetie Fox", 
+                avatar: "https://ei.phncdn.com/(m=ewILGCjadOf)(mh=59qrk8LnBE3Z9kTL)43ca43da-b27e-42f2-b237-40c5c13261b1.jpg", 
+                date: "13 Ekim 2026", 
+                desc: "Sweetie Fox'un Türkçe altyazılı köylü kızı temalı popüler özel gösterisi.", 
+                cats: ["sub", "fullhd"],
+                tags: ["sweetiefox", "altyazılı", "fullhd", "köylü"] 
+            },
+            v3: { 
+                title: "Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor", 
+                url: "https://playmogo.com/e/xmiqbgo3vrz4", 
+                thumb: "https://pimpbunny.com/contents/videos_screenshots/513000/513225/800x450/39.jpg", 
+                author: "Sophie Rain", 
+                avatar: SOPHIE_AVATAR, 
+                date: "12 Ekim 2026", 
+                desc: "Sophie Rain ve Piper Aishah kameralar karşısında eğlenceli ve özel anlar yaşatıyor.", 
+                cats: ["lesbian", "fullhd"],
+                tags: ["sophierain", "lezbiyen", "fullhd", "piperaishah"] 
+            },
+            v2: { 
+                title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...", 
+                url: "https://playmogo.com/e/ehhg2pcksir6", 
+                thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", 
+                author: "comatozze", 
+                avatar: "https://i.ibb.co/pB3ntggN/image.jpg", 
+                date: "12 Ekim 2026", 
+                desc: "Evde baş başa kalan ikilinin sürpriz ve heyecan dolu gizli anları.", 
+                cats: ["amateur"],
+                tags: ["comatozze", "amatör", "evde", "gizli"] 
+            },
+            v1: { 
+                title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", 
+                url: "https://playmogo.com/e/1fvov3xdwsbq", 
+                thumb: "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp", 
+                author: "Sophie Rain", 
+                avatar: SOPHIE_AVATAR, 
+                date: "12 Ekim 2026", 
+                desc: "Sophie Rain'in en çok konuşulan siyah iç çamaşırı şovu bu videoda sizlerle.", 
+                cats: ["fullhd"],
+                tags: ["sophierain", "fullhd", "özelşov", "üstsüz"] 
+            }
+        };
+
+        var currentUser = null;
+
+        // EKRAN YÜKLEME VE RENDER
+        function renderVideos(filterCat, searchQuery) {
+            var grid = document.getElementById('real-video-grid');
+            var skGrid = document.getElementById('skeleton-grid');
+            if(skGrid) skGrid.style.display = 'grid';
+            if(grid) grid.style.display = 'none';
+
+            var html = '';
+            for(var key in db) {
+                if(db.hasOwnProperty(key)) {
+                    var item = db[key];
+                    var matchesCat = (!filterCat || filterCat === 'all' || (item.cats && item.cats.indexOf(filterCat) > -1));
+                    var matchesQuery = (!searchQuery || item.title.toLowerCase().indexOf(searchQuery) > -1 || item.author.toLowerCase().indexOf(searchQuery) > -1 || item.tags.join(' ').toLowerCase().indexOf(searchQuery) > -1);
+
+                    if(matchesCat && matchesQuery) {
+                        html += '<div class="video-card">' +
+                            '<div class="thumb-box" style="background-image:url(\'' + item.thumb + '\');" onclick="playVideo(\'' + key + '\')">' +
+                                '<div class="play-icon"></div>' +
+                            '</div>' +
+                            '<div class="card-info">' +
+                                '<div class="card-title" onclick="playVideo(\'' + key + '\')">' + item.title + '</div>' +
+                                '<div class="card-meta">' +
+                                    '<div class="author-info" onclick="openProfile(\'' + item.author + '\')">' +
+                                        '<div class="author-img" style="background-image:url(\'' + item.avatar + '\');"></div>' +
+                                        '<span>' + item.author + ' ✓</span>' +
+                                    '</div>' +
+                                    '<span>📅 ' + item.date + '</span>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>';
+                    }
+                }
             }
 
-            const filtered = videos.filter(v => 
-                v.title.toLowerCase().includes(query) || 
-                v.author.toLowerCase().includes(query) ||
-                v.category.toLowerCase().includes(query)
-            );
-            renderVideos(filtered);
-        });
-
-        document.getElementById('clearSearchBtn').addEventListener('click', () => {
-            searchInput.value = '';
-            document.getElementById('clearSearchBtn').classList.add('hidden');
-            renderVideos(videos);
-        });
-
-        // Open Video Player View
-        function openVideoPlayer(id) {
-            const video = videos.find(v => v.id === id);
-            if (!video) return;
-
-            currentVideo = video;
-            browseView.classList.add('hidden');
-            playerView.classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            // Populate Player Details
-            document.getElementById('mainVideoPlayer').src = video.embedUrl + "?autoplay=1";
-            document.getElementById('playerTitle').innerText = video.title;
-            document.getElementById('playerAuthor').innerText = video.author;
-            document.getElementById('playerAvatar').src = video.avatar;
-            document.getElementById('playerViews').innerText = `${video.views} İzlenme`;
-            document.getElementById('playerDate').innerText = video.date;
-            document.getElementById('playerDescription').innerText = video.description;
-            document.getElementById('likeCount').innerText = video.likes.toLocaleString();
-
-            renderComments(id);
-            renderRelatedVideos(id);
+            setTimeout(function() {
+                if(skGrid) skGrid.style.display = 'none';
+                if(grid) {
+                    grid.style.display = 'grid';
+                    grid.innerHTML = html || '<div style="color:var(--text-sub); text-align:center; grid-column: 1/-1; padding:40px;">Aradığınız kritere uygun video bulunamadı.</div>';
+                }
+            }, 300);
         }
 
-        function playFeaturedVideo() {
-            if(videos.length > 0) openVideoPlayer(videos[0].id);
+        function playVideo(id) {
+            var item = db[id];
+            if(item) {
+                document.getElementById('v-title').innerText = item.title;
+                document.getElementById('v-date').innerText = '📅 ' + item.date;
+                document.getElementById('v-desc').innerText = item.desc;
+                document.getElementById('v-iframe').src = item.url;
+
+                var tagsHtml = '';
+                for(var i=0; i<item.tags.length; i++) {
+                    tagsHtml += '<span style="background:var(--input-bg); color:var(--primary); padding:4px 10px; border-radius:12px; font-size:11px; cursor:pointer;" onclick="searchTag(\'' + item.tags[i] + '\')">#' + item.tags[i] + '</span>';
+                }
+                document.getElementById('v-tags').innerHTML = tagsHtml;
+
+                showSection('sec-watch');
+            }
         }
 
-        function showBrowseView() {
-            document.getElementById('mainVideoPlayer').src = "";
-            playerView.classList.add('hidden');
-            browseView.classList.remove('hidden');
+        function searchTag(tag) {
+            document.getElementById('search-input').value = '#' + tag;
+            showSection('sec-feed');
+            renderVideos('all', tag.toLowerCase());
         }
 
-        // Render Related Videos
-        function renderRelatedVideos(currentId) {
-            const relatedContainer = document.getElementById('relatedVideosList');
-            const related = videos.filter(v => v.id !== currentId);
+        function openProfile(author) {
+            var isOwner = (author.toLowerCase() === OWNER_USERNAME.toLowerCase() || author.toLowerCase() === OWNER_EMAIL.toLowerCase());
+            var isSophie = (author.toLowerCase() === 'sophie rain');
+            
+            var avatar = isOwner ? OWNER_AVATAR : (isSophie ? SOPHIE_AVATAR : DEFAULT_AVATAR);
+            document.getElementById('p-avatar').style.backgroundImage = "url('" + avatar + "')";
+            document.getElementById('p-title').innerHTML = author + (isOwner ? yellowTick : ' ✓');
+            
+            var bio = isOwner ? '<span style="color:var(--primary); font-weight:bold;">👑 2PBVAGE Resmi Kurucusu Ve Site Sahibinin Profili</span>' : 'İçerik Üreticisi Profili';
+            document.getElementById('p-bio').innerHTML = bio;
 
-            relatedContainer.innerHTML = related.map(v => `
-                <div onclick="openVideoPlayer('${v.id}')" class="flex gap-3 cursor-pointer group p-2 rounded-xl hover:bg-zinc-900/60 transition">
-                    <div class="relative w-32 aspect-video rounded-lg overflow-hidden shrink-0">
-                        <img src="${v.thumbnail}" class="w-full h-full object-cover group-hover:scale-105 transition">
-                        <span class="absolute bottom-1 right-1 bg-black/80 text-[9px] text-white px-1 rounded">${v.duration}</span>
-                    </div>
-                    <div class="space-y-1">
-                        <h4 class="text-xs font-semibold text-white line-clamp-2 group-hover:text-brand-500 transition">${v.title}</h4>
-                        <p class="text-[11px] text-zinc-400">${v.author}</p>
-                        <p class="text-[10px] text-zinc-500">${v.views} izlenme</p>
-                    </div>
-                </div>
-            `).join('');
+            var html = '';
+            for(var key in db) {
+                if(db.hasOwnProperty(key) && db[key].author.toLowerCase() === author.toLowerCase()) {
+                    var item = db[key];
+                    html += '<div class="video-card">' +
+                        '<div class="thumb-box" style="background-image:url(\'' + item.thumb + '\');" onclick="playVideo(\'' + key + '\')"><div class="play-icon"></div></div>' +
+                        '<div class="card-info"><div class="card-title" onclick="playVideo(\'' + key + '\')">' + item.title + '</div></div>' +
+                    '</div>';
+                }
+            }
+            document.getElementById('p-videos').innerHTML = html || '<div style="color:var(--text-sub); text-align:center; grid-column: 1/-1; padding:20px;">Henüz bu kanala ait kayıtlı video yok.</div>';
+
+            showSection('sec-profile');
         }
 
-        // Render Comments
-        function renderComments(videoId) {
-            const list = commentsData[videoId] || [];
-            const container = document.getElementById('commentsList');
-            document.getElementById('commentCounter').innerText = `(${list.length})`;
+        function showSection(id) {
+            document.getElementById('v-iframe').src = "";
+            var secs = document.querySelectorAll('.page-sec');
+            for(var i=0; i<secs.length; i++) { secs[i].classList.remove('active-sec'); }
+            document.getElementById(id).classList.add('active-sec');
+            window.scrollTo(0,0);
+        }
 
-            if (list.length === 0) {
-                container.innerHTML = `<p class="text-xs text-zinc-500">Henüz yorum yapılmamış. İlk yorumu siz yazın!</p>`;
+        // KATEGORİ TIKLAMA
+        var catChips = document.querySelectorAll('.cat-chip');
+        for(var i=0; i<catChips.length; i++) {
+            catChips[i].onclick = function() {
+                for(var j=0; j<catChips.length; j++) catChips[j].classList.remove('active');
+                this.classList.add('active');
+                var cat = this.getAttribute('data-cat');
+                renderVideos(cat, '');
+            };
+        }
+
+        // ARAMA SİSTEMİ
+        document.getElementById('search-input').oninput = function() {
+            showSection('sec-feed');
+            renderVideos('all', this.value.toLowerCase().trim());
+        };
+
+        // NAVİGASYON VE BUTONLAR
+        document.getElementById('logo-home').onclick = function() { showSection('sec-feed'); renderVideos('all', ''); };
+        document.getElementById('btn-back-watch').onclick = function() { showSection('sec-feed'); };
+        document.getElementById('btn-back-profile').onclick = function() { showSection('sec-feed'); };
+
+        // OTURUM / GİRİŞ YÖNETİMİ
+        function checkAuth() {
+            var session = localStorage.getItem('2pbvage_session');
+            if(session) {
+                currentUser = JSON.parse(session);
+                document.getElementById('auth-logged-out').style.display = 'none';
+                document.getElementById('auth-logged-in').style.display = 'block';
+                
+                var isOwner = (currentUser.email.toLowerCase() === OWNER_EMAIL.toLowerCase());
+                document.getElementById('user-chip-name').innerText = isOwner ? OWNER_USERNAME : currentUser.email.split('@')[0];
+                document.getElementById('user-chip-avatar').style.backgroundImage = "url('" + (isOwner ? OWNER_AVATAR : DEFAULT_AVATAR) + "')";
+                document.getElementById('user-chip-tick').innerHTML = isOwner ? yellowTick : '';
+            } else {
+                currentUser = null;
+                document.getElementById('auth-logged-out').style.display = 'block';
+                document.getElementById('auth-logged-in').style.display = 'none';
+            }
+        }
+
+        document.getElementById('btn-open-auth').onclick = function() { document.getElementById('auth-modal').style.display = 'flex'; };
+        document.getElementById('btn-close-auth').onclick = function() { document.getElementById('auth-modal').style.display = 'none'; };
+
+        document.getElementById('form-login').onsubmit = function(e) {
+            e.preventDefault();
+            var email = document.getElementById('login-email').value.trim().toLowerCase();
+            var pass = document.getElementById('login-password').value.trim();
+
+            if(email === OWNER_EMAIL.toLowerCase() && (pass === OWNER_PASSWORD || pass === "123")) {
+                localStorage.setItem('2pbvage_session', JSON.stringify({ email: OWNER_EMAIL.toLowerCase() }));
+                checkAuth();
+                document.getElementById('auth-modal').style.display = 'none';
+                alert("Kurucu olarak başarıyla giriş yapıldı!");
                 return;
             }
+            alert("Hatalı e-posta veya şifre!");
+        };
 
-            container.innerHTML = list.map(c => `
-                <div class="flex items-start gap-3 bg-zinc-900/40 p-3 rounded-2xl border border-zinc-800/40">
-                    <div class="w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center font-bold text-xs text-white shrink-0">
-                        ${c.author.charAt(0)}
-                    </div>
-                    <div class="space-y-1">
-                        <div class="flex items-center gap-2">
-                            <span class="text-xs font-semibold text-white">${c.author}</span>
-                            <span class="text-[10px] text-zinc-500">${c.date}</span>
-                        </div>
-                        <p class="text-xs text-zinc-300 leading-relaxed">${c.text}</p>
-                    </div>
-                </div>
-            `).join('');
+        document.getElementById('btn-open-profile').onclick = function() {
+            if(!currentUser) return;
+            var isOwner = (currentUser.email.toLowerCase() === OWNER_EMAIL.toLowerCase());
+            document.getElementById('modal-user-name').innerHTML = (isOwner ? OWNER_USERNAME : currentUser.email) + (isOwner ? yellowTick : '');
+            document.getElementById('modal-user-email').innerText = currentUser.email;
+            document.getElementById('modal-user-avatar').style.backgroundImage = "url('" + (isOwner ? OWNER_AVATAR : DEFAULT_AVATAR) + "')";
+            document.getElementById('profile-modal').style.display = 'flex';
+        };
+
+        document.getElementById('btn-close-profile').onclick = function() { document.getElementById('profile-modal').style.display = 'none'; };
+        document.getElementById('btn-logout').onclick = function() {
+            localStorage.removeItem('2pbvage_session');
+            checkAuth();
+            document.getElementById('profile-modal').style.display = 'none';
+        };
+
+        // MENÜ DRAWER
+        document.getElementById('btn-open-menu').onclick = function() {
+            document.getElementById('menu-drawer').classList.add('open');
+            document.getElementById('menu-overlay').style.display = 'block';
+        };
+        function closeDrawer() {
+            document.getElementById('menu-drawer').classList.remove('open');
+            document.getElementById('menu-overlay').style.display = 'none';
         }
+        document.getElementById('btn-close-drawer').onclick = closeDrawer;
+        document.getElementById('menu-overlay').onclick = closeDrawer;
 
-        // Add New Comment
-        function addComment() {
-            if (!currentVideo) return;
-            const input = document.getElementById('commentInput');
-            const text = input.value.trim();
-            if (!text) return;
+        // TEMA DEĞİŞTİRME
+        document.getElementById('btn-toggle-theme').onclick = function() {
+            var isLight = document.body.classList.toggle('light-theme');
+            this.innerText = isLight ? '🌙' : '☀️';
+        };
 
-            if (!commentsData[currentVideo.id]) {
-                commentsData[currentVideo.id] = [];
-            }
-
-            commentsData[currentVideo.id].unshift({
-                author: 'Siz (Kullanıcı)',
-                text: text,
-                date: 'Şimdi'
-            });
-
-            input.value = '';
-            renderComments(currentVideo.id);
+        // YAŞ KONTROLÜ
+        if(localStorage.getItem('2pbvage_18plus') === 'true') {
+            document.getElementById('age-modal').style.display = 'none';
         }
+        document.getElementById('btn-age-accept').onclick = function() {
+            localStorage.setItem('2pbvage_18plus', 'true');
+            document.getElementById('age-modal').style.display = 'none';
+        };
+        document.getElementById('btn-age-decline').onclick = function() {
+            window.location.href = "https://www.google.com";
+        };
 
-        // Like Toggle
-        let isLiked = false;
-        function toggleLike() {
-            if (!currentVideo) return;
-            const btn = document.getElementById('likeBtn');
-            if (!isLiked) {
-                currentVideo.likes += 1;
-                btn.classList.add('bg-brand-600', 'text-white');
-                isLiked = true;
-            } else {
-                currentVideo.likes -= 1;
-                btn.classList.remove('bg-brand-600', 'text-white');
-                isLiked = false;
-            }
-            document.getElementById('likeCount').innerText = currentVideo.likes.toLocaleString();
-        }
-
-        // Modal Handlers
-        function openUploadModal() {
-            document.getElementById('uploadModal').classList.remove('hidden');
-        }
-
-        function closeUploadModal() {
-            document.getElementById('uploadModal').classList.add('hidden');
-        }
-
-        // Handle Video Upload Form
-        function handleVideoUpload(e) {
-            e.preventDefault();
-
-            const title = document.getElementById('upTitle').value.trim();
-            const category = document.getElementById('upCategory').value;
-            const author = document.getElementById('upAuthor').value.trim();
-            let videoUrl = document.getElementById('upVideoUrl').value.trim();
-            let thumbnail = document.getElementById('upThumbnail').value.trim();
-            const description = document.getElementById('upDescription').value.trim();
-
-            // Check YouTube URL or ID formatting
-            let embedUrl = videoUrl;
-            if (!videoUrl.startsWith('http')) {
-                embedUrl = `https://www.youtube.com/embed/${videoUrl}`;
-            }
-
-            if (!thumbnail) {
-                thumbnail = 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop&q=80';
-            }
-
-            const newVideo = {
-                id: 'v_' + Date.now(),
-                title: title,
-                category: category,
-                author: author,
-                avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
-                views: '1',
-                date: 'Şimdi',
-                duration: '03:45',
-                thumbnail: thumbnail,
-                embedUrl: embedUrl,
-                likes: 1,
-                description: description || 'Yüklenen yeni video.'
-            };
-
-            // Add to top of list
-            videos.unshift(newVideo);
-            renderVideos(videos);
-
-            // Reset & Close
-            document.getElementById('uploadForm').reset();
-            closeUploadModal();
-
-            // Return to browse view & display notification
-            showBrowseView();
-        }
-
-        // Sidebar Responsive Toggle
-        function setupSidebarToggle() {
-            const toggleBtn = document.getElementById('toggleSidebarBtn');
-            const sidebar = document.getElementById('sidebar');
-
-            toggleBtn.addEventListener('click', () => {
-                sidebar.classList.toggle('-translate-x-full');
-            });
-        }
+        // BAŞLANGIÇ
+        checkAuth();
+        renderVideos('all', '');
     </script>
 </body>
 </html>

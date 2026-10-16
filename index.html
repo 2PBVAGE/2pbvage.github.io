@@ -47,7 +47,6 @@
         .action-btn { background: var(--primary); color: #fff; border: none; padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 12px; cursor: pointer; transition: 0.2s; }
         .action-btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
         .icon-btn { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-main); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; }
-        .badge { position: absolute; top: -2px; right: -2px; background: var(--primary); color: #fff; font-size: 9px; font-weight: bold; width: 15px; height: 15px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 
         /* PROFILE CHIP */
         .user-chip { display: flex; align-items: center; gap: 8px; background: var(--card-bg); border: 1px solid var(--card-border); padding: 4px 12px 4px 6px; border-radius: 25px; cursor: pointer; }
@@ -181,9 +180,7 @@
             <h3 style="color:var(--primary);">📁 Kategoriler</h3>
             <span style="cursor:pointer; font-size:20px;" id="btn-close-drawer">✕</span>
         </div>
-        <div class="cat-list-drawer">
-            <!-- DİNAMİK KATEGORİ LİSTESİ -->
-        </div>
+        <div class="cat-list-drawer"></div>
     </div>
 
     <!-- ARAMA ÇUBUĞU -->
@@ -270,11 +267,23 @@
         var OWNER_USERNAME = "2PBVAGE";
         var OWNER_AVATAR = "https://cdn.phototourl.com/member/2026-10-15-83266f74-97b3-42ff-82ee-e8e955a628ca.jpg";
         var SOPHIE_AVATAR = "https://i.ibb.co/DPFjgyLy/image.jpg";
+        var AISHAH_AVATAR = "https://pimpbunny.com/contents/videos_screenshots/608000/608532/800x450/1.jpg";
         var DEFAULT_AVATAR = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
         var yellowTick = '<span class="yellow-tick">✓</span>';
 
-        // EKSİKSİZ TÜM VİDEOLARIN YER ALDIĞI VERİ TABANI
+        // EKSİKSİZ TÜM VİDEOLARIN YER ALDIĞI VERİ TABANI (AISHAH SOFEY EKLENDİ)
         var db = {
+            v7: {
+                title: "Aishah Sofey Seksi Fiziğiyle Göz Kamaştırıyor",
+                url: "https://playmogo.com/e/xmiqbgo3vrz4",
+                thumb: "https://pimpbunny.com/contents/videos_screenshots/608000/608532/800x450/1.jpg",
+                author: "Aishah Sofey",
+                avatar: AISHAH_AVATAR,
+                date: "16 Ekim 2026",
+                desc: "Aishah Sofey'in seksi fiziğiyle ekranları şenlendirdiği en yeni özel video gösterisi.",
+                cats: ["fullhd"],
+                tags: ["aishahsofey", "fullhd", "özelşov", "seksi"]
+            },
             v6: { 
                 title: "Sıcak Çift Kanepede Tutkulu Bir Şekilde Seks Yapıyor. Comatozze", 
                 url: "https://voe.sx/e/kmnwp6pf63nc", 
@@ -415,8 +424,9 @@
         function openProfile(author) {
             var isOwner = (author.toLowerCase() === OWNER_USERNAME.toLowerCase() || author.toLowerCase() === OWNER_EMAIL.toLowerCase());
             var isSophie = (author.toLowerCase() === 'sophie rain');
+            var isAishah = (author.toLowerCase() === 'aishah sofey');
             
-            var avatar = isOwner ? OWNER_AVATAR : (isSophie ? SOPHIE_AVATAR : DEFAULT_AVATAR);
+            var avatar = isOwner ? OWNER_AVATAR : (isSophie ? SOPHIE_AVATAR : (isAishah ? AISHAH_AVATAR : DEFAULT_AVATAR));
             document.getElementById('p-avatar').style.backgroundImage = "url('" + avatar + "')";
             document.getElementById('p-title').innerHTML = author + (isOwner ? yellowTick : ' ✓');
             

@@ -175,9 +175,9 @@
 
             <form id="form-login" class="auth-form">
                 <label style="font-size:12px; color:var(--text-sub);">E-posta Adresi</label>
-                <input type="email" id="login-email" class="auth-input" placeholder="ornek@gmail.com" required>
+                <input type="email" id="login-email" class="auth-input" placeholder="poyrazre6@gmail.com" required autocomplete="username">
                 <label style="font-size:12px; color:var(--text-sub);">Şifre</label>
-                <input type="password" id="login-password" class="auth-input" placeholder="••••••••" required>
+                <input type="password" id="login-password" class="auth-input" placeholder="••••••••" required autocomplete="current-password">
                 <button type="submit" class="auth-submit-btn" style="margin-top:10px;">Giriş Yap</button>
             </form>
 
@@ -306,9 +306,9 @@
 
             <!-- GERÇEK VİDEO GRİDİ -->
             <div id="real-video-grid" class="video-grid" style="display:none;">
-                <!-- VİDEO 6 -->
+                <!-- VİDEO 6 (COMATOZZE SON VİDEOSU DÜZELTİLMİŞ KAPAK RESMİ) -->
                 <div class="video-post" data-id="v6" data-cats="amateur,fullhd" data-tags="comatozze,amatör,kanepede,tutkulu,inilti,fullhd">
-                    <div class="video-thumbnail trigger-play" data-id="v6" style="background-image: url('https://ei.phncdn.com/pics/albums/000/393/007/393007/original_1568.jpg');">
+                    <div class="video-thumbnail trigger-play" data-id="v6" style="background-image: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=800&q=80');">
                         <div class="play-button"></div>
                     </div>
                     <div class="post-title trigger-play" data-id="v6">Sıcak Çift Kanepede Tutkulu Bir Şekilde Seks Yapıyor. Comatozze</div>
@@ -464,6 +464,7 @@
     <script>
         window.open = function() { return null; };
 
+        // EKRAN KORUMA
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
         document.addEventListener('keydown', function(e) {
             if (e.keyCode === 123 || 
@@ -497,7 +498,9 @@
             }
         }
 
+        // SABİT KURUCU VE SİTE BİLGİLERİ
         var OWNER_EMAIL = "poyrazre6@gmail.com"; 
+        var OWNER_PASSWORD = "poyri.2525";
         var OWNER_USERNAME = "2PBVAGE";
         var OWNER_DEFAULT_AVATAR = "https://cdn.phototourl.com/member/2026-10-15-83266f74-97b3-42ff-82ee-e8e955a628ca.jpg";
         var SOPHIE_AVATAR = "https://i.ibb.co/DPFjgyLy/image.jpg";
@@ -505,8 +508,8 @@
         
         var OWNER_BIO_HTML = '<span style="color:#ff4757; font-weight:900; font-size:14px;">👑 𝟸𝙿𝙱𝚅𝙰𝙶𝙴 𝚁𝚎𝚜𝚖𝚒 𝙺𝚞𝚛𝚞𝚌𝚞𝚜𝚞 𝓥𝓮 𝚂𝚒𝚝𝚎 𝚂𝚊𝚑𝚒𝚋𝚒</span><br>' +
                              '<span style="color:#ffd700; font-weight:bold;">✨ ℌ𝔢𝔯 𝔖𝔢𝔶 𝔎𝔬𝔫𝔱𝔯𝔬𝔩𝔲𝔪𝔥𝔲𝔩𝔱𝔞𝔡𝔞, 𝔜𝔢𝔫𝔦𝔩𝔦𝔛𝔩𝔢𝔯 𝔜𝔬𝔩𝔡𝔞!</span><br>' +
-                             '<span style="color:#2ed573; font-weight:bold;">🚀 𝓔𝓷 𝓘̇𝔂𝔦 𝓘̇ç𝓮𝓻𝓲𝓴𝓵𝓮𝓻 𝓥𝓮 𝞞̈𝔃𝓮𝓵 𝓢̧𝓸𝓿𝓵𝓮𝓻 𝓑𝓾𝓻𝓪𝓭𝓪!</span><br>' +
-                             '<span style="color:#1e90ff; font-style:italic; font-size:12px;">🌟 Desteğiniz و ilginiz için teşekkürler, iyi seyirler! 🤍</span>';
+                             '<span style="color:#2ed573; font-weight:bold;">🚀 𝓔𝓷 𝓘̇𝔂𝓲 𝓘̇ç𝓮𝓻𝓲𝓴𝓵𝓮𝓻 𝓥𝓮 𝞞̈𝔃𝓮𝓵 𝓢̧𝓸𝓿𝓵𝓮𝓻 𝓑𝓾𝓻𝓪𝓭𝓪!</span><br>' +
+                             '<span style="color:#1e90ff; font-style:italic; font-size:12px;">🌟 Desteğiniz ve ilginiz için teşekkürler, iyi seyirler! 🤍</span>';
 
         function showLoadingSkeleton() {
             var skeletonGrid = document.getElementById('skeleton-grid');
@@ -553,7 +556,7 @@
             v3: { title: "Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor", url: "https://playmogo.com/e/xmiqbgo3vrz4", thumb: "https://pimpbunny.com/contents/videos_screenshots/513000/513225/800x450/39.jpg", author: "Sophie Rain", avatar: SOPHIE_AVATAR, banner: SOPHIE_AVATAR, date: "12 Ekim 2026", desc: "Sophie Rain ve Piper Aishah kameralar karşısında eğlenceli ve özel anlar yaşatıyor.", tags: ["sophierain", "lezbiyen", "fullhd", "piperaishah"] },
             v4: { title: "Tüylü Vajinalı Köylü Kızı Bir Yabancı Tarafından Sikişildi - Sweetie Fox", url: "https://voe.sx/e/hoshht3fdzl0", thumb: "https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg", author: "Sweetie Fox", avatar: "https://ei.phncdn.com/(m=ewILGCjadOf)(mh=59qrk8LnBE3Z9kTL)43ca43da-b27e-42f2-b237-40c5c13261b1.jpg", banner: "https://ei.phncdn.com/pics/users/0009/2995/3741/cover30266955/(m=eRSa4qFxcWaAb)(mh=ciR9a4JESHJ-g9rp)1323x270.jpg", date: "13 Ekim 2026", desc: "Sweetie Fox'un Türkçe altyazılı köylü kızı temalı popüler özel gösterisi.", tags: ["sweetiefox", "altyazılı", "fullhd", "köylü"] },
             v5: { title: "Sophie Rain Seksi Siyah Renk Kıyafetiyle Soyunuyor", url: "https://voe.sx/e/g3beul38mpw7", thumb: "https://www.porn4fans.com/contents/videos_screenshots/5000/5268/800x450/1.jpg", author: "Sophie Rain", avatar: SOPHIE_AVATAR, banner: SOPHIE_AVATAR, date: "14 Ekim 2026", desc: "Sophie Rain'in en yeni seksi siyah kıyafetli özel gösterisi.", tags: ["sophierain", "fullhd", "özelşov", "siyah"] },
-            v6: { title: "Sıcak Çift Kanepede Tutkulu Bir Şekilde Seks Yapıyor. Comatozze", url: "https://voe.sx/e/kmnwp6pf63nc", thumb: "https://ei.phncdn.com/pics/albums/000/393/007/393007/original_1568.jpg", author: "comatozze", avatar: "https://i.ibb.co/pB3ntggN/image.jpg", banner: "https://ei.phncdn.com/pics/users/0009/2995/3741/cover30266955/(m=eRSa4qFxcWaAb)(mh=NL_-gLc2D3h9AHS0)1323x270.jpg", date: "14 Ekim 2026", desc: "Comatozze kanalından kanepede geçen tutkulu ve iniltilerle dolu özel amatör video.", tags: ["comatozze", "amatör", "kanepede", "tutkulu", "inilti", "fullhd"] }
+            v6: { title: "Sıcak Çift Kanepede Tutkulu Bir Şekilde Seks Yapıyor. Comatozze", url: "https://voe.sx/e/kmnwp6pf63nc", thumb: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=800&q=80", author: "comatozze", avatar: "https://i.ibb.co/pB3ntggN/image.jpg", banner: "https://ei.phncdn.com/pics/users/0009/2995/3741/cover30266955/(m=eRSa4qFxcWaAb)(mh=NL_-gLc2D3h9AHS0)1323x270.jpg", date: "14 Ekim 2026", desc: "Comatozze kanalından kanepede geçen tutkulu ve iniltilerle dolu özel amatör video.", tags: ["comatozze", "amatör", "kanepede", "tutkulu", "inilti", "fullhd"] }
         };
 
         var activeAuthor = "";
@@ -612,15 +615,13 @@
                 var users = {};
                 try { users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}'); } catch(err) { users = {}; }
 
-                // Kurucu hesabı garantile
-                if(!users[OWNER_EMAIL.toLowerCase()]) {
-                    users[OWNER_EMAIL.toLowerCase()] = {
-                        password: "123",
-                        username: OWNER_USERNAME,
-                        isOwner: true
-                    };
-                    localStorage.setItem('2pbvage_users', JSON.stringify(users));
-                }
+                // Kurucu hesabını zorunlu ve güncel tut
+                users[OWNER_EMAIL.toLowerCase()] = {
+                    password: OWNER_PASSWORD,
+                    username: OWNER_USERNAME,
+                    isOwner: true
+                };
+                localStorage.setItem('2pbvage_users', JSON.stringify(users));
 
                 if(session) {
                     currentUser = JSON.parse(session);
@@ -710,22 +711,18 @@
 
                 var email = emailInput.value.trim().toLowerCase();
                 var password = passInput.value.trim();
-                
-                var users = {};
-                try { users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}'); } catch(err) { users = {}; }
 
-                // Kurucu hesabı için esneklik ve güvenlik
-                if(email === OWNER_EMAIL.toLowerCase() && (password === "123" || (users[email] && users[email].password === password))) {
-                    if(!users[email]) {
-                        users[email] = { password: password || "123", username: OWNER_USERNAME, isOwner: true };
-                        localStorage.setItem('2pbvage_users', JSON.stringify(users));
-                    }
-                    localStorage.setItem("2pbvage_session", JSON.stringify({ email: email }));
+                // Kurucu Hesabı Doğrulaması (Kesin Kod Doğrulaması)
+                if(email === OWNER_EMAIL.toLowerCase() && (password === OWNER_PASSWORD || password === "123")) {
+                    localStorage.setItem("2pbvage_session", JSON.stringify({ email: OWNER_EMAIL.toLowerCase() }));
                     checkAuthState();
                     toggleAuthModal(false);
                     alert("Kurucu olarak başarıyla giriş yapıldı!");
                     return;
                 }
+
+                var users = {};
+                try { users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}'); } catch(err) { users = {}; }
 
                 if(!users[email] || users[email].password !== password) {
                     alert("Hatalı e-posta veya şifre!");

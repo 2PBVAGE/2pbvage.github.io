@@ -28,7 +28,11 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--bg-color); color: var(--text-color); font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding-bottom: 50px; transition: background-color 0.3s, color 0.3s; }
+        body { background-color: var(--bg-color); color: var(--text-color); font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding-bottom: 50px; transition: background-color 0.3s, color 0.3s; user-select: none; -webkit-user-select: none; }
+
+        @media print {
+            body { display: none !important; }
+        }
 
         /* HEADER */
         .header-bar { width: 100%; max-width: 1200px; background-color: var(--header-bg); display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--card-border); position: sticky; top: 0; z-index: 100; }
@@ -41,7 +45,6 @@
         .noti-badge { position: absolute; top: -3px; right: -3px; background: var(--primary-color); color: #fff; font-size: 9px; font-weight: bold; width: 14px; height: 14px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
         .auth-btn { background-color: var(--primary-color); color: #fff; border: none; padding: 10px 14px; border-radius: 15px; font-size: 12px; font-weight: bold; cursor: pointer; }
         
-        /* SAĞ ÜST KULLANICI PROFİL ÇİPİ */
         .user-profile-chip { display: flex; align-items: center; gap: 6px; background: var(--card-bg); border: 1px solid var(--card-border); padding: 4px 10px 4px 6px; border-radius: 20px; cursor: pointer; }
         .user-chip-avatar { width: 26px; height: 26px; border-radius: 50%; background-color: #333; background-size: cover; background-position: center; border: 1px solid var(--primary-color); }
         .user-email-tag { font-size: 11px; color: var(--text-color); font-weight: bold; max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -67,24 +70,20 @@
         .auth-input:focus { border-color: var(--primary-color); }
         .auth-submit-btn { background-color: var(--primary-color); color: #fff; border: none; padding: 12px; border-radius: 20px; font-weight: bold; font-size: 14px; cursor: pointer; margin-top: 5px; }
 
-        /* SARI TİK ROZETİ VE TOOLTİP */
         .yellow-tick { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; background: #ffd700; color: #000; border-radius: 50%; font-size: 11px; font-weight: 900; margin-left: 4px; cursor: pointer; position: relative; vertical-align: middle; box-shadow: 0 0 6px rgba(255, 215, 0, 0.6); }
         .yellow-tick .tick-tooltip { visibility: hidden; width: 140px; background-color: #111; color: #ffd700; text-align: center; border-radius: 6px; padding: 6px 8px; position: absolute; z-index: 1005; bottom: 125%; left: 50%; transform: translateX(-50%); opacity: 0; transition: opacity 0.2s; font-size: 10px; border: 1px solid #ffd700; pointer-events: none; white-space: normal; line-height: 1.2; }
         .yellow-tick:hover .tick-tooltip, .yellow-tick:active .tick-tooltip { visibility: visible; opacity: 1; }
 
-        /* YAŞ DOĞRULAMA STİLLERİ */
         .age-modal-card { background-color: var(--card-bg); border: 2px solid var(--primary-color); border-radius: 16px; width: 100%; max-width: 400px; padding: 30px 20px; text-align: center; color: var(--text-color); box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
         .age-badge { display: inline-block; background: var(--primary-color); color: #fff; font-weight: 900; font-size: 20px; padding: 8px 16px; border-radius: 50%; margin-bottom: 12px; }
         .age-btn-accept { background-color: var(--primary-color); color: #fff; border: none; padding: 12px 20px; border-radius: 25px; font-weight: bold; font-size: 14px; cursor: pointer; width: 100%; margin-top: 15px; }
         .age-btn-decline { background: transparent; color: var(--text-sub); border: 1px solid var(--card-border); padding: 10px 20px; border-radius: 25px; font-size: 13px; cursor: pointer; width: 100%; margin-top: 8px; }
 
-        /* BİLDİRİM PENCERESİ */
         .noti-item { padding: 10px; border-bottom: 1px solid var(--card-border); text-align: left; font-size: 12px; }
         .noti-item:last-child { border-bottom: none; }
         .noti-title { font-weight: bold; color: var(--primary-color); margin-bottom: 3px; }
         .noti-desc { color: var(--text-color); }
 
-        /* MENÜ */
         #menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 200; display: none; }
         #menu-drawer { position: fixed; top: 0; left: -260px; width: 260px; height: 100%; background-color: var(--card-bg); z-index: 300; transition: left 0.25s ease; display: flex; flex-direction: column; overflow-y: auto; border-right: 1px solid var(--card-border); }
         #menu-drawer.open { left: 0; }
@@ -93,7 +92,6 @@
         .page-sec { display: none; width: 100%; flex-direction: column; gap: 15px; }
         .active-sec { display: flex !important; }
 
-        /* SKELETON LOADER (YÜKLEME EKRANI) */
         @keyframes shimmer {
             0% { background-position: -200px 0; }
             100% { background-position: 200px 0; }
@@ -107,7 +105,6 @@
         .skeleton-thumb { width: 100%; padding-bottom: 56.25%; }
         .skeleton-line { height: 14px; border-radius: 4px; margin: 12px 15px; }
 
-        /* MASAÜSTÜ & PC DÜZENİ: HER SATIRDA 3 VİDEO */
         .video-grid { display: flex; flex-direction: column; gap: 15px; }
         
         @media (min-width: 768px) {
@@ -143,20 +140,21 @@
         .channel-banner { width: 100%; height: 140px; background-color: #222; background-size: cover; background-position: center; }
         .channel-main-avatar { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--primary-color); margin: -40px auto 10px auto; background-color: #333; background-size: cover; background-position: center; }
 
-        /* ETIKET SİSTEMİ */
         .tags-container { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
         .tag-badge { background: var(--input-bg); color: var(--primary-color); border: 1px solid var(--card-border); padding: 4px 10px; border-radius: 12px; font-size: 11px; cursor: pointer; font-weight: bold; }
         .tag-badge:hover { background: var(--primary-color); color: #fff; }
 
-        /* THEME SELECTOR */
         .theme-box { display: flex; gap: 8px; padding: 10px 20px; border-bottom: 1px solid var(--card-border); }
         .theme-dot { width: 22px; height: 22px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; }
         .theme-dot.active { border-color: var(--text-color); }
+
+        #privacy-shield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; color: #ff4757; z-index: 999999; display: none; align-items: center; justify-content: center; font-size: 18px; font-weight: bold; text-align: center; padding: 20px; }
     </style>
 </head>
 <body>
 
-    <!-- 18+ YAŞ DOĞRULAMA MODAL -->
+    <div id="privacy-shield">⚠️ Güvenlik Uyarısı: Bu sitede ekran görüntüsü veya ekran kaydı almak yasaktır!</div>
+
     <div id="age-modal" class="modal-overlay" style="display:flex;">
         <div class="age-modal-card">
             <div class="age-badge">18+</div>
@@ -167,7 +165,6 @@
         </div>
     </div>
 
-    <!-- GİRİŞ / KAYIT MODAL -->
     <div id="auth-modal" class="modal-overlay">
         <div class="auth-modal-card">
             <span class="auth-close-btn" id="btn-close-modal">✕</span>
@@ -176,7 +173,6 @@
                 <div id="tab-register" class="auth-tab">Kayıt Ol</div>
             </div>
 
-            <!-- GİRİŞ FORMU -->
             <form id="form-login" class="auth-form">
                 <label style="font-size:12px; color:var(--text-sub);">E-posta Adresi</label>
                 <input type="email" id="login-email" class="auth-input" placeholder="ornek@gmail.com" required>
@@ -185,7 +181,6 @@
                 <button type="submit" class="auth-submit-btn" style="margin-top:10px;">Giriş Yap</button>
             </form>
 
-            <!-- KAYIT FORMU -->
             <form id="form-register" class="auth-form" style="display:none;">
                 <label style="font-size:12px; color:var(--text-sub);">E-posta Adresi</label>
                 <input type="email" id="reg-email" class="auth-input" placeholder="ornek@gmail.com" required>
@@ -196,7 +191,6 @@
         </div>
     </div>
 
-    <!-- KULLANICI PROFİL DÜZENLEME MODAL -->
     <div id="profile-edit-modal" class="modal-overlay">
         <div class="auth-modal-card">
             <span class="auth-close-btn" id="btn-close-profile-modal">✕</span>
@@ -222,7 +216,6 @@
         </div>
     </div>
 
-    <!-- BİLDİRİM DUYURU MODAL -->
     <div id="noti-modal" class="modal-overlay">
         <div class="auth-modal-card">
             <span class="auth-close-btn" id="btn-close-noti">✕</span>
@@ -284,7 +277,6 @@
                 <button class="auth-btn" id="btn-open-auth">Giriş / Üye Ol</button>
             </div>
 
-            <!-- SAĞ ÜST PROFİL ÇİPİ -->
             <div id="auth-logged-in" style="display:none;">
                 <div class="user-profile-chip" id="btn-open-profile-panel">
                     <div class="user-chip-avatar" id="user-chip-avatar-img"></div>
@@ -316,7 +308,7 @@
             <div id="real-video-grid" class="video-grid" style="display:none;">
                 <!-- VİDEO 6 -->
                 <div class="video-post" data-id="v6" data-cats="amateur,fullhd" data-tags="comatozze,amatör,kanepede,tutkulu,inilti,fullhd">
-                    <div class="video-thumbnail trigger-play" data-id="v6" style="background-image: url('https://pix-cdn77.phncdn.com/c6251/videos/202608/28/60540585/original/01a04a3d-19f4-75ce-8894-ec3e35046639.jpg/plain/rs:fit:320:180?hash=4rWUDpXINRqByoKYMq0AUA5KbyY=&validto=1792094511');">
+                    <div class="video-thumbnail trigger-play" data-id="v6" style="background-image: url('https://ei.phncdn.com/pics/albums/000/393/007/393007/original_1568.jpg');">
                         <div class="play-button"></div>
                     </div>
                     <div class="post-title trigger-play" data-id="v6">Sıcak Çift Kanepede Tutkulu Bir Şekilde Seks Yapıyor. Comatozze</div>
@@ -462,7 +454,6 @@
                 <div class="channel-banner" id="p-banner"></div>
                 <div class="channel-main-avatar" id="p-avatar"></div>
                 <div style="font-size: 20px; font-weight: bold; color: var(--text-color);" id="p-title"></div>
-                <!-- RENKLİ VE ÖZEL BİYOGRAFİ ALANI -->
                 <div id="p-bio" style="font-size: 13px; margin-top: 10px; padding: 0 20px; line-height: 1.6;"></div>
             </div>
             <div style="font-size: 15px; font-weight: bold; color: var(--primary-color); margin-top: 10px;">📹 Kanalın Videoları</div>
@@ -473,6 +464,39 @@
     <script>
         window.open = function() { return null; };
 
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+        document.addEventListener('keydown', function(e) {
+            if (e.keyCode === 123 || 
+                (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 67 || e.keyCode === 74)) || 
+                (e.ctrlKey && e.keyCode === 85) || 
+                (e.ctrlKey && e.keyCode === 80) ||
+                e.keyCode === 44) {
+                e.preventDefault();
+                showPrivacyWarning();
+                return false;
+            }
+        });
+
+        window.addEventListener('blur', function() {
+            var shield = document.getElementById('privacy-shield');
+            if(shield) shield.style.display = 'flex';
+        });
+
+        window.addEventListener('focus', function() {
+            var shield = document.getElementById('privacy-shield');
+            if(shield) shield.style.display = 'none';
+        });
+
+        function showPrivacyWarning() {
+            var shield = document.getElementById('privacy-shield');
+            if(shield) {
+                shield.style.display = 'flex';
+                setTimeout(function() {
+                    shield.style.display = 'none';
+                }, 3000);
+            }
+        }
+
         var OWNER_EMAIL = "poyrazre6@gmail.com"; 
         var OWNER_USERNAME = "2PBVAGE";
         var OWNER_DEFAULT_AVATAR = "https://cdn.phototourl.com/member/2026-10-15-83266f74-97b3-42ff-82ee-e8e955a628ca.jpg";
@@ -481,10 +505,9 @@
         
         var OWNER_BIO_HTML = '<span style="color:#ff4757; font-weight:900; font-size:14px;">👑 𝟸𝙿𝙱𝚅𝙰𝙶𝙴 𝚁𝚎𝚜𝚖𝚒 𝙺𝚞𝚛𝚞𝚌𝚞𝚜𝚞 𝓥𝓮 𝚂𝚒𝚝𝚎 𝚂𝚊𝚑𝚒𝚋𝚒</span><br>' +
                              '<span style="color:#ffd700; font-weight:bold;">✨ ℌ𝔢𝔯 𝔖𝔢𝔶 𝔎𝔬𝔫𝔱𝔯𝔬𝔩𝔲𝔪𝔥𝔲𝔩𝔱𝔞𝔡𝔞, 𝔜𝔢𝔫𝔦𝔩𝔦𝔛𝔩𝔢𝔯 𝔜𝔬𝔩𝔡𝔞!</span><br>' +
-                             '<span style="color:#2ed573; font-weight:bold;">🚀 𝓔𝓷 𝓘̇𝔂𝔦 𝓘̇ç𝓮𝓻𝓲𝓴𝓵𝓮𝓻 𝓥𝓮 𝓞̈𝔃𝓮𝓵 𝓢̧𝓸𝓿𝓵𝓮𝓻 𝓑𝓾𝓻𝓪𝓭𝓪!</span><br>' +
-                             '<span style="color:#1e90ff; font-style:italic; font-size:12px;">🌟 Desteğiniz ve ilginiz için teşekkürler, iyi seyirler! 🤍</span>';
+                             '<span style="color:#2ed573; font-weight:bold;">🚀 𝓔𝓷 𝓘̇𝔂𝔦 𝓘̇ç𝓮𝓻𝓲𝓴𝓵𝓮𝓻 𝓥𝓮 𝞞̈𝔃𝓮𝓵 𝓢̧𝓸𝓿𝓵𝓮𝓻 𝓑𝓾𝓻𝓪𝓭𝓪!</span><br>' +
+                             '<span style="color:#1e90ff; font-style:italic; font-size:12px;">🌟 Desteğiniz و ilginiz için teşekkürler, iyi seyirler! 🤍</span>';
 
-        // SKELETON LOADER GÖSTERME FONKSİYONU
         function showLoadingSkeleton() {
             var skeletonGrid = document.getElementById('skeleton-grid');
             var realGrid = document.getElementById('real-video-grid');
@@ -497,7 +520,6 @@
             }, 350);
         }
 
-        // 18+ YAŞ KONTROLÜ
         var isAgeVerified = localStorage.getItem('2pbvage_18plus');
         var ageModal = document.getElementById('age-modal');
         if (ageModal) {
@@ -531,7 +553,7 @@
             v3: { title: "Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor", url: "https://playmogo.com/e/xmiqbgo3vrz4", thumb: "https://pimpbunny.com/contents/videos_screenshots/513000/513225/800x450/39.jpg", author: "Sophie Rain", avatar: SOPHIE_AVATAR, banner: SOPHIE_AVATAR, date: "12 Ekim 2026", desc: "Sophie Rain ve Piper Aishah kameralar karşısında eğlenceli ve özel anlar yaşatıyor.", tags: ["sophierain", "lezbiyen", "fullhd", "piperaishah"] },
             v4: { title: "Tüylü Vajinalı Köylü Kızı Bir Yabancı Tarafından Sikişildi - Sweetie Fox", url: "https://voe.sx/e/hoshht3fdzl0", thumb: "https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg", author: "Sweetie Fox", avatar: "https://ei.phncdn.com/(m=ewILGCjadOf)(mh=59qrk8LnBE3Z9kTL)43ca43da-b27e-42f2-b237-40c5c13261b1.jpg", banner: "https://ei.phncdn.com/pics/users/0009/2995/3741/cover30266955/(m=eRSa4qFxcWaAb)(mh=ciR9a4JESHJ-g9rp)1323x270.jpg", date: "13 Ekim 2026", desc: "Sweetie Fox'un Türkçe altyazılı köylü kızı temalı popüler özel gösterisi.", tags: ["sweetiefox", "altyazılı", "fullhd", "köylü"] },
             v5: { title: "Sophie Rain Seksi Siyah Renk Kıyafetiyle Soyunuyor", url: "https://voe.sx/e/g3beul38mpw7", thumb: "https://www.porn4fans.com/contents/videos_screenshots/5000/5268/800x450/1.jpg", author: "Sophie Rain", avatar: SOPHIE_AVATAR, banner: SOPHIE_AVATAR, date: "14 Ekim 2026", desc: "Sophie Rain'in en yeni seksi siyah kıyafetli özel gösterisi.", tags: ["sophierain", "fullhd", "özelşov", "siyah"] },
-            v6: { title: "Sıcak Çift Kanepede Tutkulu Bir Şekilde Seks Yapıyor. Comatozze", url: "https://voe.sx/e/kmnwp6pf63nc", thumb: "https://pix-cdn77.phncdn.com/c6251/videos/202608/28/60540585/original/01a04a3d-19f4-75ce-8894-ec3e35046639.jpg/plain/rs:fit:320:180?hash=4rWUDpXINRqByoKYMq0AUA5KbyY=&validto=1792094511", author: "comatozze", avatar: "https://i.ibb.co/pB3ntggN/image.jpg", banner: "https://ei.phncdn.com/pics/users/0009/2995/3741/cover30266955/(m=eRSa4qFxcWaAb)(mh=NL_-gLc2D3h9AHS0)1323x270.jpg", date: "14 Ekim 2026", desc: "Comatozze kanalından kanepede geçen tutkulu ve iniltilerle dolu özel amatör video.", tags: ["comatozze", "amatör", "kanepede", "tutkulu", "inilti", "fullhd"] }
+            v6: { title: "Sıcak Çift Kanepede Tutkulu Bir Şekilde Seks Yapıyor. Comatozze", url: "https://voe.sx/e/kmnwp6pf63nc", thumb: "https://ei.phncdn.com/pics/albums/000/393/007/393007/original_1568.jpg", author: "comatozze", avatar: "https://i.ibb.co/pB3ntggN/image.jpg", banner: "https://ei.phncdn.com/pics/users/0009/2995/3741/cover30266955/(m=eRSa4qFxcWaAb)(mh=NL_-gLc2D3h9AHS0)1323x270.jpg", date: "14 Ekim 2026", desc: "Comatozze kanalından kanepede geçen tutkulu ve iniltilerle dolu özel amatör video.", tags: ["comatozze", "amatör", "kanepede", "tutkulu", "inilti", "fullhd"] }
         };
 
         var activeAuthor = "";
@@ -540,7 +562,6 @@
 
         var ownerYellowTickHTML = '<span class="yellow-tick">✓<span class="tick-tooltip">👑 Sitenin Sahibi / Kurucusu</span></span>';
 
-        // BİLDİRİM
         var btnOpenNoti = document.getElementById('btn-open-noti');
         if (btnOpenNoti) btnOpenNoti.onclick = function() {
             var nModal = document.getElementById('noti-modal');
@@ -553,7 +574,6 @@
             if (nModal) nModal.style.display = 'none';
         };
 
-        // TEMA
         function toggleDayNightTheme() {
             var isLight = document.body.classList.toggle('light-theme');
             localStorage.setItem('2pbvage_daynight', isLight ? 'light' : 'dark');
@@ -592,8 +612,9 @@
                 var users = {};
                 try { users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}'); } catch(err) { users = {}; }
 
-                if(!users[OWNER_EMAIL]) {
-                    users[OWNER_EMAIL] = {
+                // Kurucu hesabı garantile
+                if(!users[OWNER_EMAIL.toLowerCase()]) {
+                    users[OWNER_EMAIL.toLowerCase()] = {
                         password: "123",
                         username: OWNER_USERNAME,
                         isOwner: true
@@ -603,7 +624,7 @@
 
                 if(session) {
                     currentUser = JSON.parse(session);
-                    var userObj = users[currentUser.email] || {};
+                    var userObj = users[currentUser.email.toLowerCase()] || {};
 
                     var loggedOut = document.getElementById('auth-logged-out');
                     var loggedIn = document.getElementById('auth-logged-in');
@@ -693,6 +714,19 @@
                 var users = {};
                 try { users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}'); } catch(err) { users = {}; }
 
+                // Kurucu hesabı için esneklik ve güvenlik
+                if(email === OWNER_EMAIL.toLowerCase() && (password === "123" || (users[email] && users[email].password === password))) {
+                    if(!users[email]) {
+                        users[email] = { password: password || "123", username: OWNER_USERNAME, isOwner: true };
+                        localStorage.setItem('2pbvage_users', JSON.stringify(users));
+                    }
+                    localStorage.setItem("2pbvage_session", JSON.stringify({ email: email }));
+                    checkAuthState();
+                    toggleAuthModal(false);
+                    alert("Kurucu olarak başarıyla giriş yapıldı!");
+                    return;
+                }
+
                 if(!users[email] || users[email].password !== password) {
                     alert("Hatalı e-posta veya şifre!");
                     return;
@@ -739,13 +773,12 @@
             };
         }
 
-        // PROFİL PANELİ
         var btnOpenProfilePanel = document.getElementById('btn-open-profile-panel');
         if (btnOpenProfilePanel) {
             btnOpenProfilePanel.onclick = function() {
                 if(!currentUser) return;
                 var users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
-                var u = users[currentUser.email] || {};
+                var u = users[currentUser.email.toLowerCase()] || {};
 
                 var isOwnerAcc = (currentUser.email.toLowerCase() === OWNER_EMAIL.toLowerCase());
                 var displayName = isOwnerAcc ? OWNER_USERNAME : (u.username || currentUser.email.split('@')[0]);
@@ -789,12 +822,12 @@
                 if(!currentUser) return;
 
                 var users = JSON.parse(localStorage.getItem('2pbvage_users') || '{}');
-                var u = users[currentUser.email] || {};
+                var u = users[currentUser.email.toLowerCase()] || {};
 
                 var editUser = document.getElementById('edit-username');
                 if(editUser) u.username = editUser.value.trim();
 
-                users[currentUser.email] = u;
+                users[currentUser.email.toLowerCase()] = u;
                 localStorage.setItem('2pbvage_users', JSON.stringify(users));
                 
                 checkAuthState();
@@ -814,7 +847,6 @@
             };
         }
 
-        // MENÜ
         function toggleMenu(open) {
             var overlay = document.getElementById('menu-overlay');
             var drawer = document.getElementById('menu-drawer');
@@ -877,7 +909,6 @@
         var btnCloseModal = document.getElementById('btn-close-modal');
         if (btnCloseModal) btnCloseModal.onclick = function() { toggleAuthModal(false); };
 
-        // ETIKET ARAMA
         function searchTag(tagName) {
             goHome();
             var searchInput = document.getElementById('search-input');
@@ -896,7 +927,6 @@
             }
         }
 
-        // VİDEO OYNATMA VE BENZERLERİ
         function playVideo(id) {
             var item = db[id];
             if(item) {
@@ -924,7 +954,6 @@
                 var vTags = document.getElementById('v-tags');
                 if(vTags) vTags.innerHTML = tagsHtml;
 
-                // Benzer videoları yükle
                 var relHtml = "";
                 var count = 0;
                 for(var key in db) {
@@ -964,7 +993,6 @@
             }
         }
 
-        // TIKLAMA DELEGASYONU (GÜVENLİ)
         document.body.onclick = function(e) {
             var target = e.target;
             
@@ -981,7 +1009,6 @@
             }
         };
 
-        // KANAL VE VİDEO ARAMA
         var searchInput = document.getElementById('search-input');
         if (searchInput) {
             searchInput.oninput = function() {

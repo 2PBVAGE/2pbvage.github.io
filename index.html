@@ -29,12 +29,9 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--bg-dark); color: var(--text-main); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; min-height: 100vh; padding-bottom: 50px; user-select: none; -webkit-user-select: none; }
+        body { background-color: var(--bg-dark); color: var(--text-main); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; min-height: 100vh; padding-bottom: 50px; }
 
         @media print { body { display: none !important; } }
-
-        /* PRIVACY SHIELD */
-        #privacy-shield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; color: var(--primary); z-index: 999999; display: none; align-items: center; justify-content: center; font-size: 18px; font-weight: bold; text-align: center; padding: 20px; }
 
         /* HEADER */
         .header-bar { width: 100%; background: var(--glass); backdrop-filter: blur(12px); border-bottom: 1px solid var(--card-border); position: sticky; top: 0; z-index: 100; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; }
@@ -112,8 +109,6 @@
     </style>
 </head>
 <body>
-
-    <div id="privacy-shield">⚠️ Güvenlik Uyarısı: Bu sitede ekran görüntüsü veya ekran kaydı almak yasaktır!</div>
 
     <!-- YAŞ DOĞRULAMA MODAL -->
     <div id="age-modal" class="modal-overlay" style="display:flex;">
@@ -223,7 +218,7 @@
             <h2 id="v-title" style="font-size:18px;"></h2>
             <div style="font-size:12px; color:var(--text-sub);" id="v-date"></div>
             <div class="player-box">
-                <iframe id="v-iframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+                <iframe id="v-iframe" src="" allowfullscreen allow="autoplay; encrypted-media; picture-in-picture; fullscreen"></iframe>
             </div>
             <div style="background:var(--card-bg); padding:15px; border-radius:12px; border:1px solid var(--card-border);">
                 <div style="font-size:14px; font-weight:bold; color:var(--primary); margin-bottom:8px;">📌 Açıklama & Etiketler</div>
@@ -246,21 +241,6 @@
     </div>
 
     <script>
-        window.open = function() { return null; };
-
-        // EKRAN KORUMASI (GÜVENLİK)
-        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-        document.addEventListener('keydown', function(e) {
-            if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 67 || e.keyCode === 74)) || (e.ctrlKey && e.keyCode === 85) || (e.ctrlKey && e.keyCode === 80) || e.keyCode === 44) {
-                e.preventDefault();
-                showPrivacyWarning();
-                return false;
-            }
-        });
-        window.addEventListener('blur', function() { var s = document.getElementById('privacy-shield'); if(s) s.style.display = 'flex'; });
-        window.addEventListener('focus', function() { var s = document.getElementById('privacy-shield'); if(s) s.style.display = 'none'; });
-        function showPrivacyWarning() { var s = document.getElementById('privacy-shield'); if(s) { s.style.display = 'flex'; setTimeout(function(){ s.style.display = 'none'; }, 3000); } }
-
         // SABİT KURUCU VE SİTE SİSTEMİ
         var OWNER_EMAIL = "poyrazre6@gmail.com";
         var OWNER_PASSWORD = "poyri.2525";
@@ -271,7 +251,7 @@
         var DEFAULT_AVATAR = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
         var yellowTick = '<span class="yellow-tick">✓</span>';
 
-        // EKSİKSİZ TÜM VİDEOLARIN YER ALDIĞI VERİ TABANI (AISHAH SOFEY EKLENDİ)
+        // EKSİKSİZ VERİ TABANI
         var db = {
             v7: {
                 title: "Aishah Sofey Seksi Fiziğiyle Göz Kamaştırıyor",
@@ -403,6 +383,8 @@
                 document.getElementById('v-title').innerText = item.title;
                 document.getElementById('v-date').innerText = '📅 ' + item.date;
                 document.getElementById('v-desc').innerText = item.desc;
+                
+                showSection('sec-watch');
                 document.getElementById('v-iframe').src = item.url;
 
                 var tagsHtml = '';
@@ -410,8 +392,6 @@
                     tagsHtml += '<span style="background:var(--input-bg); color:var(--primary); padding:4px 10px; border-radius:12px; font-size:11px; cursor:pointer;" onclick="searchTag(\'' + item.tags[i] + '\')">#' + item.tags[i] + '</span>';
                 }
                 document.getElementById('v-tags').innerHTML = tagsHtml;
-
-                showSection('sec-watch');
             }
         }
 
@@ -449,7 +429,9 @@
         }
 
         function showSection(id) {
-            document.getElementById('v-iframe').src = "";
+            if(id !== 'sec-watch') {
+                document.getElementById('v-iframe').src = "";
+            }
             var secs = document.querySelectorAll('.page-sec');
             for(var i=0; i<secs.length; i++) { secs[i].classList.remove('active-sec'); }
             document.getElementById(id).classList.add('active-sec');

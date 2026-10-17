@@ -6,10 +6,10 @@
     <title>FOXHUB 🦊 | Bedava Türkçe Altyazılı HD Video Platformu</title>
     <meta name="description" content="FOXHUB resmi web sitesi. Bedava Türkçe altyazılı, HD ve amatör video içerikleri.">
     
-    <!-- VİDEO SUNUCULARI İÇİN HIZLANDIRMA (PRECONNECT) -->
-    <link rel="preconnect" href="https://voe.sx">
+    <!-- VİDEO SUNUCULARI İÇİN HIZLANDIRMA (PRECONNECT & PREFETCH) -->
+    <link rel="preconnect" href="https://voe.sx" crossorigin>
     <link rel="dns-prefetch" href="https://voe.sx">
-    <link rel="preconnect" href="https://playmogo.com">
+    <link rel="preconnect" href="https://playmogo.com" crossorigin>
     <link rel="dns-prefetch" href="https://playmogo.com">
 
     <style>
@@ -255,7 +255,7 @@
             <h2 id="v-title" style="font-size:18px;"></h2>
             <div style="font-size:12px; color:var(--text-sub);" id="v-date"></div>
             <div class="player-box">
-                <iframe id="v-iframe" src="" loading="lazy" allowfullscreen allow="autoplay; encrypted-media; picture-in-picture; fullscreen"></iframe>
+                <iframe id="v-iframe" src="about:blank" loading="eager" allowfullscreen allow="autoplay; encrypted-media; picture-in-picture; fullscreen"></iframe>
             </div>
             <div style="background:var(--card-bg); padding:15px; border-radius:12px; border:1px solid var(--card-border);">
                 <div style="font-size:14px; font-weight:bold; color:var(--primary); margin-bottom:8px;">📌 Açıklama & Etiketler</div>
@@ -421,7 +421,9 @@
                 document.getElementById('v-desc').innerText = item.desc;
                 
                 showSection('sec-watch');
-                document.getElementById('v-iframe').src = item.url;
+                
+                var iframe = document.getElementById('v-iframe');
+                iframe.src = item.url;
 
                 var tagsHtml = '';
                 for(var i=0; i<item.tags.length; i++) {
@@ -466,7 +468,7 @@
 
         function showSection(id) {
             if(id !== 'sec-watch') {
-                document.getElementById('v-iframe').src = "";
+                document.getElementById('v-iframe').src = "about:blank";
             }
             var secs = document.querySelectorAll('.page-sec');
             for(var i=0; i<secs.length; i++) { secs[i].classList.remove('active-sec'); }

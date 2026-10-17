@@ -6,7 +6,6 @@
     <title>FOXHUB 🦊 | Premium Türkçe Altyazılı & HD Video Platformu</title>
     <meta name="description" content="FOXHUB resmi web sitesi. Bedava Türkçe altyazılı, HD ve amatör video içerikleri.">
     
-    <!-- DNS PREFETCH & PRECONNECT -->
     <link rel="preconnect" href="https://voe.sx" crossorigin>
     <link rel="dns-prefetch" href="https://voe.sx">
     <link rel="preconnect" href="https://playmogo.com" crossorigin>
@@ -17,6 +16,7 @@
             --primary: #ff7f50;
             --primary-hover: #ff6348;
             --of-blue: #00aff0;
+            --gold: #ffd700;
             --bg-dark: #08080c;
             --card-bg: rgba(18, 18, 26, 0.95);
             --card-border: rgba(255, 127, 80, 0.22);
@@ -58,6 +58,10 @@
         .header-right { display: flex; align-items: center; gap: 10px; }
         .action-btn { background: var(--primary); color: #fff; border: none; padding: 9px 18px; border-radius: 20px; font-weight: 800; font-size: 12px; cursor: pointer; transition: 0.2s; position: relative; z-index: 10; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
         .action-btn:hover { background: var(--primary-hover); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(255,127,80,0.3); }
+        
+        .premium-btn { background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); color: #000; font-weight: 900; border: none; padding: 9px 16px; border-radius: 20px; font-size: 12px; cursor: pointer; transition: 0.2s; box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+        .premium-btn:hover { transform: scale(1.04); box-shadow: 0 0 15px rgba(255, 215, 0, 0.7); }
+
         .icon-btn { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-main); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; font-size: 16px; transition: 0.2s; }
         .icon-btn:hover { border-color: var(--primary); transform: scale(1.05); }
 
@@ -150,51 +154,11 @@
         .author-img { width: 24px; height: 24px; border-radius: 50%; background-size: cover; background-position: center; border: 1px solid var(--primary); flex-shrink: 0; }
         .author-name-text { display: inline-flex; align-items: center; gap: 4px; line-height: 1; }
 
-        /* SKELETON LOADER */
-        @keyframes shimmer { 0% { background-position: -200px 0; } 100% { background-position: 200px 0; } }
-        .skeleton { background: linear-gradient(90deg, var(--card-bg) 25%, var(--card-border) 50%, var(--card-bg) 75%); background-size: 400px 100%; animation: shimmer 1.4s infinite; }
-        .sk-card { height: 260px; border-radius: 18px; overflow: hidden; }
-
         /* ROZET VE TOOLTIP SİSTEMİ */
         .badge-item { position: relative; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; vertical-align: middle; }
         .yellow-tick { width: 15px; height: 15px; background: #ffd700; color: #000; border-radius: 50%; font-size: 9px; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; }
         .blue-tick { width: 15px; height: 15px; background: #0088cc; color: #fff; border-radius: 50%; font-size: 9px; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; }
         .trophy-badge { font-size: 12px; display: inline-flex; align-items: center; justify-content: center; transition: transform 0.2s; }
-        .trophy-badge:hover { transform: scale(1.25); }
-
-        .badge-item::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            bottom: 130%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.95);
-            color: #ff7f50;
-            border: 1px solid #ff7f50;
-            padding: 5px 9px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 700;
-            white-space: nowrap;
-            pointer-events: none;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.2s, visibility 0.2s;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-        }
-        .badge-item:hover::after, .badge-item:active::after { opacity: 1; visibility: visible; }
-
-        /* KANAL TASARIMI STİLLERİ */
-        .channel-banner { width: 100%; height: 190px; background: linear-gradient(135deg, #1e1e24 0%, #2a0845 50%, #ff7f50 100%); border-radius: 20px 20px 0 0; position: relative; background-size: cover; background-position: center; }
-        .channel-header-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 0 0 20px 20px; padding: 0 20px 20px 20px; position: relative; margin-bottom: 20px; }
-        .channel-profile-row { display: flex; align-items: flex-end; justify-content: space-between; margin-top: -50px; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
-        .channel-avatar-lg { width: 100px; height: 100px; border-radius: 50%; border: 4px solid var(--bg-dark); background-size: cover; background-position: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); background-color: #111; }
-        .channel-stats-bar { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px; margin-bottom: 12px; }
-        .channel-stat-chip { background: var(--input-bg); border: 1px solid var(--card-border); padding: 5px 12px; border-radius: 20px; font-size: 12px; color: var(--text-sub); font-weight: 600; display: flex; align-items: center; gap: 5px; }
-        .channel-tabs { display: flex; gap: 10px; border-bottom: 1px solid var(--card-border); margin-bottom: 20px; overflow-x: auto; scrollbar-width: none; }
-        .channel-tab { padding: 10px 18px; font-weight: 700; font-size: 13px; color: var(--text-sub); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: 0.2s; }
-        .channel-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
 
         /* YAN MENÜ (DRAWER) GELİŞMİŞ TASARIM */
         #menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 2000; display: none; }
@@ -225,55 +189,28 @@
         .drawer-user-card:hover { border-color: var(--primary); background: rgba(255, 127, 80, 0.25); }
         .drawer-avatar { width: 44px; height: 44px; border-radius: 50%; background-size: cover; background-position: center; border: 2px solid var(--primary); flex-shrink: 0; }
 
-        @keyframes ofGlow { 0% { box-shadow: 0 0 8px rgba(0, 175, 240, 0.3); } 50% { box-shadow: 0 0 22px rgba(0, 175, 240, 0.7); } 100% { box-shadow: 0 0 8px rgba(0, 175, 240, 0.3); } }
-        .drawer-of-card { background: linear-gradient(135deg, rgba(0, 175, 240, 0.3) 0%, rgba(0, 110, 180, 0.1) 100%); border: 1.5px solid rgba(0, 175, 240, 0.7); padding: 14px; border-radius: 16px; display: flex; align-items: center; gap: 12px; cursor: pointer; margin-bottom: 20px; animation: ofGlow 2.5s infinite ease-in-out; transition: transform 0.2s; }
-        .drawer-of-card:hover { transform: translateY(-2px); scale: 1.02; }
-        .of-badge-icon { width: 36px; height: 36px; background: #00aff0; color: #fff; font-weight: 900; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; box-shadow: 0 0 10px #00aff0; flex-shrink: 0; }
+        /* PARLAYAN PIREMUN SATIN AL KARTI */
+        @keyframes piremunGlow { 0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); } 50% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.7); } 100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); } }
+        .drawer-piremun-card { background: linear-gradient(135deg, rgba(255, 215, 0, 0.25) 0%, rgba(255, 140, 0, 0.1) 100%); border: 1.5px solid rgba(255, 215, 0, 0.7); padding: 14px; border-radius: 16px; display: flex; align-items: center; gap: 12px; cursor: pointer; margin-bottom: 20px; animation: piremunGlow 2.5s infinite ease-in-out; transition: transform 0.2s; }
+        .drawer-piremun-card:hover { transform: translateY(-2px); scale: 1.02; }
+        .piremun-badge-icon { width: 36px; height: 36px; background: linear-gradient(135deg, #ffd700, #ff8c00); color: #000; font-weight: 900; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 0 12px #ffd700; flex-shrink: 0; }
 
         .drawer-section-title { font-size: 11px; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 1.2px; margin: 16px 0 10px 6px; display: flex; align-items: center; gap: 6px; }
         .drawer-nav-item { display: flex; align-items: center; justify-content: space-between; padding: 11px 14px; border-radius: 12px; font-size: 13.5px; font-weight: 700; color: var(--text-main); cursor: pointer; margin-bottom: 6px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.2s ease; }
         .drawer-nav-item:hover { background: rgba(255, 127, 80, 0.18); border-color: rgba(255, 127, 80, 0.4); color: #fff; transform: translateX(5px); }
         .drawer-chip-tag { font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 10px; background: var(--input-bg); color: var(--text-sub); }
 
-        .drawer-stats-panel { background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); border-radius: 14px; padding: 12px; margin-top: 22px; display: flex; justify-content: space-around; text-align: center; }
-        .stat-num { font-size: 14px; font-weight: 900; color: var(--primary); }
-        .stat-label { font-size: 10px; color: var(--text-sub); margin-top: 2px; }
-
-        /* MODALS (PÜRÜZSÜZ Z-INDEX & TIKLAMA HİYERARŞİSİ) */
-        .modal-overlay { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: rgba(0,0,0,0.92); 
-            backdrop-filter: blur(12px); 
-            -webkit-backdrop-filter: blur(12px);
-            z-index: 99999 !important; 
-            display: none; 
-            align-items: center; 
-            justify-content: center; 
-            padding: 20px; 
-        }
-        .modal-card { 
-            background: var(--glass); 
-            border: 1px solid var(--card-border); 
-            border-radius: 22px; 
-            width: 100%; 
-            max-width: 410px; 
-            padding: 26px; 
-            text-align: center; 
-            position: relative; 
-            color: var(--text-main); 
-            max-height: 90vh; 
-            overflow-y: auto; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.95); 
-            z-index: 100000 !important; 
-        }
+        /* MODALS */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 99999 !important; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .modal-card { background: var(--glass); border: 1px solid var(--card-border); border-radius: 22px; width: 100%; max-width: 420px; padding: 26px; text-align: center; position: relative; color: var(--text-main); max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.95); z-index: 100000 !important; }
         .modal-close { position: absolute; top: 16px; right: 16px; color: var(--text-sub); font-size: 20px; cursor: pointer; transition: 0.2s; }
         .modal-close:hover { color: var(--primary); }
         .form-input { width: 100%; background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text-main); padding: 12px; border-radius: 10px; font-size: 13px; outline: none; margin-bottom: 12px; transition: 0.2s; }
         .form-input:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(255,127,80,0.2); }
+
+        /* PIREMUN PLAN KARTLARI */
+        .piremun-feature-list { text-align: left; margin: 15px 0; font-size: 13px; color: var(--text-sub); line-height: 1.8; }
+        .piremun-feature-item { display: flex; align-items: center; gap: 8px; }
 
         /* AUTH TABS */
         .auth-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; }
@@ -302,6 +239,39 @@
         </div>
     </div>
 
+    <!-- KREDİ KARTLI PIREMUN SATIN ALMA MODALI -->
+    <div id="piremun-modal" class="modal-overlay">
+        <div class="modal-card" style="border: 2px solid var(--gold);">
+            <span class="modal-close" onclick="closePiremunModal()">✕</span>
+            <div style="font-size:28px; margin-bottom:5px;">👑</div>
+            <h2 style="font-size:20px; font-weight:900; color:var(--gold); margin-bottom:5px;">FOXHUB Piremun Üyelik</h2>
+            <p style="font-size:12px; color:var(--text-sub); margin-bottom:15px;">Sınırsız 4K İzleme, Reklamsız Deneyim ve Özel İçerikler</p>
+
+            <div class="piremun-feature-list">
+                <div class="piremun-feature-item">✨ <b>Ultra HD & 4K</b> Kesintisiz Video Oynatma</div>
+                <div class="piremun-feature-item">💎 Sophie Rain & Aishah Sofey <b>Özel Kilitli İçerikleri</b></div>
+                <div class="piremun-feature-item">⚡ <b>Sınırsız Hızda</b> Video İndirme Ayrıcalığı</div>
+                <div class="piremun-feature-item">👑 Profilde Özel <b>Piremun (VIP) Rozeti</b></div>
+                <div class="piremun-feature-item">🚫 Sıfır Reklam, %100 Gizli & Güvenli Ödeme</div>
+            </div>
+
+            <div style="background:rgba(255,215,0,0.1); border:1px solid var(--gold); padding:10px; border-radius:12px; font-weight:900; color:var(--gold); margin-bottom:15px; font-size:16px;">
+                Aylık Sadece: 149.99 TL
+            </div>
+
+            <!-- KREDİ KART FORMU -->
+            <form id="form-piremun-payment" onsubmit="handlePiremunPayment(event)">
+                <input type="text" class="form-input" placeholder="Kart Üzerindeki İsim" required>
+                <input type="text" class="form-input" placeholder="Kredi / Banka Kart Numarası" maxlength="19" required>
+                <div style="display:flex; gap:10px;">
+                    <input type="text" class="form-input" placeholder="AA/YY" maxlength="5" required style="flex:1;">
+                    <input type="password" class="form-input" placeholder="CVC / CVV" maxlength="3" required style="flex:1;">
+                </div>
+                <button type="submit" class="premium-btn" style="width:100%; padding:14px; font-size:14px; margin-top:5px;">💳 Kredi Kartı ile Şimdi Piremun Ol</button>
+            </form>
+        </div>
+    </div>
+
     <!-- GİRİŞ / KAYIT MODAL -->
     <div id="auth-modal" class="modal-overlay">
         <div class="modal-card">
@@ -311,14 +281,12 @@
                 <div class="auth-tab" id="tab-register" onclick="switchAuthTab('register')">Kayıt Ol</div>
             </div>
 
-            <!-- GİRİŞ FORMU -->
             <form id="form-login" onsubmit="handleLogin(event)">
                 <input type="email" id="login-email" class="form-input" placeholder="E-posta adresiniz" required autocomplete="username">
                 <input type="password" id="login-password" class="form-input" placeholder="Şifreniz" required autocomplete="current-password">
                 <button type="submit" class="action-btn" style="width:100%; padding:12px; margin-top:10px;">Giriş Yap</button>
             </form>
 
-            <!-- KAYIT FORMU -->
             <form id="form-register" style="display:none;" onsubmit="handleRegister(event)">
                 <input type="text" id="reg-username" class="form-input" placeholder="Kullanıcı Adı" required>
                 <input type="email" id="reg-email" class="form-input" placeholder="E-posta Adresi" required>
@@ -334,7 +302,8 @@
             <span class="modal-close" onclick="closeProfileModal()">✕</span>
             <div id="modal-user-avatar" style="width:75px; height:75px; border-radius:50%; background-size:cover; background-position:center; border:2px solid var(--primary); margin:0 auto 12px auto;"></div>
             <h3 id="modal-user-name" style="margin-bottom:6px; font-size:18px;"></h3>
-            <p id="modal-user-email" style="font-size:12px; color:var(--text-sub); margin-bottom:22px;"></p>
+            <p id="modal-user-email" style="font-size:12px; color:var(--text-sub); margin-bottom:15px;"></p>
+            <div id="modal-user-badge-box" style="margin-bottom:20px;"></div>
             <button onclick="handleLogout()" class="action-btn" style="width:100%; background:transparent; border:1px solid var(--primary); color:var(--primary);">🚪 Oturumu Kapat</button>
         </div>
     </div>
@@ -349,6 +318,7 @@
             </div>
         </div>
         <div class="header-right">
+            <button class="premium-btn" onclick="openPiremunModal()">👑 Piremun Al</button>
             <button class="icon-btn" id="btn-toggle-theme" onclick="toggleTheme()">☀️</button>
             
             <div id="auth-logged-out">
@@ -384,11 +354,12 @@
             </div>
         </div>
 
-        <div class="drawer-of-card" onclick="filterOnlyfans()">
-            <div class="of-badge-icon">OF</div>
+        <!-- PIREMUN ÜYELİK KARTI (VIP YERİNE) -->
+        <div class="drawer-piremun-card" onclick="openPiremunModal(); closeDrawer();">
+            <div class="piremun-badge-icon">👑</div>
             <div>
-                <div style="font-size:14px; font-weight:900; color:#00aff0; letter-spacing:0.5px;">OnlyFans VIP Akışı</div>
-                <div style="font-size:11px; color:var(--text-sub);">Sophie Rain & Aishah Sofey</div>
+                <div style="font-size:14px; font-weight:900; color:var(--gold); letter-spacing:0.5px;">FOXHUB Piremun Satın Al</div>
+                <div style="font-size:11px; color:var(--text-sub);">Kredi Kartı ile Anında 4K VIP Erişimi</div>
             </div>
         </div>
 
@@ -442,21 +413,6 @@
         <div class="drawer-nav-item" onclick="selectDrawerCat('lesbian')">
             <span>👭 Lezbiyen İkili</span>
             <span class="drawer-chip-tag">Çift</span>
-        </div>
-
-        <div class="drawer-stats-panel">
-            <div>
-                <div class="stat-num">7+</div>
-                <div class="stat-label">Özel Video</div>
-            </div>
-            <div>
-                <div class="stat-num">5</div>
-                <div class="stat-label">Onaylı Model</div>
-            </div>
-            <div>
-                <div class="stat-num">1080p</div>
-                <div class="stat-label">HD Kalite</div>
-            </div>
         </div>
     </div>
 
@@ -719,7 +675,7 @@
             var users = JSON.parse(localStorage.getItem('2pbvage_users') || '[]');
             var founderExists = users.some(function(u) { return u.email === OWNER_EMAIL.toLowerCase(); });
             if(!founderExists) {
-                users.push({ username: OWNER_USERNAME, email: OWNER_EMAIL.toLowerCase(), pass: OWNER_PASSWORD });
+                users.push({ username: OWNER_USERNAME, email: OWNER_EMAIL.toLowerCase(), pass: OWNER_PASSWORD, isPiremun: true });
                 localStorage.setItem('2pbvage_users', JSON.stringify(users));
             }
         }
@@ -939,6 +895,34 @@
             renderVideos('all', '', false);
         }
 
+        // PIREMUN MODAL KONTROLU
+        function openPiremunModal() { document.getElementById('piremun-modal').style.display = 'flex'; }
+        function closePiremunModal() { document.getElementById('piremun-modal').style.display = 'none'; }
+
+        function handlePiremunPayment(e) {
+            e.preventDefault();
+            if(!currentUser) {
+                alert("Lütfen önce giriş yapın veya kayıt olun!");
+                closePiremunModal();
+                openAuthModal();
+                return;
+            }
+
+            currentUser.isPiremun = true;
+            localStorage.setItem('2pbvage_session', JSON.stringify(currentUser));
+            
+            var users = JSON.parse(localStorage.getItem('2pbvage_users') || '[]');
+            var idx = users.findIndex(function(u){ return u.email === currentUser.email; });
+            if(idx > -1) {
+                users[idx].isPiremun = true;
+                localStorage.setItem('2pbvage_users', JSON.stringify(users));
+            }
+
+            checkAuth();
+            closePiremunModal();
+            alert("🎉 TEBRİKLER! Ödemeniz alındı ve hesabınız FOXHUB PIREMUN üye seviyesine yükseltildi!");
+        }
+
         // AUTH & PROFILE CONTROL
         function switchAuthTab(type) {
             var tabL = document.getElementById('tab-login');
@@ -967,11 +951,14 @@
                 
                 document.getElementById('user-chip-name').innerText = nameDisplay;
                 document.getElementById('user-chip-avatar').style.backgroundImage = "url('" + (isOwner ? OWNER_AVATAR : DEFAULT_AVATAR) + "')";
-                document.getElementById('user-chip-tick').innerHTML = isOwner ? yellowTick : '';
+                document.getElementById('user-chip-tick').innerHTML = isOwner ? yellowTick : (currentUser.isPiremun ? ' 👑' : '');
 
-                document.getElementById('drawer-user-name').innerHTML = nameDisplay + (isOwner ? yellowTick : '');
-                document.getElementById('drawer-user-status').innerText = isOwner ? "👑 Platform Kurucusu" : "VIP Üye";
+                document.getElementById('drawer-user-name').innerHTML = nameDisplay + (isOwner ? yellowTick : (currentUser.isPiremun ? ' 👑' : ''));
+                document.getElementById('drawer-user-status').innerText = isOwner ? "👑 Platform Kurucusu" : (currentUser.isPiremun ? "👑 Piremun (VIP) Üye" : "Ücretsiz Üye");
                 document.getElementById('drawer-user-avatar').style.backgroundImage = "url('" + (isOwner ? OWNER_AVATAR : DEFAULT_AVATAR) + "')";
+                
+                document.getElementById('modal-user-badge-box').innerHTML = (isOwner || currentUser.isPiremun) ? '<span style="background:linear-gradient(135deg, #ffd700, #ff8c00); color:#000; font-weight:bold; padding:6px 14px; border-radius:15px; font-size:12px;">👑 PIREMUN ÜYE</span>' : '<span style="background:var(--input-bg); color:var(--text-sub); padding:6px 14px; border-radius:15px; font-size:12px;">Standart Üye</span>';
+
             } else {
                 currentUser = null;
                 document.getElementById('auth-logged-out').style.display = 'block';
@@ -1009,7 +996,7 @@
             var pass = document.getElementById('login-password').value.trim();
 
             if(email === OWNER_EMAIL.toLowerCase() && (pass === OWNER_PASSWORD || pass === "123")) {
-                localStorage.setItem('2pbvage_session', JSON.stringify({ email: OWNER_EMAIL.toLowerCase(), username: OWNER_USERNAME }));
+                localStorage.setItem('2pbvage_session', JSON.stringify({ email: OWNER_EMAIL.toLowerCase(), username: OWNER_USERNAME, isPiremun: true }));
                 checkAuth();
                 closeAuthModal();
                 alert("Kurucu olarak başarıyla giriş yapıldı!");
@@ -1020,7 +1007,7 @@
             var found = users.find(function(u) { return u.email === email && u.pass === pass; });
 
             if(found) {
-                localStorage.setItem('2pbvage_session', JSON.stringify({ email: found.email, username: found.username }));
+                localStorage.setItem('2pbvage_session', JSON.stringify({ email: found.email, username: found.username, isPiremun: found.isPiremun || false }));
                 checkAuth();
                 closeAuthModal();
                 alert("Başarıyla giriş yapıldı!");
@@ -1041,10 +1028,10 @@
                 return;
             }
 
-            var newUser = { username: username, email: email, pass: pass };
+            var newUser = { username: username, email: email, pass: pass, isPiremun: false };
             users.push(newUser);
             localStorage.setItem('2pbvage_users', JSON.stringify(users));
-            localStorage.setItem('2pbvage_session', JSON.stringify({ email: email, username: username }));
+            localStorage.setItem('2pbvage_session', JSON.stringify({ email: email, username: username, isPiremun: false }));
             
             checkAuth();
             closeAuthModal();

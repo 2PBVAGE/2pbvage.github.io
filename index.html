@@ -3,40 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>2PBVAGE 🤍 | Bedava Türkçe Altyazılı HD Video Platformu</title>
-    <meta name="description" content="2PBVAGE resmi web sitesi. Bedava Türkçe altyazılı, HD ve amatör video içerikleri.">
+    <title>FOXHUB 🦊 | Bedava Türkçe Altyazılı HD Video Platformu</title>
+    <meta name="description" content="FOXHUB resmi web sitesi. Bedava Türkçe altyazılı, HD ve amatör video içerikleri.">
     <style>
         :root {
-            --primary: #ff4757;
-            --primary-hover: #ff6b81;
-            --bg-dark: #0f0f12;
-            --card-bg: rgba(26, 26, 36, 0.75);
-            --card-border: rgba(255, 255, 255, 0.08);
+            --primary: #ff7f50; /* Turuncu Vurgu */
+            --primary-hover: #ff6348;
+            --bg-dark: #000000; /* Gece Modu: Siyah */
+            --card-bg: rgba(20, 20, 20, 0.85);
+            --card-border: rgba(255, 127, 80, 0.2);
             --text-main: #ffffff;
             --text-sub: #a0a0b0;
-            --glass: rgba(18, 18, 24, 0.85);
-            --input-bg: rgba(0, 0, 0, 0.4);
+            --glass: rgba(10, 10, 10, 0.9);
+            --input-bg: rgba(255, 255, 255, 0.08);
+            --hub-text-color: #ffffff; /* Gece HUB yazısı beyaz */
         }
 
         body.light-theme {
-            --bg-dark: #f0f2f5;
-            --card-bg: rgba(255, 255, 255, 0.85);
-            --card-border: rgba(0, 0, 0, 0.08);
-            --text-main: #1c1e21;
-            --text-sub: #606770;
-            --glass: rgba(255, 255, 255, 0.9);
-            --input-bg: rgba(240, 242, 245, 0.9);
+            --bg-dark: #ffffff; /* Gündüz Modu: Beyaz */
+            --card-bg: #f9f9f9;
+            --card-border: rgba(255, 127, 80, 0.25);
+            --text-main: #111111;
+            --text-sub: #666666;
+            --glass: rgba(255, 255, 255, 0.95);
+            --input-bg: #f0f0f0;
+            --hub-text-color: #111111; /* Gündüz HUB yazısı koyu */
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--bg-dark); color: var(--text-main); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; min-height: 100vh; padding-bottom: 50px; }
+        body { background-color: var(--bg-dark); color: var(--text-main); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; min-height: 100vh; padding-bottom: 50px; transition: background-color 0.3s, color 0.3s; }
 
         @media print { body { display: none !important; } }
 
         /* HEADER */
         .header-bar { width: 100%; background: var(--glass); backdrop-filter: blur(12px); border-bottom: 1px solid var(--card-border); position: sticky; top: 0; z-index: 100; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; }
-        .header-left { display: flex; align-items: center; gap: 15px; }
-        .header-logo { font-size: 20px; font-weight: 900; color: var(--text-main); cursor: pointer; letter-spacing: 0.5px; }
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        
+        /* FOXHUB LOGO */
+        .header-logo { font-size: 22px; font-weight: 900; cursor: pointer; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; }
+        .logo-fox { color: #ff7f50; }
+        .logo-hub { color: var(--hub-text-color); }
+        .fox-icon { font-size: 24px; }
+
         .menu-btn { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-main); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 18px; transition: 0.2s; }
         .menu-btn:hover { background: var(--primary); color: #fff; }
 
@@ -53,7 +61,7 @@
         /* SEARCH BAR */
         .search-section { width: 100%; max-width: 1200px; margin: 15px auto 0 auto; padding: 0 15px; }
         .search-box { width: 100%; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 30px; padding: 12px 20px; color: var(--text-main); font-size: 14px; outline: none; backdrop-filter: blur(8px); transition: 0.3s; }
-        .search-box:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(255, 71, 87, 0.3); }
+        .search-box:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(255, 127, 80, 0.4); }
 
         /* CONTAINER */
         .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px 15px; }
@@ -70,9 +78,9 @@
 
         /* VIDEO KARTLARI */
         .video-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; backdrop-filter: blur(10px); display: flex; flex-direction: column; justify-content: space-between; }
-        .video-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+        .video-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(255, 127, 80, 0.2); }
         .thumb-box { position: relative; width: 100%; padding-bottom: 56.25%; background-color: #000; background-size: cover; background-position: center; cursor: pointer; }
-        .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 46px; height: 46px; background: rgba(255, 71, 87, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 46px; height: 46px; background: rgba(255, 127, 80, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
         .play-icon::after { content: ""; border-style: solid; border-width: 7px 0 7px 12px; border-color: transparent transparent transparent #fff; margin-left: 3px; }
         .card-info { padding: 14px; }
         .card-title { font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; line-height: 1.4; cursor: pointer; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -149,7 +157,10 @@
     <div class="header-bar">
         <div class="header-left">
             <button class="menu-btn" id="btn-open-menu">☰</button>
-            <div class="header-logo" id="logo-home">2PBVAGE 🤍</div>
+            <div class="header-logo" id="logo-home">
+                <span class="fox-icon">🦊</span>
+                <span class="logo-fox">FOX</span><span class="logo-hub">HUB</span>
+            </div>
         </div>
         <div class="header-right">
             <button class="icon-btn" id="btn-toggle-theme">☀️</button>
@@ -171,7 +182,7 @@
     <!-- DRAWER MENU -->
     <div id="menu-overlay"></div>
     <div id="menu-drawer">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+        <div style="display:flex; justify-space-between; align-items:center; margin-bottom:20px;">
             <h3 style="color:var(--primary);">📁 Kategoriler</h3>
             <span style="cursor:pointer; font-size:20px;" id="btn-close-drawer">✕</span>
         </div>
@@ -251,7 +262,7 @@
         var DEFAULT_AVATAR = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
         var yellowTick = '<span class="yellow-tick">✓</span>';
 
-        // EKSİKSİZ VERİ TABANI
+        // VERİ TABANI
         var db = {
             v7: {
                 title: "Aishah Sofey Seksi Fiziğiyle Göz Kamaştırıyor",
@@ -334,7 +345,6 @@
 
         var currentUser = null;
 
-        // EKRAN YÜKLEME VE RENDER
         function renderVideos(filterCat, searchQuery) {
             var grid = document.getElementById('real-video-grid');
             var skGrid = document.getElementById('skeleton-grid');
@@ -410,7 +420,7 @@
             document.getElementById('p-avatar').style.backgroundImage = "url('" + avatar + "')";
             document.getElementById('p-title').innerHTML = author + (isOwner ? yellowTick : ' ✓');
             
-            var bio = isOwner ? '<span style="color:var(--primary); font-weight:bold;">👑 2PBVAGE Resmi Kurucusu Ve Site Sahibinin Profili</span>' : 'İçerik Üreticisi Profili';
+            var bio = isOwner ? '<span style="color:var(--primary); font-weight:bold;">👑 FOXHUB Resmi Kurucusu Ve Site Sahibinin Profili</span>' : 'İçerik Üreticisi Profili';
             document.getElementById('p-bio').innerHTML = bio;
 
             var html = '';

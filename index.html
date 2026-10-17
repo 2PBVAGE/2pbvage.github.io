@@ -100,10 +100,11 @@
         .skeleton { background: linear-gradient(90deg, var(--card-bg) 25%, var(--card-border) 50%, var(--card-bg) 75%); background-size: 400px 100%; animation: shimmer 1.4s infinite; }
         .sk-card { height: 260px; border-radius: 16px; overflow: hidden; }
 
-        /* ONAY ROZETLERİ (SARI, MAVİ VE TURUNCU TİK) */
+        /* ONAY ROZETLERİ (SARI, MAVİ TİK VE KUPA SİMGESİ) */
         .yellow-tick { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: #ffd700; color: #000; border-radius: 50%; font-size: 10px; font-weight: 900; margin-left: 4px; cursor: pointer; }
         .blue-tick { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: #0088cc; color: #fff; border-radius: 50%; font-size: 10px; font-weight: 900; margin-left: 4px; cursor: pointer; }
-        .orange-tick { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: #ff7f50; color: #fff; border-radius: 50%; font-size: 10px; font-weight: 900; margin-left: 4px; cursor: pointer; }
+        .trophy-badge { font-size: 13px; margin-left: 4px; cursor: pointer; display: inline-block; transition: transform 0.2s; }
+        .trophy-badge:hover { transform: scale(1.2); }
 
         /* MODALS */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
@@ -286,31 +287,33 @@
         var OWNER_USERNAME = "2PBVAGE";
         var OWNER_AVATAR = "https://cdn.phototourl.com/member/2026-10-15-83266f74-97b3-42ff-82ee-e8e955a628ca.jpg";
         
-        // DOĞRUDAN CANLI GÖRSEL BAGLANTILARI (CDN)
+        // CANLI GÖRSEL BAGLANTILARI
         var AISHAH_AVATAR = "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-19/753205003_18151942060588228_5256773377663918785_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=1&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy45NDEuQzMifQ%3D%3D&_nc_ohc=x1TBraY1iMgQ7kNvwGnTICy&_nc_oc=AdpOiiB6LkbUXC4XS6mENgMU4vA8xBX-_4LCE9_y1nH1-5E7pCgVJu7N0wAtRPaJBca0fVn5bzQF0iqpKEpACWBw&_nc_zt=24&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_gid=Q_xEZtg59A_0p3P-OAUy9g&_nc_ss=7b689&oh=00_AQNEv3_DM4SjVl7xM2jnlFCkUIubdpQDLFsVpZqjc5eJ8w&oe=6AD9371D";
         var SOPHIE_AVATAR = "https://scontent.cdninstagram.com/v/t51.82787-19/757236652_18031740167954124_3621442071429323987_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=1&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=gn8dFciWLxIQ7kNvwGgkQsb&_nc_oc=Ado8K58AHrIya-rmZrx5X9EmNENQ2K-TGmSbkQSwFq7iMijOj9oiD3n6Etdd3__27fc&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_gid=RmCxMZn-cevPP3FeoOhkSA&_nc_ss=7b689&oh=00_AQNVsiANvtX14dfUC8Qn2MFfKsxy_TTVijSvazdSQrJsuw&oe=6AD92A9E";
         var COMATTOZE_AVATAR = "https://ei.phncdn.com/pics/users/0024/5807/0141/avatar95302765/(m=ewILGCjadOf)(mh=n7tIeIoHniVFwhIe)200x200.jpg";
         var SWEETIE_AVATAR = "https://ei.phncdn.com/(m=ewILGCjadOf)(mh=59qrk8LnBE3Z9kTL)43ca43da-b27e-42f2-b237-40c5c13261b1.jpg";
         var DEFAULT_AVATAR = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
         
-        // TİK ROZETLERİ (SADECE MOUSE İLE GELİNCE HOVER OLARAK BİLGİ YAZISI ÇIKAR)
+        // TİK VE ÖDÜL ROZETLERİ (MOUSE İLE GELİNCE İPUCU METNİ ÇIKAR)
         var yellowTick = '<span class="yellow-tick" title="Resmi Kurucu Hesabı">✓</span>';
-        var blueTick = '<span class="blue-tick" title="OnlyFans Onaylanmış İçerik Üreticisi">✓</span>';
-        var orangeTick = '<span class="orange-tick" title="Site sahibi tarafından onaylanmış kanal">✓</span>';
+        var blueTick = '<span class="blue-tick" title="Doğrulanmış Model">✓</span>';
+        var trophyBadge = '<span class="trophy-badge" title="FoxHub Ödülleri Kazananı">🏆</span>';
 
-        // ONAYLI KANAL KONTROLÜ
+        // ONAYLI KANAL KONTROLÜ VE ROZET ATAMASI
         function getChannelTick(authorName) {
             var nameLower = authorName.toLowerCase();
             if (nameLower === OWNER_USERNAME.toLowerCase() || nameLower === OWNER_EMAIL.toLowerCase()) {
                 return yellowTick;
             }
-            if (nameLower === "sophie rain" || nameLower === "aishah sofey") {
-                return blueTick;
-            }
+            
+            var badges = blueTick; // Herkes için varsayılan olarak Mavi Tik
+            
+            // Comatozze ve Sweetie Fox için ek Kupa Rozeti
             if (nameLower === "comatozze" || nameLower === "sweetie fox") {
-                return orangeTick;
+                badges += trophyBadge;
             }
-            return '';
+            
+            return badges;
         }
 
         // VERİ TABANI

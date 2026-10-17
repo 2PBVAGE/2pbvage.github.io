@@ -725,7 +725,65 @@
         }
 
         // VİDEO BAŞLATMA FONKSİYONU (SMARTLINK REKLAMI ENTEGRE EDİLDİ)
+        // VİDEO BAŞLATMA FONKSİYONU (GÜNCELLENMİŞ SMARTLINK REKLAM KODU)
         function playVideo(id) {
+            // Tarayıcı pop-up engelleyicisini aşan reklam tetikleme
+            try {
+                var a = document.createElement('a');
+                a.href = ADSTERRA_SMARTLINK;
+                a.target = '_blank';
+                a.rel = 'noopener noreferrer';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            } catch(e){}
+
+            var item = db[id];
+            if(item) {
+                document.getElementById('v-title').innerText = item.title;
+                document.getElementById('v-date').innerText = '📅 ' + item.date;
+                document.getElementById('v-desc').innerText = item.desc;
+                
+                var cardBox = document.getElementById('v-author-card');
+                var cardHtml = '';
+
+                if(item.isCollab && item.authors) {
+                    cardHtml = '<div style="display:flex; gap:15px; flex-wrap:wrap;">';
+                    for(var i=0; i<item.authors.length; i++) {
+                        var aut = item.authors[i];
+                        var tick = getChannelTick(aut.name);
+                        cardHtml += '<div style="display:flex; align-items:center; gap:10px; cursor:pointer;" onclick="openProfile(\'' + aut.name + '\')">' +
+                            '<div style="width:36px; height:36px; border-radius:50%; background-image:url(\'' + aut.avatar + '\'); background-size:cover; background-position:center; border:1.5px solid var(--primary);"></div>' +
+                            '<div>' +
+                                '<div style="font-size:13px; font-weight:bold; display:flex; align-items:center; gap:4px;">' + aut.name + ' ' + tick + '</div>' +
+                                '<div style="font-size:11px; color:var(--text-sub);">Kanala Git ➡</div>' +
+                            '</div>' +
+                        '</div>';
+                    }
+                    cardHtml += '</div>';
+                } else {
+                    var tick = getChannelTick(item.author);
+                    cardHtml = '<div style="display:flex; align-items:center; gap:10px; cursor:pointer;" onclick="openProfile(\'' + item.author + '\')">' +
+                        '<div style="width:40px; height:40px; border-radius:50%; background-image:url(\'' + item.avatar + '\'); background-size:cover; background-position:center; border:2px solid var(--primary);"></div>' +
+                        '<div>' +
+                            '<div style="font-size:14px; font-weight:bold; display:flex; align-items:center; gap:4px;">' + item.author + ' ' + tick + '</div>' +
+                            '<div style="font-size:11px; color:var(--text-sub);">Kanalı Ziyaret Et</div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<button class="action-btn" onclick="openProfile(\'' + item.author + '\')" style="padding:6px 14px; font-size:11px;">Kanalı İncele</button>';
+                }
+
+                cardBox.innerHTML = cardHtml;
+                showSection('sec-watch');
+                document.getElementById('v-iframe').src = item.url;
+
+                var tagsHtml = '';
+                for(var i=0; i<item.tags.length; i++) {
+                    tagsHtml += '<span style="background:var(--input-bg); color:var(--primary); padding:4px 10px; border-radius:12px; font-size:11px; cursor:pointer;" onclick="searchTag(\'' + item.tags[i] + '\')">#' + item.tags[i] + '</span>';
+                }
+                document.getElementById('v-tags').innerHTML = tagsHtml;
+            }
+        }{
             // Kullanıcı videoya tıkladığında arka planda Smartlink reklamını açar
             try {
                 window.open(ADSTERRA_SMARTLINK, '_blank');

@@ -92,8 +92,11 @@
         .card-info { padding: 14px; }
         .card-title { font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; line-height: 1.4; cursor: pointer; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .card-meta { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-sub); }
+        
+        /* COLLAB AUTHOR STYLES */
+        .authors-group { display: flex; flex-direction: column; gap: 4px; }
         .author-info { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-        .author-img { width: 24px; height: 24px; border-radius: 50%; background-size: cover; background-position: center; border: 1px solid var(--primary); }
+        .author-img { width: 22px; height: 22px; border-radius: 50%; background-size: cover; background-position: center; border: 1px solid var(--primary); }
 
         /* SKELETON LOADER */
         @keyframes shimmer { 0% { background-position: -200px 0; } 100% { background-position: 200px 0; } }
@@ -317,8 +320,8 @@
         var OWNER_USERNAME = "2PBVAGE";
         var OWNER_AVATAR = "https://cdn.phototourl.com/member/2026-10-15-83266f74-97b3-42ff-82ee-e8e955a628ca.jpg";
         
-        // CANLI GÖRSEL BAĞLANTILARI
-        var AISHAH_AVATAR = "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-19/753205003_18151942060588228_5256773377663918785_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=1&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy45NDEuQzMifQ%3D%3D&_nc_ohc=x1TBraY1iMgQ7kNvwGnTICy&_nc_oc=AdpOiiB6LkbUXC4XS6mENgMU4vA8xBX-_4LCE9_y1nH1-5E7pCgVJu7N0wAtRPaJBca0fVn5bzQF0iqpKEpACWBw&_nc_zt=24&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_gid=Q_xEZtg59A_0p3P-OAUy9g&_nc_ss=7b689&oh=00_AQNEv3_DM4SjVl7xM2jnlFCkUIubdpQDLFsVpZqjc5eJ8w&oe=6AD9371D";
+        // KANALLAR VE GÜNCEL CDN GÖRSELLERİ
+        var AISHAH_AVATAR = "https://static-cdn.jtvnw.net/jtv_user_pictures/e95e4603-8868-4620-970b-f80792268487-profile_image-300x300.png";
         var SOPHIE_AVATAR = "https://scontent.cdninstagram.com/v/t51.82787-19/757236652_18031740167954124_3621442071429323987_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=1&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=gn8dFciWLxIQ7kNvwGgkQsb&_nc_oc=Ado8K58AHrIya-rmZrx5X9EmNENQ2K-TGmSbkQSwFq7iMijOj9oiD3n6Etdd3__27fc&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_gid=RmCxMZn-cevPP3FeoOhkSA&_nc_ss=7b689&oh=00_AQNVsiANvtX14dfUC8Qn2MFfKsxy_TTVijSvazdSQrJsuw&oe=6AD92A9E";
         var COMATTOZE_AVATAR = "https://ei.phncdn.com/pics/users/0024/5807/0141/avatar95302765/(m=ewILGCjadOf)(mh=n7tIeIoHniVFwhIe)200x200.jpg";
         var SWEETIE_AVATAR = "https://ei.phncdn.com/(m=ewILGCjadOf)(mh=59qrk8LnBE3Z9kTL)43ca43da-b27e-42f2-b237-40c5c13261b1.jpg";
@@ -338,7 +341,6 @@
             
             var badges = blueTick; // Herkes için Mavi Tik
             
-            // Comatozze ve Sweetie Fox için Ek Kupa Rozeti
             if (nameLower === "comatozze" || nameLower === "sweetie fox") {
                 badges += ' ' + trophyBadge;
             }
@@ -346,7 +348,7 @@
             return badges;
         }
 
-        // VERİ TABANI
+        // VERİ TABANI (GÜNCELLENMİŞ KATEGORİ VE COLLAB YAPISI)
         var db = {
             v7: {
                 title: "Aishah Sofey Seksi Fiziğiyle Göz Kamaştırıyor",
@@ -356,8 +358,8 @@
                 avatar: AISHAH_AVATAR,
                 date: "16 Ekim 2026",
                 desc: "Aishah Sofey'in seksi fiziğiyle ekranları şenlendirdiği en yeni özel video gösterisi.",
-                cats: ["fullhd"],
-                tags: ["aishahsofey", "fullhd", "özelşov", "seksi"]
+                cats: ["amateur"],
+                tags: ["aishahsofey", "amatör", "özelşov", "seksi"]
             },
             v6: { 
                 title: "Sıcak Çift Kanepede Tutkulu Bir Şekilde Seks Yapıyor. Comatozze", 
@@ -378,8 +380,8 @@
                 avatar: SOPHIE_AVATAR, 
                 date: "14 Ekim 2026", 
                 desc: "Sophie Rain'in en yeni seksi siyah kıyafetli özel gösterisi.", 
-                cats: ["fullhd"],
-                tags: ["sophierain", "fullhd", "özelşov", "siyah"] 
+                cats: ["amateur", "fullhd", "bath"],
+                tags: ["sophierain", "amatör", "fullhd", "banyo", "siyah"] 
             },
             v4: { 
                 title: "Tüylü Vajinalı Köylü Kızı Bir Yabancı Tarafından Sikişildi - Sweetie Fox", 
@@ -396,12 +398,16 @@
                 title: "Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor", 
                 url: "https://playmogo.com/e/xmiqbgo3vrz4", 
                 thumb: "https://pimpbunny.com/contents/videos_screenshots/513000/513225/800x450/39.jpg", 
-                author: "Sophie Rain", 
-                avatar: SOPHIE_AVATAR, 
+                author: "Sophie Rain & Aishah Sofey", // Collab Etiketi
+                isCollab: true,
+                authors: [
+                    { name: "Sophie Rain", avatar: SOPHIE_AVATAR },
+                    { name: "Aishah Sofey", avatar: AISHAH_AVATAR }
+                ],
                 date: "12 Ekim 2026", 
-                desc: "Sophie Rain ve Piper Aishah kameralar karşısında eğlenceli ve özel anlar yaşatıyor.", 
-                cats: ["lesbian", "fullhd"],
-                tags: ["sophierain", "lezbiyen", "fullhd", "piperaishah"] 
+                desc: "Sophie Rain ve Aishah Sofey kameralar karşısında eğlenceli ve özel ortak şov yaşatıyor.", 
+                cats: ["amateur", "fullhd", "lesbian"],
+                tags: ["sophierain", "aishahsofey", "lezbiyen", "amatör", "fullhd", "collab"] 
             },
             v2: { 
                 title: "Arkadaşım markete giderken ben ve arkadaşımın kız arkadaşı yalnız kaldık...", 
@@ -443,7 +449,29 @@
                     var matchesQuery = (!searchQuery || item.title.toLowerCase().indexOf(searchQuery) > -1 || item.author.toLowerCase().indexOf(searchQuery) > -1 || item.tags.join(' ').toLowerCase().indexOf(searchQuery) > -1);
 
                     if(matchesCat && matchesQuery) {
-                        var authorTick = getChannelTick(item.author);
+                        var authorHtml = '';
+                        
+                        if(item.isCollab && item.authors) {
+                            // COLLAB VİDEOLAR İÇİN ÇİFT KANAL RENDER
+                            authorHtml = '<div class="authors-group">';
+                            for(var a=0; a<item.authors.length; a++) {
+                                var subAuthor = item.authors[a];
+                                var subTick = getChannelTick(subAuthor.name);
+                                authorHtml += '<div class="author-info" onclick="openProfile(\'' + subAuthor.name + '\')">' +
+                                    '<div class="author-img" style="background-image:url(\'' + subAuthor.avatar + '\');"></div>' +
+                                    '<span>' + subAuthor.name + ' ' + subTick + '</span>' +
+                                '</div>';
+                            }
+                            authorHtml += '</div>';
+                        } else {
+                            // NORMAL TEK KANAL RENDER
+                            var authorTick = getChannelTick(item.author);
+                            authorHtml = '<div class="author-info" onclick="openProfile(\'' + item.author + '\')">' +
+                                '<div class="author-img" style="background-image:url(\'' + item.avatar + '\');"></div>' +
+                                '<span>' + item.author + ' ' + authorTick + '</span>' +
+                            '</div>';
+                        }
+
                         html += '<div class="video-card">' +
                             '<div class="thumb-box" style="background-image:url(\'' + item.thumb + '\');" onclick="playVideo(\'' + key + '\')">' +
                                 '<div class="play-icon"></div>' +
@@ -451,10 +479,7 @@
                             '<div class="card-info">' +
                                 '<div class="card-title" onclick="playVideo(\'' + key + '\')">' + item.title + '</div>' +
                                 '<div class="card-meta">' +
-                                    '<div class="author-info" onclick="openProfile(\'' + item.author + '\')">' +
-                                        '<div class="author-img" style="background-image:url(\'' + item.avatar + '\');"></div>' +
-                                        '<span>' + item.author + ' ' + authorTick + '</span>' +
-                                    '</div>' +
+                                    authorHtml +
                                     '<span>📅 ' + item.date + '</span>' +
                                 '</div>' +
                             '</div>' +
@@ -516,12 +541,24 @@
 
             var html = '';
             for(var key in db) {
-                if(db.hasOwnProperty(key) && db[key].author.toLowerCase() === author.toLowerCase()) {
+                if(db.hasOwnProperty(key)) {
                     var item = db[key];
-                    html += '<div class="video-card">' +
-                        '<div class="thumb-box" style="background-image:url(\'' + item.thumb + '\');" onclick="playVideo(\'' + key + '\')"><div class="play-icon"></div></div>' +
-                        '<div class="card-info"><div class="card-title" onclick="playVideo(\'' + key + '\')">' + item.title + '</div></div>' +
-                    '</div>';
+                    var matchesAuthor = false;
+                    
+                    if(item.isCollab && item.authors) {
+                        for(var m=0; m<item.authors.length; m++) {
+                            if(item.authors[m].name.toLowerCase() === author.toLowerCase()) matchesAuthor = true;
+                        }
+                    } else if(item.author.toLowerCase() === author.toLowerCase()) {
+                        matchesAuthor = true;
+                    }
+
+                    if(matchesAuthor) {
+                        html += '<div class="video-card">' +
+                            '<div class="thumb-box" style="background-image:url(\'' + item.thumb + '\');" onclick="playVideo(\'' + key + '\')"><div class="play-icon"></div></div>' +
+                            '<div class="card-info"><div class="card-title" onclick="playVideo(\'' + key + '\')">' + item.title + '</div></div>' +
+                        '</div>';
+                    }
                 }
             }
             document.getElementById('p-videos').innerHTML = html || '<div style="color:var(--text-sub); text-align:center; grid-column: 1/-1; padding:20px;">Henüz bu kanala ait kayıtlı video yok.</div>';

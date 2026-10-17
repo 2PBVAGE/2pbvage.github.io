@@ -286,14 +286,14 @@
         var OWNER_USERNAME = "2PBVAGE";
         var OWNER_AVATAR = "https://cdn.phototourl.com/member/2026-10-15-83266f74-97b3-42ff-82ee-e8e955a628ca.jpg";
         
-        // GÜVENİLİR VE HIZLI YÜKLENEN PROFİL RESİMLERİ (CDN)
-        var SOPHIE_AVATAR = "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp";
-        var AISHAH_AVATAR = "https://pimpbunny.com/contents/videos_screenshots/608000/608532/800x450/1.jpg";
-        var COMATTOZE_AVATAR = "https://pornoanne.com/wp-content/uploads/2026/09/6a9d729c7b598.jpg";
+        // DOĞRUDAN CANLI GÖRSEL BAGLANTILARI (CDN)
+        var AISHAH_AVATAR = "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-19/753205003_18151942060588228_5256773377663918785_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=1&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy45NDEuQzMifQ%3D%3D&_nc_ohc=x1TBraY1iMgQ7kNvwGnTICy&_nc_oc=AdpOiiB6LkbUXC4XS6mENgMU4vA8xBX-_4LCE9_y1nH1-5E7pCgVJu7N0wAtRPaJBca0fVn5bzQF0iqpKEpACWBw&_nc_zt=24&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_gid=Q_xEZtg59A_0p3P-OAUy9g&_nc_ss=7b689&oh=00_AQNEv3_DM4SjVl7xM2jnlFCkUIubdpQDLFsVpZqjc5eJ8w&oe=6AD9371D";
+        var SOPHIE_AVATAR = "https://scontent.cdninstagram.com/v/t51.82787-19/757236652_18031740167954124_3621442071429323987_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=1&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=gn8dFciWLxIQ7kNvwGgkQsb&_nc_oc=Ado8K58AHrIya-rmZrx5X9EmNENQ2K-TGmSbkQSwFq7iMijOj9oiD3n6Etdd3__27fc&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_gid=RmCxMZn-cevPP3FeoOhkSA&_nc_ss=7b689&oh=00_AQNVsiANvtX14dfUC8Qn2MFfKsxy_TTVijSvazdSQrJsuw&oe=6AD92A9E";
+        var COMATTOZE_AVATAR = "https://ei.phncdn.com/pics/users/0024/5807/0141/avatar95302765/(m=ewILGCjadOf)(mh=n7tIeIoHniVFwhIe)200x200.jpg";
         var SWEETIE_AVATAR = "https://ei.phncdn.com/(m=ewILGCjadOf)(mh=59qrk8LnBE3Z9kTL)43ca43da-b27e-42f2-b237-40c5c13261b1.jpg";
         var DEFAULT_AVATAR = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
         
-        // TİK ROZETLERİ (SADECE MOUSE İLE GELİNCE VEYA TIKLAYINCA İPUCU YAZISI ÇIKAR)
+        // TİK ROZETLERİ (SADECE MOUSE İLE GELİNCE HOVER OLARAK BİLGİ YAZISI ÇIKAR)
         var yellowTick = '<span class="yellow-tick" title="Resmi Kurucu Hesabı">✓</span>';
         var blueTick = '<span class="blue-tick" title="OnlyFans Onaylanmış İçerik Üreticisi">✓</span>';
         var orangeTick = '<span class="orange-tick" title="Site sahibi tarafından onaylanmış kanal">✓</span>';
@@ -478,7 +478,6 @@
             var authorTick = getChannelTick(author);
             document.getElementById('p-title').innerHTML = author + ' ' + authorTick;
             
-            // AÇIKLAMADA ARTIK EXTRA METİN YAZMAZ, SADECE TEMİZ PROFIL METNİ YER ALIR
             var bio = isOwner ? '<span style="color:var(--primary); font-weight:bold;">👑 FOXHUB Resmi Kurucusu</span>' : '<span style="color:var(--text-sub);">FOXHUB İçerik Üreticisi</span>';
             document.getElementById('p-bio').innerHTML = bio;
 

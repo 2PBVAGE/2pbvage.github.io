@@ -196,7 +196,7 @@
         .channel-tab { padding: 10px 18px; font-weight: 700; font-size: 13px; color: var(--text-sub); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: 0.2s; }
         .channel-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
 
-        /* MODERNİZE EDİLMİŞ GÜZELLEŞTİRİLMİŞ YAN MENÜ (DRAWER) */
+        /* YAN MENÜ (DRAWER) */
         #menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 200; display: none; }
         #menu-drawer { 
             position: fixed; 
@@ -248,7 +248,6 @@
         }
         .drawer-close-btn:hover { background: var(--primary); color: #fff; }
 
-        /* PARLAYAN NEON ONLYFANS VIP KARTI */
         @keyframes ofPulse {
             0% { box-shadow: 0 0 10px rgba(0, 175, 240, 0.2); }
             50% { box-shadow: 0 0 20px rgba(0, 175, 240, 0.6); }
@@ -418,7 +417,7 @@
         </div>
     </div>
 
-    <!-- YENİLENMİŞ GÜZELLEŞTİRİLMİŞ YAN MENÜ -->
+    <!-- YAN MENÜ -->
     <div id="menu-overlay"></div>
     <div id="menu-drawer">
         <div class="drawer-header">
@@ -438,7 +437,7 @@
             </div>
         </div>
 
-        <!-- ÖNE ÇIKAN MODELLER KISAYOLU -->
+        <!-- ÖNE ÇIKAN MODELLER -->
         <div class="drawer-sec-label">⭐ Öne Çıkan Modeller</div>
         <div class="drawer-cat-item" onclick="openProfile('Aishah Sofey'); closeDrawer();">✨ Aishah Sofey</div>
         <div class="drawer-cat-item" onclick="openProfile('Sophie Rain'); closeDrawer();">🔥 Sophie Rain</div>
@@ -469,7 +468,6 @@
         <!-- ANA SAYFA VİDEO AKIŞI -->
         <div id="sec-feed" class="page-sec active-sec">
             
-            <!-- PORNHUB/YOUTUBE HERO BANNER -->
             <div class="hero-banner">
                 <span class="hero-badge">🔥 Günün Öne Çıkanı</span>
                 <div class="hero-content">
@@ -482,7 +480,6 @@
                 </div>
             </div>
 
-            <!-- POPÜLER KANALLAR AKIŞI -->
             <div class="top-channels-sec">
                 <div class="sec-title">⭐ Öne Çıkan Modeller & Kanallar</div>
                 <div class="channels-scroll">
@@ -509,7 +506,6 @@
                 </div>
             </div>
 
-            <!-- YATAY KATEGORİ SCROLL -->
             <div class="categories-scroll" id="categories-scroll-bar">
                 <div class="cat-chip active" data-cat="all">🔥 Tüm Videolar</div>
                 <div class="cat-chip" data-cat="sub">🇹🇷 Türkçe Altyazılı</div>
@@ -523,14 +519,12 @@
 
             <h3 id="cat-title" style="color:var(--primary); margin-bottom:15px;">🔥 Tüm Videolar</h3>
 
-            <!-- SKELETON LOADER -->
             <div id="skeleton-grid" class="video-grid">
                 <div class="sk-card skeleton"></div>
                 <div class="sk-card skeleton"></div>
                 <div class="sk-card skeleton"></div>
             </div>
 
-            <!-- GERÇEK VİDEO GRİDİ -->
             <div id="real-video-grid" class="video-grid" style="display:none;"></div>
         </div>
 
@@ -668,7 +662,7 @@
                     { name: "Aishah Sofey", avatar: AISHAH_AVATAR }
                 ],
                 date: "12 Ekim 2026", 
-                desc: "Sophie Rain ve Aishah Sofey kameralar karşısında eğlenceli ve özel ortak şov yaşatıyor.", 
+                desc: "Sophie Rain and Aishah Sofey kameralar karşısında eğlenceli ve özel ortak şov yaşatıyor.", 
                 cats: ["amateur", "fullhd", "lesbian"],
                 tags: ["sophierain", "aishahsofey", "lezbiyen", "amatör", "fullhd", "collab"] 
             },
@@ -697,6 +691,18 @@
         };
 
         var currentUser = null;
+
+        // KALICI KULLANICI HAFIZASI (LOCALSTORAGE GÜVENCESİ)
+        function initStorageUsers() {
+            var users = JSON.parse(localStorage.getItem('2pbvage_users') || '[]');
+            // Eğer kurucu veya örnek kullanıcı hafızada yoksa otomatik ekle
+            var founderExists = users.some(function(u) { return u.email === OWNER_EMAIL.toLowerCase(); });
+            if(!founderExists) {
+                users.push({ username: OWNER_USERNAME, email: OWNER_EMAIL.toLowerCase(), pass: OWNER_PASSWORD });
+                localStorage.setItem('2pbvage_users', JSON.stringify(users));
+            }
+        }
+        initStorageUsers();
 
         function renderVideos(filterCat, searchQuery, isOnlyfansFilter) {
             var grid = document.getElementById('real-video-grid');
@@ -924,163 +930,4 @@
 
         // ARAMA SİSTEMİ
         document.getElementById('search-input').oninput = function() {
-            showSection('sec-feed');
-            renderVideos('all', this.value.toLowerCase().trim(), false);
-        };
-
-        // NAVİGASYON VE BUTONLAR
-        document.getElementById('logo-home').onclick = function() { showSection('sec-feed'); renderVideos('all', '', false); };
-        document.getElementById('btn-back-watch').onclick = function() { showSection('sec-feed'); };
-        document.getElementById('btn-back-profile').onclick = function() { showSection('sec-feed'); };
-
-        // AUTH TABLARI
-        var tabLogin = document.getElementById('tab-login');
-        var tabRegister = document.getElementById('tab-register');
-        var formLogin = document.getElementById('form-login');
-        var formRegister = document.getElementById('form-register');
-
-        tabLogin.onclick = function() {
-            tabLogin.classList.add('active');
-            tabRegister.classList.remove('active');
-            formLogin.style.display = 'block';
-            formRegister.style.display = 'none';
-        };
-
-        tabRegister.onclick = function() {
-            tabRegister.classList.add('active');
-            tabLogin.classList.remove('active');
-            formRegister.style.display = 'block';
-            formLogin.style.display = 'none';
-        };
-
-        // OTURUM / GİRİŞ YÖNETİMİ
-        function checkAuth() {
-            var session = localStorage.getItem('2pbvage_session');
-            if(session) {
-                currentUser = JSON.parse(session);
-                document.getElementById('auth-logged-out').style.display = 'none';
-                document.getElementById('auth-logged-in').style.display = 'block';
-                
-                var isOwner = (currentUser.email.toLowerCase() === OWNER_EMAIL.toLowerCase());
-                var nameDisplay = isOwner ? OWNER_USERNAME : (currentUser.username || currentUser.email.split('@')[0]);
-                
-                document.getElementById('user-chip-name').innerText = nameDisplay;
-                document.getElementById('user-chip-avatar').style.backgroundImage = "url('" + (isOwner ? OWNER_AVATAR : DEFAULT_AVATAR) + "')";
-                document.getElementById('user-chip-tick').innerHTML = isOwner ? yellowTick : '';
-            } else {
-                currentUser = null;
-                document.getElementById('auth-logged-out').style.display = 'block';
-                document.getElementById('auth-logged-in').style.display = 'none';
-            }
-        }
-
-        document.getElementById('btn-open-auth').onclick = function() { document.getElementById('auth-modal').style.display = 'flex'; };
-        document.getElementById('btn-close-auth').onclick = function() { document.getElementById('auth-modal').style.display = 'none'; };
-
-        // GİRİŞ YAP FORMU
-        document.getElementById('form-login').onsubmit = function(e) {
-            e.preventDefault();
-            var email = document.getElementById('login-email').value.trim().toLowerCase();
-            var pass = document.getElementById('login-password').value.trim();
-
-            if(email === OWNER_EMAIL.toLowerCase() && (pass === OWNER_PASSWORD || pass === "123")) {
-                localStorage.setItem('2pbvage_session', JSON.stringify({ email: OWNER_EMAIL.toLowerCase(), username: OWNER_USERNAME }));
-                checkAuth();
-                document.getElementById('auth-modal').style.display = 'none';
-                alert("Kurucu olarak başarıyla giriş yapıldı!");
-                return;
-            }
-
-            var users = JSON.parse(localStorage.getItem('2pbvage_users') || '[]');
-            var found = users.find(function(u) { return u.email === email && u.pass === pass; });
-
-            if(found) {
-                localStorage.setItem('2pbvage_session', JSON.stringify({ email: found.email, username: found.username }));
-                checkAuth();
-                document.getElementById('auth-modal').style.display = 'none';
-                alert("Başarıyla giriş yapıldı!");
-            } else {
-                alert("Hatalı e-posta veya şifre!");
-            }
-        };
-
-        // KAYIT OL FORMU
-        document.getElementById('form-register').onsubmit = function(e) {
-            e.preventDefault();
-            var username = document.getElementById('reg-username').value.trim();
-            var email = document.getElementById('reg-email').value.trim().toLowerCase();
-            var pass = document.getElementById('reg-password').value.trim();
-
-            var users = JSON.parse(localStorage.getItem('2pbvage_users') || '[]');
-            
-            if(users.some(function(u) { return u.email === email; })) {
-                alert("Bu e-posta adresi zaten kayıtlı!");
-                return;
-            }
-
-            var newUser = { username: username, email: email, pass: pass };
-            users.push(newUser);
-            localStorage.setItem('2pbvage_users', JSON.stringify(users));
-            localStorage.setItem('2pbvage_session', JSON.stringify({ email: email, username: username }));
-            
-            checkAuth();
-            document.getElementById('auth-modal').style.display = 'none';
-            alert("Hesabınız başarıyla oluşturuldu ve giriş yapıldı!");
-        };
-
-        document.getElementById('btn-open-profile').onclick = function() {
-            if(!currentUser) return;
-            var isOwner = (currentUser.email.toLowerCase() === OWNER_EMAIL.toLowerCase());
-            var nameDisplay = isOwner ? OWNER_USERNAME : (currentUser.username || currentUser.email);
-            
-            document.getElementById('modal-user-name').innerHTML = nameDisplay + (isOwner ? yellowTick : '');
-            document.getElementById('modal-user-email').innerText = currentUser.email;
-            document.getElementById('modal-user-avatar').style.backgroundImage = "url('" + (isOwner ? OWNER_AVATAR : DEFAULT_AVATAR) + "')";
-            document.getElementById('profile-modal').style.display = 'flex';
-        };
-
-        document.getElementById('btn-close-profile').onclick = function() { document.getElementById('profile-modal').style.display = 'none'; };
-        document.getElementById('btn-logout').onclick = function() {
-            localStorage.removeItem('2pbvage_session');
-            checkAuth();
-            document.getElementById('profile-modal').style.display = 'none';
-        };
-
-        // MENÜ DRAWER
-        document.getElementById('btn-open-menu').onclick = function() {
-            document.getElementById('menu-drawer').classList.add('open');
-            document.getElementById('menu-overlay').style.display = 'block';
-        };
-        function closeDrawer() {
-            document.getElementById('menu-drawer').classList.remove('open');
-            document.getElementById('menu-overlay').style.display = 'none';
-        }
-        document.getElementById('btn-close-drawer').onclick = closeDrawer;
-        document.getElementById('menu-overlay').onclick = closeDrawer;
-
-        // TEMA DEĞİŞTİRME
-        document.getElementById('btn-toggle-theme').onclick = function() {
-            var isLight = document.body.classList.toggle('light-theme');
-            this.innerText = isLight ? '🌙' : '☀️';
-        };
-
-        // YAŞ KONTROLÜ
-        if(localStorage.getItem('2pbvage_18plus') === 'true') {
-            document.getElementById('age-modal').style.display = 'none';
-        }
-
-        document.getElementById('btn-age-accept').onclick = function() {
-            localStorage.setItem('2pbvage_18plus', 'true');
-            document.getElementById('age-modal').style.display = 'none';
-        };
-
-        document.getElementById('btn-age-decline').onclick = function() {
-            window.location.href = "https://www.google.com";
-        };
-
-        // BAŞLANGIÇ
-        checkAuth();
-        renderVideos('all', '', false);
-    </script>
-</body>
-</html>
+            showSection('sec-feed

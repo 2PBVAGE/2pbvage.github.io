@@ -103,6 +103,11 @@
         .form-input { width: 100%; background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text-main); padding: 12px; border-radius: 10px; font-size: 13px; outline: none; margin-bottom: 12px; }
         .form-input:focus { border-color: var(--primary); }
 
+        /* AUTH TAB TABS */
+        .auth-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; }
+        .auth-tab { flex: 1; padding: 8px; font-weight: bold; font-size: 14px; color: var(--text-sub); cursor: pointer; border-radius: 8px; transition: 0.2s; }
+        .auth-tab.active { color: #fff; background: var(--primary); }
+
         /* DRAWER MENU */
         #menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 200; display: none; }
         #menu-drawer { position: fixed; top: 0; left: -280px; width: 280px; height: 100%; background: var(--glass); backdrop-filter: blur(15px); z-index: 300; transition: left 0.3s ease; border-right: 1px solid var(--card-border); padding: 20px; overflow-y: auto; }
@@ -133,11 +138,25 @@
     <div id="auth-modal" class="modal-overlay">
         <div class="modal-card">
             <span class="modal-close" id="btn-close-auth">✕</span>
-            <h3 style="margin-bottom:20px; color:var(--primary);" id="auth-modal-title">Giriş Yap</h3>
+            
+            <div class="auth-tabs">
+                <div class="auth-tab active" id="tab-login">Giriş Yap</div>
+                <div class="auth-tab" id="tab-register">Kayıt Ol</div>
+            </div>
+
+            <!-- GİRİŞ FORMU -->
             <form id="form-login">
-                <input type="email" id="login-email" class="form-input" placeholder="poyrazre6@gmail.com" required autocomplete="username">
-                <input type="password" id="login-password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+                <input type="email" id="login-email" class="form-input" placeholder="E-posta adresiniz" required autocomplete="username">
+                <input type="password" id="login-password" class="form-input" placeholder="Şifreniz" required autocomplete="current-password">
                 <button type="submit" class="action-btn" style="width:100%; padding:12px; margin-top:10px;">Giriş Yap</button>
+            </form>
+
+            <!-- KAYIT FORMU -->
+            <form id="form-register" style="display:none;">
+                <input type="text" id="reg-username" class="form-input" placeholder="Kullanıcı Adı" required>
+                <input type="email" id="reg-email" class="form-input" placeholder="E-posta Adresi" required>
+                <input type="password" id="reg-password" class="form-input" placeholder="Şifre Oluşturun" required>
+                <button type="submit" class="action-btn" style="width:100%; padding:12px; margin-top:10px;">Hesap Oluştur & Giriş Yap</button>
             </form>
         </div>
     </div>
@@ -166,7 +185,7 @@
             <button class="icon-btn" id="btn-toggle-theme">☀️</button>
             
             <div id="auth-logged-out">
-                <button class="action-btn" id="btn-open-auth">Giriş Yap</button>
+                <button class="action-btn" id="btn-open-auth">Giriş / Kayıt</button>
             </div>
 
             <div id="auth-logged-in" style="display:none;">
@@ -182,7 +201,7 @@
     <!-- DRAWER MENU -->
     <div id="menu-overlay"></div>
     <div id="menu-drawer">
-        <div style="display:flex; justify-space-between; align-items:center; margin-bottom:20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
             <h3 style="color:var(--primary);">📁 Kategoriler</h3>
             <span style="cursor:pointer; font-size:20px;" id="btn-close-drawer">✕</span>
         </div>
@@ -470,6 +489,26 @@
         document.getElementById('btn-back-watch').onclick = function() { showSection('sec-feed'); };
         document.getElementById('btn-back-profile').onclick = function() { showSection('sec-feed'); };
 
+        // AUTH TABLARI (GİRİŞ / KAYIT GEÇİŞİ)
+        var tabLogin = document.getElementById('tab-login');
+        var tabRegister = document.getElementById('tab-register');
+        var formLogin = document.getElementById('form-login');
+        var formRegister = document.getElementById('form-register');
+
+        tabLogin.onclick = function() {
+            tabLogin.classList.add('active');
+            tabRegister.classList.remove('active');
+            formLogin.style.display = 'block';
+            formRegister.style.display = 'none';
+        };
+
+        tabRegister.onclick = function() {
+            tabRegister.classList.add('active');
+            tabLogin.classList.remove('active');
+            formRegister.style.display = 'block';
+            formLogin.style.display = 'none';
+        };
+
         // OTURUM / GİRİŞ YÖNETİMİ
         function checkAuth() {
             var session = localStorage.getItem('2pbvage_session');
@@ -479,7 +518,9 @@
                 document.getElementById('auth-logged-in').style.display = 'block';
                 
                 var isOwner = (currentUser.email.toLowerCase() === OWNER_EMAIL.toLowerCase());
-                document.getElementById('user-chip-name').innerText = isOwner ? OWNER_USERNAME : currentUser.email.split('@')[0];
+                var nameDisplay = isOwner ? OWNER_USERNAME : (currentUser.username || currentUser.email.split('@')[0]);
+                
+                document.getElementById('user-chip-name').innerText = nameDisplay;
                 document.getElementById('user-chip-avatar').style.backgroundImage = "url('" + (isOwner ? OWNER_AVATAR : DEFAULT_AVATAR) + "')";
                 document.getElementById('user-chip-tick').innerHTML = isOwner ? yellowTick : '';
             } else {
@@ -492,25 +533,63 @@
         document.getElementById('btn-open-auth').onclick = function() { document.getElementById('auth-modal').style.display = 'flex'; };
         document.getElementById('btn-close-auth').onclick = function() { document.getElementById('auth-modal').style.display = 'none'; };
 
+        // GİRİŞ YAP FORMU
         document.getElementById('form-login').onsubmit = function(e) {
             e.preventDefault();
             var email = document.getElementById('login-email').value.trim().toLowerCase();
             var pass = document.getElementById('login-password').value.trim();
 
             if(email === OWNER_EMAIL.toLowerCase() && (pass === OWNER_PASSWORD || pass === "123")) {
-                localStorage.setItem('2pbvage_session', JSON.stringify({ email: OWNER_EMAIL.toLowerCase() }));
+                localStorage.setItem('2pbvage_session', JSON.stringify({ email: OWNER_EMAIL.toLowerCase(), username: OWNER_USERNAME }));
                 checkAuth();
                 document.getElementById('auth-modal').style.display = 'none';
                 alert("Kurucu olarak başarıyla giriş yapıldı!");
                 return;
             }
-            alert("Hatalı e-posta veya şifre!");
+
+            var users = JSON.parse(localStorage.getItem('2pbvage_users') || '[]');
+            var found = users.find(function(u) { return u.email === email && u.pass === pass; });
+
+            if(found) {
+                localStorage.setItem('2pbvage_session', JSON.stringify({ email: found.email, username: found.username }));
+                checkAuth();
+                document.getElementById('auth-modal').style.display = 'none';
+                alert("Başarıyla giriş yapıldı!");
+            } else {
+                alert("Hatalı e-posta veya şifre!");
+            }
+        };
+
+        // KAYIT OL FORMU
+        document.getElementById('form-register').onsubmit = function(e) {
+            e.preventDefault();
+            var username = document.getElementById('reg-username').value.trim();
+            var email = document.getElementById('reg-email').value.trim().toLowerCase();
+            var pass = document.getElementById('reg-password').value.trim();
+
+            var users = JSON.parse(localStorage.getItem('2pbvage_users') || '[]');
+            
+            if(users.some(function(u) { return u.email === email; })) {
+                alert("Bu e-posta adresi zaten kayıtlı!");
+                return;
+            }
+
+            var newUser = { username: username, email: email, pass: pass };
+            users.push(newUser);
+            localStorage.setItem('2pbvage_users', JSON.stringify(users));
+            localStorage.setItem('2pbvage_session', JSON.stringify({ email: email, username: username }));
+            
+            checkAuth();
+            document.getElementById('auth-modal').style.display = 'none';
+            alert("Hesabınız başarıyla oluşturuldu ve giriş yapıldı!");
         };
 
         document.getElementById('btn-open-profile').onclick = function() {
             if(!currentUser) return;
             var isOwner = (currentUser.email.toLowerCase() === OWNER_EMAIL.toLowerCase());
-            document.getElementById('modal-user-name').innerHTML = (isOwner ? OWNER_USERNAME : currentUser.email) + (isOwner ? yellowTick : '');
+            var nameDisplay = isOwner ? OWNER_USERNAME : (currentUser.username || currentUser.email);
+            
+            document.getElementById('modal-user-name').innerHTML = nameDisplay + (isOwner ? yellowTick : '');
             document.getElementById('modal-user-email').innerText = currentUser.email;
             document.getElementById('modal-user-avatar').style.backgroundImage = "url('" + (isOwner ? OWNER_AVATAR : DEFAULT_AVATAR) + "')";
             document.getElementById('profile-modal').style.display = 'flex';

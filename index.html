@@ -100,11 +100,41 @@
         .skeleton { background: linear-gradient(90deg, var(--card-bg) 25%, var(--card-border) 50%, var(--card-bg) 75%); background-size: 400px 100%; animation: shimmer 1.4s infinite; }
         .sk-card { height: 260px; border-radius: 16px; overflow: hidden; }
 
-        /* ONAY ROZETLERİ (SARI, MAVİ TİK VE KUPA SİMGESİ) */
-        .yellow-tick { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: #ffd700; color: #000; border-radius: 50%; font-size: 10px; font-weight: 900; margin-left: 4px; cursor: pointer; }
-        .blue-tick { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: #0088cc; color: #fff; border-radius: 50%; font-size: 10px; font-weight: 900; margin-left: 4px; cursor: pointer; }
-        .trophy-badge { font-size: 13px; margin-left: 4px; cursor: pointer; display: inline-block; transition: transform 0.2s; }
-        .trophy-badge:hover { transform: scale(1.2); }
+        /* ROZET VE TOOLTIP SİSTEMİ */
+        .badge-item { position: relative; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+        .yellow-tick { width: 16px; height: 16px; background: #ffd700; color: #000; border-radius: 50%; font-size: 10px; font-weight: 900; margin-left: 4px; }
+        .blue-tick { width: 16px; height: 16px; background: #0088cc; color: #fff; border-radius: 50%; font-size: 10px; font-weight: 900; margin-left: 4px; }
+        .trophy-badge { font-size: 13px; margin-left: 4px; transition: transform 0.2s; }
+        .trophy-badge:hover { transform: scale(1.25); }
+
+        /* ÖZEL KUTU İPUCU (TOOLTIP CSS) */
+        .badge-item::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.95);
+            color: #ff7f50;
+            border: 1px solid #ff7f50;
+            padding: 5px 9px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        .badge-item:hover::after,
+        .badge-item:active::after {
+            opacity: 1;
+            visibility: visible;
+        }
 
         /* MODALS */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
@@ -287,17 +317,17 @@
         var OWNER_USERNAME = "2PBVAGE";
         var OWNER_AVATAR = "https://cdn.phototourl.com/member/2026-10-15-83266f74-97b3-42ff-82ee-e8e955a628ca.jpg";
         
-        // CANLI GÖRSEL BAGLANTILARI
+        // CANLI GÖRSEL BAĞLANTILARI
         var AISHAH_AVATAR = "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-19/753205003_18151942060588228_5256773377663918785_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=1&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy45NDEuQzMifQ%3D%3D&_nc_ohc=x1TBraY1iMgQ7kNvwGnTICy&_nc_oc=AdpOiiB6LkbUXC4XS6mENgMU4vA8xBX-_4LCE9_y1nH1-5E7pCgVJu7N0wAtRPaJBca0fVn5bzQF0iqpKEpACWBw&_nc_zt=24&_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_gid=Q_xEZtg59A_0p3P-OAUy9g&_nc_ss=7b689&oh=00_AQNEv3_DM4SjVl7xM2jnlFCkUIubdpQDLFsVpZqjc5eJ8w&oe=6AD9371D";
         var SOPHIE_AVATAR = "https://scontent.cdninstagram.com/v/t51.82787-19/757236652_18031740167954124_3621442071429323987_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=1&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=gn8dFciWLxIQ7kNvwGgkQsb&_nc_oc=Ado8K58AHrIya-rmZrx5X9EmNENQ2K-TGmSbkQSwFq7iMijOj9oiD3n6Etdd3__27fc&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_gid=RmCxMZn-cevPP3FeoOhkSA&_nc_ss=7b689&oh=00_AQNVsiANvtX14dfUC8Qn2MFfKsxy_TTVijSvazdSQrJsuw&oe=6AD92A9E";
         var COMATTOZE_AVATAR = "https://ei.phncdn.com/pics/users/0024/5807/0141/avatar95302765/(m=ewILGCjadOf)(mh=n7tIeIoHniVFwhIe)200x200.jpg";
         var SWEETIE_AVATAR = "https://ei.phncdn.com/(m=ewILGCjadOf)(mh=59qrk8LnBE3Z9kTL)43ca43da-b27e-42f2-b237-40c5c13261b1.jpg";
         var DEFAULT_AVATAR = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
         
-        // TİK VE ÖDÜL ROZETLERİ (MOUSE İLE GELİNCE İPUCU METNİ ÇIKAR)
-        var yellowTick = '<span class="yellow-tick" title="Resmi Kurucu Hesabı">✓</span>';
-        var blueTick = '<span class="blue-tick" title="Doğrulanmış Model">✓</span>';
-        var trophyBadge = '<span class="trophy-badge" title="FoxHub Ödülleri Kazananı">🏆</span>';
+        // ÖZEL TOOLTIP'Lİ SARI, MAVİ TİK VE KUPA ROZETLERİ
+        var yellowTick = '<span class="badge-item" data-tooltip="Resmi Kurucu Hesabı"><span class="yellow-tick">✓</span></span>';
+        var blueTick = '<span class="badge-item" data-tooltip="Doğrulanmış Model"><span class="blue-tick">✓</span></span>';
+        var trophyBadge = '<span class="badge-item" data-tooltip="FoxHub Ödülleri Kazananı"><span class="trophy-badge">🏆</span></span>';
 
         // ONAYLI KANAL KONTROLÜ VE ROZET ATAMASI
         function getChannelTick(authorName) {
@@ -306,11 +336,11 @@
                 return yellowTick;
             }
             
-            var badges = blueTick; // Herkes için varsayılan olarak Mavi Tik
+            var badges = blueTick; // Herkes için Mavi Tik
             
-            // Comatozze ve Sweetie Fox için ek Kupa Rozeti
+            // Comatozze ve Sweetie Fox için Ek Kupa Rozeti
             if (nameLower === "comatozze" || nameLower === "sweetie fox") {
-                badges += trophyBadge;
+                badges += ' ' + trophyBadge;
             }
             
             return badges;
@@ -568,115 +598,4 @@
             } else {
                 currentUser = null;
                 document.getElementById('auth-logged-out').style.display = 'block';
-                document.getElementById('auth-logged-in').style.display = 'none';
-            }
-        }
-
-        document.getElementById('btn-open-auth').onclick = function() { document.getElementById('auth-modal').style.display = 'flex'; };
-        document.getElementById('btn-close-auth').onclick = function() { document.getElementById('auth-modal').style.display = 'none'; };
-
-        // GİRİŞ YAP FORMU
-        document.getElementById('form-login').onsubmit = function(e) {
-            e.preventDefault();
-            var email = document.getElementById('login-email').value.trim().toLowerCase();
-            var pass = document.getElementById('login-password').value.trim();
-
-            if(email === OWNER_EMAIL.toLowerCase() && (pass === OWNER_PASSWORD || pass === "123")) {
-                localStorage.setItem('2pbvage_session', JSON.stringify({ email: OWNER_EMAIL.toLowerCase(), username: OWNER_USERNAME }));
-                checkAuth();
-                document.getElementById('auth-modal').style.display = 'none';
-                alert("Kurucu olarak başarıyla giriş yapıldı!");
-                return;
-            }
-
-            var users = JSON.parse(localStorage.getItem('2pbvage_users') || '[]');
-            var found = users.find(function(u) { return u.email === email && u.pass === pass; });
-
-            if(found) {
-                localStorage.setItem('2pbvage_session', JSON.stringify({ email: found.email, username: found.username }));
-                checkAuth();
-                document.getElementById('auth-modal').style.display = 'none';
-                alert("Başarıyla giriş yapıldı!");
-            } else {
-                alert("Hatalı e-posta veya şifre!");
-            }
-        };
-
-        // KAYIT OL FORMU
-        document.getElementById('form-register').onsubmit = function(e) {
-            e.preventDefault();
-            var username = document.getElementById('reg-username').value.trim();
-            var email = document.getElementById('reg-email').value.trim().toLowerCase();
-            var pass = document.getElementById('reg-password').value.trim();
-
-            var users = JSON.parse(localStorage.getItem('2pbvage_users') || '[]');
-            
-            if(users.some(function(u) { return u.email === email; })) {
-                alert("Bu e-posta adresi zaten kayıtlı!");
-                return;
-            }
-
-            var newUser = { username: username, email: email, pass: pass };
-            users.push(newUser);
-            localStorage.setItem('2pbvage_users', JSON.stringify(users));
-            localStorage.setItem('2pbvage_session', JSON.stringify({ email: email, username: username }));
-            
-            checkAuth();
-            document.getElementById('auth-modal').style.display = 'none';
-            alert("Hesabınız başarıyla oluşturuldu ve giriş yapıldı!");
-        };
-
-        document.getElementById('btn-open-profile').onclick = function() {
-            if(!currentUser) return;
-            var isOwner = (currentUser.email.toLowerCase() === OWNER_EMAIL.toLowerCase());
-            var nameDisplay = isOwner ? OWNER_USERNAME : (currentUser.username || currentUser.email);
-            
-            document.getElementById('modal-user-name').innerHTML = nameDisplay + (isOwner ? yellowTick : '');
-            document.getElementById('modal-user-email').innerText = currentUser.email;
-            document.getElementById('modal-user-avatar').style.backgroundImage = "url('" + (isOwner ? OWNER_AVATAR : DEFAULT_AVATAR) + "')";
-            document.getElementById('profile-modal').style.display = 'flex';
-        };
-
-        document.getElementById('btn-close-profile').onclick = function() { document.getElementById('profile-modal').style.display = 'none'; };
-        document.getElementById('btn-logout').onclick = function() {
-            localStorage.removeItem('2pbvage_session');
-            checkAuth();
-            document.getElementById('profile-modal').style.display = 'none';
-        };
-
-        // MENÜ DRAWER
-        document.getElementById('btn-open-menu').onclick = function() {
-            document.getElementById('menu-drawer').classList.add('open');
-            document.getElementById('menu-overlay').style.display = 'block';
-        };
-        function closeDrawer() {
-            document.getElementById('menu-drawer').classList.remove('open');
-            document.getElementById('menu-overlay').style.display = 'none';
-        }
-        document.getElementById('btn-close-drawer').onclick = closeDrawer;
-        document.getElementById('menu-overlay').onclick = closeDrawer;
-
-        // TEMA DEĞİŞTİRME
-        document.getElementById('btn-toggle-theme').onclick = function() {
-            var isLight = document.body.classList.toggle('light-theme');
-            this.innerText = isLight ? '🌙' : '☀️';
-        };
-
-        // YAŞ KONTROLÜ
-        if(localStorage.getItem('2pbvage_18plus') === 'true') {
-            document.getElementById('age-modal').style.display = 'none';
-        }
-        document.getElementById('btn-age-accept').onclick = function() {
-            localStorage.setItem('2pbvage_18plus', 'true');
-            document.getElementById('age-modal').style.display = 'none';
-        };
-        document.getElementById('btn-age-decline').onclick = function() {
-            window.location.href = "https://www.google.com";
-        };
-
-        // BAŞLANGIÇ
-        checkAuth();
-        renderVideos('all', '');
-    </script>
-</body>
-</html>
+                document.getElementById('auth

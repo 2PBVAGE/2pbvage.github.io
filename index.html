@@ -486,6 +486,9 @@
     </div>
 
     <script>
+        // ADSTERRA SMARTLINK / DIRECT LINK ADRESİ
+        var ADSTERRA_SMARTLINK = "https://auctionr.org/4/f52b96b557fb75ab92ceff2ae0017f80";
+
         // YAŞ KONTROLÜ
         function checkAgeStorage() {
             var isAdult = localStorage.getItem('2pbvage_18plus');
@@ -721,7 +724,13 @@
             renderVideos(cat, '', false);
         }
 
+        // VİDEO BAŞLATMA FONKSİYONU (SMARTLINK REKLAMI ENTEGRE EDİLDİ)
         function playVideo(id) {
+            // Kullanıcı videoya tıkladığında arka planda Smartlink reklamını açar
+            try {
+                window.open(ADSTERRA_SMARTLINK, '_blank');
+            } catch(e){}
+
             var item = db[id];
             if(item) {
                 document.getElementById('v-title').innerText = item.title;

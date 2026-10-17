@@ -93,7 +93,7 @@
         .card-title { font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; line-height: 1.4; cursor: pointer; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .card-meta { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-sub); }
         
-        /* AUTHOR STYLES & KAYMAYI ÖNLEYEN HİZALAMA FIXI */
+        /* AUTHOR STYLES & HİZALAMA */
         .authors-group { display: flex; flex-direction: column; gap: 6px; }
         .author-info { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 12px; font-weight: 600; vertical-align: middle; }
         .author-img { width: 22px; height: 22px; border-radius: 50%; background-size: cover; background-position: center; border: 1px solid var(--primary); flex-shrink: 0; }
@@ -104,14 +104,14 @@
         .skeleton { background: linear-gradient(90deg, var(--card-bg) 25%, var(--card-border) 50%, var(--card-bg) 75%); background-size: 400px 100%; animation: shimmer 1.4s infinite; }
         .sk-card { height: 260px; border-radius: 16px; overflow: hidden; }
 
-        /* ROZET VE TOOLTIP SİSTEMİ (DÜZELTİLMİŞ HİZALAMA) */
+        /* ROZET VE TOOLTIP SİSTEMİ */
         .badge-item { position: relative; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; vertical-align: middle; }
         .yellow-tick { width: 15px; height: 15px; background: #ffd700; color: #000; border-radius: 50%; font-size: 9px; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; }
         .blue-tick { width: 15px; height: 15px; background: #0088cc; color: #fff; border-radius: 50%; font-size: 9px; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; }
         .trophy-badge { font-size: 12px; display: inline-flex; align-items: center; justify-content: center; transition: transform 0.2s; }
         .trophy-badge:hover { transform: scale(1.25); }
 
-        /* ÖZEL KUTU İPUCU (TOOLTIP CSS) */
+        /* TOOLTIP CSS */
         .badge-item::after {
             content: attr(data-tooltip);
             position: absolute;
@@ -138,6 +138,121 @@
         .badge-item:active::after {
             opacity: 1;
             visibility: visible;
+        }
+
+        /* YENİ YOUTUBE / PORNHUB KANAL TASARIMI STİLLERİ */
+        .channel-banner {
+            width: 100%;
+            height: 160px;
+            background: linear-gradient(135deg, #1e1e24 0%, #2a0845 50%, #ff7f50 100%);
+            border-radius: 20px 20px 0 0;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .channel-header-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 0 0 20px 20px;
+            padding: 0 20px 20px 20px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .channel-profile-row {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-top: -50px;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .channel-avatar-lg {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid var(--bg-dark);
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            background-color: #111;
+        }
+
+        .channel-sub-btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-weight: 800;
+            font-size: 13px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(255, 127, 80, 0.3);
+            transition: 0.2s;
+        }
+
+        .channel-sub-btn:hover {
+            transform: scale(1.05);
+            background: var(--primary-hover);
+        }
+
+        .channel-sub-btn.subscribed {
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--text-main);
+            border: 1px solid var(--card-border);
+            box-shadow: none;
+        }
+
+        .channel-stats-bar {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            margin-bottom: 12px;
+        }
+
+        .channel-stat-chip {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--text-sub);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .channel-tabs {
+            display: flex;
+            gap: 10px;
+            border-bottom: 1px solid var(--card-border);
+            margin-bottom: 20px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .channel-tab {
+            padding: 10px 18px;
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--text-sub);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+
+        .channel-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
         }
 
         /* MODALS */
@@ -306,15 +421,34 @@
             </div>
         </div>
 
-        <!-- PROFİL SAYFASI -->
+        <!-- YENİ YOUTUBE / PORNHUB PROFİL SAYFASI -->
         <div id="sec-profile" class="page-sec">
             <button class="back-btn" id="btn-back-profile">⬅ Ana Sayfaya Dön</button>
-            <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:16px; padding:20px; text-align:center;">
-                <div id="p-avatar" style="width:80px; height:80px; border-radius:50%; border:3px solid var(--primary); margin:0 auto 10px auto; background-size:cover; background-position:center;"></div>
-                <h2 id="p-title" style="display:inline-flex; align-items:center; justify-content:center; gap:6px;"></h2>
-                <div id="p-bio" style="font-size:13px; margin-top:10px; line-height:1.6;"></div>
+            
+            <div class="channel-banner" id="p-banner"></div>
+            
+            <div class="channel-header-card">
+                <div class="channel-profile-row">
+                    <div id="p-avatar" class="channel-avatar-lg"></div>
+                    <button class="channel-sub-btn" id="btn-sub-channel" onclick="toggleSubscribe(this)">
+                        <span>🔔</span> <span>Abone Ol</span>
+                    </button>
+                </div>
+
+                <h2 id="p-title" style="font-size:20px; font-weight:900; display:flex; align-items:center; gap:6px; flex-wrap:wrap;"></h2>
+                <div id="p-bio" style="font-size:13px; color:var(--text-sub); margin-top:6px; line-height:1.5;"></div>
+
+                <!-- PORNHUB STYLE KANAL İSTATİSTİKLERİ -->
+                <div class="channel-stats-bar" id="p-stats"></div>
             </div>
-            <h3 style="color:var(--primary); margin-top:15px;">📹 Kanalın Videoları</h3>
+
+            <!-- YOUTUBE TABS -->
+            <div class="channel-tabs">
+                <div class="channel-tab active">🎥 Videolar</div>
+                <div class="channel-tab">🔥 Popüler</div>
+                <div class="channel-tab">ℹ️ Hakkında</div>
+            </div>
+
             <div id="p-videos" class="video-grid"></div>
         </div>
     </div>
@@ -345,7 +479,7 @@
                 return yellowTick;
             }
             
-            var badges = blueTick; // Herkes için Mavi Tik
+            var badges = blueTick;
             
             if (nameLower === "comatozze" || nameLower === "sweetie fox") {
                 badges += trophyBadge;
@@ -354,7 +488,7 @@
             return badges;
         }
 
-        // VERİ TABANI (TÜM VİDEOLARA FULLHD EKLENDİ)
+        // VERİ TABANI
         var db = {
             v7: {
                 title: "Aishah Sofey Seksi Fiziğiyle Göz Kamaştırıyor",
@@ -508,7 +642,6 @@
                 document.getElementById('v-date').innerText = '📅 ' + item.date;
                 document.getElementById('v-desc').innerText = item.desc;
                 
-                // VİDEO İZLEME SAYFASINDAKİ KANAL KARTINI OLUŞTURMA
                 var cardBox = document.getElementById('v-author-card');
                 var cardHtml = '';
 
@@ -559,6 +692,7 @@
             renderVideos('all', tag.toLowerCase());
         }
 
+        // YENİLEŞTİRİLMİŞ YOUTUBE/PORNHUB KANAL GÖRÜNTÜLEME
         function openProfile(author) {
             var isOwner = (author.toLowerCase() === OWNER_USERNAME.toLowerCase() || author.toLowerCase() === OWNER_EMAIL.toLowerCase());
             var isSophie = (author.toLowerCase() === 'sophie rain');
@@ -572,9 +706,11 @@
             var authorTick = getChannelTick(author);
             document.getElementById('p-title').innerHTML = author + ' ' + authorTick;
             
-            var bio = isOwner ? '<span style="color:var(--primary); font-weight:bold;">👑 FOXHUB Resmi Kurucusu</span>' : '<span style="color:var(--text-sub);">FOXHUB İçerik Üreticisi</span>';
-            document.getElementById('p-bio').innerHTML = bio;
+            var bio = isOwner ? '👑 FOXHUB Platformunun Resmi Kurucu Hesabı. En kaliteli özel HD içerikler burada.' : 'FOXHUB Doğrulanmış Model & İçerik Üreticisi Resmi Kanalı.';
+            document.getElementById('p-bio').innerText = bio;
 
+            // VİDEO SAYISINI HESAPLA
+            var videoCount = 0;
             var html = '';
             for(var key in db) {
                 if(db.hasOwnProperty(key)) {
@@ -590,6 +726,7 @@
                     }
 
                     if(matchesAuthor) {
+                        videoCount++;
                         html += '<div class="video-card">' +
                             '<div class="thumb-box" style="background-image:url(\'' + item.thumb + '\');" onclick="playVideo(\'' + key + '\')"><div class="play-icon"></div></div>' +
                             '<div class="card-info"><div class="card-title" onclick="playVideo(\'' + key + '\')">' + item.title + '</div></div>' +
@@ -597,9 +734,26 @@
                     }
                 }
             }
-            document.getElementById('p-videos').innerHTML = html || '<div style="color:var(--text-sub); text-align:center; grid-column: 1/-1; padding:20px;">Henüz bu kanala ait kayıtlı video yok.</div>';
+
+            // STATS BAR BİLGİLERİ (PORNHUB/YOUTUBE DOKUNUŞU)
+            var statsHtml = '<div class="channel-stat-chip">📹 <b>' + videoCount + '</b> Video</div>' +
+                            '<div class="channel-stat-chip">👁️ <b>' + (videoCount * 42.5).toFixed(1) + 'K</b> İzlenme</div>' +
+                            '<div class="channel-stat-chip">⭐ <b>%98</b> Beğeni Oranı</div>';
+            document.getElementById('p-stats').innerHTML = statsHtml;
+
+            document.getElementById('p-videos').innerHTML = html || '<div style="color:var(--text-sub); text-align:center; grid-column: 1/-1; padding:30px;">Henüz bu kanala ait video bulunmuyor.</div>';
 
             showSection('sec-profile');
+        }
+
+        function toggleSubscribe(btn) {
+            if(btn.classList.contains('subscribed')) {
+                btn.classList.remove('subscribed');
+                btn.innerHTML = '<span>🔔</span> <span>Abone Ol</span>';
+            } else {
+                btn.classList.add('subscribed');
+                btn.innerHTML = '<span>✓</span> <span>Abone Olundu</span>';
+            }
         }
 
         function showSection(id) {

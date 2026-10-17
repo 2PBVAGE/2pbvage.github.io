@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FOXHUB 🦊 | Premium Türkçe Altyazılı & HD Video Platformu</title>
+    <title>FOXHUB 🦊 | Ücretsiz Türkçe Altyazılı & HD Video Platformu</title>
     <meta name="description" content="FOXHUB resmi web sitesi. Bedava Türkçe altyazılı, HD ve amatör video içerikleri.">
     
-    <!-- DNS PREFETCH & PRECONNECT -->
     <link rel="preconnect" href="https://voe.sx" crossorigin>
     <link rel="dns-prefetch" href="https://voe.sx">
     <link rel="preconnect" href="https://playmogo.com" crossorigin>
@@ -17,6 +16,7 @@
             --primary: #ff7f50;
             --primary-hover: #ff6348;
             --of-blue: #00aff0;
+            --gold: #ffd700;
             --bg-dark: #08080c;
             --card-bg: rgba(18, 18, 26, 0.95);
             --card-border: rgba(255, 127, 80, 0.22);
@@ -58,6 +58,7 @@
         .header-right { display: flex; align-items: center; gap: 10px; }
         .action-btn { background: var(--primary); color: #fff; border: none; padding: 9px 18px; border-radius: 20px; font-weight: 800; font-size: 12px; cursor: pointer; transition: 0.2s; position: relative; z-index: 10; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
         .action-btn:hover { background: var(--primary-hover); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(255,127,80,0.3); }
+
         .icon-btn { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-main); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; font-size: 16px; transition: 0.2s; }
         .icon-btn:hover { border-color: var(--primary); transform: scale(1.05); }
 
@@ -116,10 +117,10 @@
         .channels-scroll { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
         .channels-scroll::-webkit-scrollbar { display: none; }
         
-        .channel-card-mini { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; min-width: 78px; transition: transform 0.2s; }
+        .channel-card-mini { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; min-width: 80px; transition: transform 0.2s; }
         .channel-card-mini:hover { transform: translateY(-4px); }
-        .channel-mini-img { width: 60px; height: 60px; border-radius: 50%; background-size: cover; background-position: center; border: 2px solid var(--primary); box-shadow: 0 4px 12px rgba(255, 127, 80, 0.3); }
-        .channel-mini-name { font-size: 11px; font-weight: 700; color: var(--text-main); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 78px; }
+        .channel-mini-img { width: 62px; height: 62px; border-radius: 50%; background-size: cover; background-position: center; border: 2px solid var(--primary); box-shadow: 0 4px 12px rgba(255, 127, 80, 0.3); }
+        .channel-mini-name { font-size: 11px; font-weight: 700; color: var(--text-main); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80px; }
 
         /* CATEGORIES BAR */
         .categories-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 20px; scrollbar-width: none; }
@@ -150,51 +151,10 @@
         .author-img { width: 24px; height: 24px; border-radius: 50%; background-size: cover; background-position: center; border: 1px solid var(--primary); flex-shrink: 0; }
         .author-name-text { display: inline-flex; align-items: center; gap: 4px; line-height: 1; }
 
-        /* SKELETON LOADER */
-        @keyframes shimmer { 0% { background-position: -200px 0; } 100% { background-position: 200px 0; } }
-        .skeleton { background: linear-gradient(90deg, var(--card-bg) 25%, var(--card-border) 50%, var(--card-bg) 75%); background-size: 400px 100%; animation: shimmer 1.4s infinite; }
-        .sk-card { height: 260px; border-radius: 18px; overflow: hidden; }
-
-        /* ROZET VE TOOLTIP SİSTEMİ */
+        /* ROZET SİSTEMİ */
         .badge-item { position: relative; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; vertical-align: middle; }
         .yellow-tick { width: 15px; height: 15px; background: #ffd700; color: #000; border-radius: 50%; font-size: 9px; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; }
         .blue-tick { width: 15px; height: 15px; background: #0088cc; color: #fff; border-radius: 50%; font-size: 9px; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; }
-        .trophy-badge { font-size: 12px; display: inline-flex; align-items: center; justify-content: center; transition: transform 0.2s; }
-        .trophy-badge:hover { transform: scale(1.25); }
-
-        .badge-item::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            bottom: 130%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.95);
-            color: #ff7f50;
-            border: 1px solid #ff7f50;
-            padding: 5px 9px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 700;
-            white-space: nowrap;
-            pointer-events: none;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.2s, visibility 0.2s;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-        }
-        .badge-item:hover::after, .badge-item:active::after { opacity: 1; visibility: visible; }
-
-        /* KANAL TASARIMI STİLLERİ */
-        .channel-banner { width: 100%; height: 190px; background: linear-gradient(135deg, #1e1e24 0%, #2a0845 50%, #ff7f50 100%); border-radius: 20px 20px 0 0; position: relative; background-size: cover; background-position: center; }
-        .channel-header-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 0 0 20px 20px; padding: 0 20px 20px 20px; position: relative; margin-bottom: 20px; }
-        .channel-profile-row { display: flex; align-items: flex-end; justify-content: space-between; margin-top: -50px; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
-        .channel-avatar-lg { width: 100px; height: 100px; border-radius: 50%; border: 4px solid var(--bg-dark); background-size: cover; background-position: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); background-color: #111; }
-        .channel-stats-bar { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px; margin-bottom: 12px; }
-        .channel-stat-chip { background: var(--input-bg); border: 1px solid var(--card-border); padding: 5px 12px; border-radius: 20px; font-size: 12px; color: var(--text-sub); font-weight: 600; display: flex; align-items: center; gap: 5px; }
-        .channel-tabs { display: flex; gap: 10px; border-bottom: 1px solid var(--card-border); margin-bottom: 20px; overflow-x: auto; scrollbar-width: none; }
-        .channel-tab { padding: 10px 18px; font-weight: 700; font-size: 13px; color: var(--text-sub); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: 0.2s; }
-        .channel-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
 
         /* YAN MENÜ (DRAWER) GELİŞMİŞ TASARIM */
         #menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 2000; display: none; }
@@ -225,51 +185,14 @@
         .drawer-user-card:hover { border-color: var(--primary); background: rgba(255, 127, 80, 0.25); }
         .drawer-avatar { width: 44px; height: 44px; border-radius: 50%; background-size: cover; background-position: center; border: 2px solid var(--primary); flex-shrink: 0; }
 
-        @keyframes ofGlow { 0% { box-shadow: 0 0 8px rgba(0, 175, 240, 0.3); } 50% { box-shadow: 0 0 22px rgba(0, 175, 240, 0.7); } 100% { box-shadow: 0 0 8px rgba(0, 175, 240, 0.3); } }
-        .drawer-of-card { background: linear-gradient(135deg, rgba(0, 175, 240, 0.3) 0%, rgba(0, 110, 180, 0.1) 100%); border: 1.5px solid rgba(0, 175, 240, 0.7); padding: 14px; border-radius: 16px; display: flex; align-items: center; gap: 12px; cursor: pointer; margin-bottom: 20px; animation: ofGlow 2.5s infinite ease-in-out; transition: transform 0.2s; }
-        .drawer-of-card:hover { transform: translateY(-2px); scale: 1.02; }
-        .of-badge-icon { width: 36px; height: 36px; background: #00aff0; color: #fff; font-weight: 900; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; box-shadow: 0 0 10px #00aff0; flex-shrink: 0; }
-
         .drawer-section-title { font-size: 11px; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 1.2px; margin: 16px 0 10px 6px; display: flex; align-items: center; gap: 6px; }
         .drawer-nav-item { display: flex; align-items: center; justify-content: space-between; padding: 11px 14px; border-radius: 12px; font-size: 13.5px; font-weight: 700; color: var(--text-main); cursor: pointer; margin-bottom: 6px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.2s ease; }
         .drawer-nav-item:hover { background: rgba(255, 127, 80, 0.18); border-color: rgba(255, 127, 80, 0.4); color: #fff; transform: translateX(5px); }
         .drawer-chip-tag { font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 10px; background: var(--input-bg); color: var(--text-sub); }
 
-        .drawer-stats-panel { background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); border-radius: 14px; padding: 12px; margin-top: 22px; display: flex; justify-content: space-around; text-align: center; }
-        .stat-num { font-size: 14px; font-weight: 900; color: var(--primary); }
-        .stat-label { font-size: 10px; color: var(--text-sub); margin-top: 2px; }
-
-        /* MODALS (PÜRÜZSÜZ Z-INDEX & TIKLAMA HİYERARŞİSİ) */
-        .modal-overlay { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: rgba(0,0,0,0.92); 
-            backdrop-filter: blur(12px); 
-            -webkit-backdrop-filter: blur(12px);
-            z-index: 99999 !important; 
-            display: none; 
-            align-items: center; 
-            justify-content: center; 
-            padding: 20px; 
-        }
-        .modal-card { 
-            background: var(--glass); 
-            border: 1px solid var(--card-border); 
-            border-radius: 22px; 
-            width: 100%; 
-            max-width: 410px; 
-            padding: 26px; 
-            text-align: center; 
-            position: relative; 
-            color: var(--text-main); 
-            max-height: 90vh; 
-            overflow-y: auto; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.95); 
-            z-index: 100000 !important; 
-        }
+        /* MODALS */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 99999 !important; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .modal-card { background: var(--glass); border: 1px solid var(--card-border); border-radius: 22px; width: 100%; max-width: 420px; padding: 26px; text-align: center; position: relative; color: var(--text-main); max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.95); z-index: 100000 !important; }
         .modal-close { position: absolute; top: 16px; right: 16px; color: var(--text-sub); font-size: 20px; cursor: pointer; transition: 0.2s; }
         .modal-close:hover { color: var(--primary); }
         .form-input { width: 100%; background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text-main); padding: 12px; border-radius: 10px; font-size: 13px; outline: none; margin-bottom: 12px; transition: 0.2s; }
@@ -279,6 +202,17 @@
         .auth-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; }
         .auth-tab { flex: 1; padding: 10px; font-weight: bold; font-size: 14px; color: var(--text-sub); cursor: pointer; border-radius: 10px; transition: 0.2s; }
         .auth-tab.active { color: #fff; background: var(--primary); }
+
+        /* KANAL TASARIMI STİLLERİ */
+        .channel-banner { width: 100%; height: 190px; background: linear-gradient(135deg, #1e1e24 0%, #2a0845 50%, #ff7f50 100%); border-radius: 20px 20px 0 0; position: relative; background-size: cover; background-position: center; }
+        .channel-header-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 0 0 20px 20px; padding: 0 20px 20px 20px; position: relative; margin-bottom: 20px; }
+        .channel-profile-row { display: flex; align-items: flex-end; justify-content: space-between; margin-top: -50px; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
+        .channel-avatar-lg { width: 100px; height: 100px; border-radius: 50%; border: 4px solid var(--bg-dark); background-size: cover; background-position: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); background-color: #111; }
+        .channel-stats-bar { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px; margin-bottom: 12px; }
+        .channel-stat-chip { background: var(--input-bg); border: 1px solid var(--card-border); padding: 5px 12px; border-radius: 20px; font-size: 12px; color: var(--text-sub); font-weight: 600; display: flex; align-items: center; gap: 5px; }
+        .channel-tabs { display: flex; gap: 10px; border-bottom: 1px solid var(--card-border); margin-bottom: 20px; overflow-x: auto; scrollbar-width: none; }
+        .channel-tab { padding: 10px 18px; font-weight: 700; font-size: 13px; color: var(--text-sub); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: 0.2s; }
+        .channel-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
 
         /* PAGES */
         .page-sec { display: none; flex-direction: column; gap: 16px; }
@@ -311,14 +245,12 @@
                 <div class="auth-tab" id="tab-register" onclick="switchAuthTab('register')">Kayıt Ol</div>
             </div>
 
-            <!-- GİRİŞ FORMU -->
             <form id="form-login" onsubmit="handleLogin(event)">
                 <input type="email" id="login-email" class="form-input" placeholder="E-posta adresiniz" required autocomplete="username">
                 <input type="password" id="login-password" class="form-input" placeholder="Şifreniz" required autocomplete="current-password">
                 <button type="submit" class="action-btn" style="width:100%; padding:12px; margin-top:10px;">Giriş Yap</button>
             </form>
 
-            <!-- KAYIT FORMU -->
             <form id="form-register" style="display:none;" onsubmit="handleRegister(event)">
                 <input type="text" id="reg-username" class="form-input" placeholder="Kullanıcı Adı" required>
                 <input type="email" id="reg-email" class="form-input" placeholder="E-posta Adresi" required>
@@ -334,7 +266,8 @@
             <span class="modal-close" onclick="closeProfileModal()">✕</span>
             <div id="modal-user-avatar" style="width:75px; height:75px; border-radius:50%; background-size:cover; background-position:center; border:2px solid var(--primary); margin:0 auto 12px auto;"></div>
             <h3 id="modal-user-name" style="margin-bottom:6px; font-size:18px;"></h3>
-            <p id="modal-user-email" style="font-size:12px; color:var(--text-sub); margin-bottom:22px;"></p>
+            <p id="modal-user-email" style="font-size:12px; color:var(--text-sub); margin-bottom:15px;"></p>
+            <div id="modal-user-badge-box" style="margin-bottom:20px;"></div>
             <button onclick="handleLogout()" class="action-btn" style="width:100%; background:transparent; border:1px solid var(--primary); color:var(--primary);">🚪 Oturumu Kapat</button>
         </div>
     </div>
@@ -381,14 +314,6 @@
             <div>
                 <div id="drawer-user-name" style="font-size:13.5px; font-weight:bold;">Giriş Yapılmadı</div>
                 <div id="drawer-user-status" style="font-size:11px; color:var(--text-sub);">Oturum açmak için tıklayın</div>
-            </div>
-        </div>
-
-        <div class="drawer-of-card" onclick="filterOnlyfans()">
-            <div class="of-badge-icon">OF</div>
-            <div>
-                <div style="font-size:14px; font-weight:900; color:#00aff0; letter-spacing:0.5px;">OnlyFans VIP Akışı</div>
-                <div style="font-size:11px; color:var(--text-sub);">Sophie Rain & Aishah Sofey</div>
             </div>
         </div>
 
@@ -443,21 +368,6 @@
             <span>👭 Lezbiyen İkili</span>
             <span class="drawer-chip-tag">Çift</span>
         </div>
-
-        <div class="drawer-stats-panel">
-            <div>
-                <div class="stat-num">7+</div>
-                <div class="stat-label">Özel Video</div>
-            </div>
-            <div>
-                <div class="stat-num">5</div>
-                <div class="stat-label">Onaylı Model</div>
-            </div>
-            <div>
-                <div class="stat-num">1080p</div>
-                <div class="stat-label">HD Kalite</div>
-            </div>
-        </div>
     </div>
 
     <!-- ARAMA ÇUBUĞU -->
@@ -476,7 +386,7 @@
                     <h2 class="hero-title">Aishah Sofey Seksi Fiziğiyle Göz Kamaştırıyor</h2>
                     <p style="font-size:12px; color:#d0d0e0; margin-bottom:10px;">Aishah Sofey'in ekranları şenlendirdiği en yeni ve özel HD performansı.</p>
                     <div class="hero-btns">
-                        <button class="action-btn" onclick="playVideo('v7')">▶ Hemen İzle</button>
+                        <button class="action-btn" onclick="playVideo('v7')">▶ Ücretsiz İzle</button>
                         <button class="action-btn" style="background:rgba(255,255,255,0.15); border:1px solid var(--card-border);" onclick="openProfile('Aishah Sofey')">👤 Kanala Git</button>
                     </div>
                 </div>
@@ -623,8 +533,8 @@
                 return yellowTick;
             }
             var badges = blueTick;
-            if (nameLower === "comatozze" || nameLower === "sweetie fox") {
-                badges += trophyBadge;
+            if (nameLower.indexOf("comatozze") > -1 || nameLower.indexOf("sweetie fox") > -1) {
+                badges += ' ' + trophyBadge;
             }
             return badges;
         }
@@ -791,15 +701,6 @@
             }, 250);
         }
 
-        function filterOnlyfans() {
-            closeDrawer();
-            showSection('sec-feed');
-            document.getElementById('cat-title').innerHTML = '💙 OnlyFans Özel İçerikleri (Sophie Rain & Aishah Sofey)';
-            var catChips = document.querySelectorAll('.cat-chip');
-            for(var j=0; j<catChips.length; j++) catChips[j].classList.remove('active');
-            renderVideos('all', '', true);
-        }
-
         function selectCategoryChip(elem, cat) {
             var catChips = document.querySelectorAll('.cat-chip');
             for(var j=0; j<catChips.length; j++) catChips[j].classList.remove('active');
@@ -875,23 +776,32 @@
         }
 
         function openProfile(author) {
-            var isOwner = (author.toLowerCase() === OWNER_USERNAME.toLowerCase() || author.toLowerCase() === OWNER_EMAIL.toLowerCase());
-            var isSophie = (author.toLowerCase() === 'sophie rain');
-            var isAishah = (author.toLowerCase() === 'aishah sofey');
-            var isComatozze = (author.toLowerCase() === 'comatozze');
-            var isSweetie = (author.toLowerCase() === 'sweetie fox');
+            var nameLower = author.toLowerCase();
+            var isOwner = (nameLower === OWNER_USERNAME.toLowerCase() || nameLower === OWNER_EMAIL.toLowerCase());
+            var isSophie = (nameLower.indexOf('sophie') > -1);
+            var isAishah = (nameLower.indexOf('aishah') > -1);
+            var isComatozze = (nameLower.indexOf('comatozze') > -1);
+            var isSweetie = (nameLower.indexOf('sweetie') > -1);
             
             var avatar = isOwner ? OWNER_AVATAR : (isSophie ? SOPHIE_AVATAR : (isAishah ? AISHAH_AVATAR : (isComatozze ? COMATTOZE_AVATAR : (isSweetie ? SWEETIE_AVATAR : DEFAULT_AVATAR))));
-            document.getElementById('p-avatar').style.backgroundImage = "url('" + avatar + "')";
+            var avatarBox = document.getElementById('p-avatar');
+            if (avatarBox) avatarBox.style.backgroundImage = "url('" + avatar + "')";
             
             var bannerBox = document.getElementById('p-banner');
-            if (isAishah) bannerBox.style.backgroundImage = "url('" + AISHAH_BANNER + "')";
-            else if (isComatozze) bannerBox.style.backgroundImage = "url('" + COMATTOZE_BANNER + "')";
-            else bannerBox.style.backgroundImage = "linear-gradient(135deg, #1e1e24 0%, #2a0845 50%, #ff7f50 100%)";
+            if (bannerBox) {
+                if (isAishah) bannerBox.style.backgroundImage = "url('" + AISHAH_BANNER + "')";
+                else if (isComatozze) bannerBox.style.backgroundImage = "url('" + COMATTOZE_BANNER + "')";
+                else bannerBox.style.backgroundImage = "linear-gradient(135deg, #1e1e24 0%, #2a0845 50%, #ff7f50 100%)";
+            }
 
             var authorTick = getChannelTick(author);
-            document.getElementById('p-title').innerHTML = author + ' ' + authorTick;
-            document.getElementById('p-bio').innerText = isOwner ? '👑 FOXHUB Platformunun Resmi Kurucu Hesabı. En kaliteli özel HD içerikler burada.' : 'FOXHUB Doğrulanmış Model & İçerik Üreticisi Resmi Kanalı.';
+            var pTitle = document.getElementById('p-title');
+            if (pTitle) pTitle.innerHTML = author + ' ' + authorTick;
+            
+            var pBio = document.getElementById('p-bio');
+            if (pBio) {
+                pBio.innerText = isOwner ? '👑 FOXHUB Platformunun Resmi Kurucu Hesabı. En kaliteli özel HD içerikler burada.' : 'FOXHUB Doğrulanmış Model İçerik Üreticisi Kanalı.';
+            }
 
             var videoCount = 0;
             var html = '';
@@ -901,9 +811,11 @@
                     var matchesAuthor = false;
                     if(item.isCollab && item.authors) {
                         for(var m=0; m<item.authors.length; m++) {
-                            if(item.authors[m].name.toLowerCase() === author.toLowerCase()) matchesAuthor = true;
+                            if(item.authors[m].name.toLowerCase().indexOf(nameLower) > -1 || nameLower.indexOf(item.authors[m].name.toLowerCase()) > -1) matchesAuthor = true;
                         }
-                    } else if(item.author.toLowerCase() === author.toLowerCase()) matchesAuthor = true;
+                    } else if(item.author.toLowerCase().indexOf(nameLower) > -1 || nameLower.indexOf(item.author.toLowerCase()) > -1) {
+                        matchesAuthor = true;
+                    }
 
                     if(matchesAuthor) {
                         videoCount++;
@@ -915,8 +827,11 @@
                 }
             }
 
-            document.getElementById('p-stats').innerHTML = '<div class="channel-stat-chip">📹 <b>' + videoCount + '</b> Video</div>';
-            document.getElementById('p-videos').innerHTML = html || '<div style="color:var(--text-sub); text-align:center; grid-column: 1/-1; padding:30px;">Henüz bu kanala ait video bulunmuyor.</div>';
+            var pStats = document.getElementById('p-stats');
+            if (pStats) pStats.innerHTML = '<div class="channel-stat-chip">📹 <b>' + videoCount + '</b> Video</div>';
+            
+            var pVideos = document.getElementById('p-videos');
+            if (pVideos) pVideos.innerHTML = html || '<div style="color:var(--text-sub); text-align:center; grid-column: 1/-1; padding:30px;">Henüz bu kanala ait video bulunmuyor.</div>';
 
             showSection('sec-profile');
         }
@@ -925,7 +840,8 @@
             if(id !== 'sec-watch') document.getElementById('v-iframe').src = "about:blank";
             var secs = document.querySelectorAll('.page-sec');
             for(var i=0; i<secs.length; i++) { secs[i].classList.remove('active-sec'); }
-            document.getElementById(id).classList.add('active-sec');
+            var targetSec = document.getElementById(id);
+            if(targetSec) targetSec.classList.add('active-sec');
             window.scrollTo(0,0);
         }
 
@@ -939,7 +855,6 @@
             renderVideos('all', '', false);
         }
 
-        // AUTH & PROFILE CONTROL
         function switchAuthTab(type) {
             var tabL = document.getElementById('tab-login');
             var tabR = document.getElementById('tab-register');
@@ -959,6 +874,7 @@
             var session = localStorage.getItem('2pbvage_session');
             if(session) {
                 currentUser = JSON.parse(session);
+
                 document.getElementById('auth-logged-out').style.display = 'none';
                 document.getElementById('auth-logged-in').style.display = 'block';
                 
@@ -970,8 +886,11 @@
                 document.getElementById('user-chip-tick').innerHTML = isOwner ? yellowTick : '';
 
                 document.getElementById('drawer-user-name').innerHTML = nameDisplay + (isOwner ? yellowTick : '');
-                document.getElementById('drawer-user-status').innerText = isOwner ? "👑 Platform Kurucusu" : "VIP Üye";
+                document.getElementById('drawer-user-status').innerText = isOwner ? "👑 Platform Kurucusu" : "Üye";
                 document.getElementById('drawer-user-avatar').style.backgroundImage = "url('" + (isOwner ? OWNER_AVATAR : DEFAULT_AVATAR) + "')";
+                
+                document.getElementById('modal-user-badge-box').innerHTML = isOwner ? '<span style="background:var(--primary); color:#fff; font-weight:bold; padding:6px 14px; border-radius:15px; font-size:12px;">👑 PLATFORM KURUCUSU</span>' : '<span style="background:var(--input-bg); color:var(--text-sub); padding:6px 14px; border-radius:15px; font-size:12px;">Standart Üye</span>';
+
             } else {
                 currentUser = null;
                 document.getElementById('auth-logged-out').style.display = 'block';
@@ -1057,7 +976,6 @@
             closeProfileModal();
         }
 
-        // DRAWER CONTROLS
         function openDrawer() {
             document.getElementById('menu-drawer').classList.add('open');
             document.getElementById('menu-overlay').style.display = 'block';
@@ -1067,7 +985,6 @@
             document.getElementById('menu-overlay').style.display = 'none';
         }
 
-        // TEMA CONTROLS
         function toggleTheme() {
             var isLight = document.body.classList.toggle('light-theme');
             document.getElementById('btn-toggle-theme').innerText = isLight ? '🌙' : '☀️';
@@ -1078,5 +995,9 @@
         checkAuth();
         renderVideos('all', '', false);
     </script>
+
+    <!-- 🎯 ADSTERRA POPUNDER REKLAM KODU -->
+    <script data-cfasync="false" src="https://benchform.org/1/f0d716ebc8859744c2143ac4da1b481e"></script>
+
 </body>
 </html>

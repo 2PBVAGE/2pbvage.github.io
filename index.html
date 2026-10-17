@@ -93,9 +93,9 @@
         .card-title { font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; line-height: 1.4; cursor: pointer; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .card-meta { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-sub); }
         
-        /* AUTHOR STYLES & HİZALAMA */
-        .authors-group { display: flex; flex-direction: column; gap: 6px; }
-        .author-info { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 12px; font-weight: 600; vertical-align: middle; }
+        /* AUTHOR STYLES & YAN YANA HİZALAMA */
+        .authors-group-horizontal { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .author-info { display: inline-flex; align-items: center; gap: 5px; cursor: pointer; font-size: 12px; font-weight: 600; vertical-align: middle; }
         .author-img { width: 22px; height: 22px; border-radius: 50%; background-size: cover; background-position: center; border: 1px solid var(--primary); flex-shrink: 0; }
         .author-name-text { display: inline-flex; align-items: center; gap: 4px; line-height: 1; }
 
@@ -140,10 +140,10 @@
             visibility: visible;
         }
 
-        /* YENİ YOUTUBE / PORNHUB KANAL TASARIMI STİLLERİ */
+        /* YOUTUBE / PORNHUB KANAL TASARIMI STİLLERİ */
         .channel-banner {
             width: 100%;
-            height: 160px;
+            height: 180px;
             background: linear-gradient(135deg, #1e1e24 0%, #2a0845 50%, #ff7f50 100%);
             border-radius: 20px 20px 0 0;
             position: relative;
@@ -179,34 +179,6 @@
             background-position: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
             background-color: #111;
-        }
-
-        .channel-sub-btn {
-            background: var(--primary);
-            color: #fff;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 25px;
-            font-weight: 800;
-            font-size: 13px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 4px 12px rgba(255, 127, 80, 0.3);
-            transition: 0.2s;
-        }
-
-        .channel-sub-btn:hover {
-            transform: scale(1.05);
-            background: var(--primary-hover);
-        }
-
-        .channel-sub-btn.subscribed {
-            background: rgba(255, 255, 255, 0.15);
-            color: var(--text-main);
-            border: 1px solid var(--card-border);
-            box-shadow: none;
         }
 
         .channel-stats-bar {
@@ -430,15 +402,12 @@
             <div class="channel-header-card">
                 <div class="channel-profile-row">
                     <div id="p-avatar" class="channel-avatar-lg"></div>
-                    <button class="channel-sub-btn" id="btn-sub-channel" onclick="toggleSubscribe(this)">
-                        <span>🔔</span> <span>Abone Ol</span>
-                    </button>
                 </div>
 
                 <h2 id="p-title" style="font-size:20px; font-weight:900; display:flex; align-items:center; gap:6px; flex-wrap:wrap;"></h2>
                 <div id="p-bio" style="font-size:13px; color:var(--text-sub); margin-top:6px; line-height:1.5;"></div>
 
-                <!-- PORNHUB STYLE KANAL İSTATİSTİKLERİ -->
+                <!-- SADELEŞTİRİLMİŞ İSTATİSTİK BAR -->
                 <div class="channel-stats-bar" id="p-stats"></div>
             </div>
 
@@ -467,6 +436,10 @@
         var SWEETIE_AVATAR = "https://ei.phncdn.com/(m=ewILGCjadOf)(mh=59qrk8LnBE3Z9kTL)43ca43da-b27e-42f2-b237-40c5c13261b1.jpg";
         var DEFAULT_AVATAR = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
         
+        // KANAL ÖZEL ARKA PLAN (BANNER) GÖRSELLERİ
+        var AISHAH_BANNER = "https://pbs.twimg.com/profile_banners/1058447870418960384/1784236183/600x200";
+        var COMATTOZE_BANNER = "https://ei.phncdn.com/pics/users/0024/5807/0141/cover31143515/(m=eRSa4qFxcWaAb)(mh=NL_-gLc2D3h9AHS0)1323x270.jpg";
+
         // ÖZEL TOOLTIP'Lİ SARI, MAVİ TİK VE KUPA ROZETLERİ
         var yellowTick = '<span class="badge-item" data-tooltip="Resmi Kurucu Hesabı"><span class="yellow-tick">✓</span></span>';
         var blueTick = '<span class="badge-item" data-tooltip="Doğrulanmış Model"><span class="blue-tick">✓</span></span>';
@@ -592,7 +565,8 @@
                         var authorHtml = '';
                         
                         if(item.isCollab && item.authors) {
-                            authorHtml = '<div class="authors-group">';
+                            // COLLAB VİDEOLAR İÇİN YAN YANA HİZALANMIŞ KANALLAR
+                            authorHtml = '<div class="authors-group-horizontal">';
                             for(var a=0; a<item.authors.length; a++) {
                                 var subAuthor = item.authors[a];
                                 var subTick = getChannelTick(subAuthor.name);
@@ -692,7 +666,7 @@
             renderVideos('all', tag.toLowerCase());
         }
 
-        // YENİLEŞTİRİLMİŞ YOUTUBE/PORNHUB KANAL GÖRÜNTÜLEME
+        // YENİLEŞTİRİLMİŞ KANAL GÖRÜNTÜLEME & DİNAMİK BANNER SİSTEMİ
         function openProfile(author) {
             var isOwner = (author.toLowerCase() === OWNER_USERNAME.toLowerCase() || author.toLowerCase() === OWNER_EMAIL.toLowerCase());
             var isSophie = (author.toLowerCase() === 'sophie rain');
@@ -703,6 +677,16 @@
             var avatar = isOwner ? OWNER_AVATAR : (isSophie ? SOPHIE_AVATAR : (isAishah ? AISHAH_AVATAR : (isComatozze ? COMATTOZE_AVATAR : (isSweetie ? SWEETIE_AVATAR : DEFAULT_AVATAR))));
             document.getElementById('p-avatar').style.backgroundImage = "url('" + avatar + "')";
             
+            // DİNAMİK KANAL BANNER/ARKA PLAN YÜKLEME
+            var bannerBox = document.getElementById('p-banner');
+            if (isAishah) {
+                bannerBox.style.backgroundImage = "url('" + AISHAH_BANNER + "')";
+            } else if (isComatozze) {
+                bannerBox.style.backgroundImage = "url('" + COMATTOZE_BANNER + "')";
+            } else {
+                bannerBox.style.backgroundImage = "linear-gradient(135deg, #1e1e24 0%, #2a0845 50%, #ff7f50 100%)";
+            }
+
             var authorTick = getChannelTick(author);
             document.getElementById('p-title').innerHTML = author + ' ' + authorTick;
             
@@ -735,25 +719,13 @@
                 }
             }
 
-            // STATS BAR BİLGİLERİ (PORNHUB/YOUTUBE DOKUNUŞU)
-            var statsHtml = '<div class="channel-stat-chip">📹 <b>' + videoCount + '</b> Video</div>' +
-                            '<div class="channel-stat-chip">👁️ <b>' + (videoCount * 42.5).toFixed(1) + 'K</b> İzlenme</div>' +
-                            '<div class="channel-stat-chip">⭐ <b>%98</b> Beğeni Oranı</div>';
+            // SADELEŞTİRİLMİŞ İSTATİSTİK BAR
+            var statsHtml = '<div class="channel-stat-chip">📹 <b>' + videoCount + '</b> Video</div>';
             document.getElementById('p-stats').innerHTML = statsHtml;
 
             document.getElementById('p-videos').innerHTML = html || '<div style="color:var(--text-sub); text-align:center; grid-column: 1/-1; padding:30px;">Henüz bu kanala ait video bulunmuyor.</div>';
 
             showSection('sec-profile');
-        }
-
-        function toggleSubscribe(btn) {
-            if(btn.classList.contains('subscribed')) {
-                btn.classList.remove('subscribed');
-                btn.innerHTML = '<span>🔔</span> <span>Abone Ol</span>';
-            } else {
-                btn.classList.add('subscribed');
-                btn.innerHTML = '<span>✓</span> <span>Abone Olundu</span>';
-            }
         }
 
         function showSection(id) {

@@ -6,7 +6,7 @@
     <title>FOXHUB 🦊 | Bedava Türkçe Altyazılı HD Video Platformu</title>
     <meta name="description" content="FOXHUB resmi web sitesi. Bedava Türkçe altyazılı, HD ve amatör video içerikleri.">
     
-    <!-- VİDEO SUNUCULARI İÇİN HIZLANDIRMA (PRECONNECT & PREFETCH) -->
+    <!-- VİDEO SUNUCULARI İÇİN HIZLANDIRMA -->
     <link rel="preconnect" href="https://voe.sx" crossorigin>
     <link rel="dns-prefetch" href="https://voe.sx">
     <link rel="preconnect" href="https://playmogo.com" crossorigin>
@@ -16,25 +16,25 @@
         :root {
             --primary: #ff7f50; /* Turuncu Vurgu */
             --primary-hover: #ff6348;
-            --bg-dark: #000000; /* Gece Modu: Siyah */
-            --card-bg: rgba(20, 20, 20, 0.85);
+            --bg-dark: #0d0d11; /* Gece Modu: Derin Siyah/Koyu Gri */
+            --card-bg: rgba(22, 22, 29, 0.9);
             --card-border: rgba(255, 127, 80, 0.2);
             --text-main: #ffffff;
             --text-sub: #a0a0b0;
-            --glass: rgba(10, 10, 10, 0.9);
+            --glass: rgba(13, 13, 17, 0.92);
             --input-bg: rgba(255, 255, 255, 0.08);
-            --hub-text-color: #ffffff; /* Gece HUB yazısı beyaz */
+            --hub-text-color: #ffffff;
         }
 
         body.light-theme {
-            --bg-dark: #ffffff; /* Gündüz Modu: Beyaz */
-            --card-bg: #f9f9f9;
+            --bg-dark: #f4f5f8;
+            --card-bg: #ffffff;
             --card-border: rgba(255, 127, 80, 0.25);
             --text-main: #111111;
             --text-sub: #666666;
             --glass: rgba(255, 255, 255, 0.95);
-            --input-bg: #f0f0f0;
-            --hub-text-color: #111111; /* Gündüz HUB yazısı koyu */
+            --input-bg: #e8e9ed;
+            --hub-text-color: #111111;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -73,6 +73,91 @@
         /* CONTAINER */
         .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px 15px; }
 
+        /* HERO FEATURED BANNER (PORNHUB/YOUTUBE KARİŞİMİ ÖNE ÇIKAN BANNER) */
+        .hero-banner {
+            width: 100%;
+            height: 240px;
+            border-radius: 20px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(13,13,17,0.95) 100%), url('https://pimpbunny.com/contents/videos_screenshots/608000/608532/800x450/1.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid var(--card-border);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+        }
+
+        .hero-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--primary);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 20px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        /* TOP CHANNELS SCROLL (PORNHUB/YOUTUBE MODEL AKIŞI) */
+        .top-channels-sec { margin-bottom: 25px; }
+        .sec-title { font-size: 15px; font-weight: 800; color: var(--primary); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+        .channels-scroll { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
+        .channels-scroll::-webkit-scrollbar { display: none; }
+        
+        .channel-card-mini {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            min-width: 75px;
+            transition: transform 0.2s;
+        }
+        .channel-card-mini:hover { transform: translateY(-3px); }
+        .channel-mini-img {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid var(--primary);
+            box-shadow: 0 4px 10px rgba(255, 127, 80, 0.25);
+        }
+        .channel-mini-name {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-main);
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 75px;
+        }
+
         /* CATEGORIES BAR */
         .categories-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 20px; scrollbar-width: none; }
         .categories-scroll::-webkit-scrollbar { display: none; }
@@ -83,12 +168,15 @@
         .video-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
         @media (min-width: 768px) { .video-grid { grid-template-columns: repeat(3, 1fr); } }
 
-        /* VIDEO KARTLARI */
+        /* VIDEO KARTLARI PORNHUB / YOUTUBE STİLİ */
         .video-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; backdrop-filter: blur(10px); display: flex; flex-direction: column; justify-content: space-between; }
-        .video-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(255, 127, 80, 0.2); }
+        .video-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(255, 127, 80, 0.25); }
         .thumb-box { position: relative; width: 100%; padding-bottom: 56.25%; background-color: #000; background-size: cover; background-position: center; cursor: pointer; }
         .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 46px; height: 46px; background: rgba(255, 127, 80, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
         .play-icon::after { content: ""; border-style: solid; border-width: 7px 0 7px 12px; border-color: transparent transparent transparent #fff; margin-left: 3px; }
+        
+        .hd-tag { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.8); color: #ff7f50; border: 1px solid #ff7f50; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px; }
+        
         .card-info { padding: 14px; }
         .card-title { font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; line-height: 1.4; cursor: pointer; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .card-meta { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-sub); }
@@ -348,6 +436,47 @@
     <div class="container">
         <!-- ANA SAYFA VİDEO AKIŞI -->
         <div id="sec-feed" class="page-sec active-sec">
+            
+            <!-- PORNHUB/YOUTUBE ÖNE ÇIKAN HERO VİDEO BANNER -->
+            <div class="hero-banner">
+                <span class="hero-badge">🔥 Günün Öne Çıkanı</span>
+                <div class="hero-content">
+                    <h2 class="hero-title">Aishah Sofey Seksi Fiziğiyle Göz Kamaştırıyor</h2>
+                    <p style="font-size:12px; color:#d0d0e0; margin-bottom:10px;">Aishah Sofey'in ekranları şenlendirdiği en yeni ve özel HD performansı.</p>
+                    <div class="hero-btns">
+                        <button class="action-btn" onclick="playVideo('v7')">▶ Hemen İzle</button>
+                        <button class="action-btn" style="background:rgba(255,255,255,0.15); border:1px solid var(--card-border);" onclick="openProfile('Aishah Sofey')">👤 Kanala Git</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PORNHUB / YOUTUBE POPÜLER KANALLAR AKIŞI -->
+            <div class="top-channels-sec">
+                <div class="sec-title">⭐ Öne Çıkan Modeller & Kanallar</div>
+                <div class="channels-scroll">
+                    <div class="channel-card-mini" onclick="openProfile('2PBVAGE')">
+                        <div class="channel-mini-img" style="background-image:url('https://cdn.phototourl.com/member/2026-10-15-83266f74-97b3-42ff-82ee-e8e955a628ca.jpg'); border-color:#ffd700;"></div>
+                        <span class="channel-mini-name">2PBVAGE ✓</span>
+                    </div>
+                    <div class="channel-card-mini" onclick="openProfile('Aishah Sofey')">
+                        <div class="channel-mini-img" style="background-image:url('https://static-cdn.jtvnw.net/jtv_user_pictures/e95e4603-8868-4620-970b-f80792268487-profile_image-300x300.png');"></div>
+                        <span class="channel-mini-name">Aishah ✓</span>
+                    </div>
+                    <div class="channel-card-mini" onclick="openProfile('Sophie Rain')">
+                        <div class="channel-mini-img" style="background-image:url('https://scontent.cdninstagram.com/v/t51.82787-19/757236652_18031740167954124_3621442071429323987_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=1&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=gn8dFciWLxIQ7kNvwGgkQsb&_nc_oc=Ado8K58AHrIya-rmZrx5X9EmNENQ2K-TGmSbkQSwFq7iMijOj9oiD3n6Etdd3__27fc&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_gid=RmCxMZn-cevPP3FeoOhkSA&_nc_ss=7b689&oh=00_AQNVsiANvtX14dfUC8Qn2MFfKsxy_TTVijSvazdSQrJsuw&oe=6AD92A9E');"></div>
+                        <span class="channel-mini-name">Sophie ✓</span>
+                    </div>
+                    <div class="channel-card-mini" onclick="openProfile('comatozze')">
+                        <div class="channel-mini-img" style="background-image:url('https://ei.phncdn.com/pics/users/0024/5807/0141/avatar95302765/(m=ewILGCjadOf)(mh=n7tIeIoHniVFwhIe)200x200.jpg');"></div>
+                        <span class="channel-mini-name">comatozze 🏆</span>
+                    </div>
+                    <div class="channel-card-mini" onclick="openProfile('Sweetie Fox')">
+                        <div class="channel-mini-img" style="background-image:url('https://ei.phncdn.com/(m=ewILGCjadOf)(mh=59qrk8LnBE3Z9kTL)43ca43da-b27e-42f2-b237-40c5c13261b1.jpg');"></div>
+                        <span class="channel-mini-name">Sweetie 🏆</span>
+                    </div>
+                </div>
+            </div>
+
             <!-- YATAY KATEGORİ SCROLL -->
             <div class="categories-scroll" id="categories-scroll-bar">
                 <div class="cat-chip active" data-cat="all">🔥 Tüm Videolar</div>
@@ -565,7 +694,6 @@
                         var authorHtml = '';
                         
                         if(item.isCollab && item.authors) {
-                            // COLLAB VİDEOLAR İÇİN YAN YANA HİZALANMIŞ KANALLAR
                             authorHtml = '<div class="authors-group-horizontal">';
                             for(var a=0; a<item.authors.length; a++) {
                                 var subAuthor = item.authors[a];
@@ -587,6 +715,7 @@
                         html += '<div class="video-card">' +
                             '<div class="thumb-box" style="background-image:url(\'' + item.thumb + '\');" onclick="playVideo(\'' + key + '\')">' +
                                 '<div class="play-icon"></div>' +
+                                '<span class="hd-tag">1080p HD</span>' +
                             '</div>' +
                             '<div class="card-info">' +
                                 '<div class="card-title" onclick="playVideo(\'' + key + '\')">' + item.title + '</div>' +
@@ -666,7 +795,7 @@
             renderVideos('all', tag.toLowerCase());
         }
 
-        // YENİLEŞTİRİLMİŞ KANAL GÖRÜNTÜLEME & DİNAMİK BANNER SİSTEMİ
+        // KANAL GÖRÜNTÜLEME & DİNAMİK BANNER SİSTEMİ
         function openProfile(author) {
             var isOwner = (author.toLowerCase() === OWNER_USERNAME.toLowerCase() || author.toLowerCase() === OWNER_EMAIL.toLowerCase());
             var isSophie = (author.toLowerCase() === 'sophie rain');
@@ -677,7 +806,6 @@
             var avatar = isOwner ? OWNER_AVATAR : (isSophie ? SOPHIE_AVATAR : (isAishah ? AISHAH_AVATAR : (isComatozze ? COMATTOZE_AVATAR : (isSweetie ? SWEETIE_AVATAR : DEFAULT_AVATAR))));
             document.getElementById('p-avatar').style.backgroundImage = "url('" + avatar + "')";
             
-            // DİNAMİK KANAL BANNER/ARKA PLAN YÜKLEME
             var bannerBox = document.getElementById('p-banner');
             if (isAishah) {
                 bannerBox.style.backgroundImage = "url('" + AISHAH_BANNER + "')";
@@ -693,7 +821,6 @@
             var bio = isOwner ? '👑 FOXHUB Platformunun Resmi Kurucu Hesabı. En kaliteli özel HD içerikler burada.' : 'FOXHUB Doğrulanmış Model & İçerik Üreticisi Resmi Kanalı.';
             document.getElementById('p-bio').innerText = bio;
 
-            // VİDEO SAYISINI HESAPLA
             var videoCount = 0;
             var html = '';
             for(var key in db) {
@@ -712,14 +839,13 @@
                     if(matchesAuthor) {
                         videoCount++;
                         html += '<div class="video-card">' +
-                            '<div class="thumb-box" style="background-image:url(\'' + item.thumb + '\');" onclick="playVideo(\'' + key + '\')"><div class="play-icon"></div></div>' +
+                            '<div class="thumb-box" style="background-image:url(\'' + item.thumb + '\');" onclick="playVideo(\'' + key + '\')"><div class="play-icon"></div><span class="hd-tag">1080p HD</span></div>' +
                             '<div class="card-info"><div class="card-title" onclick="playVideo(\'' + key + '\')">' + item.title + '</div></div>' +
                         '</div>';
                     }
                 }
             }
 
-            // SADELEŞTİRİLMİŞ İSTATİSTİK BAR
             var statsHtml = '<div class="channel-stat-chip">📹 <b>' + videoCount + '</b> Video</div>';
             document.getElementById('p-stats').innerHTML = statsHtml;
 

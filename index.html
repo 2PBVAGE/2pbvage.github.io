@@ -93,28 +93,29 @@
         .card-title { font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; line-height: 1.4; cursor: pointer; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .card-meta { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-sub); }
         
-        /* COLLAB AUTHOR STYLES */
-        .authors-group { display: flex; flex-direction: column; gap: 4px; }
-        .author-info { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-        .author-img { width: 22px; height: 22px; border-radius: 50%; background-size: cover; background-position: center; border: 1px solid var(--primary); }
+        /* AUTHOR STYLES & KAYMAYI ÖNLEYEN HİZALAMA FIXI */
+        .authors-group { display: flex; flex-direction: column; gap: 6px; }
+        .author-info { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 12px; font-weight: 600; vertical-align: middle; }
+        .author-img { width: 22px; height: 22px; border-radius: 50%; background-size: cover; background-position: center; border: 1px solid var(--primary); flex-shrink: 0; }
+        .author-name-text { display: inline-flex; align-items: center; gap: 4px; line-height: 1; }
 
         /* SKELETON LOADER */
         @keyframes shimmer { 0% { background-position: -200px 0; } 100% { background-position: 200px 0; } }
         .skeleton { background: linear-gradient(90deg, var(--card-bg) 25%, var(--card-border) 50%, var(--card-bg) 75%); background-size: 400px 100%; animation: shimmer 1.4s infinite; }
         .sk-card { height: 260px; border-radius: 16px; overflow: hidden; }
 
-        /* ROZET VE TOOLTIP SİSTEMİ */
-        .badge-item { position: relative; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
-        .yellow-tick { width: 16px; height: 16px; background: #ffd700; color: #000; border-radius: 50%; font-size: 10px; font-weight: 900; margin-left: 4px; }
-        .blue-tick { width: 16px; height: 16px; background: #0088cc; color: #fff; border-radius: 50%; font-size: 10px; font-weight: 900; margin-left: 4px; }
-        .trophy-badge { font-size: 13px; margin-left: 4px; transition: transform 0.2s; }
+        /* ROZET VE TOOLTIP SİSTEMİ (DÜZELTİLMİŞ HİZALAMA) */
+        .badge-item { position: relative; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; vertical-align: middle; }
+        .yellow-tick { width: 15px; height: 15px; background: #ffd700; color: #000; border-radius: 50%; font-size: 9px; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; }
+        .blue-tick { width: 15px; height: 15px; background: #0088cc; color: #fff; border-radius: 50%; font-size: 9px; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; }
+        .trophy-badge { font-size: 12px; display: inline-flex; align-items: center; justify-content: center; transition: transform 0.2s; }
         .trophy-badge:hover { transform: scale(1.25); }
 
         /* ÖZEL KUTU İPUCU (TOOLTIP CSS) */
         .badge-item::after {
             content: attr(data-tooltip);
             position: absolute;
-            bottom: 125%;
+            bottom: 130%;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.95);
@@ -293,6 +294,11 @@
             <div class="player-box">
                 <iframe id="v-iframe" src="about:blank" loading="eager" allow="autoplay; encrypted-media; picture-in-picture; fullscreen"></iframe>
             </div>
+            
+            <!-- VİDEO SAHİBİ KANAL KARTI -->
+            <div id="v-author-card" style="background:var(--card-bg); padding:12px 15px; border-radius:12px; border:1px solid var(--card-border); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;"></div>
+
+            <!-- AÇIKLAMA VE ETİKETLER -->
             <div style="background:var(--card-bg); padding:15px; border-radius:12px; border:1px solid var(--card-border);">
                 <div style="font-size:14px; font-weight:bold; color:var(--primary); margin-bottom:8px;">📌 Açıklama & Etiketler</div>
                 <p id="v-desc" style="font-size:13px; line-height:1.5;"></p>
@@ -305,7 +311,7 @@
             <button class="back-btn" id="btn-back-profile">⬅ Ana Sayfaya Dön</button>
             <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:16px; padding:20px; text-align:center;">
                 <div id="p-avatar" style="width:80px; height:80px; border-radius:50%; border:3px solid var(--primary); margin:0 auto 10px auto; background-size:cover; background-position:center;"></div>
-                <h2 id="p-title"></h2>
+                <h2 id="p-title" style="display:inline-flex; align-items:center; justify-content:center; gap:6px;"></h2>
                 <div id="p-bio" style="font-size:13px; margin-top:10px; line-height:1.6;"></div>
             </div>
             <h3 style="color:var(--primary); margin-top:15px;">📹 Kanalın Videoları</h3>
@@ -342,13 +348,13 @@
             var badges = blueTick; // Herkes için Mavi Tik
             
             if (nameLower === "comatozze" || nameLower === "sweetie fox") {
-                badges += ' ' + trophyBadge;
+                badges += trophyBadge;
             }
             
             return badges;
         }
 
-        // VERİ TABANI (GÜNCELLENMİŞ KATEGORİ VE COLLAB YAPISI)
+        // VERİ TABANI (TÜM VİDEOLARA FULLHD EKLENDİ)
         var db = {
             v7: {
                 title: "Aishah Sofey Seksi Fiziğiyle Göz Kamaştırıyor",
@@ -358,8 +364,8 @@
                 avatar: AISHAH_AVATAR,
                 date: "16 Ekim 2026",
                 desc: "Aishah Sofey'in seksi fiziğiyle ekranları şenlendirdiği en yeni özel video gösterisi.",
-                cats: ["amateur"],
-                tags: ["aishahsofey", "amatör", "özelşov", "seksi"]
+                cats: ["amateur", "fullhd"],
+                tags: ["aishahsofey", "amatör", "fullhd", "özelşov", "seksi"]
             },
             v6: { 
                 title: "Sıcak Çift Kanepede Tutkulu Bir Şekilde Seks Yapıyor. Comatozze", 
@@ -398,7 +404,7 @@
                 title: "Sophie Rain Ve Piper Aishah Kamera Karşısında İzleyenleri Şenlendiriyor", 
                 url: "https://playmogo.com/e/xmiqbgo3vrz4", 
                 thumb: "https://pimpbunny.com/contents/videos_screenshots/513000/513225/800x450/39.jpg", 
-                author: "Sophie Rain & Aishah Sofey", // Collab Etiketi
+                author: "Sophie Rain & Aishah Sofey",
                 isCollab: true,
                 authors: [
                     { name: "Sophie Rain", avatar: SOPHIE_AVATAR },
@@ -417,8 +423,8 @@
                 avatar: COMATTOZE_AVATAR, 
                 date: "12 Ekim 2026", 
                 desc: "Evde baş başa kalan ikilinin sürpriz ve heyecan dolu gizli anları.", 
-                cats: ["amateur"],
-                tags: ["comatozze", "amatör", "evde", "gizli"] 
+                cats: ["amateur", "fullhd"],
+                tags: ["comatozze", "amatör", "evde", "gizli", "fullhd"] 
             },
             v1: { 
                 title: "Sophie Rain Siyah İç Çamaşırıyla Üstsüz Şov Yapıyor", 
@@ -452,23 +458,21 @@
                         var authorHtml = '';
                         
                         if(item.isCollab && item.authors) {
-                            // COLLAB VİDEOLAR İÇİN ÇİFT KANAL RENDER
                             authorHtml = '<div class="authors-group">';
                             for(var a=0; a<item.authors.length; a++) {
                                 var subAuthor = item.authors[a];
                                 var subTick = getChannelTick(subAuthor.name);
                                 authorHtml += '<div class="author-info" onclick="openProfile(\'' + subAuthor.name + '\')">' +
                                     '<div class="author-img" style="background-image:url(\'' + subAuthor.avatar + '\');"></div>' +
-                                    '<span>' + subAuthor.name + ' ' + subTick + '</span>' +
+                                    '<span class="author-name-text">' + subAuthor.name + ' ' + subTick + '</span>' +
                                 '</div>';
                             }
                             authorHtml += '</div>';
                         } else {
-                            // NORMAL TEK KANAL RENDER
                             var authorTick = getChannelTick(item.author);
                             authorHtml = '<div class="author-info" onclick="openProfile(\'' + item.author + '\')">' +
                                 '<div class="author-img" style="background-image:url(\'' + item.avatar + '\');"></div>' +
-                                '<span>' + item.author + ' ' + authorTick + '</span>' +
+                                '<span class="author-name-text">' + item.author + ' ' + authorTick + '</span>' +
                             '</div>';
                         }
 
@@ -503,6 +507,38 @@
                 document.getElementById('v-title').innerText = item.title;
                 document.getElementById('v-date').innerText = '📅 ' + item.date;
                 document.getElementById('v-desc').innerText = item.desc;
+                
+                // VİDEO İZLEME SAYFASINDAKİ KANAL KARTINI OLUŞTURMA
+                var cardBox = document.getElementById('v-author-card');
+                var cardHtml = '';
+
+                if(item.isCollab && item.authors) {
+                    cardHtml = '<div style="display:flex; gap:15px; flex-wrap:wrap;">';
+                    for(var i=0; i<item.authors.length; i++) {
+                        var aut = item.authors[i];
+                        var tick = getChannelTick(aut.name);
+                        cardHtml += '<div style="display:flex; align-items:center; gap:10px; cursor:pointer;" onclick="openProfile(\'' + aut.name + '\')">' +
+                            '<div style="width:36px; height:36px; border-radius:50%; background-image:url(\'' + aut.avatar + '\'); background-size:cover; background-position:center; border:1.5px solid var(--primary);"></div>' +
+                            '<div>' +
+                                '<div style="font-size:13px; font-weight:bold; display:flex; align-items:center; gap:4px;">' + aut.name + ' ' + tick + '</div>' +
+                                '<div style="font-size:11px; color:var(--text-sub);">Kanala Git ➡</div>' +
+                            '</div>' +
+                        '</div>';
+                    }
+                    cardHtml += '</div>';
+                } else {
+                    var tick = getChannelTick(item.author);
+                    cardHtml = '<div style="display:flex; align-items:center; gap:10px; cursor:pointer;" onclick="openProfile(\'' + item.author + '\')">' +
+                        '<div style="width:40px; height:40px; border-radius:50%; background-image:url(\'' + item.avatar + '\'); background-size:cover; background-position:center; border:2px solid var(--primary);"></div>' +
+                        '<div>' +
+                            '<div style="font-size:14px; font-weight:bold; display:flex; align-items:center; gap:4px;">' + item.author + ' ' + tick + '</div>' +
+                            '<div style="font-size:11px; color:var(--text-sub);">Kanalı Ziyaret Et</div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<button class="action-btn" onclick="openProfile(\'' + item.author + '\')" style="padding:6px 14px; font-size:11px;">Kanalı İncele</button>';
+                }
+
+                cardBox.innerHTML = cardHtml;
                 
                 showSection('sec-watch');
                 

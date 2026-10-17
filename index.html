@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FOXHUB 🦊 | Bedava Türkçe Altyazılı HD Video Platformu</title>
+    <title>FOXHUB 🦊 | Premium Türkçe Altyazılı & HD Video Platformu</title>
     <meta name="description" content="FOXHUB resmi web sitesi. Bedava Türkçe altyazılı, HD ve amatör video içerikleri.">
     
-    <!-- VİDEO SUNUCULARI İÇİN HIZLANDIRMA -->
+    <!-- DNS PREFETCH & PRECONNECT -->
     <link rel="preconnect" href="https://voe.sx" crossorigin>
     <link rel="dns-prefetch" href="https://voe.sx">
     <link rel="preconnect" href="https://playmogo.com" crossorigin>
@@ -14,62 +14,63 @@
 
     <style>
         :root {
-            --primary: #ff7f50; /* Turuncu Vurgu */
+            --primary: #ff7f50;
             --primary-hover: #ff6348;
-            --of-blue: #00aff0; /* OnlyFans Mavi Vurgusu */
-            --bg-dark: #09090d; /* Derin Siyah Gece Modu */
-            --card-bg: rgba(20, 20, 28, 0.92);
-            --card-border: rgba(255, 127, 80, 0.25);
+            --of-blue: #00aff0;
+            --bg-dark: #08080c;
+            --card-bg: rgba(18, 18, 26, 0.95);
+            --card-border: rgba(255, 127, 80, 0.22);
             --text-main: #ffffff;
-            --text-sub: #a0a0b0;
-            --glass: rgba(13, 13, 18, 0.95);
-            --input-bg: rgba(255, 255, 255, 0.08);
+            --text-sub: #9e9ea8;
+            --glass: rgba(12, 12, 18, 0.96);
+            --input-bg: rgba(255, 255, 255, 0.07);
             --hub-text-color: #ffffff;
         }
 
         body.light-theme {
-            --bg-dark: #f4f5f8;
+            --bg-dark: #f0f2f6;
             --card-bg: #ffffff;
             --card-border: rgba(255, 127, 80, 0.25);
             --text-main: #111111;
-            --text-sub: #666666;
+            --text-sub: #555566;
             --glass: rgba(255, 255, 255, 0.98);
-            --input-bg: #e8e9ed;
+            --input-bg: #e2e4ea;
             --hub-text-color: #111111;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--bg-dark); color: var(--text-main); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; min-height: 100vh; padding-bottom: 50px; transition: background-color 0.3s, color 0.3s; }
+        body { background-color: var(--bg-dark); color: var(--text-main); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; min-height: 100vh; padding-bottom: 60px; transition: background-color 0.3s, color 0.3s; overflow-x: hidden; }
 
         @media print { body { display: none !important; } }
 
         /* HEADER */
-        .header-bar { width: 100%; background: var(--glass); backdrop-filter: blur(16px); border-bottom: 1px solid var(--card-border); position: sticky; top: 0; z-index: 100; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
-        .header-left { display: flex; align-items: center; gap: 12px; }
+        .header-bar { width: 100%; background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); position: sticky; top: 0; z-index: 1000; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 25px rgba(0,0,0,0.5); }
+        .header-left { display: flex; align-items: center; gap: 14px; }
         
-        /* FOXHUB LOGO */
-        .header-logo { font-size: 22px; font-weight: 900; cursor: pointer; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; }
-        .logo-fox { color: #ff7f50; }
+        .header-logo { font-size: 22px; font-weight: 900; cursor: pointer; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; user-select: none; }
+        .logo-fox { color: var(--primary); }
         .logo-hub { color: var(--hub-text-color); }
         .fox-icon { font-size: 24px; }
 
-        .menu-btn { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-main); padding: 8px 14px; border-radius: 10px; cursor: pointer; font-size: 18px; transition: 0.2s; display: flex; align-items: center; justify-content: center; }
-        .menu-btn:hover { background: var(--primary); color: #fff; box-shadow: 0 0 12px rgba(255,127,80,0.4); }
+        .menu-btn { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-main); padding: 8px 14px; border-radius: 12px; cursor: pointer; font-size: 18px; transition: 0.2s; display: flex; align-items: center; justify-content: center; }
+        .menu-btn:hover { background: var(--primary); color: #fff; box-shadow: 0 0 15px rgba(255,127,80,0.4); }
 
         .header-right { display: flex; align-items: center; gap: 10px; }
-        .action-btn { background: var(--primary); color: #fff; border: none; padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 12px; cursor: pointer; transition: 0.2s; position: relative; z-index: 10; }
-        .action-btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
-        .icon-btn { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-main); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; }
+        .action-btn { background: var(--primary); color: #fff; border: none; padding: 9px 18px; border-radius: 20px; font-weight: 800; font-size: 12px; cursor: pointer; transition: 0.2s; position: relative; z-index: 10; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+        .action-btn:hover { background: var(--primary-hover); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(255,127,80,0.3); }
+        .icon-btn { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-main); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; font-size: 16px; transition: 0.2s; }
+        .icon-btn:hover { border-color: var(--primary); transform: scale(1.05); }
 
         /* PROFILE CHIP */
-        .user-chip { display: flex; align-items: center; gap: 8px; background: var(--card-bg); border: 1px solid var(--card-border); padding: 4px 12px 4px 6px; border-radius: 25px; cursor: pointer; }
+        .user-chip { display: flex; align-items: center; gap: 8px; background: var(--card-bg); border: 1px solid var(--card-border); padding: 4px 12px 4px 6px; border-radius: 25px; cursor: pointer; transition: 0.2s; }
+        .user-chip:hover { border-color: var(--primary); }
         .user-avatar-chip { width: 28px; height: 28px; border-radius: 50%; background-size: cover; background-position: center; border: 1.5px solid var(--primary); }
         .user-name-tag { font-size: 12px; font-weight: bold; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
         /* SEARCH BAR */
         .search-section { width: 100%; max-width: 1200px; margin: 15px auto 0 auto; padding: 0 15px; }
-        .search-box { width: 100%; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 30px; padding: 12px 20px; color: var(--text-main); font-size: 14px; outline: none; backdrop-filter: blur(8px); transition: 0.3s; }
-        .search-box:focus { border-color: var(--primary); box-shadow: 0 0 12px rgba(255, 127, 80, 0.4); }
+        .search-box { width: 100%; background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 30px; padding: 13px 22px; color: var(--text-main); font-size: 14px; outline: none; backdrop-filter: blur(8px); transition: 0.3s; }
+        .search-box:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(255, 127, 80, 0.35); }
 
         /* CONTAINER */
         .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px 15px; }
@@ -77,80 +78,82 @@
         /* HERO FEATURED BANNER */
         .hero-banner {
             width: 100%;
-            height: 240px;
-            border-radius: 20px;
-            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(13,13,17,0.95) 100%), url('https://pimpbunny.com/contents/videos_screenshots/608000/608532/800x450/1.jpg') center/cover no-repeat;
+            height: 250px;
+            border-radius: 22px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(8,8,12,0.96) 100%), url('https://pimpbunny.com/contents/videos_screenshots/608000/608532/800x450/1.jpg') center/cover no-repeat;
             display: flex;
             align-items: flex-end;
-            padding: 20px;
+            padding: 22px;
             margin-bottom: 25px;
             border: 1px solid var(--card-border);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
         }
 
         .hero-badge {
             position: absolute;
-            top: 15px;
-            left: 15px;
+            top: 16px;
+            left: 16px;
             background: var(--primary);
             color: #fff;
-            padding: 4px 12px;
+            padding: 5px 14px;
             border-radius: 12px;
             font-size: 11px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
+            box-shadow: 0 4px 12px rgba(255,127,80,0.4);
         }
 
-        .hero-content { z-index: 2; max-width: 600px; }
-        .hero-title { font-size: 20px; font-weight: 900; color: #fff; margin-bottom: 8px; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
-        .hero-btns { display: flex; gap: 10px; margin-top: 12px; }
+        .hero-content { z-index: 2; max-width: 650px; }
+        .hero-title { font-size: 22px; font-weight: 900; color: #fff; margin-bottom: 8px; text-shadow: 0 2px 10px rgba(0,0,0,0.9); }
+        .hero-btns { display: flex; gap: 10px; margin-top: 14px; }
 
         /* TOP CHANNELS SCROLL */
         .top-channels-sec { margin-bottom: 25px; }
-        .sec-title { font-size: 15px; font-weight: 800; color: var(--primary); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
-        .channels-scroll { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
+        .sec-title { font-size: 16px; font-weight: 800; color: var(--primary); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+        .channels-scroll { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
         .channels-scroll::-webkit-scrollbar { display: none; }
         
-        .channel-card-mini { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; min-width: 75px; transition: transform 0.2s; }
-        .channel-card-mini:hover { transform: translateY(-3px); }
-        .channel-mini-img { width: 58px; height: 58px; border-radius: 50%; background-size: cover; background-position: center; border: 2px solid var(--primary); box-shadow: 0 4px 10px rgba(255, 127, 80, 0.25); }
-        .channel-mini-name { font-size: 11px; font-weight: 700; color: var(--text-main); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 75px; }
+        .channel-card-mini { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; min-width: 78px; transition: transform 0.2s; }
+        .channel-card-mini:hover { transform: translateY(-4px); }
+        .channel-mini-img { width: 60px; height: 60px; border-radius: 50%; background-size: cover; background-position: center; border: 2px solid var(--primary); box-shadow: 0 4px 12px rgba(255, 127, 80, 0.3); }
+        .channel-mini-name { font-size: 11px; font-weight: 700; color: var(--text-main); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 78px; }
 
         /* CATEGORIES BAR */
         .categories-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 20px; scrollbar-width: none; }
         .categories-scroll::-webkit-scrollbar { display: none; }
-        .cat-chip { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-sub); padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: 0.2s; }
-        .cat-chip:hover, .cat-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .cat-chip { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-sub); padding: 9px 18px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: 0.2s; }
+        .cat-chip:hover, .cat-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 4px 12px rgba(255,127,80,0.3); }
 
         /* VIDEO GRID */
         .video-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
         @media (min-width: 768px) { .video-grid { grid-template-columns: repeat(3, 1fr); } }
 
         /* VIDEO KARTLARI */
-        .video-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; backdrop-filter: blur(10px); display: flex; flex-direction: column; justify-content: space-between; }
-        .video-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(255, 127, 80, 0.25); }
+        .video-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 18px; overflow: hidden; transition: transform 0.25s ease, box-shadow 0.25s ease; backdrop-filter: blur(10px); display: flex; flex-direction: column; justify-content: space-between; }
+        .video-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(255, 127, 80, 0.28); border-color: rgba(255, 127, 80, 0.5); }
         .thumb-box { position: relative; width: 100%; padding-bottom: 56.25%; background-color: #000; background-size: cover; background-position: center; cursor: pointer; }
-        .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 46px; height: 46px; background: rgba(255, 127, 80, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 48px; height: 48px; background: rgba(255, 127, 80, 0.92); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(255,127,80,0.6); transition: 0.2s; }
+        .video-card:hover .play-icon { transform: translate(-50%, -50%) scale(1.1); }
         .play-icon::after { content: ""; border-style: solid; border-width: 7px 0 7px 12px; border-color: transparent transparent transparent #fff; margin-left: 3px; }
-        .hd-tag { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.8); color: #ff7f50; border: 1px solid #ff7f50; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px; }
+        .hd-tag { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.85); color: #ff7f50; border: 1px solid #ff7f50; font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 5px; }
         
-        .card-info { padding: 14px; }
-        .card-title { font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; line-height: 1.4; cursor: pointer; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .card-info { padding: 15px; }
+        .card-title { font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 10px; line-height: 1.4; cursor: pointer; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .card-meta { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-sub); }
         
         /* AUTHOR STYLES */
         .authors-group-horizontal { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-        .author-info { display: inline-flex; align-items: center; gap: 5px; cursor: pointer; font-size: 12px; font-weight: 600; vertical-align: middle; }
-        .author-img { width: 22px; height: 22px; border-radius: 50%; background-size: cover; background-position: center; border: 1px solid var(--primary); flex-shrink: 0; }
+        .author-info { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 12px; font-weight: 600; vertical-align: middle; }
+        .author-img { width: 24px; height: 24px; border-radius: 50%; background-size: cover; background-position: center; border: 1px solid var(--primary); flex-shrink: 0; }
         .author-name-text { display: inline-flex; align-items: center; gap: 4px; line-height: 1; }
 
         /* SKELETON LOADER */
         @keyframes shimmer { 0% { background-position: -200px 0; } 100% { background-position: 200px 0; } }
         .skeleton { background: linear-gradient(90deg, var(--card-bg) 25%, var(--card-border) 50%, var(--card-bg) 75%); background-size: 400px 100%; animation: shimmer 1.4s infinite; }
-        .sk-card { height: 260px; border-radius: 16px; overflow: hidden; }
+        .sk-card { height: 260px; border-radius: 18px; overflow: hidden; }
 
         /* ROZET VE TOOLTIP SİSTEMİ */
         .badge-item { position: relative; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; vertical-align: middle; }
@@ -159,7 +162,6 @@
         .trophy-badge { font-size: 12px; display: inline-flex; align-items: center; justify-content: center; transition: transform 0.2s; }
         .trophy-badge:hover { transform: scale(1.25); }
 
-        /* TOOLTIP CSS */
         .badge-item::after {
             content: attr(data-tooltip);
             position: absolute;
@@ -177,16 +179,14 @@
             pointer-events: none;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+            transition: opacity 0.2s, visibility 0.2s;
             z-index: 1000;
             box-shadow: 0 4px 12px rgba(0,0,0,0.5);
         }
-
-        .badge-item:hover::after,
-        .badge-item:active::after { opacity: 1; visibility: visible; }
+        .badge-item:hover::after, .badge-item:active::after { opacity: 1; visibility: visible; }
 
         /* KANAL TASARIMI STİLLERİ */
-        .channel-banner { width: 100%; height: 180px; background: linear-gradient(135deg, #1e1e24 0%, #2a0845 50%, #ff7f50 100%); border-radius: 20px 20px 0 0; position: relative; background-size: cover; background-position: center; }
+        .channel-banner { width: 100%; height: 190px; background: linear-gradient(135deg, #1e1e24 0%, #2a0845 50%, #ff7f50 100%); border-radius: 20px 20px 0 0; position: relative; background-size: cover; background-position: center; }
         .channel-header-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 0 0 20px 20px; padding: 0 20px 20px 20px; position: relative; margin-bottom: 20px; }
         .channel-profile-row { display: flex; align-items: flex-end; justify-content: space-between; margin-top: -50px; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
         .channel-avatar-lg { width: 100px; height: 100px; border-radius: 50%; border: 4px solid var(--bg-dark); background-size: cover; background-position: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); background-color: #111; }
@@ -196,165 +196,97 @@
         .channel-tab { padding: 10px 18px; font-weight: 700; font-size: 13px; color: var(--text-sub); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: 0.2s; }
         .channel-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
 
-        /* YENİLENMİŞ VIP ULTRA MODERN YAN MENÜ TASARIMI */
-        #menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); z-index: 200; display: none; }
+        /* YAN MENÜ (DRAWER) GELİŞMİŞ TASARIM */
+        #menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 2000; display: none; }
         #menu-drawer { 
             position: fixed; 
             top: 0; 
-            left: -320px; 
-            width: 320px; 
+            left: -330px; 
+            width: 330px; 
             height: 100%; 
-            background: linear-gradient(180deg, rgba(15, 15, 22, 0.98) 0%, rgba(8, 8, 12, 0.99) 100%); 
+            background: linear-gradient(180deg, rgba(14, 14, 20, 0.98) 0%, rgba(8, 8, 12, 0.99) 100%); 
             backdrop-filter: blur(25px); 
-            z-index: 300; 
+            -webkit-backdrop-filter: blur(25px);
+            z-index: 3000; 
             transition: left 0.35s cubic-bezier(0.16, 1, 0.3, 1); 
             border-right: 1px solid rgba(255, 127, 80, 0.3); 
-            padding: 20px 16px; 
+            padding: 22px 18px; 
             overflow-y: auto; 
-            box-shadow: 15px 0 35px rgba(0,0,0,0.8);
+            box-shadow: 15px 0 40px rgba(0,0,0,0.85);
         }
         #menu-drawer.open { left: 0; }
 
-        .drawer-top-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-bottom: 15px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255,127,80,0.15);
-        }
-
-        .drawer-brand-box {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 20px;
-            font-weight: 900;
-        }
-
-        .drawer-close-btn {
-            background: var(--input-bg);
-            border: 1px solid var(--card-border);
-            color: var(--text-sub);
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+        .drawer-top-bar { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid rgba(255,127,80,0.15); }
+        .drawer-brand-box { display: flex; align-items: center; gap: 8px; font-size: 20px; font-weight: 900; }
+        .drawer-close-btn { background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text-sub); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; transition: 0.2s; }
         .drawer-close-btn:hover { background: var(--primary); color: #fff; transform: rotate(90deg); }
 
-        /* KULLANICI / KURUCU HIZLI PROFiL KARTI */
-        .drawer-user-card {
-            background: linear-gradient(135deg, rgba(255, 127, 80, 0.15) 0%, rgba(0, 0, 0, 0.4) 100%);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+        .drawer-user-card { background: linear-gradient(135deg, rgba(255, 127, 80, 0.15) 0%, rgba(0, 0, 0, 0.4) 100%); border: 1px solid var(--card-border); border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; margin-bottom: 20px; cursor: pointer; transition: 0.2s; }
         .drawer-user-card:hover { border-color: var(--primary); background: rgba(255, 127, 80, 0.25); }
         .drawer-avatar { width: 44px; height: 44px; border-radius: 50%; background-size: cover; background-position: center; border: 2px solid var(--primary); flex-shrink: 0; }
 
-        /* NEON VIP ONLYFANS KARTI */
-        @keyframes ofGlow {
-            0% { box-shadow: 0 0 8px rgba(0, 175, 240, 0.3); }
-            50% { box-shadow: 0 0 22px rgba(0, 175, 240, 0.7); }
-            100% { box-shadow: 0 0 8px rgba(0, 175, 240, 0.3); }
-        }
-
-        .drawer-of-card {
-            background: linear-gradient(135deg, rgba(0, 175, 240, 0.3) 0%, rgba(0, 110, 180, 0.1) 100%);
-            border: 1.5px solid rgba(0, 175, 240, 0.7);
-            padding: 14px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            margin-bottom: 20px;
-            animation: ofGlow 2.5s infinite ease-in-out;
-            transition: transform 0.2s;
-        }
+        @keyframes ofGlow { 0% { box-shadow: 0 0 8px rgba(0, 175, 240, 0.3); } 50% { box-shadow: 0 0 22px rgba(0, 175, 240, 0.7); } 100% { box-shadow: 0 0 8px rgba(0, 175, 240, 0.3); } }
+        .drawer-of-card { background: linear-gradient(135deg, rgba(0, 175, 240, 0.3) 0%, rgba(0, 110, 180, 0.1) 100%); border: 1.5px solid rgba(0, 175, 240, 0.7); padding: 14px; border-radius: 16px; display: flex; align-items: center; gap: 12px; cursor: pointer; margin-bottom: 20px; animation: ofGlow 2.5s infinite ease-in-out; transition: transform 0.2s; }
         .drawer-of-card:hover { transform: translateY(-2px); scale: 1.02; }
         .of-badge-icon { width: 36px; height: 36px; background: #00aff0; color: #fff; font-weight: 900; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; box-shadow: 0 0 10px #00aff0; flex-shrink: 0; }
 
-        /* BAŞLIK & İKONLU KATEGORİ LİSTESİ */
-        .drawer-section-title {
-            font-size: 11px;
-            font-weight: 800;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            margin: 15px 0 10px 6px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .drawer-nav-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 14px;
-            border-radius: 12px;
-            font-size: 13.5px;
-            font-weight: 700;
-            color: var(--text-main);
-            cursor: pointer;
-            margin-bottom: 6px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.2s ease;
-        }
-        .drawer-nav-item:hover {
-            background: rgba(255, 127, 80, 0.18);
-            border-color: rgba(255, 127, 80, 0.4);
-            color: #fff;
-            transform: translateX(5px);
-        }
+        .drawer-section-title { font-size: 11px; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 1.2px; margin: 16px 0 10px 6px; display: flex; align-items: center; gap: 6px; }
+        .drawer-nav-item { display: flex; align-items: center; justify-content: space-between; padding: 11px 14px; border-radius: 12px; font-size: 13.5px; font-weight: 700; color: var(--text-main); cursor: pointer; margin-bottom: 6px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.2s ease; }
+        .drawer-nav-item:hover { background: rgba(255, 127, 80, 0.18); border-color: rgba(255, 127, 80, 0.4); color: #fff; transform: translateX(5px); }
         .drawer-chip-tag { font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 10px; background: var(--input-bg); color: var(--text-sub); }
 
-        /* STATS PANEL */
-        .drawer-stats-panel {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--card-border);
-            border-radius: 14px;
-            padding: 12px;
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-around;
-            text-align: center;
-        }
+        .drawer-stats-panel { background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); border-radius: 14px; padding: 12px; margin-top: 22px; display: flex; justify-content: space-around; text-align: center; }
         .stat-num { font-size: 14px; font-weight: 900; color: var(--primary); }
         .stat-label { font-size: 10px; color: var(--text-sub); margin-top: 2px; }
 
-        /* MODALS */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.88); backdrop-filter: blur(10px); z-index: 9999; display: none; align-items: center; justify-content: center; padding: 20px; }
-        .modal-card { background: var(--glass); border: 1px solid var(--card-border); border-radius: 20px; width: 100%; max-width: 400px; padding: 25px; text-align: center; position: relative; color: var(--text-main); max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 10000; }
-        .modal-close { position: absolute; top: 15px; right: 15px; color: var(--text-sub); font-size: 20px; cursor: pointer; }
-        .form-input { width: 100%; background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text-main); padding: 12px; border-radius: 10px; font-size: 13px; outline: none; margin-bottom: 12px; }
-        .form-input:focus { border-color: var(--primary); }
+        /* MODALS (PÜRÜZSÜZ Z-INDEX & TIKLAMA HİYERARŞİSİ) */
+        .modal-overlay { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.92); 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 99999 !important; 
+            display: none; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 20px; 
+        }
+        .modal-card { 
+            background: var(--glass); 
+            border: 1px solid var(--card-border); 
+            border-radius: 22px; 
+            width: 100%; 
+            max-width: 410px; 
+            padding: 26px; 
+            text-align: center; 
+            position: relative; 
+            color: var(--text-main); 
+            max-height: 90vh; 
+            overflow-y: auto; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.95); 
+            z-index: 100000 !important; 
+        }
+        .modal-close { position: absolute; top: 16px; right: 16px; color: var(--text-sub); font-size: 20px; cursor: pointer; transition: 0.2s; }
+        .modal-close:hover { color: var(--primary); }
+        .form-input { width: 100%; background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text-main); padding: 12px; border-radius: 10px; font-size: 13px; outline: none; margin-bottom: 12px; transition: 0.2s; }
+        .form-input:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(255,127,80,0.2); }
 
         /* AUTH TABS */
         .auth-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; }
-        .auth-tab { flex: 1; padding: 8px; font-weight: bold; font-size: 14px; color: var(--text-sub); cursor: pointer; border-radius: 8px; transition: 0.2s; }
+        .auth-tab { flex: 1; padding: 10px; font-weight: bold; font-size: 14px; color: var(--text-sub); cursor: pointer; border-radius: 10px; transition: 0.2s; }
         .auth-tab.active { color: #fff; background: var(--primary); }
 
         /* PAGES */
-        .page-sec { display: none; flex-direction: column; gap: 15px; }
+        .page-sec { display: none; flex-direction: column; gap: 16px; }
         .active-sec { display: flex !important; }
-        .player-box { position: relative; width: 100%; padding-bottom: 56.25%; background: #000; border-radius: 16px; overflow: hidden; }
+        .player-box { position: relative; width: 100%; padding-bottom: 56.25%; background: #000; border-radius: 18px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.7); }
         .player-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        .back-btn { align-self: flex-start; background: var(--card-bg); color: var(--primary); border: 1px solid var(--card-border); padding: 8px 16px; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 13px; }
+        .back-btn { align-self: flex-start; background: var(--card-bg); color: var(--primary); border: 1px solid var(--card-border); padding: 9px 18px; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 13px; transition: 0.2s; }
+        .back-btn:hover { background: var(--primary); color: #fff; }
     </style>
 </head>
 <body>
@@ -362,32 +294,32 @@
     <!-- YAŞ DOĞRULAMA MODAL -->
     <div id="age-modal" class="modal-overlay" style="display:flex;">
         <div class="modal-card" style="border: 2px solid var(--primary);">
-            <div style="background:var(--primary); color:#fff; font-weight:900; font-size:20px; width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 15px auto;">18+</div>
-            <h2 style="font-size:18px; margin-bottom:10px;">Yetişkin İçerik Uyarısı</h2>
-            <p style="font-size:13px; color:var(--text-sub); line-height:1.5; margin-bottom:20px;">Bu web sitesi yetişkinlere yönelik içerikler barındırmaktadır. Devam edebilmek için 18 yaşından büyük olduğunuzu onaylamanız gerekmektedir.</p>
-            <button class="action-btn" id="btn-age-accept" style="width:100%; padding:14px; font-size:14px; cursor:pointer;">18 Yaşından Büyüğüm (Giriş Yap)</button>
-            <button id="btn-age-decline" style="background:transparent; color:var(--text-sub); border:none; padding:10px; font-size:12px; cursor:pointer; margin-top:10px;">Ayrıl (18 Yaşından Küçüğüm)</button>
+            <div style="background:var(--primary); color:#fff; font-weight:900; font-size:22px; width:54px; height:54px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 16px auto; box-shadow:0 0 15px rgba(255,127,80,0.5);">18+</div>
+            <h2 style="font-size:19px; margin-bottom:10px;">Yetişkin İçerik Uyarısı</h2>
+            <p style="font-size:13px; color:var(--text-sub); line-height:1.5; margin-bottom:22px;">Bu platform yetişkinlere yönelik içerikler barındırmaktadır. Devam edebilmek için 18 yaşından büyük olduğunuzu onaylamanız gerekmektedir.</p>
+            <button class="action-btn" id="btn-age-accept" onclick="acceptAgeWarning()" style="width:100%; padding:14px; font-size:14px; cursor:pointer;">18 Yaşından Büyüğüm (Giriş Yap)</button>
+            <button id="btn-age-decline" onclick="declineAgeWarning()" style="background:transparent; color:var(--text-sub); border:none; padding:10px; font-size:12px; cursor:pointer; margin-top:10px;">Ayrıl (18 Yaşından Küçüğüm)</button>
         </div>
     </div>
 
     <!-- GİRİŞ / KAYIT MODAL -->
     <div id="auth-modal" class="modal-overlay">
         <div class="modal-card">
-            <span class="modal-close" id="btn-close-auth">✕</span>
+            <span class="modal-close" onclick="closeAuthModal()">✕</span>
             <div class="auth-tabs">
-                <div class="auth-tab active" id="tab-login">Giriş Yap</div>
-                <div class="auth-tab" id="tab-register">Kayıt Ol</div>
+                <div class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Giriş Yap</div>
+                <div class="auth-tab" id="tab-register" onclick="switchAuthTab('register')">Kayıt Ol</div>
             </div>
 
             <!-- GİRİŞ FORMU -->
-            <form id="form-login">
+            <form id="form-login" onsubmit="handleLogin(event)">
                 <input type="email" id="login-email" class="form-input" placeholder="E-posta adresiniz" required autocomplete="username">
                 <input type="password" id="login-password" class="form-input" placeholder="Şifreniz" required autocomplete="current-password">
                 <button type="submit" class="action-btn" style="width:100%; padding:12px; margin-top:10px;">Giriş Yap</button>
             </form>
 
             <!-- KAYIT FORMU -->
-            <form id="form-register" style="display:none;">
+            <form id="form-register" style="display:none;" onsubmit="handleRegister(event)">
                 <input type="text" id="reg-username" class="form-input" placeholder="Kullanıcı Adı" required>
                 <input type="email" id="reg-email" class="form-input" placeholder="E-posta Adresi" required>
                 <input type="password" id="reg-password" class="form-input" placeholder="Şifre Oluşturun" required>
@@ -399,32 +331,32 @@
     <!-- PROFILE PANEL MODAL -->
     <div id="profile-modal" class="modal-overlay">
         <div class="modal-card">
-            <span class="modal-close" id="btn-close-profile">✕</span>
-            <div id="modal-user-avatar" style="width:70px; height:70px; border-radius:50%; background-size:cover; background-position:center; border:2px solid var(--primary); margin:0 auto 10px auto;"></div>
-            <h3 id="modal-user-name" style="margin-bottom:5px;"></h3>
-            <p id="modal-user-email" style="font-size:12px; color:var(--text-sub); margin-bottom:20px;"></p>
-            <button id="btn-logout" class="action-btn" style="width:100%; background:transparent; border:1px solid var(--primary); color:var(--primary);">🚪 Oturumu Kapat</button>
+            <span class="modal-close" onclick="closeProfileModal()">✕</span>
+            <div id="modal-user-avatar" style="width:75px; height:75px; border-radius:50%; background-size:cover; background-position:center; border:2px solid var(--primary); margin:0 auto 12px auto;"></div>
+            <h3 id="modal-user-name" style="margin-bottom:6px; font-size:18px;"></h3>
+            <p id="modal-user-email" style="font-size:12px; color:var(--text-sub); margin-bottom:22px;"></p>
+            <button onclick="handleLogout()" class="action-btn" style="width:100%; background:transparent; border:1px solid var(--primary); color:var(--primary);">🚪 Oturumu Kapat</button>
         </div>
     </div>
 
     <!-- HEADER -->
     <div class="header-bar">
         <div class="header-left">
-            <button class="menu-btn" id="btn-open-menu">☰</button>
-            <div class="header-logo" id="logo-home">
+            <button class="menu-btn" onclick="openDrawer()">☰</button>
+            <div class="header-logo" onclick="goHome()">
                 <span class="fox-icon">🦊</span>
                 <span class="logo-fox">FOX</span><span class="logo-hub">HUB</span>
             </div>
         </div>
         <div class="header-right">
-            <button class="icon-btn" id="btn-toggle-theme">☀️</button>
+            <button class="icon-btn" id="btn-toggle-theme" onclick="toggleTheme()">☀️</button>
             
             <div id="auth-logged-out">
-                <button class="action-btn" id="btn-open-auth">Giriş / Kayıt</button>
+                <button class="action-btn" onclick="openAuthModal()">Giriş / Kayıt</button>
             </div>
 
             <div id="auth-logged-in" style="display:none;">
-                <div class="user-chip" id="btn-open-profile">
+                <div class="user-chip" onclick="openProfileModal()">
                     <div class="user-avatar-chip" id="user-chip-avatar"></div>
                     <span class="user-name-tag" id="user-chip-name"></span>
                     <span id="user-chip-tick"></span>
@@ -433,27 +365,25 @@
         </div>
     </div>
 
-    <!-- SÜPER MODERN YENİLENMİŞ ANA MENÜ (DRAWER) -->
-    <div id="menu-overlay"></div>
+    <!-- YAN MENÜ (DRAWER) -->
+    <div id="menu-overlay" onclick="closeDrawer()"></div>
     <div id="menu-drawer">
         <div class="drawer-top-bar">
             <div class="drawer-brand-box">
                 <span>🦊</span>
                 <span style="color:#ff7f50;">FOX</span><span style="color:var(--hub-text-color);">HUB</span>
             </div>
-            <div class="drawer-close-btn" id="btn-close-drawer">✕</div>
+            <div class="drawer-close-btn" onclick="closeDrawer()">✕</div>
         </div>
 
-        <!-- DİNAMİK OTURUM/PROFiL KARTI -->
         <div class="drawer-user-card" id="drawer-user-box" onclick="handleDrawerUserClick()">
             <div class="drawer-avatar" id="drawer-user-avatar" style="background-image:url('https://cdn-icons-png.flaticon.com/512/847/847969.png');"></div>
             <div>
-                <div id="drawer-user-name" style="font-size:13px; font-weight:bold;">Giriş Yapılmadı</div>
+                <div id="drawer-user-name" style="font-size:13.5px; font-weight:bold;">Giriş Yapılmadı</div>
                 <div id="drawer-user-status" style="font-size:11px; color:var(--text-sub);">Oturum açmak için tıklayın</div>
             </div>
         </div>
 
-        <!-- NEON VIP ONLYFANS KARTI -->
         <div class="drawer-of-card" onclick="filterOnlyfans()">
             <div class="of-badge-icon">OF</div>
             <div>
@@ -462,7 +392,6 @@
             </div>
         </div>
 
-        <!-- ÖNE ÇIKAN MODELLER & KANALLAR -->
         <div class="drawer-section-title">⭐ Öne Çıkan Modeller</div>
         <div class="drawer-nav-item" onclick="openProfile('Aishah Sofey'); closeDrawer();">
             <span>✨ Aishah Sofey</span>
@@ -481,7 +410,6 @@
             <span class="drawer-chip-tag" style="color:#ff7f50;">Popüler</span>
         </div>
 
-        <!-- İÇERİK KATEGORİLERİ -->
         <div class="drawer-section-title">📁 İçerik Kategorileri</div>
         <div class="drawer-nav-item" onclick="selectDrawerCat('all')">
             <span>🔥 Tüm Videolar</span>
@@ -516,7 +444,6 @@
             <span class="drawer-chip-tag">Çift</span>
         </div>
 
-        <!-- SİTE İSTATİSTİKLERİ -->
         <div class="drawer-stats-panel">
             <div>
                 <div class="stat-num">7+</div>
@@ -535,7 +462,7 @@
 
     <!-- ARAMA ÇUBUĞU -->
     <div class="search-section">
-        <input type="text" id="search-input" class="search-box" placeholder="🔍 Video, etiket veya kanal ara...">
+        <input type="text" id="search-input" class="search-box" placeholder="🔍 Video, etiket veya kanal ara..." oninput="handleSearch(this.value)">
     </div>
 
     <!-- ANA İÇERİK CONTAINER -->
@@ -582,14 +509,14 @@
             </div>
 
             <div class="categories-scroll" id="categories-scroll-bar">
-                <div class="cat-chip active" data-cat="all">🔥 Tüm Videolar</div>
-                <div class="cat-chip" data-cat="sub">🇹🇷 Türkçe Altyazılı</div>
-                <div class="cat-chip" data-cat="amateur">🏠 Amatör</div>
-                <div class="cat-chip" data-cat="mom">👩‍👧‍👦 Anne</div>
-                <div class="cat-chip" data-cat="sibling">👧 Kardeş</div>
-                <div class="cat-chip" data-cat="bath">🛁 Banyo</div>
-                <div class="cat-chip" data-cat="fullhd">🎬 Full HD</div>
-                <div class="cat-chip" data-cat="lesbian">👭 Lezbiyen</div>
+                <div class="cat-chip active" data-cat="all" onclick="selectCategoryChip(this, 'all')">🔥 Tüm Videolar</div>
+                <div class="cat-chip" data-cat="sub" onclick="selectCategoryChip(this, 'sub')">🇹🇷 Türkçe Altyazılı</div>
+                <div class="cat-chip" data-cat="amateur" onclick="selectCategoryChip(this, 'amateur')">🏠 Amatör</div>
+                <div class="cat-chip" data-cat="mom" onclick="selectCategoryChip(this, 'mom')">👩‍👧‍👦 Anne</div>
+                <div class="cat-chip" data-cat="sibling" onclick="selectCategoryChip(this, 'sibling')">👧 Kardeş</div>
+                <div class="cat-chip" data-cat="bath" onclick="selectCategoryChip(this, 'bath')">🛁 Banyo</div>
+                <div class="cat-chip" data-cat="fullhd" onclick="selectCategoryChip(this, 'fullhd')">🎬 Full HD</div>
+                <div class="cat-chip" data-cat="lesbian" onclick="selectCategoryChip(this, 'lesbian')">👭 Lezbiyen</div>
             </div>
 
             <h3 id="cat-title" style="color:var(--primary); margin-bottom:15px;">🔥 Tüm Videolar</h3>
@@ -605,7 +532,7 @@
 
         <!-- İZLEME SAYFASI -->
         <div id="sec-watch" class="page-sec">
-            <button class="back-btn" id="btn-back-watch">⬅ Ana Sayfaya Dön</button>
+            <button class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</button>
             <h2 id="v-title" style="font-size:18px;"></h2>
             <div style="font-size:12px; color:var(--text-sub);" id="v-date"></div>
             <div class="player-box">
@@ -623,7 +550,7 @@
 
         <!-- PROFİL SAYFASI -->
         <div id="sec-profile" class="page-sec">
-            <button class="back-btn" id="btn-back-profile">⬅ Ana Sayfaya Dön</button>
+            <button class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</button>
             
             <div class="channel-banner" id="p-banner"></div>
             
@@ -649,6 +576,27 @@
     </div>
 
     <script>
+        // YAŞ KONTROLÜ
+        function checkAgeStorage() {
+            var isAdult = localStorage.getItem('2pbvage_18plus');
+            var ageModal = document.getElementById('age-modal');
+            if (isAdult === 'true') {
+                if (ageModal) ageModal.style.display = 'none';
+            } else {
+                if (ageModal) ageModal.style.display = 'flex';
+            }
+        }
+
+        function acceptAgeWarning() {
+            localStorage.setItem('2pbvage_18plus', 'true');
+            var ageModal = document.getElementById('age-modal');
+            if (ageModal) ageModal.style.display = 'none';
+        }
+
+        function declineAgeWarning() {
+            window.location.href = "https://www.google.com";
+        }
+
         // SABİT KURUCU VE SİTE SİSTEMİ
         var OWNER_EMAIL = "poyrazre6@gmail.com";
         var OWNER_PASSWORD = "poyri.2525";
@@ -767,7 +715,6 @@
 
         var currentUser = null;
 
-        // KALICI KULLANICI HAFIZASI
         function initStorageUsers() {
             var users = JSON.parse(localStorage.getItem('2pbvage_users') || '[]');
             var founderExists = users.some(function(u) { return u.email === OWNER_EMAIL.toLowerCase(); });
@@ -841,7 +788,7 @@
                     grid.style.display = 'grid';
                     grid.innerHTML = html || '<div style="color:var(--text-sub); text-align:center; grid-column: 1/-1; padding:40px;">Aradığınız kritere uygun video bulunamadı.</div>';
                 }
-            }, 300);
+            }, 250);
         }
 
         function filterOnlyfans() {
@@ -851,6 +798,14 @@
             var catChips = document.querySelectorAll('.cat-chip');
             for(var j=0; j<catChips.length; j++) catChips[j].classList.remove('active');
             renderVideos('all', '', true);
+        }
+
+        function selectCategoryChip(elem, cat) {
+            var catChips = document.querySelectorAll('.cat-chip');
+            for(var j=0; j<catChips.length; j++) catChips[j].classList.remove('active');
+            elem.classList.add('active');
+            document.getElementById('cat-title').innerText = '🔥 ' + elem.innerText;
+            renderVideos(cat, '', false);
         }
 
         function selectDrawerCat(cat) {
@@ -902,11 +857,8 @@
                 }
 
                 cardBox.innerHTML = cardHtml;
-                
                 showSection('sec-watch');
-                
-                var iframe = document.getElementById('v-iframe');
-                iframe.src = item.url;
+                document.getElementById('v-iframe').src = item.url;
 
                 var tagsHtml = '';
                 for(var i=0; i<item.tags.length; i++) {
@@ -933,19 +885,13 @@
             document.getElementById('p-avatar').style.backgroundImage = "url('" + avatar + "')";
             
             var bannerBox = document.getElementById('p-banner');
-            if (isAishah) {
-                bannerBox.style.backgroundImage = "url('" + AISHAH_BANNER + "')";
-            } else if (isComatozze) {
-                bannerBox.style.backgroundImage = "url('" + COMATTOZE_BANNER + "')";
-            } else {
-                bannerBox.style.backgroundImage = "linear-gradient(135deg, #1e1e24 0%, #2a0845 50%, #ff7f50 100%)";
-            }
+            if (isAishah) bannerBox.style.backgroundImage = "url('" + AISHAH_BANNER + "')";
+            else if (isComatozze) bannerBox.style.backgroundImage = "url('" + COMATTOZE_BANNER + "')";
+            else bannerBox.style.backgroundImage = "linear-gradient(135deg, #1e1e24 0%, #2a0845 50%, #ff7f50 100%)";
 
             var authorTick = getChannelTick(author);
             document.getElementById('p-title').innerHTML = author + ' ' + authorTick;
-            
-            var bio = isOwner ? '👑 FOXHUB Platformunun Resmi Kurucu Hesabı. En kaliteli özel HD içerikler burada.' : 'FOXHUB Doğrulanmış Model & İçerik Üreticisi Resmi Kanalı.';
-            document.getElementById('p-bio').innerText = bio;
+            document.getElementById('p-bio').innerText = isOwner ? '👑 FOXHUB Platformunun Resmi Kurucu Hesabı. En kaliteli özel HD içerikler burada.' : 'FOXHUB Doğrulanmış Model & İçerik Üreticisi Resmi Kanalı.';
 
             var videoCount = 0;
             var html = '';
@@ -953,14 +899,11 @@
                 if(db.hasOwnProperty(key)) {
                     var item = db[key];
                     var matchesAuthor = false;
-                    
                     if(item.isCollab && item.authors) {
                         for(var m=0; m<item.authors.length; m++) {
                             if(item.authors[m].name.toLowerCase() === author.toLowerCase()) matchesAuthor = true;
                         }
-                    } else if(item.author.toLowerCase() === author.toLowerCase()) {
-                        matchesAuthor = true;
-                    }
+                    } else if(item.author.toLowerCase() === author.toLowerCase()) matchesAuthor = true;
 
                     if(matchesAuthor) {
                         videoCount++;
@@ -972,68 +915,46 @@
                 }
             }
 
-            var statsHtml = '<div class="channel-stat-chip">📹 <b>' + videoCount + '</b> Video</div>';
-            document.getElementById('p-stats').innerHTML = statsHtml;
-
+            document.getElementById('p-stats').innerHTML = '<div class="channel-stat-chip">📹 <b>' + videoCount + '</b> Video</div>';
             document.getElementById('p-videos').innerHTML = html || '<div style="color:var(--text-sub); text-align:center; grid-column: 1/-1; padding:30px;">Henüz bu kanala ait video bulunmuyor.</div>';
 
             showSection('sec-profile');
         }
 
         function showSection(id) {
-            if(id !== 'sec-watch') {
-                document.getElementById('v-iframe').src = "about:blank";
-            }
+            if(id !== 'sec-watch') document.getElementById('v-iframe').src = "about:blank";
             var secs = document.querySelectorAll('.page-sec');
             for(var i=0; i<secs.length; i++) { secs[i].classList.remove('active-sec'); }
             document.getElementById(id).classList.add('active-sec');
             window.scrollTo(0,0);
         }
 
-        // KATEGORİ TIKLAMA
-        var catChips = document.querySelectorAll('.cat-chip');
-        for(var i=0; i<catChips.length; i++) {
-            catChips[i].onclick = function() {
-                for(var j=0; j<catChips.length; j++) catChips[j].classList.remove('active');
-                this.classList.add('active');
-                var cat = this.getAttribute('data-cat');
-                document.getElementById('cat-title').innerText = '🔥 ' + this.innerText;
-                renderVideos(cat, '', false);
-            };
+        function handleSearch(val) {
+            showSection('sec-feed');
+            renderVideos('all', val.toLowerCase().trim(), false);
         }
 
-        // ARAMA SİSTEMİ
-        document.getElementById('search-input').oninput = function() {
+        function goHome() {
             showSection('sec-feed');
-            renderVideos('all', this.value.toLowerCase().trim(), false);
-        };
+            renderVideos('all', '', false);
+        }
 
-        // NAVİGASYON VE BUTONLAR
-        document.getElementById('logo-home').onclick = function() { showSection('sec-feed'); renderVideos('all', '', false); };
-        document.getElementById('btn-back-watch').onclick = function() { showSection('sec-feed'); };
-        document.getElementById('btn-back-profile').onclick = function() { showSection('sec-feed'); };
+        // AUTH & PROFILE CONTROL
+        function switchAuthTab(type) {
+            var tabL = document.getElementById('tab-login');
+            var tabR = document.getElementById('tab-register');
+            var formL = document.getElementById('form-login');
+            var formR = document.getElementById('form-register');
 
-        // AUTH TABLARI
-        var tabLogin = document.getElementById('tab-login');
-        var tabRegister = document.getElementById('tab-register');
-        var formLogin = document.getElementById('form-login');
-        var formRegister = document.getElementById('form-register');
+            if(type === 'login') {
+                tabL.classList.add('active'); tabR.classList.remove('active');
+                formL.style.display = 'block'; formR.style.display = 'none';
+            } else {
+                tabR.classList.add('active'); tabL.classList.remove('active');
+                formR.style.display = 'block'; formL.style.display = 'none';
+            }
+        }
 
-        tabLogin.onclick = function() {
-            tabLogin.classList.add('active');
-            tabRegister.classList.remove('active');
-            formLogin.style.display = 'block';
-            formRegister.style.display = 'none';
-        };
-
-        tabRegister.onclick = function() {
-            tabRegister.classList.add('active');
-            tabLogin.classList.remove('active');
-            formRegister.style.display = 'block';
-            formLogin.style.display = 'none';
-        };
-
-        // OTURUM / GİRİŞ YÖNETİMİ
         function checkAuth() {
             var session = localStorage.getItem('2pbvage_session');
             if(session) {
@@ -1048,37 +969,41 @@
                 document.getElementById('user-chip-avatar').style.backgroundImage = "url('" + (isOwner ? OWNER_AVATAR : DEFAULT_AVATAR) + "')";
                 document.getElementById('user-chip-tick').innerHTML = isOwner ? yellowTick : '';
 
-                // DRAWER USER KARTI GÜNCELLEME
                 document.getElementById('drawer-user-name').innerHTML = nameDisplay + (isOwner ? yellowTick : '');
                 document.getElementById('drawer-user-status').innerText = isOwner ? "👑 Platform Kurucusu" : "VIP Üye";
                 document.getElementById('drawer-user-avatar').style.backgroundImage = "url('" + (isOwner ? OWNER_AVATAR : DEFAULT_AVATAR) + "')";
-
             } else {
                 currentUser = null;
                 document.getElementById('auth-logged-out').style.display = 'block';
                 document.getElementById('auth-logged-in').style.display = 'none';
 
-                // DRAWER USER KARTI VARSAYILAN
                 document.getElementById('drawer-user-name').innerText = "Giriş Yapılmadı";
                 document.getElementById('drawer-user-status').innerText = "Oturum açmak için tıklayın";
                 document.getElementById('drawer-user-avatar').style.backgroundImage = "url('" + DEFAULT_AVATAR + "')";
             }
         }
 
+        function openAuthModal() { document.getElementById('auth-modal').style.display = 'flex'; }
+        function closeAuthModal() { document.getElementById('auth-modal').style.display = 'none'; }
+        function openProfileModal() {
+            if(!currentUser) return;
+            var isOwner = (currentUser.email.toLowerCase() === OWNER_EMAIL.toLowerCase());
+            var nameDisplay = isOwner ? OWNER_USERNAME : (currentUser.username || currentUser.email);
+            
+            document.getElementById('modal-user-name').innerHTML = nameDisplay + (isOwner ? yellowTick : '');
+            document.getElementById('modal-user-email').innerText = currentUser.email;
+            document.getElementById('modal-user-avatar').style.backgroundImage = "url('" + (isOwner ? OWNER_AVATAR : DEFAULT_AVATAR) + "')";
+            document.getElementById('profile-modal').style.display = 'flex';
+        }
+        function closeProfileModal() { document.getElementById('profile-modal').style.display = 'none'; }
+
         function handleDrawerUserClick() {
             closeDrawer();
-            if(currentUser) {
-                document.getElementById('btn-open-profile').click();
-            } else {
-                document.getElementById('auth-modal').style.display = 'flex';
-            }
+            if(currentUser) openProfileModal();
+            else openAuthModal();
         }
 
-        document.getElementById('btn-open-auth').onclick = function() { document.getElementById('auth-modal').style.display = 'flex'; };
-        document.getElementById('btn-close-auth').onclick = function() { document.getElementById('auth-modal').style.display = 'none'; };
-
-        // GİRİŞ YAP FORMU
-        document.getElementById('form-login').onsubmit = function(e) {
+        function handleLogin(e) {
             e.preventDefault();
             var email = document.getElementById('login-email').value.trim().toLowerCase();
             var pass = document.getElementById('login-password').value.trim();
@@ -1086,7 +1011,7 @@
             if(email === OWNER_EMAIL.toLowerCase() && (pass === OWNER_PASSWORD || pass === "123")) {
                 localStorage.setItem('2pbvage_session', JSON.stringify({ email: OWNER_EMAIL.toLowerCase(), username: OWNER_USERNAME }));
                 checkAuth();
-                document.getElementById('auth-modal').style.display = 'none';
+                closeAuthModal();
                 alert("Kurucu olarak başarıyla giriş yapıldı!");
                 return;
             }
@@ -1097,22 +1022,20 @@
             if(found) {
                 localStorage.setItem('2pbvage_session', JSON.stringify({ email: found.email, username: found.username }));
                 checkAuth();
-                document.getElementById('auth-modal').style.display = 'none';
+                closeAuthModal();
                 alert("Başarıyla giriş yapıldı!");
             } else {
                 alert("Hatalı e-posta veya şifre!");
             }
-        };
+        }
 
-        // KAYIT OL FORMU
-        document.getElementById('form-register').onsubmit = function(e) {
+        function handleRegister(e) {
             e.preventDefault();
             var username = document.getElementById('reg-username').value.trim();
             var email = document.getElementById('reg-email').value.trim().toLowerCase();
             var pass = document.getElementById('reg-password').value.trim();
 
             var users = JSON.parse(localStorage.getItem('2pbvage_users') || '[]');
-            
             if(users.some(function(u) { return u.email === email; })) {
                 alert("Bu e-posta adresi zaten kayıtlı!");
                 return;
@@ -1124,61 +1047,34 @@
             localStorage.setItem('2pbvage_session', JSON.stringify({ email: email, username: username }));
             
             checkAuth();
-            document.getElementById('auth-modal').style.display = 'none';
+            closeAuthModal();
             alert("Hesabınız başarıyla oluşturuldu ve giriş yapıldı!");
-        };
+        }
 
-        document.getElementById('btn-open-profile').onclick = function() {
-            if(!currentUser) return;
-            var isOwner = (currentUser.email.toLowerCase() === OWNER_EMAIL.toLowerCase());
-            var nameDisplay = isOwner ? OWNER_USERNAME : (currentUser.username || currentUser.email);
-            
-            document.getElementById('modal-user-name').innerHTML = nameDisplay + (isOwner ? yellowTick : '');
-            document.getElementById('modal-user-email').innerText = currentUser.email;
-            document.getElementById('modal-user-avatar').style.backgroundImage = "url('" + (isOwner ? OWNER_AVATAR : DEFAULT_AVATAR) + "')";
-            document.getElementById('profile-modal').style.display = 'flex';
-        };
-
-        document.getElementById('btn-close-profile').onclick = function() { document.getElementById('profile-modal').style.display = 'none'; };
-        document.getElementById('btn-logout').onclick = function() {
+        function handleLogout() {
             localStorage.removeItem('2pbvage_session');
             checkAuth();
-            document.getElementById('profile-modal').style.display = 'none';
-        };
+            closeProfileModal();
+        }
 
-        // MENÜ DRAWER
-        document.getElementById('btn-open-menu').onclick = function() {
+        // DRAWER CONTROLS
+        function openDrawer() {
             document.getElementById('menu-drawer').classList.add('open');
             document.getElementById('menu-overlay').style.display = 'block';
-        };
+        }
         function closeDrawer() {
             document.getElementById('menu-drawer').classList.remove('open');
             document.getElementById('menu-overlay').style.display = 'none';
         }
-        document.getElementById('btn-close-drawer').onclick = closeDrawer;
-        document.getElementById('menu-overlay').onclick = closeDrawer;
 
-        // TEMA DEĞİŞTİRME
-        document.getElementById('btn-toggle-theme').onclick = function() {
+        // TEMA CONTROLS
+        function toggleTheme() {
             var isLight = document.body.classList.toggle('light-theme');
-            this.innerText = isLight ? '🌙' : '☀️';
-        };
-
-        // YAŞ KONTROLÜ
-        if(localStorage.getItem('2pbvage_18plus') === 'true') {
-            document.getElementById('age-modal').style.display = 'none';
+            document.getElementById('btn-toggle-theme').innerText = isLight ? '🌙' : '☀️';
         }
 
-        document.getElementById('btn-age-accept').onclick = function() {
-            localStorage.setItem('2pbvage_18plus', 'true');
-            document.getElementById('age-modal').style.display = 'none';
-        };
-
-        document.getElementById('btn-age-decline').onclick = function() {
-            window.location.href = "https://www.google.com";
-        };
-
-        // BAŞLANGIÇ
+        // INIT
+        checkAgeStorage();
         checkAuth();
         renderVideos('all', '', false);
     </script>

@@ -120,10 +120,10 @@
         .channels-scroll { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
         .channels-scroll::-webkit-scrollbar { display: none; }
         
-        .channel-card-mini { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; min-width: 78px; transition: transform 0.2s; }
+        .channel-card-mini { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; min-width: 80px; transition: transform 0.2s; }
         .channel-card-mini:hover { transform: translateY(-4px); }
-        .channel-mini-img { width: 60px; height: 60px; border-radius: 50%; background-size: cover; background-position: center; border: 2px solid var(--primary); box-shadow: 0 4px 12px rgba(255, 127, 80, 0.3); }
-        .channel-mini-name { font-size: 11px; font-weight: 700; color: var(--text-main); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 78px; }
+        .channel-mini-img { width: 62px; height: 62px; border-radius: 50%; background-size: cover; background-position: center; border: 2px solid var(--primary); box-shadow: 0 4px 12px rgba(255, 127, 80, 0.3); }
+        .channel-mini-name { font-size: 11px; font-weight: 700; color: var(--text-main); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80px; }
 
         /* CATEGORIES BAR */
         .categories-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 20px; scrollbar-width: none; }
@@ -158,7 +158,7 @@
         .badge-item { position: relative; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; vertical-align: middle; }
         .yellow-tick { width: 15px; height: 15px; background: #ffd700; color: #000; border-radius: 50%; font-size: 9px; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; }
         .blue-tick { width: 15px; height: 15px; background: #0088cc; color: #fff; border-radius: 50%; font-size: 9px; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; }
-        .trophy-badge { font-size: 12px; display: inline-flex; align-items: center; justify-content: center; transition: transform 0.2s; }
+        .piremun-crown { font-size: 13px; margin-left: 2px; display: inline-flex; align-items: center; }
 
         /* YAN MENÜ (DRAWER) GELİŞMİŞ TASARIM */
         #menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 2000; display: none; }
@@ -208,7 +208,6 @@
         .form-input { width: 100%; background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text-main); padding: 12px; border-radius: 10px; font-size: 13px; outline: none; margin-bottom: 12px; transition: 0.2s; }
         .form-input:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(255,127,80,0.2); }
 
-        /* PIREMUN PLAN KARTLARI */
         .piremun-feature-list { text-align: left; margin: 15px 0; font-size: 13px; color: var(--text-sub); line-height: 1.8; }
         .piremun-feature-item { display: flex; align-items: center; gap: 8px; }
 
@@ -216,6 +215,17 @@
         .auth-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px; }
         .auth-tab { flex: 1; padding: 10px; font-weight: bold; font-size: 14px; color: var(--text-sub); cursor: pointer; border-radius: 10px; transition: 0.2s; }
         .auth-tab.active { color: #fff; background: var(--primary); }
+
+        /* KANAL TASARIMI STİLLERİ */
+        .channel-banner { width: 100%; height: 190px; background: linear-gradient(135deg, #1e1e24 0%, #2a0845 50%, #ff7f50 100%); border-radius: 20px 20px 0 0; position: relative; background-size: cover; background-position: center; }
+        .channel-header-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 0 0 20px 20px; padding: 0 20px 20px 20px; position: relative; margin-bottom: 20px; }
+        .channel-profile-row { display: flex; align-items: flex-end; justify-content: space-between; margin-top: -50px; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
+        .channel-avatar-lg { width: 100px; height: 100px; border-radius: 50%; border: 4px solid var(--bg-dark); background-size: cover; background-position: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); background-color: #111; }
+        .channel-stats-bar { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px; margin-bottom: 12px; }
+        .channel-stat-chip { background: var(--input-bg); border: 1px solid var(--card-border); padding: 5px 12px; border-radius: 20px; font-size: 12px; color: var(--text-sub); font-weight: 600; display: flex; align-items: center; gap: 5px; }
+        .channel-tabs { display: flex; gap: 10px; border-bottom: 1px solid var(--card-border); margin-bottom: 20px; overflow-x: auto; scrollbar-width: none; }
+        .channel-tab { padding: 10px 18px; font-weight: 700; font-size: 13px; color: var(--text-sub); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: 0.2s; }
+        .channel-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
 
         /* PAGES */
         .page-sec { display: none; flex-direction: column; gap: 16px; }
@@ -251,7 +261,7 @@
                 <div class="piremun-feature-item">✨ <b>Ultra HD & 4K</b> Kesintisiz Video Oynatma</div>
                 <div class="piremun-feature-item">💎 Sophie Rain & Aishah Sofey <b>Özel Kilitli İçerikleri</b></div>
                 <div class="piremun-feature-item">⚡ <b>Sınırsız Hızda</b> Video İndirme Ayrıcalığı</div>
-                <div class="piremun-feature-item">👑 Profilde Özel <b>Piremun (VIP) Rozeti</b></div>
+                <div class="piremun-feature-item">👑 Profilde Özel <b>Piremun Rozeti</b></div>
                 <div class="piremun-feature-item">🚫 Sıfır Reklam, %100 Gizli & Güvenli Ödeme</div>
             </div>
 
@@ -354,7 +364,7 @@
             </div>
         </div>
 
-        <!-- PIREMUN ÜYELİK KARTI (VIP YERİNE) -->
+        <!-- PIREMUN ÜYELİK KARTI -->
         <div class="drawer-piremun-card" onclick="openPiremunModal(); closeDrawer();">
             <div class="piremun-badge-icon">👑</div>
             <div>
@@ -366,19 +376,19 @@
         <div class="drawer-section-title">⭐ Öne Çıkan Modeller</div>
         <div class="drawer-nav-item" onclick="openProfile('Aishah Sofey'); closeDrawer();">
             <span>✨ Aishah Sofey</span>
-            <span class="drawer-chip-tag" style="color:#00aff0;">Model ✓</span>
+            <span class="drawer-chip-tag" style="color:#00aff0;">Model ✓ 👑</span>
         </div>
         <div class="drawer-nav-item" onclick="openProfile('Sophie Rain'); closeDrawer();">
             <span>🔥 Sophie Rain</span>
-            <span class="drawer-chip-tag" style="color:#ff7f50;">Trend</span>
+            <span class="drawer-chip-tag" style="color:#ff7f50;">Trend 👑</span>
         </div>
         <div class="drawer-nav-item" onclick="openProfile('comatozze'); closeDrawer();">
             <span>🏆 comatozze</span>
-            <span class="drawer-chip-tag" style="color:#ffd700;">Ödüllü</span>
+            <span class="drawer-chip-tag" style="color:#ffd700;">Ödüllü 👑</span>
         </div>
         <div class="drawer-nav-item" onclick="openProfile('Sweetie Fox'); closeDrawer();">
             <span>👑 Sweetie Fox</span>
-            <span class="drawer-chip-tag" style="color:#ff7f50;">Popüler</span>
+            <span class="drawer-chip-tag" style="color:#ff7f50;">Popüler 👑</span>
         </div>
 
         <div class="drawer-section-title">📁 İçerik Kategorileri</div>
@@ -443,23 +453,23 @@
                 <div class="channels-scroll">
                     <div class="channel-card-mini" onclick="openProfile('2PBVAGE')">
                         <div class="channel-mini-img" style="background-image:url('https://cdn.phototourl.com/member/2026-10-15-83266f74-97b3-42ff-82ee-e8e955a628ca.jpg'); border-color:#ffd700;"></div>
-                        <span class="channel-mini-name">2PBVAGE ✓</span>
+                        <span class="channel-mini-name">2PBVAGE 👑</span>
                     </div>
                     <div class="channel-card-mini" onclick="openProfile('Aishah Sofey')">
                         <div class="channel-mini-img" style="background-image:url('https://static-cdn.jtvnw.net/jtv_user_pictures/e95e4603-8868-4620-970b-f80792268487-profile_image-300x300.png');"></div>
-                        <span class="channel-mini-name">Aishah ✓</span>
+                        <span class="channel-mini-name">Aishah 👑</span>
                     </div>
                     <div class="channel-card-mini" onclick="openProfile('Sophie Rain')">
                         <div class="channel-mini-img" style="background-image:url('https://scontent.cdninstagram.com/v/t51.82787-19/757236652_18031740167954124_3621442071429323987_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=1&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=gn8dFciWLxIQ7kNvwGgkQsb&_nc_oc=Ado8K58AHrIya-rmZrx5X9EmNENQ2K-TGmSbkQSwFq7iMijOj9oiD3n6Etdd3__27fc&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_gid=RmCxMZn-cevPP3FeoOhkSA&_nc_ss=7b689&oh=00_AQNVsiANvtX14dfUC8Qn2MFfKsxy_TTVijSvazdSQrJsuw&oe=6AD92A9E');"></div>
-                        <span class="channel-mini-name">Sophie ✓</span>
+                        <span class="channel-mini-name">Sophie 👑</span>
                     </div>
                     <div class="channel-card-mini" onclick="openProfile('comatozze')">
                         <div class="channel-mini-img" style="background-image:url('https://ei.phncdn.com/pics/users/0024/5807/0141/avatar95302765/(m=ewILGCjadOf)(mh=n7tIeIoHniVFwhIe)200x200.jpg');"></div>
-                        <span class="channel-mini-name">comatozze 🏆</span>
+                        <span class="channel-mini-name">comatozze 👑</span>
                     </div>
                     <div class="channel-card-mini" onclick="openProfile('Sweetie Fox')">
                         <div class="channel-mini-img" style="background-image:url('https://ei.phncdn.com/(m=ewILGCjadOf)(mh=59qrk8LnBE3Z9kTL)43ca43da-b27e-42f2-b237-40c5c13261b1.jpg');"></div>
-                        <span class="channel-mini-name">Sweetie 🏆</span>
+                        <span class="channel-mini-name">Sweetie 👑</span>
                     </div>
                 </div>
             </div>
@@ -504,7 +514,7 @@
             </div>
         </div>
 
-        <!-- PROFİL SAYFASI -->
+        <!-- PROFİL SAYFASI (TAMAMEN DÜZELTİLDİ) -->
         <div id="sec-profile" class="page-sec">
             <button class="back-btn" onclick="goHome()">⬅ Ana Sayfaya Dön</button>
             
@@ -572,15 +582,20 @@
         var yellowTick = '<span class="badge-item" data-tooltip="Resmi Kurucu Hesabı"><span class="yellow-tick">✓</span></span>';
         var blueTick = '<span class="badge-item" data-tooltip="Doğrulanmış Model"><span class="blue-tick">✓</span></span>';
         var trophyBadge = '<span class="badge-item" data-tooltip="FoxHub Ödülleri Kazananı"><span class="trophy-badge">🏆</span></span>';
+        var piremunCrown = '<span class="badge-item" data-tooltip="Piremun (VIP) Üye"><span class="piremun-crown">👑</span></span>';
 
+        // TÜM İÇERİK ÜRETİCİLERİNE VE KURUCUYA PIREMUN ROZETİ ENTEGRASYONU
         function getChannelTick(authorName) {
             var nameLower = authorName.toLowerCase();
             if (nameLower === OWNER_USERNAME.toLowerCase() || nameLower === OWNER_EMAIL.toLowerCase()) {
-                return yellowTick;
+                return yellowTick + ' ' + piremunCrown;
             }
             var badges = blueTick;
-            if (nameLower === "comatozze" || nameLower === "sweetie fox") {
-                badges += trophyBadge;
+            if (nameLower.indexOf("comatozze") > -1 || nameLower.indexOf("sweetie fox") > -1) {
+                badges += ' ' + trophyBadge;
+            }
+            if (nameLower.indexOf("sophie rain") > -1 || nameLower.indexOf("aishah sofey") > -1 || nameLower.indexOf("comatozze") > -1 || nameLower.indexOf("sweetie fox") > -1) {
+                badges += ' ' + piremunCrown;
             }
             return badges;
         }
@@ -830,24 +845,34 @@
             renderVideos('all', tag.toLowerCase(), false);
         }
 
+        // PROFİL AÇMA FONKSİYONU (TAMAMEN SIFIRDAN REFAKTÖR EDİLDİ & DÜZELTİLDİ)
         function openProfile(author) {
-            var isOwner = (author.toLowerCase() === OWNER_USERNAME.toLowerCase() || author.toLowerCase() === OWNER_EMAIL.toLowerCase());
-            var isSophie = (author.toLowerCase() === 'sophie rain');
-            var isAishah = (author.toLowerCase() === 'aishah sofey');
-            var isComatozze = (author.toLowerCase() === 'comatozze');
-            var isSweetie = (author.toLowerCase() === 'sweetie fox');
+            var nameLower = author.toLowerCase();
+            var isOwner = (nameLower === OWNER_USERNAME.toLowerCase() || nameLower === OWNER_EMAIL.toLowerCase());
+            var isSophie = (nameLower.indexOf('sophie') > -1);
+            var isAishah = (nameLower.indexOf('aishah') > -1);
+            var isComatozze = (nameLower.indexOf('comatozze') > -1);
+            var isSweetie = (nameLower.indexOf('sweetie') > -1);
             
             var avatar = isOwner ? OWNER_AVATAR : (isSophie ? SOPHIE_AVATAR : (isAishah ? AISHAH_AVATAR : (isComatozze ? COMATTOZE_AVATAR : (isSweetie ? SWEETIE_AVATAR : DEFAULT_AVATAR))));
-            document.getElementById('p-avatar').style.backgroundImage = "url('" + avatar + "')";
+            var avatarBox = document.getElementById('p-avatar');
+            if (avatarBox) avatarBox.style.backgroundImage = "url('" + avatar + "')";
             
             var bannerBox = document.getElementById('p-banner');
-            if (isAishah) bannerBox.style.backgroundImage = "url('" + AISHAH_BANNER + "')";
-            else if (isComatozze) bannerBox.style.backgroundImage = "url('" + COMATTOZE_BANNER + "')";
-            else bannerBox.style.backgroundImage = "linear-gradient(135deg, #1e1e24 0%, #2a0845 50%, #ff7f50 100%)";
+            if (bannerBox) {
+                if (isAishah) bannerBox.style.backgroundImage = "url('" + AISHAH_BANNER + "')";
+                else if (isComatozze) bannerBox.style.backgroundImage = "url('" + COMATTOZE_BANNER + "')";
+                else bannerBox.style.backgroundImage = "linear-gradient(135deg, #1e1e24 0%, #2a0845 50%, #ff7f50 100%)";
+            }
 
             var authorTick = getChannelTick(author);
-            document.getElementById('p-title').innerHTML = author + ' ' + authorTick;
-            document.getElementById('p-bio').innerText = isOwner ? '👑 FOXHUB Platformunun Resmi Kurucu Hesabı. En kaliteli özel HD içerikler burada.' : 'FOXHUB Doğrulanmış Model & İçerik Üreticisi Resmi Kanalı.';
+            var pTitle = document.getElementById('p-title');
+            if (pTitle) pTitle.innerHTML = author + ' ' + authorTick;
+            
+            var pBio = document.getElementById('p-bio');
+            if (pBio) {
+                pBio.innerText = isOwner ? '👑 FOXHUB Platformunun Resmi Kurucu Hesabı. En kaliteli özel HD içerikler burada.' : 'FOXHUB Doğrulanmış VIP & Piremun Model İçerik Üreticisi Kanalı.';
+            }
 
             var videoCount = 0;
             var html = '';
@@ -857,9 +882,11 @@
                     var matchesAuthor = false;
                     if(item.isCollab && item.authors) {
                         for(var m=0; m<item.authors.length; m++) {
-                            if(item.authors[m].name.toLowerCase() === author.toLowerCase()) matchesAuthor = true;
+                            if(item.authors[m].name.toLowerCase().indexOf(nameLower) > -1 || nameLower.indexOf(item.authors[m].name.toLowerCase()) > -1) matchesAuthor = true;
                         }
-                    } else if(item.author.toLowerCase() === author.toLowerCase()) matchesAuthor = true;
+                    } else if(item.author.toLowerCase().indexOf(nameLower) > -1 || nameLower.indexOf(item.author.toLowerCase()) > -1) {
+                        matchesAuthor = true;
+                    }
 
                     if(matchesAuthor) {
                         videoCount++;
@@ -871,8 +898,11 @@
                 }
             }
 
-            document.getElementById('p-stats').innerHTML = '<div class="channel-stat-chip">📹 <b>' + videoCount + '</b> Video</div>';
-            document.getElementById('p-videos').innerHTML = html || '<div style="color:var(--text-sub); text-align:center; grid-column: 1/-1; padding:30px;">Henüz bu kanala ait video bulunmuyor.</div>';
+            var pStats = document.getElementById('p-stats');
+            if (pStats) pStats.innerHTML = '<div class="channel-stat-chip">📹 <b>' + videoCount + '</b> Video</div><div class="channel-stat-chip">👑 <b>Piremun (VIP)</b> Model</div>';
+            
+            var pVideos = document.getElementById('p-videos');
+            if (pVideos) pVideos.innerHTML = html || '<div style="color:var(--text-sub); text-align:center; grid-column: 1/-1; padding:30px;">Henüz bu kanala ait video bulunmuyor.</div>';
 
             showSection('sec-profile');
         }
@@ -881,7 +911,8 @@
             if(id !== 'sec-watch') document.getElementById('v-iframe').src = "about:blank";
             var secs = document.querySelectorAll('.page-sec');
             for(var i=0; i<secs.length; i++) { secs[i].classList.remove('active-sec'); }
-            document.getElementById(id).classList.add('active-sec');
+            var targetSec = document.getElementById(id);
+            if(targetSec) targetSec.classList.add('active-sec');
             window.scrollTo(0,0);
         }
 
@@ -895,7 +926,6 @@
             renderVideos('all', '', false);
         }
 
-        // PIREMUN MODAL KONTROLU
         function openPiremunModal() { document.getElementById('piremun-modal').style.display = 'flex'; }
         function closePiremunModal() { document.getElementById('piremun-modal').style.display = 'none'; }
 
@@ -923,7 +953,6 @@
             alert("🎉 TEBRİKLER! Ödemeniz alındı ve hesabınız FOXHUB PIREMUN üye seviyesine yükseltildi!");
         }
 
-        // AUTH & PROFILE CONTROL
         function switchAuthTab(type) {
             var tabL = document.getElementById('tab-login');
             var tabR = document.getElementById('tab-register');
@@ -951,9 +980,9 @@
                 
                 document.getElementById('user-chip-name').innerText = nameDisplay;
                 document.getElementById('user-chip-avatar').style.backgroundImage = "url('" + (isOwner ? OWNER_AVATAR : DEFAULT_AVATAR) + "')";
-                document.getElementById('user-chip-tick').innerHTML = isOwner ? yellowTick : (currentUser.isPiremun ? ' 👑' : '');
+                document.getElementById('user-chip-tick').innerHTML = isOwner ? (yellowTick + ' 👑') : (currentUser.isPiremun ? ' 👑' : '');
 
-                document.getElementById('drawer-user-name').innerHTML = nameDisplay + (isOwner ? yellowTick : (currentUser.isPiremun ? ' 👑' : ''));
+                document.getElementById('drawer-user-name').innerHTML = nameDisplay + (isOwner ? (yellowTick + ' 👑') : (currentUser.isPiremun ? ' 👑' : ''));
                 document.getElementById('drawer-user-status').innerText = isOwner ? "👑 Platform Kurucusu" : (currentUser.isPiremun ? "👑 Piremun (VIP) Üye" : "Ücretsiz Üye");
                 document.getElementById('drawer-user-avatar').style.backgroundImage = "url('" + (isOwner ? OWNER_AVATAR : DEFAULT_AVATAR) + "')";
                 
@@ -1044,7 +1073,6 @@
             closeProfileModal();
         }
 
-        // DRAWER CONTROLS
         function openDrawer() {
             document.getElementById('menu-drawer').classList.add('open');
             document.getElementById('menu-overlay').style.display = 'block';
@@ -1054,7 +1082,6 @@
             document.getElementById('menu-overlay').style.display = 'none';
         }
 
-        // TEMA CONTROLS
         function toggleTheme() {
             var isLight = document.body.classList.toggle('light-theme');
             document.getElementById('btn-toggle-theme').innerText = isLight ? '🌙' : '☀️';

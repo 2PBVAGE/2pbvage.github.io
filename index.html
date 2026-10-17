@@ -100,8 +100,9 @@
         .skeleton { background: linear-gradient(90deg, var(--card-bg) 25%, var(--card-border) 50%, var(--card-bg) 75%); background-size: 400px 100%; animation: shimmer 1.4s infinite; }
         .sk-card { height: 260px; border-radius: 16px; overflow: hidden; }
 
-        /* ONAY ROZETLERİ (SARI & TURUNCU TİK) */
+        /* ONAY ROZETLERİ (SARI, MAVİ VE TURUNCU TİK) */
         .yellow-tick { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: #ffd700; color: #000; border-radius: 50%; font-size: 10px; font-weight: 900; margin-left: 4px; cursor: pointer; }
+        .blue-tick { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: #0088cc; color: #fff; border-radius: 50%; font-size: 10px; font-weight: 900; margin-left: 4px; cursor: pointer; }
         .orange-tick { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: #ff7f50; color: #fff; border-radius: 50%; font-size: 10px; font-weight: 900; margin-left: 4px; cursor: pointer; }
 
         /* MODALS */
@@ -284,13 +285,17 @@
         var OWNER_PASSWORD = "poyri.2525";
         var OWNER_USERNAME = "2PBVAGE";
         var OWNER_AVATAR = "https://cdn.phototourl.com/member/2026-10-15-83266f74-97b3-42ff-82ee-e8e955a628ca.jpg";
-        var SOPHIE_AVATAR = "https://i.ibb.co/DPFjgyLy/image.jpg";
-        var AISHAH_AVATAR = "https://pimpbunny.com/contents/videos_screenshots/608000/608532/800x450/1.jpg";
+        
+        // KANAL PROFİL RESİMLERİ (GÜNCELLENDİ)
+        var SOPHIE_AVATAR = "757236652_18031740167954124_3621442071429323987_n.jpg";
+        var AISHAH_AVATAR = "753205003_18151942060588228_5256773377663918785_n.jpg";
         var COMATTOZE_AVATAR = "https://pornoanne.com/wp-content/uploads/2026/09/6a9d729c7b598.jpg";
+        var SWEETIE_AVATAR = "https://ei.phncdn.com/(m=ewILGCjadOf)(mh=59qrk8LnBE3Z9kTL)43ca43da-b27e-42f2-b237-40c5c13261b1.jpg";
         var DEFAULT_AVATAR = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
         
-        // TİK ROZETLERİ (HOVER BİLGİ METNİ İLE)
+        // TİK ROZETLERİ
         var yellowTick = '<span class="yellow-tick" title="Resmi Kurucu Hesabı">✓</span>';
+        var blueTick = '<span class="blue-tick" title="OnlyFans Onaylanmış İçerik Üreticisi">✓</span>';
         var orangeTick = '<span class="orange-tick" title="Site sahibi tarafından onaylanmış kanal">✓</span>';
 
         // ONAYLI KANAL KONTROLÜ
@@ -299,7 +304,10 @@
             if (nameLower === OWNER_USERNAME.toLowerCase() || nameLower === OWNER_EMAIL.toLowerCase()) {
                 return yellowTick;
             }
-            if (nameLower === "sophie rain" || nameLower === "comatozze" || nameLower === "sweetie fox" || nameLower === "aishah sofey") {
+            if (nameLower === "sophie rain" || nameLower === "aishah sofey") {
+                return blueTick;
+            }
+            if (nameLower === "comatozze" || nameLower === "sweetie fox") {
                 return orangeTick;
             }
             return '';
@@ -345,7 +353,7 @@
                 url: "https://voe.sx/e/hoshht3fdzl0", 
                 thumb: "https://t3.pixhost.to/thumbs/6399/783546656_162830.jpg", 
                 author: "Sweetie Fox", 
-                avatar: "https://ei.phncdn.com/(m=ewILGCjadOf)(mh=59qrk8LnBE3Z9kTL)43ca43da-b27e-42f2-b237-40c5c13261b1.jpg", 
+                avatar: SWEETIE_AVATAR, 
                 date: "13 Ekim 2026", 
                 desc: "Sweetie Fox'un Türkçe altyazılı köylü kızı temalı popüler özel gösterisi.", 
                 cats: ["sub", "fullhd"],
@@ -462,14 +470,17 @@
             var isSophie = (author.toLowerCase() === 'sophie rain');
             var isAishah = (author.toLowerCase() === 'aishah sofey');
             var isComatozze = (author.toLowerCase() === 'comatozze');
+            var isSweetie = (author.toLowerCase() === 'sweetie fox');
             
-            var avatar = isOwner ? OWNER_AVATAR : (isSophie ? SOPHIE_AVATAR : (isAishah ? AISHAH_AVATAR : (isComatozze ? COMATTOZE_AVATAR : DEFAULT_AVATAR)));
+            var avatar = isOwner ? OWNER_AVATAR : (isSophie ? SOPHIE_AVATAR : (isAishah ? AISHAH_AVATAR : (isComatozze ? COMATTOZE_AVATAR : (isSweetie ? SWEETIE_AVATAR : DEFAULT_AVATAR))));
             document.getElementById('p-avatar').style.backgroundImage = "url('" + avatar + "')";
             
             var authorTick = getChannelTick(author);
             document.getElementById('p-title').innerHTML = author + ' ' + authorTick;
             
-            var bio = isOwner ? '<span style="color:var(--primary); font-weight:bold;">👑 FOXHUB Resmi Kurucusu Ve Site Sahibinin Profili</span>' : '<span style="color:var(--primary); font-weight:bold;">Verified Creator / Onaylı İçerik Üreticisi</span>';
+            var bio = isOwner ? '<span style="color:var(--primary); font-weight:bold;">👑 FOXHUB Resmi Kurucusu Ve Site Sahibinin Profili</span>' : 
+                      ((isSophie || isAishah) ? '<span style="color:#0088cc; font-weight:bold;">💙 OnlyFans Onaylanmış İçerik Üreticisi</span>' : 
+                      '<span style="color:var(--primary); font-weight:bold;">Verified Creator / Onaylı İçerik Üreticisi</span>');
             document.getElementById('p-bio').innerHTML = bio;
 
             var html = '';

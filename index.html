@@ -286,14 +286,14 @@
         var OWNER_USERNAME = "2PBVAGE";
         var OWNER_AVATAR = "https://cdn.phototourl.com/member/2026-10-15-83266f74-97b3-42ff-82ee-e8e955a628ca.jpg";
         
-        // KANAL PROFİL RESİMLERİ (GÜNCELLENDİ)
-        var SOPHIE_AVATAR = "757236652_18031740167954124_3621442071429323987_n.jpg";
-        var AISHAH_AVATAR = "753205003_18151942060588228_5256773377663918785_n.jpg";
+        // GÜVENİLİR VE HIZLI YÜKLENEN PROFİL RESİMLERİ (CDN)
+        var SOPHIE_AVATAR = "https://leakgrl.com/storage/thumbs/5HajB5frpfR8iIlMx1LazHoK-640w.webp";
+        var AISHAH_AVATAR = "https://pimpbunny.com/contents/videos_screenshots/608000/608532/800x450/1.jpg";
         var COMATTOZE_AVATAR = "https://pornoanne.com/wp-content/uploads/2026/09/6a9d729c7b598.jpg";
         var SWEETIE_AVATAR = "https://ei.phncdn.com/(m=ewILGCjadOf)(mh=59qrk8LnBE3Z9kTL)43ca43da-b27e-42f2-b237-40c5c13261b1.jpg";
         var DEFAULT_AVATAR = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
         
-        // TİK ROZETLERİ
+        // TİK ROZETLERİ (SADECE MOUSE İLE GELİNCE VEYA TIKLAYINCA İPUCU YAZISI ÇIKAR)
         var yellowTick = '<span class="yellow-tick" title="Resmi Kurucu Hesabı">✓</span>';
         var blueTick = '<span class="blue-tick" title="OnlyFans Onaylanmış İçerik Üreticisi">✓</span>';
         var orangeTick = '<span class="orange-tick" title="Site sahibi tarafından onaylanmış kanal">✓</span>';
@@ -478,9 +478,8 @@
             var authorTick = getChannelTick(author);
             document.getElementById('p-title').innerHTML = author + ' ' + authorTick;
             
-            var bio = isOwner ? '<span style="color:var(--primary); font-weight:bold;">👑 FOXHUB Resmi Kurucusu Ve Site Sahibinin Profili</span>' : 
-                      ((isSophie || isAishah) ? '<span style="color:#0088cc; font-weight:bold;">💙 OnlyFans Onaylanmış İçerik Üreticisi</span>' : 
-                      '<span style="color:var(--primary); font-weight:bold;">Verified Creator / Onaylı İçerik Üreticisi</span>');
+            // AÇIKLAMADA ARTIK EXTRA METİN YAZMAZ, SADECE TEMİZ PROFIL METNİ YER ALIR
+            var bio = isOwner ? '<span style="color:var(--primary); font-weight:bold;">👑 FOXHUB Resmi Kurucusu</span>' : '<span style="color:var(--text-sub);">FOXHUB İçerik Üreticisi</span>';
             document.getElementById('p-bio').innerHTML = bio;
 
             var html = '';

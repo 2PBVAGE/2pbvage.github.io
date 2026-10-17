@@ -100,8 +100,9 @@
         .skeleton { background: linear-gradient(90deg, var(--card-bg) 25%, var(--card-border) 50%, var(--card-bg) 75%); background-size: 400px 100%; animation: shimmer 1.4s infinite; }
         .sk-card { height: 260px; border-radius: 16px; overflow: hidden; }
 
-        /* SARI TİK ROZETİ */
-        .yellow-tick { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: #ffd700; color: #000; border-radius: 50%; font-size: 10px; font-weight: 900; margin-left: 4px; }
+        /* ONAY ROZETLERİ (SARI & TURUNCU TİK) */
+        .yellow-tick { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: #ffd700; color: #000; border-radius: 50%; font-size: 10px; font-weight: 900; margin-left: 4px; cursor: pointer; }
+        .orange-tick { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: #ff7f50; color: #fff; border-radius: 50%; font-size: 10px; font-weight: 900; margin-left: 4px; cursor: pointer; }
 
         /* MODALS */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
@@ -285,8 +286,24 @@
         var OWNER_AVATAR = "https://cdn.phototourl.com/member/2026-10-15-83266f74-97b3-42ff-82ee-e8e955a628ca.jpg";
         var SOPHIE_AVATAR = "https://i.ibb.co/DPFjgyLy/image.jpg";
         var AISHAH_AVATAR = "https://pimpbunny.com/contents/videos_screenshots/608000/608532/800x450/1.jpg";
+        var COMATTOZE_AVATAR = "https://pornoanne.com/wp-content/uploads/2026/09/6a9d729c7b598.jpg";
         var DEFAULT_AVATAR = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
-        var yellowTick = '<span class="yellow-tick">✓</span>';
+        
+        // TİK ROZETLERİ (HOVER BİLGİ METNİ İLE)
+        var yellowTick = '<span class="yellow-tick" title="Resmi Kurucu Hesabı">✓</span>';
+        var orangeTick = '<span class="orange-tick" title="Site sahibi tarafından onaylanmış kanal">✓</span>';
+
+        // ONAYLI KANAL KONTROLÜ
+        function getChannelTick(authorName) {
+            var nameLower = authorName.toLowerCase();
+            if (nameLower === OWNER_USERNAME.toLowerCase() || nameLower === OWNER_EMAIL.toLowerCase()) {
+                return yellowTick;
+            }
+            if (nameLower === "sophie rain" || nameLower === "comatozze" || nameLower === "sweetie fox" || nameLower === "aishah sofey") {
+                return orangeTick;
+            }
+            return '';
+        }
 
         // VERİ TABANI
         var db = {
@@ -306,7 +323,7 @@
                 url: "https://voe.sx/e/kmnwp6pf63nc", 
                 thumb: "https://pornoanne.com/wp-content/uploads/2026/09/6a9d729c7b598.jpg", 
                 author: "comatozze", 
-                avatar: "https://i.ibb.co/pB3ntggN/image.jpg", 
+                avatar: COMATTOZE_AVATAR, 
                 date: "14 Ekim 2026", 
                 desc: "Comatozze kanalından kanepede geçen tutkulu ve iniltilerle dolu özel amatör video.", 
                 cats: ["amateur", "fullhd"],
@@ -350,7 +367,7 @@
                 url: "https://playmogo.com/e/ehhg2pcksir6", 
                 thumb: "https://thumb-cdn77.xvideos-cdn.com/2a1608a1-926f-43a0-88ab-9884148cd7d9/5/xv_30_t.avif", 
                 author: "comatozze", 
-                avatar: "https://i.ibb.co/pB3ntggN/image.jpg", 
+                avatar: COMATTOZE_AVATAR, 
                 date: "12 Ekim 2026", 
                 desc: "Evde baş başa kalan ikilinin sürpriz ve heyecan dolu gizli anları.", 
                 cats: ["amateur"],
@@ -385,6 +402,7 @@
                     var matchesQuery = (!searchQuery || item.title.toLowerCase().indexOf(searchQuery) > -1 || item.author.toLowerCase().indexOf(searchQuery) > -1 || item.tags.join(' ').toLowerCase().indexOf(searchQuery) > -1);
 
                     if(matchesCat && matchesQuery) {
+                        var authorTick = getChannelTick(item.author);
                         html += '<div class="video-card">' +
                             '<div class="thumb-box" style="background-image:url(\'' + item.thumb + '\');" onclick="playVideo(\'' + key + '\')">' +
                                 '<div class="play-icon"></div>' +
@@ -394,7 +412,7 @@
                                 '<div class="card-meta">' +
                                     '<div class="author-info" onclick="openProfile(\'' + item.author + '\')">' +
                                         '<div class="author-img" style="background-image:url(\'' + item.avatar + '\');"></div>' +
-                                        '<span>' + item.author + ' ✓</span>' +
+                                        '<span>' + item.author + ' ' + authorTick + '</span>' +
                                     '</div>' +
                                     '<span>📅 ' + item.date + '</span>' +
                                 '</div>' +
@@ -443,12 +461,15 @@
             var isOwner = (author.toLowerCase() === OWNER_USERNAME.toLowerCase() || author.toLowerCase() === OWNER_EMAIL.toLowerCase());
             var isSophie = (author.toLowerCase() === 'sophie rain');
             var isAishah = (author.toLowerCase() === 'aishah sofey');
+            var isComatozze = (author.toLowerCase() === 'comatozze');
             
-            var avatar = isOwner ? OWNER_AVATAR : (isSophie ? SOPHIE_AVATAR : (isAishah ? AISHAH_AVATAR : DEFAULT_AVATAR));
+            var avatar = isOwner ? OWNER_AVATAR : (isSophie ? SOPHIE_AVATAR : (isAishah ? AISHAH_AVATAR : (isComatozze ? COMATTOZE_AVATAR : DEFAULT_AVATAR)));
             document.getElementById('p-avatar').style.backgroundImage = "url('" + avatar + "')";
-            document.getElementById('p-title').innerHTML = author + (isOwner ? yellowTick : ' ✓');
             
-            var bio = isOwner ? '<span style="color:var(--primary); font-weight:bold;">👑 FOXHUB Resmi Kurucusu Ve Site Sahibinin Profili</span>' : 'İçerik Üreticisi Profili';
+            var authorTick = getChannelTick(author);
+            document.getElementById('p-title').innerHTML = author + ' ' + authorTick;
+            
+            var bio = isOwner ? '<span style="color:var(--primary); font-weight:bold;">👑 FOXHUB Resmi Kurucusu Ve Site Sahibinin Profili</span>' : '<span style="color:var(--primary); font-weight:bold;">Verified Creator / Onaylı İçerik Üreticisi</span>';
             document.getElementById('p-bio').innerHTML = bio;
 
             var html = '';

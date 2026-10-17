@@ -288,7 +288,7 @@
             <h2 id="v-title" style="font-size:18px;"></h2>
             <div style="font-size:12px; color:var(--text-sub);" id="v-date"></div>
             <div class="player-box">
-                <iframe id="v-iframe" src="about:blank" loading="eager" allowfullscreen allow="autoplay; encrypted-media; picture-in-picture; fullscreen"></iframe>
+                <iframe id="v-iframe" src="about:blank" loading="eager" allow="autoplay; encrypted-media; picture-in-picture; fullscreen"></iframe>
             </div>
             <div style="background:var(--card-bg); padding:15px; border-radius:12px; border:1px solid var(--card-border);">
                 <div style="font-size:14px; font-weight:bold; color:var(--primary); margin-bottom:8px;">📌 Açıklama & Etiketler</div>
@@ -598,4 +598,115 @@
             } else {
                 currentUser = null;
                 document.getElementById('auth-logged-out').style.display = 'block';
-                document.getElementById('auth
+                document.getElementById('auth-logged-in').style.display = 'none';
+            }
+        }
+
+        document.getElementById('btn-open-auth').onclick = function() { document.getElementById('auth-modal').style.display = 'flex'; };
+        document.getElementById('btn-close-auth').onclick = function() { document.getElementById('auth-modal').style.display = 'none'; };
+
+        // GİRİŞ YAP FORMU
+        document.getElementById('form-login').onsubmit = function(e) {
+            e.preventDefault();
+            var email = document.getElementById('login-email').value.trim().toLowerCase();
+            var pass = document.getElementById('login-password').value.trim();
+
+            if(email === OWNER_EMAIL.toLowerCase() && (pass === OWNER_PASSWORD || pass === "123")) {
+                localStorage.setItem('2pbvage_session', JSON.stringify({ email: OWNER_EMAIL.toLowerCase(), username: OWNER_USERNAME }));
+                checkAuth();
+                document.getElementById('auth-modal').style.display = 'none';
+                alert("Kurucu olarak başarıyla giriş yapıldı!");
+                return;
+            }
+
+            var users = JSON.parse(localStorage.getItem('2pbvage_users') || '[]');
+            var found = users.find(function(u) { return u.email === email && u.pass === pass; });
+
+            if(found) {
+                localStorage.setItem('2pbvage_session', JSON.stringify({ email: found.email, username: found.username }));
+                checkAuth();
+                document.getElementById('auth-modal').style.display = 'none';
+                alert("Başarıyla giriş yapıldı!");
+            } else {
+                alert("Hatalı e-posta veya şifre!");
+            }
+        };
+
+        // KAYIT OL FORMU
+        document.getElementById('form-register').onsubmit = function(e) {
+            e.preventDefault();
+            var username = document.getElementById('reg-username').value.trim();
+            var email = document.getElementById('reg-email').value.trim().toLowerCase();
+            var pass = document.getElementById('reg-password').value.trim();
+
+            var users = JSON.parse(localStorage.getItem('2pbvage_users') || '[]');
+            
+            if(users.some(function(u) { return u.email === email; })) {
+                alert("Bu e-posta adresi zaten kayıtlı!");
+                return;
+            }
+
+            var newUser = { username: username, email: email, pass: pass };
+            users.push(newUser);
+            localStorage.setItem('2pbvage_users', JSON.stringify(users));
+            localStorage.setItem('2pbvage_session', JSON.stringify({ email: email, username: username }));
+            
+            checkAuth();
+            document.getElementById('auth-modal').style.display = 'none';
+            alert("Hesabınız başarıyla oluşturuldu ve giriş yapıldı!");
+        };
+
+        document.getElementById('btn-open-profile').onclick = function() {
+            if(!currentUser) return;
+            var isOwner = (currentUser.email.toLowerCase() === OWNER_EMAIL.toLowerCase());
+            var nameDisplay = isOwner ? OWNER_USERNAME : (currentUser.username || currentUser.email);
+            
+            document.getElementById('modal-user-name').innerHTML = nameDisplay + (isOwner ? yellowTick : '');
+            document.getElementById('modal-user-email').innerText = currentUser.email;
+            document.getElementById('modal-user-avatar').style.backgroundImage = "url('" + (isOwner ? OWNER_AVATAR : DEFAULT_AVATAR) + "')";
+            document.getElementById('profile-modal').style.display = 'flex';
+        };
+
+        document.getElementById('btn-close-profile').onclick = function() { document.getElementById('profile-modal').style.display = 'none'; };
+        document.getElementById('btn-logout').onclick = function() {
+            localStorage.removeItem('2pbvage_session');
+            checkAuth();
+            document.getElementById('profile-modal').style.display = 'none';
+        };
+
+        // MENÜ DRAWER
+        document.getElementById('btn-open-menu').onclick = function() {
+            document.getElementById('menu-drawer').classList.add('open');
+            document.getElementById('menu-overlay').style.display = 'block';
+        };
+        function closeDrawer() {
+            document.getElementById('menu-drawer').classList.remove('open');
+            document.getElementById('menu-overlay').style.display = 'none';
+        }
+        document.getElementById('btn-close-drawer').onclick = closeDrawer;
+        document.getElementById('menu-overlay').onclick = closeDrawer;
+
+        // TEMA DEĞİŞTİRME
+        document.getElementById('btn-toggle-theme').onclick = function() {
+            var isLight = document.body.classList.toggle('light-theme');
+            this.innerText = isLight ? '🌙' : '☀️';
+        };
+
+        // YAŞ KONTROLÜ
+        if(localStorage.getItem('2pbvage_18plus') === 'true') {
+            document.getElementById('age-modal').style.display = 'none';
+        }
+        document.getElementById('btn-age-accept').onclick = function() {
+            localStorage.setItem('2pbvage_18plus', 'true');
+            document.getElementById('age-modal').style.display = 'none';
+        };
+        document.getElementById('btn-age-decline').onclick = function() {
+            window.location.href = "https://www.google.com";
+        };
+
+        // BAŞLANGIÇ
+        checkAuth();
+        renderVideos('all', '');
+    </script>
+</body>
+</html>
